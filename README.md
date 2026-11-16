@@ -30,14 +30,16 @@ Clients & partners · Core values & Vision 2030 · Contact (form + map) · Foote
   a handler (e.g. Formspree or your CRM).
 - Language can be forced via URL: `index.html?lang=ar`.
 
-## Immersive 3D layer
-- **Hero:** real-time WebGL command-center scene (AI core, orbit rings, curved LED wall, data-grid floor, particles).
-  It follows the mouse, moves with scroll and mirrors for Arabic.
-- **Virtual Showroom** (`#showroom`): 360° room with the 12 projects on its walls. Drag / swipe / arrow keys to look
-  around, click (or Enter) to open a project. The project list comes from `PROJECTS` in `assets/js/main.js`.
-- **3D tilt + glare** on cards (desktop mouse only).
-- Rendering pauses when off-screen; reduced-motion users get a calm version; no-WebGL browsers fall back to the
-  static hero photo and hide the showroom.
-- Source: `src/immersive.js`. Rebuild after editing: `npm install && npm run build` (outputs `assets/js/immersive.js`).
-- Project photos appear on the 3D walls only when the site is served over http(s). Opened straight from disk
-  (`file://`), the browser blocks images in WebGL, so the walls show branded placeholder art instead.
+## Interactive & immersive experience
+Plain HTML/CSS/JavaScript: no 3D, no WebGL, no libraries, and no build step.
+- **Hero "worlds":** four cinematic scenes (Control Rooms, AI, Exhibitions, Development) that cross-fade
+  automatically or on click, with a slow zoom, mouse parallax, cursor spotlight and a word-by-word headline reveal.
+- **Live operations wall** (Control Rooms): network map of the Kingdom, live throughput chart, ticking KPIs,
+  camera feed and event stream. Click a panel to focus it. *Illustrative data, generated in the browser.*
+- **"See what AI sees"** (AI Enablement): drag the slider to compare the camera view with AI detection boxes or a heatmap.
+- **Project tour** (`#tour`): vertical scrolling drives a horizontal walk through all 12 projects (desktop).
+  On phones it becomes a swipeable carousel.
+- **Project viewer:** full-screen viewer with previous/next buttons, keyboard arrows, swipe and a counter.
+- Process timeline that fills as you scroll, a scroll progress bar and a cursor glow on dark sections.
+- Respects "reduce motion": auto-play, the guided slider sweep and the scroll-pinned tour are switched off.
+- All projects come from `PROJECTS` in `assets/js/main.js`; event-stream texts are in `FEED` in the same file.

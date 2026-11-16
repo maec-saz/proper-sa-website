@@ -37,6 +37,7 @@
   </script>
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <!-- Top bar -->
@@ -78,8 +79,12 @@
 <!-- Hero -->
 <section class="hero" id="top">
   <div class="hero__media" aria-hidden="true">
-    <img src="assets/img/services/control-room-hero.jpg" alt="">
+    <div class="hero__slide is-active"><img src="assets/img/services/control-room-hero.jpg" alt=""></div>
+    <div class="hero__slide"><img src="assets/img/services/city-night.jpg" alt="" loading="lazy"></div>
+    <div class="hero__slide"><img src="assets/img/projects/aramco-sail.jpg" alt="" loading="lazy"></div>
+    <div class="hero__slide"><img src="assets/img/services/cranes.jpg" alt="" loading="lazy"></div>
   </div>
+  <div class="hero__spot" aria-hidden="true"></div>
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="container hero__content">
     <p class="eyebrow eyebrow--light" data-i18n="hero.eyebrow">Proper Developments · Since 2007</p>
@@ -87,13 +92,33 @@
     <p class="hero__lead" data-i18n="hero.lead">With a certified team boasting over 20 years of industry experience, Proper Developments has successfully delivered solutions across all major verticals — from mission-critical control rooms and AI-ready infrastructure to flagship exhibitions and landmark developments.</p>
     <div class="hero__actions">
       <a href="#solutions" class="btn btn--accent" data-i18n="hero.cta1">Explore Our Solutions</a>
-      <a href="#showroom" class="btn btn--ghost btn--3d"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg><span data-i18n="hero.cta2">Enter the 3D Showroom</span></a>
+      <a href="#tour" class="btn btn--ghost btn--play"><span class="play" aria-hidden="true"></span><span data-i18n="hero.cta2">Take the project tour</span></a>
     </div>
-    <div class="hero__ticker" aria-label="Capabilities">
-      <div class="ticker__track">
-        <span data-i18n="tk.control">Control Room Solutions</span><span data-i18n="tk.ai">AI Enablement</span><span data-i18n="tk.av">AV Solutions</span><span data-i18n="tk.ict">ICT</span><span data-i18n="tk.exh">Exhibitions</span><span data-i18n="tk.pd">Project Development</span><span data-i18n="tk.con">Construction</span><span data-i18n="tk.dist">Distribution</span>
-        <span aria-hidden="true" data-i18n="tk.control">Control Room Solutions</span><span aria-hidden="true" data-i18n="tk.ai">AI Enablement</span><span aria-hidden="true" data-i18n="tk.av">AV Solutions</span><span aria-hidden="true" data-i18n="tk.ict">ICT</span><span aria-hidden="true" data-i18n="tk.exh">Exhibitions</span><span aria-hidden="true" data-i18n="tk.pd">Project Development</span><span aria-hidden="true" data-i18n="tk.con">Construction</span><span aria-hidden="true" data-i18n="tk.dist">Distribution</span>
-      </div>
+    <div class="worlds" role="tablist" aria-label="Explore our worlds">
+      <button class="world is-active" type="button" role="tab" aria-selected="true" data-world="0" data-href="#control-rooms">
+        <span class="world__n">01</span>
+        <span class="world__t" data-i18n="w.1t">Control Rooms</span>
+        <span class="world__d" data-i18n="w.1d">Real-time command & control</span>
+        <span class="world__bar"><i></i></span>
+      </button>
+      <button class="world" type="button" role="tab" aria-selected="false" data-world="1" data-href="#ai">
+        <span class="world__n">02</span>
+        <span class="world__t" data-i18n="w.2t">AI Enablement</span>
+        <span class="world__d" data-i18n="w.2d">Data into intelligence</span>
+        <span class="world__bar"><i></i></span>
+      </button>
+      <button class="world" type="button" role="tab" aria-selected="false" data-world="2" data-href="#exhibitions">
+        <span class="world__n">03</span>
+        <span class="world__t" data-i18n="w.3t">Exhibitions</span>
+        <span class="world__d" data-i18n="w.3d">Experiences that draw a crowd</span>
+        <span class="world__bar"><i></i></span>
+      </button>
+      <button class="world" type="button" role="tab" aria-selected="false" data-world="3" data-href="#solutions">
+        <span class="world__n">04</span>
+        <span class="world__t" data-i18n="w.4t">Development</span>
+        <span class="world__d" data-i18n="w.4d">From concept to completion</span>
+        <span class="world__bar"><i></i></span>
+      </button>
     </div>
   </div>
 </section>
@@ -272,7 +297,39 @@
       </ul>
     </div>
     <div class="spotlight__media">
-      <img src="assets/img/services/mission-control.jpg" alt="Operators working in a control room in front of a large video wall" loading="lazy">
+      <div class="opswall" id="opswall">
+        <div class="ow-head">
+          <span class="ow-live"><i></i>LIVE</span>
+          <span class="ow-title" data-i18n="ow.title">Operations wall</span>
+          <span class="ow-clock" id="owClock" dir="ltr">--:--:--</span>
+        </div>
+        <div class="ow-grid">
+          <button type="button" class="ow-tile ow-map" aria-label="Kingdom network map">
+            <span class="ow-label" data-i18n="ow.map">Kingdom network</span>
+            <svg viewBox="0 0 320 200" aria-hidden="true"><path class="ow-link" d="M224.1 75.8 Q163.25 50.8 102.4 115.5"/><path class="ow-link" d="M224.1 75.8 Q168.15 50.8 112.2 116.8"/><path class="ow-link" d="M224.1 75.8 Q166.5 50.8 108.9 78.3"/><path class="ow-link" d="M224.1 75.8 Q251.64999999999998 29.700000000000003 279.2 54.7"/><path class="ow-link" d="M224.1 75.8 Q142.2 4.899999999999999 60.3 29.9"/><path class="ow-link" d="M224.1 75.8 Q130.85 11.100000000000001 37.6 36.1"/><path class="ow-link" d="M224.1 75.8 Q190.0 50.8 155.9 156.5"/><path class="ow-link" d="M224.1 75.8 Q190.85 50.8 157.6 172.6"/><path class="ow-link" d="M224.1 75.8 Q183.55 16.0 143.0 41.0"/><path class="ow-link" d="M224.1 75.8 Q152.75 27.200000000000003 81.4 52.2"/><path class="ow-link" d="M224.1 75.8 Q247.60000000000002 42.099999999999994 271.1 67.1"/><g class="ow-node ow-node--hub" style="--d:0.00s" transform="translate(224.1 75.8)"><circle class="ow-ping" r="4"/><circle r="4"/><text x="7" y="3">Riyadh</text></g><g class="ow-node" style="--d:0.35s" transform="translate(102.4 115.5)"><circle class="ow-ping" r="4"/><circle r="2.6"/><text x="7" y="3">Jeddah</text></g><g class="ow-node" style="--d:0.70s" transform="translate(112.2 116.8)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g><g class="ow-node" style="--d:1.05s" transform="translate(108.9 78.3)"><circle class="ow-ping" r="4"/><circle r="2.6"/><text x="7" y="3">Madinah</text></g><g class="ow-node" style="--d:1.40s" transform="translate(279.2 54.7)"><circle class="ow-ping" r="4"/><circle r="2.6"/><text x="7" y="3">Dammam</text></g><g class="ow-node" style="--d:1.75s" transform="translate(60.3 29.9)"><circle class="ow-ping" r="4"/><circle r="2.6"/><text x="7" y="3">Tabuk</text></g><g class="ow-node" style="--d:2.10s" transform="translate(37.6 36.1)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g><g class="ow-node" style="--d:2.45s" transform="translate(155.9 156.5)"><circle class="ow-ping" r="4"/><circle r="2.6"/><text x="7" y="3">Abha</text></g><g class="ow-node" style="--d:2.80s" transform="translate(157.6 172.6)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g><g class="ow-node" style="--d:3.15s" transform="translate(143.0 41.0)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g><g class="ow-node" style="--d:3.50s" transform="translate(81.4 52.2)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g><g class="ow-node" style="--d:3.85s" transform="translate(271.1 67.1)"><circle class="ow-ping" r="4"/><circle r="2.6"/></g></svg>
+          </button>
+          <button type="button" class="ow-tile ow-cam" aria-label="Camera feed">
+            <img src="assets/img/services/mission-control.jpg" alt="" loading="lazy">
+            <span class="ow-rec"><i></i>CAM 04</span>
+            <span class="ow-scan" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="ow-tile ow-chart" aria-label="Network throughput chart">
+            <span class="ow-label" data-i18n="ow.chart">Network throughput</span>
+            <strong class="ow-big" dir="ltr"><span id="owGbps">8.4</span> Gbps</strong>
+            <canvas id="owCanvas" aria-hidden="true"></canvas>
+          </button>
+          <div class="ow-tile ow-kpis">
+            <div><span class="ow-label" data-i18n="ow.k1">Uptime</span><strong dir="ltr">99.98%</strong></div>
+            <div><span class="ow-label" data-i18n="ow.k2">Cameras online</span><strong id="owCams" dir="ltr">1,248</strong></div>
+            <div><span class="ow-label" data-i18n="ow.k3">Incidents resolved today</span><strong id="owInc" dir="ltr">37</strong></div>
+          </div>
+          <div class="ow-tile ow-feed">
+            <span class="ow-label" data-i18n="ow.feed">Event stream</span>
+            <ul id="owFeed" aria-live="off"></ul>
+          </div>
+        </div>
+        <p class="ow-note" data-i18n="ow.note">Illustrative demo — click any panel to focus it.</p>
+      </div>
       <div class="chips">
         <span class="chip" data-i18n="cr.c1">Security Operations (SOC)</span>
         <span class="chip" data-i18n="cr.c2">Network Operations (NOC)</span>
@@ -295,6 +352,35 @@
       </div>
       <p class="section__intro" data-i18n="ai.intro">Artificial intelligence is central to the Kingdom’s digital ambitions. We help government and enterprise clients move from AI ambition to AI in production — with the infrastructure, data foundations and practical use-cases that deliver measurable results, responsibly and in line with national data and AI regulations.</p>
     </div>
+    <div class="aivision">
+      <div class="aiv-stage" id="aivStage" dir="ltr" style="--split:50%">
+        <img src="assets/img/projects/kec-dar-al-jewar.jpg" alt="Arcaded retail corridor used for the AI vision demo" loading="lazy">
+        <div class="aiv-layer">
+          <div class="aiv-heat" aria-hidden="true"></div>
+          <div class="aiv-scan" aria-hidden="true"></div>
+          <div class="aiv-box aiv-box--person" style="--x:45.5%;--y:53.5%;--w:6%;--h:31.5%;--i:0"><span><b data-i18n="aiv.person">Person</b> 97%</span></div><div class="aiv-box aiv-box--person" style="--x:51%;--y:54%;--w:6.5%;--h:30%;--i:1"><span><b data-i18n="aiv.person">Person</b> 95%</span></div><div class="aiv-box aiv-box--planter" style="--x:65%;--y:68.7%;--w:8%;--h:10.5%;--i:2"><span><b data-i18n="aiv.planter">Planter</b> 88%</span></div><div class="aiv-box aiv-box--planter" style="--x:33%;--y:68.7%;--w:7.5%;--h:10.5%;--i:3"><span><b data-i18n="aiv.planter">Planter</b> 86%</span></div><div class="aiv-box aiv-box--display" style="--x:20%;--y:42.5%;--w:10%;--h:36%;--i:4"><span><b data-i18n="aiv.display">Display case</b> 82%</span></div><div class="aiv-box aiv-box--light" style="--x:50.5%;--y:0.5%;--w:6%;--h:12%;--i:5"><span><b data-i18n="aiv.light">Light fixture</b> 79%</span></div>
+        </div>
+        <span class="aiv-tag aiv-tag--raw" data-i18n="aiv.raw">Camera view</span>
+        <span class="aiv-tag aiv-tag--ai" data-i18n="aiv.ai">AI view</span>
+        <div class="aiv-handle" id="aivHandle" role="slider" tabindex="0" aria-label="Compare camera view and AI view" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span></span></div>
+      </div>
+      <div class="aiv-panel">
+        <p class="eyebrow" data-i18n="aiv.eyebrow">Interactive demo</p>
+        <h3 data-i18n="aiv.t">See what AI sees</h3>
+        <p data-i18n="aiv.d">Drag the slider across the camera feed. Computer vision turns ordinary video into structured, searchable events your control room can act on.</p>
+        <div class="aiv-modes" role="group" aria-label="AI view mode">
+          <button type="button" class="aiv-mode is-active" data-mode="detect" data-i18n="aiv.m1">Detection</button>
+          <button type="button" class="aiv-mode" data-mode="heat" data-i18n="aiv.m2">Heatmap</button>
+        </div>
+        <ul class="aiv-stats">
+          <li><span data-i18n="aiv.s1">People detected</span><strong>2</strong></li>
+          <li><span data-i18n="aiv.s2">Objects tracked</span><strong>6</strong></li>
+          <li><span data-i18n="aiv.s3">Crowd density</span><strong data-i18n="aiv.low">Low</strong></li>
+          <li><span data-i18n="aiv.s4">Edge inference</span><strong dir="ltr">42 ms</strong></li>
+        </ul>
+      </div>
+    </div>
+
     <div class="ai__grid">
       <article class="ai-card">
         <span class="ai-card__n">01</span>
@@ -390,23 +476,23 @@
   </div>
 </section>
 
-<!-- Virtual 3D showroom -->
-<section class="showroom" id="showroom" aria-labelledby="showroom-title">
-  <div class="showroom__stage" id="showroomStage" tabindex="0" aria-label="Interactive 3D showroom. Drag or use the arrow keys to look around; press Enter to open the project in front of you.">
-    <canvas aria-hidden="true"></canvas>
-    <div class="showroom__ui">
-      <div class="container">
-        <p class="eyebrow eyebrow--light" data-i18n="sh.eyebrow">Virtual showroom</p>
-        <h2 id="showroom-title" class="h2" data-i18n="sh.title">Step inside our work</h2>
-        <p class="showroom__lead" data-i18n="sh.lead">A 360° immersive gallery of our projects. Drag to look around, then click any screen to explore the project.</p>
+<!-- Project tour (scroll-driven horizontal journey) -->
+<section class="tour" id="tour" aria-labelledby="tour-title">
+  <div class="tour__pin">
+    <div class="container tour__head">
+      <div>
+        <p class="eyebrow eyebrow--light" data-i18n="tour.eyebrow">Project tour</p>
+        <h2 id="tour-title" class="h2" data-i18n="tour.title">Walk through our work</h2>
+      </div>
+      <div class="tour__meta">
+        <p data-i18n="tour.lead">Keep scrolling to travel through our projects — select any project to open it.</p>
+        <span class="tour__count" dir="ltr"><b id="tourNow">01</b> / <span id="tourTotal">12</span></span>
       </div>
     </div>
-    <div class="showroom__label" id="showroomLabel" aria-live="polite"></div>
-    <div class="showroom__controls">
-      <button type="button" class="sr-btn" id="showroomPrev" aria-label="Previous project"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
-      <span class="showroom__hint"><svg viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11.5v-2a1.5 1.5 0 0 1 3 0V12M14 10.5a1.5 1.5 0 0 1 3 0V12M17 11.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2a6 6 0 0 1-5-2.7L4.3 15a1.5 1.5 0 0 1 2.4-1.8L8 15"/></svg><span data-i18n="sh.hint">Drag to explore</span></span>
-      <button type="button" class="sr-btn" id="showroomNext" aria-label="Next project"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+    <div class="tour__viewport" id="tourViewport">
+      <div class="tour__track" id="tourTrack"></div>
     </div>
+    <div class="container"><div class="tour__bar"><i id="tourBar"></i></div></div>
   </div>
 </section>
 
@@ -574,9 +660,11 @@
 <!-- Project modal -->
 <dialog class="modal" id="modal">
   <button class="modal__close" id="modalClose" aria-label="Close">×</button>
+  <button class="modal__nav modal__nav--prev" id="modalPrev" aria-label="Previous project"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+  <button class="modal__nav modal__nav--next" id="modalNext" aria-label="Next project"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
   <img id="modalImg" alt="">
   <div class="modal__body">
-    <span class="tag" id="modalCat"></span>
+    <div class="modal__top"><span class="tag" id="modalCat"></span><span class="modal__count" id="modalCount" dir="ltr"></span></div>
     <h3 id="modalTitle"></h3>
     <p id="modalDesc"></p>
   </div>
@@ -584,6 +672,5 @@
 
 <script src="assets/js/i18n-ar.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/immersive.js" defer></script>
 </body>
 </html>
