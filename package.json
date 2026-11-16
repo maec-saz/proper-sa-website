@@ -1,0 +1,12 @@
+{
+  "name": "proper-sa-website",
+  "private": true,
+  "description": "Proper Developments website — builds the 3D layer (src/immersive.js -> assets/js/immersive.js)",
+  "scripts": {
+    "build": "esbuild src/immersive.js --bundle --minify --format=iife --target=es2019 --legal-comments=none --outfile=assets/js/immersive.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0",
+    "three": "0.169.0"
+  }
+}
