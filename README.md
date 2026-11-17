@@ -62,7 +62,39 @@ The brief asks for real imagery only. These are the gaps:
 4. **Project photography for AI & robotics, command & control, NOC/SOC and museums.** No verified projects in
    these categories exist on the current site, so none are shown. Add them to `PROJECTS` with real photos.
 5. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
-6. **Rental imagery.** The Exhibition & Equipment Rental page uses one stock warehouse photo from the current site.
+
+## Imagery
+- **Capability pages, About, Partners, Projects and Capabilities headers** use high-resolution photography
+  (2560px, with 1280px versions served to phones) from **Unsplash**, which is free for commercial use and needs
+  no attribution. Credits are listed below as a courtesy. These photos are illustrative and are never presented
+  as PROPER projects.
+- **Projects** show only real project photography (Aramco Sail, Lexus and the construction portfolio). Their
+  resolution is limited to what the current site holds; supply originals to sharpen them.
+- **Home hero and Headquarters section** use the only real photo of the Headquarters Business Park (1024px).
+
+| File (assets/img/hd/) | Photographer on Unsplash |
+|---|---|
+| command-centre | Tasha Kostyuk |
+| control-room-blue | Ana Garnica |
+| server-rack | Kevin Ache |
+| robotic-arm | ZHENYU LUO |
+| led-curved | Arno Senoner |
+| led-panels | Kier in Sight Archives |
+| stage-purple | Danny Pérez |
+| stage-lights | Samuel Fyfe |
+| towers-sunset | Eugene Chystiakov |
+| lobby | Aalo Lens |
+| workplace-interior | Don Kaveen |
+| architecture | Andrew Whitmore |
+| immersive-projection | Redd Francisco |
+| light-installation | Rodolfo Cuadros |
+| museum-gallery | Mustafa Yiğit |
+| gallery-hall | Darya Tryfanava |
+| network-cables | Taylor Vick |
+| jeddah-corniche | Asim Alghamdi |
+
+To swap in AI-generated visuals (e.g. Higgsfield) later, save them in `assets/img/hd/` as `name.jpg` (2560px wide)
+plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
 
 ## Please verify
 - **Project descriptions and categories** in `PROJECTS`: they're kept deliberately short, but the

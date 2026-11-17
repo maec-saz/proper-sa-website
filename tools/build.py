@@ -41,7 +41,7 @@ CAPABILITIES = [
         "name": "Technology & Intelligent Infrastructure", "short": "Technology",
         "tagline": "Intelligent systems for mission-critical operations.",
         "intro": "We design, supply and integrate the compute, AI and operations infrastructure that keeps organisations informed and in control — from GPU platforms and robotics to command centres that run around the clock.",
-        "hero": "real/control-room-render.jpg", "hero_caption": "Command centre — design visualisation",
+        "hero": "hd/command-centre.jpg", "hero_caption": "",
         "services": [
             ("AI Enablement", "Readiness assessments, use-case delivery and the data foundations needed to put AI into production."),
             ("GPU Solutions", "High-performance GPU compute, storage and networking for AI training and inference — on-premise or hybrid."),
@@ -50,15 +50,16 @@ CAPABILITIES = [
             ("Network Operations Centres (NOC)", "Purpose-built NOCs combining visualisation, monitoring platforms and resilient infrastructure."),
             ("Security Operations Centres (SOC)", "SOC environments that bring analysts, processes and security tooling together in one space."),
         ],
-        "gallery": [("real/aramco-sail-robot.jpg", "Aramco Sail — robotics and LED environment"),
-                    ("real/aramco-sail-kiosk.jpg", "Aramco Sail — interactive cybersecurity kiosk")],
+        "gallery": [("hd/server-rack.jpg", "GPU & AI infrastructure"),
+                    ("hd/robotic-arm.jpg", "Robotics"),
+                    ("hd/control-room-blue.jpg", "Operations centres")],
     },
     {
         "slug": "audiovisual", "n": "02", "accent": "#c9a978",
         "name": "Audiovisual & Integrated Solutions", "short": "Audiovisual",
         "tagline": "Display, sound and control — engineered as one system.",
         "intro": "From curved LED walls to operator consoles, we engineer audiovisual environments where every screen, signal and control surface works together — reliably, every day.",
-        "hero": "real/aramco-sail-led-wall.jpg", "hero_caption": "Aramco Sail — curved LED environment",
+        "hero": "hd/led-curved.jpg", "hero_caption": "",
         "services": [
             ("Professional AV Solutions", "Boardrooms, auditoria, briefing centres and collaboration spaces, designed and integrated end to end."),
             ("LED Display Solutions", "Fine-pitch and large-format LED, curved and bespoke walls, calibrated for colour and longevity."),
@@ -66,54 +67,54 @@ CAPABILITIES = [
             ("Operator Consoles", "Ergonomic technical consoles and supervisor positions designed around the operator."),
             ("Integrated Technology Systems", "Unified control, scheduling and monitoring that bring AV, IT and building systems together."),
         ],
-        "gallery": [("real/aramco-sail-panorama.jpg", "Aramco Sail — panoramic LED wall"),
-                    ("projects/lexus-showroom.jpg", "Lexus Flagship Showroom"),
-                    ("real/aramco-sail-gallery.jpg", "Aramco Sail")],
+        "gallery": [("hd/led-panels.jpg", "LED display engineering"),
+                    ("hd/stage-purple.jpg", "Display & show systems"),
+                    ("hd/network-cables.jpg", "Integrated technology systems")],
     },
     {
         "slug": "construction", "n": "03", "accent": "#b7a68b",
         "name": "Construction & Development", "short": "Construction",
         "tagline": "From concept to completion — built to perform.",
         "intro": "We deliver commercial, residential and specialised buildings, interiors and infrastructure — combining planning, engineering and site expertise to build environments that last.",
-        "hero": "hero/hq-business-park-1920.jpg", "hero_caption": "The Headquarters Business Park, Jeddah",
+        "hero": "hd/towers-sunset.jpg", "hero_caption": "",
         "services": [
             ("Construction", "Commercial buildings and specialised facilities, delivered with precision, quality and safety."),
             ("Interior Fit-Out", "Workplace, hospitality and retail interiors, from design development to final handover."),
             ("Infrastructure Development", "Planning, engineering and delivery of the infrastructure that developments depend on."),
         ],
-        "gallery": [("real/executive-lounge-render.jpg", "Executive interior — design visualisation"),
-                    ("projects/madinah-office.jpg", "Madinah Office Building"),
-                    ("projects/al-salheah.jpg", "Al-Salheah Building")],
+        "gallery": [("hd/lobby.jpg", "Interior fit-out"),
+                    ("hd/workplace-interior.jpg", "Workplace interiors"),
+                    ("hd/architecture.jpg", "Architecture & structure")],
     },
     {
         "slug": "museums", "n": "04", "accent": "#8fb3a5",
         "name": "Museums & Immersive Experiences", "short": "Museums & Immersive",
         "tagline": "Spaces where stories become places.",
         "intro": "We create museums, interactive exhibitions and immersive environments that hold attention — combining storytelling, architecture and technology into experiences visitors remember.",
-        "hero": "real/immersive-dome-render.jpg", "hero_caption": "Immersive exhibition — design visualisation",
+        "hero": "hd/immersive-projection.jpg", "hero_caption": "",
         "services": [
             ("Museum Development", "Galleries and visitor centres, from interpretive planning to fit-out and commissioning."),
             ("Interactive Exhibitions", "Touch, motion and sensor-driven exhibits that invite visitors to take part."),
             ("Immersive Experiences", "Projection, LED and spatial sound environments that surround the audience."),
             ("Exhibition Solutions", "Showcases, lighting, media and content integrated into a single coherent experience."),
         ],
-        "gallery": [("real/immersive-panorama-render.jpg", "360° immersive room — design visualisation"),
-                    ("real/aramco-sail-panorama.jpg", "Aramco Sail"),
-                    ("projects/kec-dar-al-jewar.jpg", "KEC – Dar Al Jewar")],
+        "gallery": [("hd/museum-gallery.jpg", "Museum development"),
+                    ("hd/light-installation.jpg", "Immersive installations"),
+                    ("hd/gallery-hall.jpg", "Exhibition design")],
     },
     {
         "slug": "rental", "n": "05", "accent": "#a9a6c4",
         "name": "Exhibition & Equipment Rental", "short": "Rental",
         "tagline": "Event-ready infrastructure, on demand.",
         "intro": "Exhibition structures, audiovisual equipment and display technology — supplied, installed, operated and removed by our own teams, so your event runs exactly to plan.",
-        "hero": "projects/lexus-showroom.jpg", "hero_caption": "Lexus Flagship Showroom",
+        "hero": "hd/stage-lights.jpg", "hero_caption": "",
         "services": [
             ("Exhibition Infrastructure", "Stands, structures and staging for exhibitions, conferences and launches."),
             ("AV Equipment Rental", "Sound, lighting, cameras and control systems with on-site technical crews."),
             ("Display and Technology Rental", "LED walls, screens, kiosks and interactive displays for short- and long-term hire."),
         ],
-        "gallery": [("real/aramco-sail-gallery.jpg", "Aramco Sail"),
-                    ("services/warehouse.jpg", "")],
+        "gallery": [("hd/stage-purple.jpg", "Event & stage technology"),
+                    ("hd/led-panels.jpg", "Display rental")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
@@ -284,8 +285,14 @@ def page(path, title, desc, body, active, body_class="", image="hero/hq-business
 '''
 
 
-def img(src, alt="", cls="", lazy=True, sizes=None):
-    return f'<img src="{{r}}assets/img/{src}" alt="{e(alt)}"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}{" loading=" + chr(34) + "lazy" + chr(34) if lazy else ""} decoding="async">'
+def img(src, alt="", cls="", lazy=True, sizes="100vw"):
+    """<img> tag. Images in assets/img/hd/ get a 1280/2560 srcset so phones load the smaller file."""
+    attrs = f' class="{cls}"' if cls else ""
+    attrs += ' loading="lazy"' if lazy else ' fetchpriority="high"'
+    if src.startswith("hd/"):
+        base = src[:-4]
+        attrs += (f' srcset="{{r}}assets/img/{base}-1280.jpg 1280w, {{r}}assets/img/{src} 2560w" sizes="{sizes}"')
+    return f'<img src="{{r}}assets/img/{src}" alt="{e(alt)}"{attrs} decoding="async">'
 
 
 def eyebrow(text, light=False):
@@ -372,7 +379,7 @@ def home():
             <ul>{"".join(f"<li>{e(s[0])}</li>" for s in c["services"])}</ul>
           </div></div>
         </li>''' for i, c in enumerate(CAPABILITIES))
-    cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "")}<figcaption>{e(c["hero_caption"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
+    cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     feat = [p for p in PROJECTS if p.get("featured")]
     body = f'''
 <section class="hero" id="hero" data-hero data-video="{e(v)}">
@@ -501,7 +508,7 @@ def page_hero(title, sub, image, caption="", kicker="", accent=None):
 
 def about():
     body = page_hero("A multidisciplinary group, <em>built on delivery.</em>", "Technology, engineering, infrastructure and development expertise — brought together to deliver integrated solutions across industries.",
-                     "hero/hq-business-park-1920.jpg", "The Headquarters Business Park, Jeddah", "About Us") + f'''
+                     "hd/jeddah-corniche.jpg", "Jeddah, Kingdom of Saudi Arabia", "About Us") + f'''
 <section class="section">
   <div class="wrap split">
     <div data-reveal>{eyebrow("Who we are")}<h2 class="display-3">Integrated solutions, from concept to completion.</h2></div>
@@ -559,7 +566,7 @@ def about():
 def capabilities_overview():
     blocks = "".join(f'''
   <article class="capblock" style="--accent:{c["accent"]}" data-reveal>
-    <a class="capblock__media" href="{{r}}capabilities/{c["slug"]}.html" tabindex="-1" aria-hidden="true">{img(c["hero"], "")}</a>
+    <a class="capblock__media" href="{{r}}capabilities/{c["slug"]}.html" tabindex="-1" aria-hidden="true">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 55vw")}</a>
     <div class="capblock__body">
       <span class="capblock__n">{c["n"]}</span>
       <h2 class="display-3"><a href="{{r}}capabilities/{c["slug"]}.html">{e(c["name"])}</a></h2>
@@ -569,7 +576,7 @@ def capabilities_overview():
     </div>
   </article>''' for c in CAPABILITIES)
     body = page_hero("Our <em>Capabilities</em>", "Five integrated business verticals — engineered to work together, from the first concept to long-term operation.",
-                     "real/control-room-render.jpg", "Command centre — design visualisation", "What We Do") + f'''
+                     "hd/control-room-blue.jpg", "", "What We Do") + f'''
 <section class="section capblocks"><div class="wrap">{blocks}</div></section>
 {cta_band()}'''
     return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction & development, museums & immersive experiences, and exhibition & equipment rental.",
@@ -578,7 +585,7 @@ def capabilities_overview():
 
 def capability_page(c, idx):
     services = "".join(f'''<li class="svc" data-reveal><span class="svc__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
-    gallery = "".join(f'<figure data-reveal>{img(src, cap or c["name"])}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>' for src, cap in c["gallery"])
+    gallery = "".join(f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>' for src, cap in c["gallery"])
     related = [p for p in PROJECTS if c["slug"] in p["caps"]][:3]
     rel = f'''<section class="section section--graphite">
   <div class="wrap">
@@ -620,7 +627,7 @@ def capability_page(c, idx):
 
 def partners():
     body = page_hero("Technology Partners <em>&amp; Distribution</em>", "We work with global technology leaders — and distribute selected brands — to deliver proven, supported solutions in the Kingdom.",
-                     "real/aramco-sail-panorama.jpg", "Aramco Sail", "Partners") + f'''
+                     "hd/network-cables.jpg", "", "Partners") + f'''
 <section class="section section--stone">
   <div class="wrap">
     <ul class="partners partners--big">{"".join(partner_tile(p, True) for p in PARTNERS)}</ul>
@@ -648,7 +655,7 @@ def projects():
                 cats.append(c)
     filters = '<button type="button" class="chip is-active" data-filter="*">All</button>' + "".join(f'<button type="button" class="chip" data-filter="{e(c)}">{e(c)}</button>' for c in cats)
     body = page_hero("Projects <em>&amp; Experience</em>", "A selection of completed work across audiovisual, immersive environments, construction and fit-out.",
-                     "real/aramco-sail-led-wall.jpg", "Aramco Sail", "Portfolio") + f'''
+                     "hd/architecture.jpg", "", "Portfolio") + f'''
 <section class="section">
   <div class="wrap">
     <div class="filters" role="group" aria-label="Filter projects" data-reveal>{filters}</div>
@@ -658,7 +665,7 @@ def projects():
 {cta_band("Have a project in mind?")}
 {project_viewer()}'''
     return page("projects.html", "Projects", "Selected PROPER Developments projects including Aramco Sail, the Lexus Flagship Showroom and the Headquarters Business Park.",
-                body, "projects.html", "has-hero", image="real/aramco-sail-led-wall.jpg")
+                body, "projects.html", "has-hero", image="hd/architecture.jpg")
 
 
 def contact():
