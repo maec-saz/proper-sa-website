@@ -34,14 +34,18 @@ python3 tools/build.py
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
 ## The cinematic hero
-The home page opens with a ~8-second sequence built from the **real photograph of the
-Headquarters Business Park**: a high, blurred view descends toward the building and calligraphy wall
-with golden-hour grading, a light sweep and film grain, the "MIDRAR · The Headquarters Business Park" slate,
-then letterbox bars open to reveal the logo, statement and calls to action.
+The home page opens with a ~9-second, three-shot aerial sequence built from high-resolution photography:
+1. **High altitude:** a misty city skyline, slowly descending, with the "A MIDRAR company" title card.
+2. **Drone dive:** a top-down view onto modern towers with a slight camera yaw.
+3. **Architectural flyover:** a golden-hour glass façade that pans in as the letterbox opens and the logo,
+   statement and calls to action are revealed.
 
 - It plays once per browser session; repeat views go straight to the final frame. There's a **Skip intro** button.
+- Shots 1 and 2 load **only** when the intro plays, so repeat visits download just the final image.
 - Visitors with *reduce motion* switched on see the final frame only.
-- Built with CSS and a few lines of JavaScript: no video download, so it doesn't slow the page.
+- Built with CSS and a few lines of JavaScript, with no video download.
+- The hero imagery is illustrative; it does not depict the Headquarters Business Park. The real Headquarters photo
+  appears in the "Our home" section further down the page.
 
 **Drone film slot:** when real aerial footage is available, export it as MP4 (H.264, 1920×1080,
 8–15 seconds, ideally under 6 MB, no audio), save it as `assets/video/hq-aerial.mp4`, set
@@ -52,10 +56,8 @@ and for reduce-motion users.
 ## Assets needed before launch
 The brief asks for real imagery only. These are the gaps:
 
-1. **Headquarters aerial / drone footage, or high-resolution photos.** The only HQ image available is a 1024×529
-   photo from the current site. It works, but looks soft on large screens. A 4K drone clip or several
-   high-resolution photos (aerial, daytime/golden hour, close architectural details) would complete the brief's
-   "high-altitude → descent → flyover" experience.
+1. **Headquarters photography (optional).** The "Our home" section uses the only HQ photo available (1024×529).
+   A high-resolution photo would let it run full-width again.
 2. **PUDU logo.** Not on the current site; a typographic placeholder is shown. Supply the official logo (SVG preferred).
 3. **Partner logos in SVG/high resolution.** VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
    from the current site.
@@ -70,7 +72,7 @@ The brief asks for real imagery only. These are the gaps:
   as PROPER projects.
 - **Projects** show only real project photography (Aramco Sail, Lexus and the construction portfolio). Their
   resolution is limited to what the current site holds; supply originals to sharpen them.
-- **Home hero and Headquarters section** use the only real photo of the Headquarters Business Park (1024px).
+- **Home hero** uses three illustrative aerial/architectural photos; the **Headquarters section** uses the real HQ photo.
 
 | File (assets/img/hd/) | Photographer on Unsplash |
 |---|---|
@@ -92,6 +94,9 @@ The brief asks for real imagery only. These are the gaps:
 | gallery-hall | Darya Tryfanava |
 | network-cables | Taylor Vick |
 | jeddah-corniche | Asim Alghamdi |
+| aerial-city | Datingscout |
+| aerial-dive | Kate Trysh |
+| facade-golden | Joakim Honkasalo |
 
 To swap in AI-generated visuals (e.g. Higgsfield) later, save them in `assets/img/hd/` as `name.jpg` (2560px wide)
 plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.

@@ -491,3 +491,51 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 @media (max-aspect-ratio: 4/5) {
   .hero__img { object-position: 64% 70%; }
 }
+
+/* =====================================================================
+   Hero v2 — three-shot aerial sequence
+   1) high-altitude city (descends)  2) top-down drone dive (yaw + push-in)
+   3) golden-hour façade flyover (lateral pan, then continuous drift)
+   ===================================================================== */
+.hero__shot--1, .hero__shot--2 { opacity: 0; }
+.hero__shot--1 .hero__img, .hero__shot--2 .hero__img { animation: none; }
+.is-intro .hero__shot--1 { animation: shotA 4s ease both; }
+.is-intro .hero__shot--1 .hero__img { animation: s1move 4s cubic-bezier(.35, 0, .25, 1) both; }
+.is-intro .hero__shot--2 { animation: shotB 3.4s ease 3.1s both; }
+.is-intro .hero__shot--2 .hero__img { animation: s2move 3.4s cubic-bezier(.3, 0, .3, 1) 3.1s both; }
+.is-intro .hero__shot--3 { animation: fadeIn 1.4s ease 5.9s both; }
+.is-intro .hero__shot--3 .hero__img { animation: s3move 3.3s cubic-bezier(.2, .6, .2, 1) 5.9s both; }
+@keyframes shotA { 0% { opacity: 0; } 18% { opacity: 1; } 82% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes shotB { 0% { opacity: 0; } 22% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes s1move {
+  from { transform: scale(1.12) translate3d(0, 5%, 0); filter: blur(5px) brightness(.55) saturate(.8); }
+  35%  { filter: blur(0) brightness(.75) saturate(.9); }
+  to   { transform: scale(1.42) translate3d(0, -4%, 0); filter: brightness(.85) saturate(.95); }
+}
+@keyframes s2move {
+  from { transform: scale(1.5) rotate(-5deg); filter: brightness(.7); }
+  to   { transform: scale(1.16) rotate(1.5deg); filter: brightness(.9); }
+}
+@keyframes s3move {
+  from { transform: scale(1.28) translate3d(5%, 0, 0); filter: brightness(.7); }
+  to   { transform: scale(1.06) translate3d(0, 0, 0); filter: none; }
+}
+/* re-time the reveal so the brand lands with the façade flyover */
+.is-intro .hero__bars i { animation: bars 8.6s var(--ease) both; }
+.is-intro .hero__sweep { animation: sweep 2.4s ease-in-out 6.4s both; }
+.is-intro .hero__slate { animation: slate 4.4s ease .5s both; }
+.is-intro .hero__logo { animation: logoIn 1.6s var(--ease) 6.1s both; }
+.is-intro .hero__title .line:nth-child(1) > * { animation-delay: 6.5s; }
+.is-intro .hero__title .line:nth-child(2) > * { animation-delay: 6.7s; }
+.is-intro .hero__lead { animation: fadeUp 1.1s var(--ease) 7.2s both; }
+.is-intro .hero__actions { animation: fadeUp 1.1s var(--ease) 7.45s both; }
+.is-intro .hero__loc, .is-intro .hero__scroll { animation: fadeIn 1.2s ease 7.8s both; }
+.hero__slate-t { max-width: 18ch; margin-inline: auto; }
+
+/* Home: Headquarters — editorial split (keeps the real photo at a size where it stays sharp) */
+.hq { min-height: 0; display: block; padding: clamp(90px, 11vw, 160px) 0; }
+.hq__split { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(36px, 6vw, 100px); align-items: center; }
+.hq .hq__media { position: relative; inset: auto; aspect-ratio: 4 / 3; overflow: hidden; }
+.hq .hq__media::after { display: none; }
+.hq .hq__card { width: auto; background: none; border: 0; padding: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+@media (max-width: 980px) { .hq__split { grid-template-columns: 1fr; } }

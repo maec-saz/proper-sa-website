@@ -240,7 +240,7 @@ INTRO_JS = ("try{if(!sessionStorage.getItem('proper-intro')&&!matchMedia('(prefe
             "document.documentElement.classList.add('is-intro')}catch(e){}")
 
 
-def page(path, title, desc, body, active, body_class="", image="hero/hq-business-park-1920.jpg", preload=None, jsonld=None):
+def page(path, title, desc, body, active, body_class="", image="hd/facade-golden.jpg", preload=None, jsonld=None):
     depth = path.count("/")
     r = "../" * depth
     canonical = SITE + "/" + ("" if path == "index.html" else path)
@@ -384,20 +384,21 @@ def home():
     body = f'''
 <section class="hero" id="hero" data-hero data-video="{e(v)}">
   <div class="hero__stage" aria-hidden="true">
-    <div class="hero__shot">
-      <img class="hero__img" src="{{r}}assets/img/hero/hq-business-park-1920.jpg" srcset="{{r}}assets/img/hero/hq-business-park-960.jpg 960w, {{r}}assets/img/hero/hq-business-park-1920.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
-    </div>
-    <video class="hero__video" muted playsinline loop preload="none" poster="{{r}}assets/img/hero/hq-business-park-1920.jpg"></video>
+    <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-city.jpg" data-srcset="{{r}}assets/img/hd/aerial-city-1280.jpg 1280w, {{r}}assets/img/hd/aerial-city.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
+    <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-dive.jpg" data-srcset="{{r}}assets/img/hd/aerial-dive-1280.jpg 1280w, {{r}}assets/img/hd/aerial-dive.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
+    <div class="hero__shot hero__shot--3"><img class="hero__img" src="{{r}}assets/img/hd/facade-golden.jpg" srcset="{{r}}assets/img/hd/facade-golden-1280.jpg 1280w, {{r}}assets/img/hd/facade-golden.jpg 2560w" sizes="100vw" alt="" style="object-position:30% 50%" fetchpriority="high" decoding="async"></div>
+    <video class="hero__video" muted playsinline loop preload="none" poster="{{r}}assets/img/hd/facade-golden.jpg"></video>
     <div class="hero__grade"></div>
     <div class="hero__sweep"></div>
     <div class="hero__grain"></div>
   </div>
+  <script>/* intro shots load only when the intro plays */(function(){{if(!document.documentElement.classList.contains('is-intro'))return;document.querySelectorAll('.hero__img[data-src]').forEach(function(i){{i.srcset=i.dataset.srcset;i.src=i.dataset.src;}});}})();</script>
   <div class="hero__bars" aria-hidden="true"><i></i><i></i></div>
 
   <div class="hero__slate" aria-hidden="true">
-    <span class="hero__slate-k">{COMPANY["parent"]}</span>
-    <span class="hero__slate-t">The Headquarters Business Park</span>
-    <span class="hero__slate-l">Al Corniche Road · Jeddah</span>
+    <span class="hero__slate-k">A {COMPANY["parent"]} company</span>
+    <span class="hero__slate-t">Intelligent environments, built in the Kingdom</span>
+    <span class="hero__slate-l">Technology · Infrastructure · Development</span>
   </div>
 
   <div class="wrap hero__content">
@@ -411,7 +412,7 @@ def home():
   </div>
 
   <div class="hero__foot wrap">
-    <span class="hero__loc"><i></i>Headquarters Business Park, Jeddah</span>
+    <span class="hero__loc"><i></i>Jeddah · Kingdom of Saudi Arabia</span>
     <button type="button" class="hero__skip" id="heroSkip">Skip intro</button>
     <a class="hero__scroll" href="#intro" aria-label="Scroll to content"><span></span></a>
   </div>
@@ -451,8 +452,8 @@ def home():
 </section>
 
 <section class="hq" aria-labelledby="hq-title">
-  <div class="hq__media" data-reveal="clip">{img("hero/hq-business-park-1920.jpg", "The Headquarters Business Park on Al Corniche Road, Jeddah")}</div>
-  <div class="wrap hq__grid">
+  <div class="wrap hq__split">
+    <div class="hq__media" data-reveal="clip">{img("hero/hq-business-park-1920.jpg", "The Headquarters Business Park on Al Corniche Road, Jeddah", sizes="(max-width: 980px) 100vw, 50vw")}</div>
     <div class="hq__card" data-reveal>
       {eyebrow("Our home")}
       <h2 class="display-3" id="hq-title">The Headquarters Business Park</h2>
@@ -490,7 +491,7 @@ def home():
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
-                body, "index.html", "has-hero is-home", preload="hero/hq-business-park-1920.jpg", jsonld=ORG_LD)
+                body, "index.html", "has-hero is-home", image="hd/facade-golden.jpg", preload="hd/facade-golden.jpg", jsonld=ORG_LD)
 
 
 def page_hero(title, sub, image, caption="", kicker="", accent=None):

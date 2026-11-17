@@ -33,7 +33,7 @@
   /* ---------- Cinematic hero ---------- */
   var hero = $('[data-hero]');
   if (hero) {
-    var INTRO_MS = 8600;
+    var INTRO_MS = 9300;
     var finishIntro = function () {
       doc.classList.remove('is-intro');
       try { sessionStorage.setItem('proper-intro', '1'); } catch (e) { /* storage unavailable */ }

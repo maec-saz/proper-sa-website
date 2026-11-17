@@ -12,14 +12,14 @@
 <meta property="og:title" content="PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.">
 <meta property="og:description" content="PROPER Developments, a MIDRAR company, delivers technology &amp; intelligent infrastructure, audiovisual, construction &amp; fit-out, museums &amp; immersive experiences and exhibition rental across Saudi Arabia.">
 <meta property="og:url" content="https://proper-sa.com/">
-<meta property="og:image" content="https://proper-sa.com/assets/img/hero/hq-business-park-1920.jpg">
+<meta property="og:image" content="https://proper-sa.com/assets/img/hd/facade-golden.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <script>document.documentElement.classList.add('js');try{if(!sessionStorage.getItem('proper-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-intro')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="preload" as="image" href="assets/img/hero/hq-business-park-1920.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hd/facade-golden.jpg" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/site.css">
 <script src="assets/js/site.js" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "PROPER Developments", "url": "https://proper-sa.com", "logo": "https://proper-sa.com/assets/img/logo-dark.png", "foundingDate": "2007", "slogan": "Building Intelligent Environments. Enabling Tomorrow.", "parentOrganization": {"@type": "Organization", "name": "MIDRAR"}, "email": "sales@properholding.com", "telephone": "+966549966266", "address": {"@type": "PostalAddress", "streetAddress": "The Headquarters Business Park, Al Corniche Road, P.O. Box 23511", "addressLocality": "Jeddah", "addressCountry": "SA"}}</script>
@@ -46,20 +46,21 @@
 
 <section class="hero" id="hero" data-hero data-video="">
   <div class="hero__stage" aria-hidden="true">
-    <div class="hero__shot">
-      <img class="hero__img" src="assets/img/hero/hq-business-park-1920.jpg" srcset="assets/img/hero/hq-business-park-960.jpg 960w, assets/img/hero/hq-business-park-1920.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
-    </div>
-    <video class="hero__video" muted playsinline loop preload="none" poster="assets/img/hero/hq-business-park-1920.jpg"></video>
+    <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="assets/img/hd/aerial-city.jpg" data-srcset="assets/img/hd/aerial-city-1280.jpg 1280w, assets/img/hd/aerial-city.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
+    <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="assets/img/hd/aerial-dive.jpg" data-srcset="assets/img/hd/aerial-dive-1280.jpg 1280w, assets/img/hd/aerial-dive.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
+    <div class="hero__shot hero__shot--3"><img class="hero__img" src="assets/img/hd/facade-golden.jpg" srcset="assets/img/hd/facade-golden-1280.jpg 1280w, assets/img/hd/facade-golden.jpg 2560w" sizes="100vw" alt="" style="object-position:30% 50%" fetchpriority="high" decoding="async"></div>
+    <video class="hero__video" muted playsinline loop preload="none" poster="assets/img/hd/facade-golden.jpg"></video>
     <div class="hero__grade"></div>
     <div class="hero__sweep"></div>
     <div class="hero__grain"></div>
   </div>
+  <script>/* intro shots load only when the intro plays */(function(){if(!document.documentElement.classList.contains('is-intro'))return;document.querySelectorAll('.hero__img[data-src]').forEach(function(i){i.srcset=i.dataset.srcset;i.src=i.dataset.src;});})();</script>
   <div class="hero__bars" aria-hidden="true"><i></i><i></i></div>
 
   <div class="hero__slate" aria-hidden="true">
-    <span class="hero__slate-k">MIDRAR</span>
-    <span class="hero__slate-t">The Headquarters Business Park</span>
-    <span class="hero__slate-l">Al Corniche Road · Jeddah</span>
+    <span class="hero__slate-k">A MIDRAR company</span>
+    <span class="hero__slate-t">Intelligent environments, built in the Kingdom</span>
+    <span class="hero__slate-l">Technology · Infrastructure · Development</span>
   </div>
 
   <div class="wrap hero__content">
@@ -73,7 +74,7 @@
   </div>
 
   <div class="hero__foot wrap">
-    <span class="hero__loc"><i></i>Headquarters Business Park, Jeddah</span>
+    <span class="hero__loc"><i></i>Jeddah · Kingdom of Saudi Arabia</span>
     <button type="button" class="hero__skip" id="heroSkip">Skip intro</button>
     <a class="hero__scroll" href="#intro" aria-label="Scroll to content"><span></span></a>
   </div>
@@ -168,8 +169,8 @@
 </section>
 
 <section class="hq" aria-labelledby="hq-title">
-  <div class="hq__media" data-reveal="clip"><img src="assets/img/hero/hq-business-park-1920.jpg" alt="The Headquarters Business Park on Al Corniche Road, Jeddah" loading="lazy" decoding="async"></div>
-  <div class="wrap hq__grid">
+  <div class="wrap hq__split">
+    <div class="hq__media" data-reveal="clip"><img src="assets/img/hero/hq-business-park-1920.jpg" alt="The Headquarters Business Park on Al Corniche Road, Jeddah" loading="lazy" decoding="async"></div>
     <div class="hq__card" data-reveal>
       <p class="eyebrow">Our home</p>
       <h2 class="display-3" id="hq-title">The Headquarters Business Park</h2>
