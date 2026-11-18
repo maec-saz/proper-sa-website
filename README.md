@@ -76,7 +76,7 @@ The brief asks for real imagery only. These are the gaps:
 
 | File (assets/img/hd/) | Photographer on Unsplash |
 |---|---|
-| command-centre | Tasha Kostyuk |
+| video-wall | Frederic Köberl |
 | control-room-blue | Ana Garnica |
 | server-rack | Kevin Ache |
 | robotic-arm | ZHENYU LUO |

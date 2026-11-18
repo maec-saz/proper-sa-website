@@ -41,7 +41,7 @@ CAPABILITIES = [
         "name": "Technology & Intelligent Infrastructure", "short": "Technology",
         "tagline": "Intelligent systems for mission-critical operations.",
         "intro": "We design, supply and integrate the compute, AI and operations infrastructure that keeps organisations informed and in control — from GPU platforms and robotics to command centres that run around the clock.",
-        "hero": "hd/command-centre.jpg", "hero_caption": "",
+        "hero": "hd/video-wall.jpg", "hero_caption": "",
         "services": [
             ("AI Enablement", "Readiness assessments, use-case delivery and the data foundations needed to put AI into production."),
             ("GPU Solutions", "High-performance GPU compute, storage and networking for AI training and inference — on-premise or hybrid."),
