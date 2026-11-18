@@ -27,9 +27,10 @@ COMPANY = {
     "address_short": "Headquarters Business Park, Al Corniche Road, Jeddah",
     "hours": "Monday – Saturday, 7:00 – 17:00",
     "whatsapp": "https://wa.me/966549966266",
-    # Drop a drone film at this path (MP4/H.264, ~1920×1080, 8–15 s, < 6 MB) and the hero plays it
-    # automatically, with the photo sequence as poster and fallback. Leave empty to use the photo sequence.
-    "hero_video": "",
+    # Hero film (MP4/H.264, 1920×1080, 16 s loop, < 6 MB), timed to the intro text. Rendered from the aerial
+    # photos by tools/render_hero_film.py; replace the file with real drone footage when available.
+    # The photo sequence stays as poster and fallback. Set to "" to use the photo sequence only.
+    "hero_video": "assets/video/hero-film.mp4",
 }
 
 # --------------------------------------------------------------------------------------------
@@ -118,6 +119,8 @@ CAPABILITIES = [
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
+SERVICE_COUNT = [s for c in CAPABILITIES for s in c["services"]]
+YEARS = __import__("datetime").date.today().year - int(COMPANY["founded"])
 
 # --------------------------------------------------------------------------------------------
 # Projects — ONLY verified projects with real imagery. Each entry is from the current proper-sa.com
@@ -380,7 +383,6 @@ def home():
           </div></div>
         </li>''' for i, c in enumerate(CAPABILITIES))
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
-    feat = [p for p in PROJECTS if p.get("featured")]
     body = f'''
 <section class="hero" id="hero" data-hero data-video="{e(v)}">
   <div class="hero__stage" aria-hidden="true">
@@ -430,10 +432,10 @@ def home():
     </div>
   </div>
   <div class="wrap facts" data-reveal>
-    <div class="fact"><span class="fact__v">{COMPANY["founded"]}</span><span class="fact__l">Established</span></div>
-    <div class="fact"><span class="fact__v">05</span><span class="fact__l">Integrated business verticals</span></div>
-    <div class="fact"><span class="fact__v">{COMPANY["parent"]}</span><span class="fact__l">Parent organisation</span></div>
-    <div class="fact"><span class="fact__v">Jeddah</span><span class="fact__l">Headquarters Business Park</span></div>
+    <div class="fact"><span class="fact__v"><span data-count="{YEARS}" data-since="{COMPANY["founded"]}">{YEARS}</span><sup>+</sup></span><span class="fact__l">Years of delivery, since {COMPANY["founded"]}</span></div>
+    <div class="fact"><span class="fact__v"><span data-count="{len(CAPABILITIES)}" data-pad="2">{len(CAPABILITIES):02d}</span></span><span class="fact__l">Integrated business verticals</span></div>
+    <div class="fact"><span class="fact__v"><span data-count="{len(PARTNERS)}" data-pad="2">{len(PARTNERS):02d}</span></span><span class="fact__l">Global technology partners</span></div>
+    <div class="fact"><span class="fact__v"><span data-count="{len(SERVICE_COUNT)}" data-pad="2">{len(SERVICE_COUNT):02d}</span></span><span class="fact__l">Specialist services, one team</span></div>
   </div>
 </section>
 
@@ -463,19 +465,6 @@ def home():
   </div>
 </section>
 
-<section class="featured" aria-labelledby="feat-title">
-  <div class="wrap">
-    <div class="sec-head sec-head--split" data-reveal>
-      <div>{eyebrow("Projects")}<h2 class="display-2" id="feat-title">Selected work</h2></div>
-      <a class="link" href="{{r}}projects.html">All projects {arrow()}</a>
-    </div>
-    <div class="featured__grid">
-      {project_card(feat[0], "pcard--xl")}
-      {"".join(project_card(p) for p in feat[1:])}
-    </div>
-  </div>
-</section>
-
 <section class="partners-strip" aria-labelledby="ps-title">
   <div class="wrap">
     <div class="sec-head sec-head--split" data-reveal>
@@ -487,11 +476,73 @@ def home():
 </section>
 
 {cta_band()}
-{project_viewer()}
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
                 body, "index.html", "has-hero is-home", image="hd/facade-golden.jpg", preload="hd/facade-golden.jpg", jsonld=ORG_LD)
+
+
+# --------------------------------------------------------------------------------------------
+# Live operations wall (Technology page): an animated, illustrative operations-centre interface.
+# All figures are simulated in the browser by assets/js/site.js; nothing here is real client data.
+# --------------------------------------------------------------------------------------------
+OPS_SITES = [  # name, longitude, latitude (approximate city positions, used for the schematic network), is HQ
+    ("Jeddah", 39.17, 21.54, True), ("Makkah", 39.83, 21.42, False), ("Madinah", 39.61, 24.47, False),
+    ("Riyadh", 46.72, 24.71, False), ("Dammam", 50.10, 26.43, False), ("Tabuk", 36.57, 28.38, False),
+    ("NEOM", 35.20, 28.00, False), ("Abha", 42.50, 18.22, False), ("Hail", 41.69, 27.52, False),
+]
+OPS_CAMS = [("CAM 01 · Lobby", "hd/lobby-1280.jpg"), ("CAM 04 · Plaza", "hd/architecture-1280.jpg"),
+            ("CAM 07 · Data hall", "hd/server-rack-1280.jpg"), ("CAM 12 · Perimeter", "hd/towers-sunset-1280.jpg")]
+
+
+def ops_wall():
+    def xy(lon, lat):  # simple equirectangular projection into a 400×300 viewBox
+        return round((lon - 34) / (52 - 34) * 360 + 20, 1), round((30 - lat) / (30 - 16) * 260 + 20, 1)
+    hq = next(xy(lo, la) for n, lo, la, h in OPS_SITES if h)
+    links, nodes = "", ""
+    for i, (n, lo, la, h) in enumerate(OPS_SITES):
+        x, y = xy(lo, la)
+        if not h:
+            links += f'<path class="ow-link" d="M{hq[0]},{hq[1]} Q{(hq[0] + x) / 2},{min(hq[1], y) - 30} {x},{y}" style="--d:{i * .37:.2f}s"/>'
+        anchor, dx, dy = {"Jeddah": ("end", -9, 3.5), "Makkah": ("start", 8, 13), "NEOM": ("middle", 0, 15),
+                          "Dammam": ("end", -9, 3.5)}.get(n, ("start", 9, 3.5))
+        nodes += (f'<g class="ow-node{" is-hq" if h else ""}" style="--d:{i * .41:.2f}s"><circle class="ow-pulse" cx="{x}" cy="{y}" r="4"/>'
+                  f'<circle cx="{x}" cy="{y}" r="{4 if h else 2.6}"/><text x="{x + dx}" y="{y + dy}" text-anchor="{anchor}">{n}{" · HQ" if h else ""}</text></g>')
+    grid = "".join(f'<line x1="{x}" y1="10" x2="{x}" y2="290"/>' for x in range(20, 400, 40)) + \
+           "".join(f'<line x1="10" y1="{y}" x2="390" y2="{y}"/>' for y in range(20, 300, 40))
+    cams = "".join(f'<figure class="ow-cam"><img src="{{r}}assets/img/{src}" alt="" loading="lazy" decoding="async"><figcaption><i></i>{e(label)}<span data-ow-clock></span></figcaption></figure>' for label, src in OPS_CAMS)
+    bars = "".join(f'<li><span>GPU {i + 1:02d}</span><b><i data-ow-bar></i></b><em data-ow-barv>0%</em></li>' for i in range(8))
+    kpis = [("Platform availability", "99.98", "%", "2"), ("Connected sites", "48", "", "0"),
+            ("Events processed today", "12840", "", "0"), ("Mean response", "42", "s", "0")]
+    kp = "".join(f'<div class="ow-kpi"><span class="ow-kpi__v"><span data-count="{v}" data-dec="{d}" data-ow-kpi="{k}">{v}</span><small>{u}</small></span><span class="ow-kpi__l">{e(l)}</span></div>' for k, (l, v, u, d) in enumerate(kpis))
+    return f'''<section class="section dark opswall-sec" aria-labelledby="ow-title">
+  <div class="wrap">
+    <div class="sec-head sec-head--split" data-reveal>
+      <div>{eyebrow("Command & control", True)}<h2 class="display-3" id="ow-title">Inside an operations centre <em>we build.</em></h2></div>
+      <p class="opswall-sec__lead">Video walls, monitoring platforms and the people who run them, designed as one environment. The wall below is a live illustration of the picture our command, network and security operations centres bring together.</p>
+    </div>
+    <div class="opswall" data-opswall data-reveal role="img" aria-label="Illustrative operations-centre video wall with a site network map, live metrics, camera feeds, GPU utilisation and an event log. All data is simulated.">
+      <div class="ow-bar">
+        <span class="ow-brand">PROPER <b>OPS</b> · Unified operations view</span>
+        <span class="ow-status"><i></i>All systems nominal</span>
+        <span class="ow-time"><span data-ow-clock>--:--:--</span> AST</span>
+      </div>
+      <div class="ow-grid">
+        <div class="ow-tile ow-map"><h3>Site network <span>Kingdom of Saudi Arabia · schematic</span></h3>
+          <svg viewBox="0 0 400 300" aria-hidden="true"><g class="ow-gridlines">{grid}</g>{links}{nodes}</svg>
+        </div>
+        <div class="ow-tile ow-kpis">{kp}</div>
+        <div class="ow-tile ow-chart"><h3>Network throughput <span data-ow-tput>— Gbps</span></h3>
+          <svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true"><path class="ow-area" data-ow-area/><path class="ow-line" data-ow-line/><path class="ow-line ow-line--b" data-ow-line2/></svg>
+        </div>
+        <div class="ow-tile ow-cams">{cams}</div>
+        <div class="ow-tile ow-gpu"><h3>AI cluster utilisation</h3><ul>{bars}</ul></div>
+        <div class="ow-tile ow-log"><h3>Event log</h3><ol data-ow-log></ol></div>
+      </div>
+    </div>
+    <p class="opswall-sec__note">Illustrative interface. All figures are simulated.</p>
+  </div>
+</section>'''
 
 
 def page_hero(title, sub, image, caption="", kicker="", accent=None):
@@ -605,6 +656,7 @@ def capability_page(c, idx):
   </div>
 </section>
 
+{ops_wall() if c["slug"] == "technology" else ""}
 <section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div></section>
 
 <section class="section section--stone">

@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (cinematic Headquarters intro) | `index.html` |
+| Home (cinematic intro, capabilities, HQ, partners; projects live on their own page) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -34,24 +34,32 @@ python3 tools/build.py
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
 ## The cinematic hero
-The home page opens with a ~9-second, three-shot aerial sequence built from high-resolution photography:
-1. **High altitude:** a misty city skyline, slowly descending, with the "A MIDRAR company" title card.
+The home page opens with a ~9-second, three-shot aerial sequence:
+1. **High altitude:** descending through cloud over a city skyline, with the "A MIDRAR company" title card.
 2. **Drone dive:** a top-down view onto modern towers with a slight camera yaw.
 3. **Architectural flyover:** a golden-hour glass façade that pans in as the letterbox opens and the logo,
-   statement and calls to action are revealed.
+   statement and calls to action are revealed. It then drifts slowly and the film loops.
 
-- It plays once per browser session; repeat views go straight to the final frame. There's a **Skip intro** button.
-- Shots 1 and 2 load **only** when the intro plays, so repeat visits download just the final image.
-- Visitors with *reduce motion* switched on see the final frame only.
-- Built with CSS and a few lines of JavaScript, with no video download.
+- On desktop it plays as a **film** (`assets/video/hero-film.mp4`, 1920×1080, 16 s loop, ~4.4 MB) kept in sync with the
+  intro text. The film is rendered from the aerial photos by `tools/render_hero_film.py` (needs Pillow, NumPy, ffmpeg).
+- Phones, data-saver connections and reduce-motion users get the lighter CSS photo sequence instead (same shots and timing).
+- It plays once per browser session; repeat views open on the façade shot. There's a **Skip intro** button.
 - The hero imagery is illustrative; it does not depict the Headquarters Business Park. The real Headquarters photo
   appears in the "Our home" section further down the page.
 
-**Drone film slot:** when real aerial footage is available, export it as MP4 (H.264, 1920×1080,
-8–15 seconds, ideally under 6 MB, no audio), save it as `assets/video/hq-aerial.mp4`, set
-`"hero_video": "assets/video/hq-aerial.mp4"` in `tools/build.py` and rebuild. The film then plays behind the
-same text sequence, with the photo as poster and fallback. It is skipped on phones, on data-saver connections
-and for reduce-motion users.
+**Real drone footage:** export it as MP4 (H.264, 1920×1080, 10–16 s, ideally under 6 MB, no audio), save it over
+`assets/video/hero-film.mp4` and rebuild. Keep the first cut around 3 s and the final shot from ~6 s so the text still lands.
+
+## Live operations wall
+The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,
+live KPIs, throughput chart, camera tiles, AI-cluster utilisation and an event log. **All data is simulated** in the
+browser and the section is labelled as illustrative. It pauses when off-screen and is static for reduce-motion users.
+Edit it in `ops_wall()` in `tools/build.py` (sites, cameras, KPIs) and the "Live operations wall" block in `assets/js/site.js` (events).
+
+## Animated figures
+The home-page key figures count up when they scroll into view: years of delivery (calculated from the founding year,
+so it stays current), business verticals, technology partners and specialist services (all counted from the data in
+`tools/build.py`).
 
 ## Assets needed before launch
 The brief asks for real imagery only. These are the gaps:

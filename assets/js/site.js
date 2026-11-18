@@ -47,7 +47,13 @@
     var conn = navigator.connection || {};
     if (src && !reduce && !conn.saveData && window.innerWidth >= 760) {
       var v = $('.hero__video', hero);
+      var t0 = performance.now(), intro = doc.classList.contains('is-intro');
       v.src = src;
+      // Keep the film in step with the intro text; repeat visits open on the façade shot.
+      v.addEventListener('loadedmetadata', function () {
+        var at = intro ? (performance.now() - t0) / 1000 : 6.6;
+        if (at > 0.3 && at < v.duration - 1) v.currentTime = at;
+      }, { once: true });
       v.addEventListener('playing', function () { hero.classList.add('has-video'); }, { once: true });
       v.play().catch(function () { /* autoplay blocked — the photo sequence remains */ });
     }
@@ -85,6 +91,90 @@
     revealEls.forEach(function (el) { ro.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  /* ---------- Animated counters ---------- */
+  var fmt = function (n, el) {
+    var dec = +(el.getAttribute('data-dec') || 0), pad = +(el.getAttribute('data-pad') || 0);
+    var s = n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    return pad && s.length < pad ? ('0000' + s).slice(-pad) : s;
+  };
+  var counters = $$('[data-count]');
+  counters.forEach(function (el) {
+    var since = el.getAttribute('data-since');   // keeps "years of delivery" current without a rebuild
+    if (since) el.setAttribute('data-count', String(new Date().getFullYear() - (+since)));
+  });
+  var runCount = function (el) {
+    var to = parseFloat(el.getAttribute('data-count')), t0 = null, D = 1800;
+    var step = function (ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / D, 1), k = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(to * k, el);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  if ('IntersectionObserver' in window && !reduce) {
+    var co = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { co.unobserve(e.target); runCount(e.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { el.textContent = fmt(0, el); co.observe(el); });
+  } else {
+    counters.forEach(function (el) { el.textContent = fmt(parseFloat(el.getAttribute('data-count')), el); });
+  }
+
+  /* ---------- Live operations wall (simulated data) ---------- */
+  var wall = $('[data-opswall]');
+  if (wall) {
+    var clocks = $$('[data-ow-clock]', wall), bars = $$('[data-ow-bar]', wall), barv = $$('[data-ow-barv]', wall);
+    var logEl = $('[data-ow-log]', wall), tput = $('[data-ow-tput]', wall);
+    var line = $('[data-ow-line]', wall), line2 = $('[data-ow-line2]', wall), area = $('[data-ow-area]', wall);
+    var N = 48, A = [], B = [], seed = 0.55, live = false, timer = null, tick = 0;
+    for (var i = 0; i < N; i++) { seed = Math.min(.92, Math.max(.25, seed + (Math.random() - .5) * .12)); A.push(seed); B.push(.25 + Math.random() * .2); }
+    var EVENTS = [['Access granted · Gate 3', ''], ['Video wall layout “Incident” recalled', ''], ['NOC: link Riyadh ⇄ Jeddah latency 18 ms', 'ok'],
+      ['Camera 12 motion detected · perimeter', 'warn'], ['GPU job #4471 completed · inference', 'ok'], ['Visitor badge issued · Lobby', ''],
+      ['SOC: anomalous login blocked', 'warn'], ['UPS-B battery test passed', 'ok'], ['HVAC data hall setpoint 22.0 °C', ''],
+      ['Shift handover acknowledged', ''], ['Backup replication complete · DR site', 'ok'], ['Crowd density threshold · Plaza', 'warn'],
+      ['Dispatch unit 07 en route', ''], ['Firmware update scheduled · 02:00', '']];
+    var now = function () { return new Date().toLocaleTimeString('en-GB', { hour12: false, timeZone: 'Asia/Riyadh' }); };
+    var path = function (arr, close) {
+      var d = arr.map(function (v, k) { return (k ? 'L' : 'M') + (k * 300 / (N - 1)).toFixed(1) + ',' + (110 - v * 100).toFixed(1); }).join(' ');
+      return close ? d + ' L300,110 L0,110 Z' : d;
+    };
+    var addLog = function () {
+      var ev = EVENTS[Math.floor(Math.random() * EVENTS.length)], li = document.createElement('li');
+      if (ev[1]) li.className = 'is-' + ev[1];
+      li.innerHTML = '<time>' + now() + '</time><span></span>';
+      li.lastChild.textContent = ev[0];
+      logEl.insertBefore(li, logEl.firstChild);
+      while (logEl.children.length > 9) logEl.removeChild(logEl.lastChild);
+    };
+    var update = function () {
+      tick++;
+      var t = now();
+      clocks.forEach(function (c) { c.textContent = t; });
+      seed = Math.min(.92, Math.max(.25, seed + (Math.random() - .5) * .14));
+      A.push(seed); A.shift(); B.push(.22 + Math.random() * .22); B.shift();
+      line.setAttribute('d', path(A)); area.setAttribute('d', path(A, true)); line2.setAttribute('d', path(B));
+      tput.textContent = (seed * 40).toFixed(1) + ' Gbps';
+      if (tick % 2 === 1) bars.forEach(function (b, k) {
+        var v = Math.round(55 + Math.random() * 44);
+        b.style.width = v + '%'; b.classList.toggle('is-hot', v > 90); barv[k].textContent = v + '%';
+      });
+      if (tick % 3 === 0) addLog();
+      var ev = $('[data-ow-kpi="2"]', wall);   // events processed keeps climbing once its counter has run
+      if (ev && tick > 3) { ev.setAttribute('data-count', String(+ev.getAttribute('data-count') + Math.floor(Math.random() * 7))); ev.textContent = fmt(+ev.getAttribute('data-count'), ev); }
+    };
+    for (var j = 0; j < 6; j++) addLog();
+    update();
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        live = es[0].isIntersecting;
+        wall.classList.toggle('is-paused', !live);
+        if (live && !timer) timer = setInterval(update, 1000);
+        if (!live && timer) { clearInterval(timer); timer = null; }
+      }, { threshold: 0.05 }).observe(wall);
+    }
   }
 
   /* ---------- Projects: filter ---------- */
