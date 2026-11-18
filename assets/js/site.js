@@ -183,6 +183,31 @@
     }
   }
 
+  /* ---------- Project story: the sticky image follows the step in view ---------- */
+  $$('[data-story]').forEach(function (story) {
+    var steps = $$('[data-story-step]', story), figs = $$('[data-story-fig]', story), bar = $('.story__progress i', story);
+    var set = function (i) {
+      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      figs.forEach(function (f, k) { f.classList.toggle('is-active', k === i); });
+      if (bar) bar.style.width = ((i + 1) / steps.length * 100) + '%';
+    };
+    if ('IntersectionObserver' in window) {
+      var so = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) set(steps.indexOf(e.target)); });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      steps.forEach(function (s) { so.observe(s); });
+    }
+    set(0);
+  });
+
+  /* ---------- Before / after slider ---------- */
+  $$('[data-ba]').forEach(function (ba) {
+    var range = $('.ba__range', ba);
+    var upd = function () { ba.style.setProperty('--pos', range.value + '%'); };
+    range.addEventListener('input', upd);
+    upd();
+  });
+
   /* ---------- Projects: filter ---------- */
   $$('.chip[data-filter]').forEach(function (chip) {
     chip.addEventListener('click', function () {

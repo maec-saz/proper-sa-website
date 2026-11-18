@@ -42,6 +42,20 @@ laid out right-to-left. Each page has a language switch (العربية / Englis
   transliterated (Aramco Sail, High Mark, KEC and Tewergi are kept in Latin). Confirm them with the project owners.
 - Have a native-speaking reviewer proofread the copy before launch.
 
+## Project story, before/after and trust sections
+- **Project story (Projects page):** a scroll-driven walkthrough. The photo stays pinned while each step scrolls past and
+  the image changes to match. On phones the steps stack with their own photos. It currently tells the **Aramco Sail**
+  story from its five real photos, describing only what the photos show. Please confirm the wording with the project team.
+  Add more stories in `PROJECT_STORIES` in `tools/build.py` (needs 3+ real photos per project).
+- **Before/after slider (Projects page, "Design to delivery"):** drag, tap or use the arrow keys to compare a design
+  visualisation with the finished project. It mirrors for Arabic. **It's hidden until a project has a real pair**: add
+  `"compare": {"before": "...render.jpg", "after": "...photo.jpg"}` to the project in `PROJECTS`. Use the same viewpoint
+  for both images.
+- **Trust (Home page):** client logos are shown now. **Testimonials** and **certifications & accreditations** (e.g. ISO 9001,
+  contractor classification) appear automatically once you add entries to `TESTIMONIALS` and `CERTIFICATIONS` in
+  `tools/build.py`. Add only genuine, approved quotes and certificates you hold. Certificate logos go in `assets/img/certs/`.
+  New English text is reported by the build until its Arabic translation is added to `tools/i18n_ar.py`.
+
 ## Editing content
 All text, capabilities, projects and partners live in **`tools/build.py`**. Edit the data at the top,
 then regenerate every page:
@@ -90,7 +104,8 @@ The brief asks for real imagery only. These are the gaps:
    from the current site.
 4. **Project photography for AI & robotics, command & control, NOC/SOC and museums.** No verified projects in
    these categories exist on the current site, so none are shown. Add them to `PROJECTS` with real photos.
-5. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
+5. **Before/after pairs, testimonials and certificates** (see "Project story, before/after and trust sections").
+6. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
 
 ## Imagery
 - **Capability pages, About, Partners, Projects and Capabilities headers** use high-resolution photography

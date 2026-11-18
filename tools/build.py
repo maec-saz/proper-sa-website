@@ -128,6 +128,9 @@ YEARS = __import__("datetime").date.today().year - int(COMPANY["founded"])
 # --------------------------------------------------------------------------------------------
 # Projects — ONLY verified projects with real imagery. Each entry is from the current proper-sa.com
 # portfolio. Confirm wording/categories with the project teams before launch (see README).
+# Optional before/after slider on the Projects page — add a real design render and a real photo of the same view:
+#   "compare": {"before": "projects/x-render.jpg", "after": "projects/x-photo.jpg",
+#               "before_label": "Design visualisation", "after_label": "Completed"}
 # --------------------------------------------------------------------------------------------
 PROJECTS = [
     {"id": "aramco-sail", "title": "Aramco Sail", "cats": ["LED & Audiovisual", "Immersive Experiences"],
@@ -173,6 +176,36 @@ PARTNERS = [
     {"name": "SAMSUNG", "logo": "partners/samsung.png", "role": "Commercial displays & LED"},
     {"name": "SOLUM", "logo": "partners/solum.png", "role": "Distribution partner"},
 ]
+
+# --------------------------------------------------------------------------------------------
+# Project stories: scroll-driven walkthroughs on the Projects page. Use real project photos only,
+# and describe what the photos show (confirm wording with the project team — see README).
+# --------------------------------------------------------------------------------------------
+PROJECT_STORIES = [
+    {"project": "aramco-sail", "title": "Inside Aramco Sail",
+     "lead": "An immersive technology environment where large-format LED, interactive displays and live demonstrations work as one space.",
+     "steps": [
+         ("real/aramco-sail-panorama.jpg", "Behind the glass",
+          "A large-format LED video wall runs the length of a glass-fronted space, visible from across the gallery."),
+         ("real/aramco-sail-gallery.jpg", "A curved story wall",
+          "Curved LED walls follow the line of the gallery, presenting each technology use case above a demonstration counter."),
+         ("real/aramco-sail-led-wall.jpg", "Live demonstrations",
+          "Equipment sits on the counter directly beneath its story on the wall, so visitors see the device and the explanation together."),
+         ("real/aramco-sail-kiosk.jpg", "Freestanding displays",
+          "Portrait display totems present individual solutions beside the exhibits themselves."),
+         ("real/aramco-sail-robot.jpg", "Robotics on show",
+          "A humanoid robot joins the exhibits, in a space built to show emerging technology at work."),
+     ]},
+]
+
+# --------------------------------------------------------------------------------------------
+# Trust: testimonials and certifications. Sections appear automatically once entries are added.
+# Only add genuine, approved quotes and certificates you hold.
+#   TESTIMONIALS: {"quote": "...", "name": "...", "role": "...", "org": "..."}
+#   CERTIFICATIONS: {"name": "ISO 9001:2015", "detail": "Quality management", "image": "certs/iso-9001.png" or None}
+# --------------------------------------------------------------------------------------------
+TESTIMONIALS = []
+CERTIFICATIONS = []
 
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
        ("partners.html", "Technology Partners"), ("projects.html", "Projects"), ("contact.html", "Contact")]
@@ -266,7 +299,7 @@ def tr(text):
     for pat, rep_ in AR_PATTERNS:
         m = re.fullmatch(pat, text)
         if m:
-            return m.expand(rep_)
+            return rep_(m) if callable(rep_) else m.expand(rep_)
     for sep in (" · ", " | ", " – ", "|"):
         if sep in text:
             return sep.join(tr(part) for part in text.split(sep))
@@ -455,6 +488,73 @@ ORG_LD = {
 # ============================================================================================
 # Pages
 # ============================================================================================
+def compare_slider(c, title):
+    """Before/after slider. c = {"before": img, "after": img, "before_label": str, "after_label": str}."""
+    bl, al = c.get("before_label", "Design visualisation"), c.get("after_label", "Completed")
+    return f'''<figure class="ba" data-ba style="--pos:50%">
+  {img(c["after"], f"{title} · {al}", "ba__img")}
+  <div class="ba__before">{img(c["before"], f"{title} · {bl}", "ba__img")}</div>
+  <span class="ba__label ba__label--before">{e(bl)}</span><span class="ba__label ba__label--after">{e(al)}</span>
+  <span class="ba__handle" aria-hidden="true"><i></i></span>
+  <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="{e("Compare: " + bl + " and " + al)}">
+  <figcaption>{e(title)}</figcaption>
+</figure>'''
+
+
+def compare_section():
+    items = [p for p in PROJECTS if p.get("compare")]
+    if not items:
+        return ""
+    return f'''<section class="section section--stone compare-sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("Design to delivery")}<h2 class="display-3">From visualisation <em>to reality.</em></h2>
+      <p class="sec-head__lead">Drag the handle to compare the approved design with the finished project.</p></div>
+    <div class="compare-grid">{"".join(f'<div data-reveal>{compare_slider(p["compare"], p["title"])}</div>' for p in items)}</div>
+  </div>
+</section>'''
+
+
+def project_story(s):
+    p = next(x for x in PROJECTS if x["id"] == s["project"])
+    media = "".join(f'<figure class="story__fig{" is-active" if i == 0 else ""}" data-story-fig="{i}">{img(src, t, sizes="(max-width: 980px) 100vw, 58vw")}</figure>'
+                    for i, (src, t, d) in enumerate(s["steps"]))
+    steps = "".join(f'''<li class="story__step{" is-active" if i == 0 else ""}" data-story-step="{i}">
+        <span class="story__n">{i + 1:02d}<i>/ {len(s["steps"]):02d}</i></span>
+        <h3>{e(t)}</h3><p>{e(d)}</p>
+        <div class="story__inline">{img(src, t, sizes="100vw")}</div>
+      </li>''' for i, (src, t, d) in enumerate(s["steps"]))
+    return f'''<section class="story dark" data-story aria-labelledby="story-{p["id"]}">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("Project story", True)}<h2 class="display-2" id="story-{p["id"]}">{e(s["title"])}</h2>
+      <p class="sec-head__lead">{e(s["lead"])}</p></div>
+    <div class="story__grid">
+      <div class="story__media" aria-hidden="true"><div class="story__stage">{media}
+        <div class="story__progress"><i></i></div></div></div>
+      <ol class="story__steps">{steps}</ol>
+    </div>
+    <p class="story__meta">{e(" · ".join(p["cats"]))}</p>
+  </div>
+</section>'''
+
+
+def trust_section():
+    quotes = "".join(f'''<figure class="quote" data-reveal><blockquote><p>{e(t["quote"])}</p></blockquote>
+      <figcaption><b>{e(t["name"])}</b><span>{e(t["role"])}{", " + e(t["org"]) if t.get("org") else ""}</span></figcaption></figure>''' for t in TESTIMONIALS)
+    certs = "".join(f'''<li class="cert" data-reveal>{img(c["image"], c["name"]) if c.get("image") else '<span class="cert__seal" aria-hidden="true"></span>'}
+      <b>{e(c["name"])}</b><span>{e(c.get("detail", ""))}</span></li>''' for c in CERTIFICATIONS)
+    return f'''<section class="section section--stone trust" aria-labelledby="trust-title">
+  <div class="wrap">
+    <div class="sec-head sec-head--split" data-reveal>
+      <div>{eyebrow("Clients")}<h2 class="display-3" id="trust-title">Trusted by leading organisations</h2></div>
+      <a class="link" href="{{r}}about.html">About PROPER Developments {arrow()}</a>
+    </div>
+    <div class="trust__clients" data-reveal>{img("clients.jpg", "Logos of PROPER Developments clients, including the Ministry of Culture and leading Saudi organisations", sizes="(max-width: 980px) 100vw, 900px")}</div>
+    {f'<div class="quotes">{quotes}</div>' if quotes else ""}
+    {f'<div class="certs-wrap"><h3 class="certs__h" data-reveal>Certifications &amp; accreditations</h3><ul class="certs">{certs}</ul></div>' if certs else ""}
+  </div>
+</section>'''
+
+
 def home():
     v = COMPANY["hero_video"]
     caps = "".join(f'''
@@ -562,6 +662,7 @@ def home():
   </div>
 </section>
 
+{trust_section()}
 {cta_band()}
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
@@ -795,13 +896,14 @@ def projects():
                 cats.append(c)
     filters = '<button type="button" class="chip is-active" data-filter="*">All</button>' + "".join(f'<button type="button" class="chip" data-filter="{e(c)}">{e(c)}</button>' for c in cats)
     body = page_hero("Projects <em>&amp; Experience</em>", "A selection of completed work across audiovisual, immersive environments, construction and fit-out.",
-                     "hd/architecture.jpg", "", "Portfolio") + f'''
+                     "hd/architecture.jpg", "", "Portfolio") + "".join(project_story(st) for st in PROJECT_STORIES) + f'''
 <section class="section">
   <div class="wrap">
     <div class="filters" role="group" aria-label="Filter projects" data-reveal>{filters}</div>
     <div class="pgrid" id="pgrid">{"".join(project_card(p, "pcard--xl" if i == 0 else "") for i, p in enumerate(PROJECTS))}</div>
   </div>
 </section>
+{compare_section()}
 {cta_band("Have a project in mind?")}
 {project_viewer()}'''
     return page("projects.html", "Projects", "Selected PROPER Developments projects including Aramco Sail, the Lexus Flagship Showroom and the Headquarters Business Park.",

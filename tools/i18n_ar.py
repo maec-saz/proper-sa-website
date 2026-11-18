@@ -398,9 +398,40 @@ AR = {
     "Back to home": "العودة إلى الرئيسية",
     "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.":
         "تقدّم PROPER Developments، إحدى شركات MIDRAR، حلول التقنية والبنية التحتية الذكية والأنظمة السمعية والبصرية والإنشاءات والتجهيزات الداخلية والمتاحف والتجارب الغامرة وتأجير المعارض في جميع أنحاء المملكة العربية السعودية.",
+
+    # ---------------------------------------------------------------- project story (Aramco Sail)
+    "Project story": "قصة مشروع",
+    "Inside Aramco Sail": "من داخل Aramco Sail",
+    "An immersive technology environment where large-format LED, interactive displays and live demonstrations work as one space.":
+        "بيئة تقنية غامرة تعمل فيها شاشات LED الكبيرة والشاشات التفاعلية والعروض الحيّة كمساحة واحدة.",
+    "Behind the glass": "خلف الزجاج",
+    "A large-format LED video wall runs the length of a glass-fronted space, visible from across the gallery.":
+        "جدار فيديو LED كبير يمتد على طول مساحة بواجهة زجاجية، ويظهر من أرجاء صالة العرض كافة.",
+    "A curved story wall": "جدار قصصي منحنٍ",
+    "Curved LED walls follow the line of the gallery, presenting each technology use case above a demonstration counter.":
+        "تتبع جدران LED المنحنية خط صالة العرض، وتعرض كل حالة استخدام تقنية فوق منصة عرض حيّ.",
+    "Live demonstrations": "عروض حيّة",
+    "Equipment sits on the counter directly beneath its story on the wall, so visitors see the device and the explanation together.":
+        "تُعرض الأجهزة على المنصة أسفل قصتها على الجدار مباشرة، فيرى الزوّار الجهاز وشرحه معًا.",
+    "Freestanding displays": "شاشات قائمة بذاتها",
+    "Portrait display totems present individual solutions beside the exhibits themselves.":
+        "شاشات عمودية قائمة تعرض كل حل على حدة بجوار المعروضات نفسها.",
+    "Robotics on show": "الروبوتات في العرض",
+    "A humanoid robot joins the exhibits, in a space built to show emerging technology at work.":
+        "ينضم روبوت بشري الشكل إلى المعروضات، في مساحة صُممت لعرض التقنيات الناشئة وهي تعمل.",
+
+    # ---------------------------------------------------------------- before/after & trust (shown once content is added)
+    "Design to delivery": "من التصميم إلى التنفيذ",
+    "From visualisation": "من التصوّر",
+    "to reality.": "إلى الواقع.",
+    "Drag the handle to compare the approved design with the finished project.": "اسحب المقبض للمقارنة بين التصميم المعتمد والمشروع المنجز.",
+    "Design visualisation": "تصوّر التصميم",
+    "Completed": "المشروع المنجز",
+    "Certifications & accreditations": "الشهادات والاعتمادات",
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
 AR_PATTERNS = [
     (r"Capability (\d+)", r"المجال \1"),
+    (r"Compare: (.+) and (.+)", lambda m: "مقارنة: " + AR.get(m.group(1), m.group(1)) + " و" + AR.get(m.group(2), m.group(2))),
 ]
