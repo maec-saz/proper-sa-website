@@ -7,9 +7,12 @@ Edit it, then run:   python3 tools/build.py
 It writes every .html page, sitemap.xml and robots.txt into the site root.
 No dependencies beyond the Python 3 standard library.
 """
-from html import escape as e
+from html import escape as e, unescape
+import re
 from pathlib import Path
 import json
+
+LANG = "en"          # set per build in main(): "en" or "ar"
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://proper-sa.com"          # used for canonical URLs, sitemap and social tags
@@ -203,6 +206,7 @@ def header(r, active):
     <nav class="nav" id="siteNav" aria-label="Main">
       {''.join(links)}
     </nav>
+    <a class="lang-switch" href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a>
     <a class="btn btn--line btn--sm header-cta" href="{r}contact.html">Contact Us</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav"><span class="sr">Menu</span><i></i><i></i></button>
   </div>
@@ -238,29 +242,110 @@ def footer(r):
 </footer>'''
 
 
+# ============================================================================================
+# Arabic build: every page is rendered from the same templates, then each visible text node and
+# text attribute is translated with the dictionary in tools/i18n_ar.py. Anything left in English is
+# reported when you build, so the Arabic site can't silently fall behind the English one.
+# ============================================================================================
+try:
+    from i18n_ar import AR, AR_PATTERNS
+except ImportError:                      # running from another directory
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from i18n_ar import AR, AR_PATTERNS
+
+MISSING = set()
+KEEP = re.compile(r"^(?:[^A-Za-z]*|PROPER(?: Developments)?|PROPER OPS|MIDRAR|VOD|CTF|PUDU|LG|SAMSUNG|SOLUM|OPS|GPU \d+|CAM \d+|"
+                  r"[\w.+-]+@[\w.-]+|\+?[\d\s]+|AI|NOC|SOC|LED|AV|GPU)$")
+
+
+def tr(text):
+    """Translate one visible string (already unescaped and trimmed)."""
+    if text in AR:
+        return AR[text]
+    for pat, rep_ in AR_PATTERNS:
+        m = re.fullmatch(pat, text)
+        if m:
+            return m.expand(rep_)
+    for sep in (" · ", " | ", " – ", "|"):
+        if sep in text:
+            return sep.join(tr(part) for part in text.split(sep))
+    if KEEP.match(text):
+        return text
+    MISSING.add(text)
+    return text
+
+
+def _tr_node(m):
+    raw = m.group(1)
+    text = unescape(raw)
+    core = text.strip()
+    if not core:
+        return m.group(0)
+    lead, trail = text[:len(text) - len(text.lstrip())], text[len(text.rstrip()):]
+    return ">" + e(lead + tr(core) + trail, quote=False) + "<"
+
+
+def _tr_attr(m):
+    name, val = m.group(1), unescape(m.group(2))
+    return f'{name}="{e(tr(val.strip()))}"' if val.strip() else m.group(0)
+
+
+def _tr_project_json(m):
+    data = json.loads(m.group(2))
+    for item in data["items"].values():
+        for k in ("t", "c", "d", "l"):
+            if item[k]:
+                item[k] = tr(item[k])
+    return m.group(1) + json.dumps(data, ensure_ascii=False) + m.group(3)
+
+
+def translate(doc):
+    parts = re.split(r"(<script\b.*?</script>|<style\b.*?</style>)", doc, flags=re.S)
+    out = []
+    for part in parts:
+        if part.startswith("<script"):
+            part = re.sub(r'(<script type="application/json" id="projectData">)(.*?)(</script>)', _tr_project_json, part, flags=re.S)
+        elif not part.startswith("<style"):
+            part = re.sub(r">([^<>]+)<", _tr_node, part)
+            part = re.sub(r'\b(alt|aria-label|title|placeholder|data-filter|data-cats)="([^"]*)"', _tr_attr, part)
+            part = re.sub(r'(<meta (?:name="description"|property="og:(?:title|description)") content=)"([^"]*)"',
+                          lambda m: m.group(1) + '"' + e(tr(unescape(m.group(2)))) + '"', part)
+        out.append(part)
+    return "".join(out)
+
+
 # First visit per session with motion allowed → play the cinematic intro (decided before first paint).
 INTRO_JS = ("try{if(!sessionStorage.getItem('proper-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)"
             "document.documentElement.classList.add('is-intro')}catch(e){}")
 
 
 def page(path, title, desc, body, active, body_class="", image="hd/facade-golden.jpg", preload=None, jsonld=None):
-    depth = path.count("/")
-    r = "../" * depth
-    canonical = SITE + "/" + ("" if path == "index.html" else path)
+    ar = LANG == "ar"
+    full_path = ("ar/" if ar else "") + path
+    root = "../" * full_path.count("/")          # site root (shared assets)
+    r = "{r}"                                    # page links; resolved at the end (Arabic pages link to /ar/)
+    url = lambda p: SITE + "/" + ("" if p == "index.html" else p.replace("/index.html", "/"))
+    canonical = url(full_path)
+    alt_href = root + ("" if ar else "ar/") + path
+    hreflang = (f'<link rel="alternate" hreflang="en" href="{url(path)}">\n<link rel="alternate" hreflang="ar" href="{url("ar/" + path)}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{url(path)}">')
     ld = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ""
     pre = f'<link rel="preload" as="image" href="{r}assets/img/{preload}" fetchpriority="high">' if preload else ""
     full_title = title if path == "index.html" else f"{title} | PROPER Developments"
-    return f'''<!doctype html>
-<html lang="en">
+    doc = f'''<!doctype html>
+<html lang="{"ar" if ar else "en"}" dir="{"rtl" if ar else "ltr"}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{canonical}">
+{hreflang}
 <meta name="theme-color" content="#0d0e10">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PROPER Developments">
+<meta property="og:locale" content="{"ar_SA" if ar else "en_US"}">
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canonical}">
@@ -270,7 +355,7 @@ def page(path, title, desc, body, active, body_class="", image="hd/facade-golden
 <script>document.documentElement.classList.add('js');{INTRO_JS if path == "index.html" else ""}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1{"&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:wght@400;700" if ar else ""}&display=swap">
 {pre}
 <link rel="stylesheet" href="{r}assets/css/site.css">
 <script src="{r}assets/js/site.js" defer></script>
@@ -285,7 +370,9 @@ def page(path, title, desc, body, active, body_class="", image="hd/facade-golden
 {footer(r)}
 </body>
 </html>
-'''
+'''.replace("{alt}", alt_href)
+    doc = doc.replace("{r}assets/", root + "assets/").replace("{r}", root + ("ar/" if ar else ""))
+    return translate(doc) if ar else doc
 
 
 def img(src, alt="", cls="", lazy=True, sizes="100vw"):
@@ -384,7 +471,7 @@ def home():
         </li>''' for i, c in enumerate(CAPABILITIES))
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     body = f'''
-<section class="hero" id="hero" data-hero data-video="{e(v)}">
+<section class="hero" id="hero" data-hero data-video="{"{r}" + e(v) if v else ""}">
   <div class="hero__stage" aria-hidden="true">
     <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-city.jpg" data-srcset="{{r}}assets/img/hd/aerial-city-1280.jpg 1280w, {{r}}assets/img/hd/aerial-city.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
     <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-dive.jpg" data-srcset="{{r}}assets/img/hd/aerial-dive-1280.jpg 1280w, {{r}}assets/img/hd/aerial-dive.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
@@ -764,17 +851,30 @@ def not_found():
     return page("404.html", "Page not found", "Page not found.", body, "", "is-contact")
 
 
-def main():
+def build_pages():
     out = {"index.html": home(), "about.html": about(), "capabilities.html": capabilities_overview(),
            "partners.html": partners(), "projects.html": projects(), "contact.html": contact(), "404.html": not_found()}
     for i, c in enumerate(CAPABILITIES):
         out[f'capabilities/{c["slug"]}.html'] = capability_page(c, i)
+    return out
+
+
+def main():
+    global LANG
+    out = build_pages()
+    LANG = "ar"
+    out.update({"ar/" + p: h for p, h in build_pages().items()})
+    LANG = "en"
+    if MISSING:
+        print(f"{len(MISSING)} untranslated Arabic strings:")
+        for m in sorted(MISSING):
+            print("   ", repr(m))
     for path, html in out.items():
         f = ROOT / path
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(html, encoding="utf-8")
     urls = [p for p in out if p != "404.html"]
-    sm = "\n".join(f"  <url><loc>{SITE}/{'' if p == 'index.html' else p}</loc></url>" for p in urls)
+    sm = "\n".join(f"  <url><loc>{SITE}/{p.replace('index.html', '')}</loc></url>" for p in urls)
     (ROOT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{sm}\n</urlset>\n', encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     print(f"Built {len(out)} pages")

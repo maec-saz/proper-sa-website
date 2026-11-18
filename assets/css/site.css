@@ -637,3 +637,56 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 @media (prefers-reduced-motion: reduce) {
   .opswall *, .opswall *::before { animation: none !important; transition: none !important; }
 }
+
+/* =====================================================================
+   Language switch
+   ===================================================================== */
+.lang-switch { margin-inline-start: 14px; font-size: 13.5px; color: #d6d9de; padding: 6px 4px; border-bottom: 1px solid transparent; transition: color .3s, border-color .3s; white-space: nowrap; }
+.lang-switch:hover, .lang-switch:focus-visible { color: #fff; border-color: currentColor; }
+.lang-switch[lang="ar"] { font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Geeza Pro", Tahoma, sans-serif; font-size: 15px; }
+.lang-switch[lang="en"] { font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif; }
+@media (max-width: 980px) { .lang-switch { margin-inline-start: auto; margin-inline-end: 12px; } }
+
+/* =====================================================================
+   Arabic / right-to-left
+   ===================================================================== */
+[dir="rtl"] {
+  --sans: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Geeza Pro", Tahoma, sans-serif;
+  --serif: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+}
+/* Arabic letters must stay joined: no tracking, no forced capitals */
+[dir="rtl"] body, [dir="rtl"] body * { letter-spacing: 0 !important; text-transform: none !important; }
+[dir="rtl"] em, [dir="rtl"] .hero__slate-t { font-style: normal; }
+[dir="rtl"] .display-1, [dir="rtl"] .display-2, [dir="rtl"] .display-3, [dir="rtl"] .hero__title { line-height: 1.35; }
+[dir="rtl"] .hero__title em { padding-right: 0; margin-right: 0; padding-left: .18em; margin-left: -.12em; }
+/* icons and motion that point "forward" */
+[dir="rtl"] .i-arrow { transform: scaleX(-1); }
+[dir="rtl"] .btn:hover .i-arrow, [dir="rtl"] .link:hover .i-arrow { transform: scaleX(-1) translateX(5px); }
+[dir="rtl"] .next-cap__link:hover .i-arrow { transform: scaleX(-1) translateX(10px); }
+[dir="rtl"] .viewer__nav svg { transform: scaleX(-1); }
+[dir="rtl"] .capx__item.is-active .capx__name, [dir="rtl"] .capx__link:hover .capx__name { transform: translateX(-6px); }
+[dir="rtl"] .nav__item > a::after, [dir="rtl"] .capx__item::before { transform-origin: right; }
+/* positioned elements */
+[dir="rtl"] .mega { left: auto; right: -12px; }
+[dir="rtl"] .pcard__body { left: 60px; right: 0; }
+[dir="rtl"] .pcard__go { right: auto; left: clamp(18px, 2.4vw, 32px); }
+[dir="rtl"] .capblock__media::after { left: auto; right: 0; }
+[dir="rtl"] .viewer__thumbs { left: auto; right: 16px; }
+[dir="rtl"] .viewer__close { right: auto; left: 14px; }
+/* gradients that shade behind right-aligned text */
+[dir="rtl"] .hero__grade { background:
+  radial-gradient(110% 75% at 18% 0%, rgba(255, 178, 96, .38), transparent 60%),
+  linear-gradient(180deg, rgba(255, 170, 90, .10), rgba(255, 170, 90, 0) 45%),
+  linear-gradient(180deg, rgba(8, 9, 10, .55) 0%, rgba(8, 9, 10, 0) 26%, rgba(8, 9, 10, .25) 55%, rgba(8, 9, 10, .94) 100%),
+  linear-gradient(270deg, rgba(8, 9, 10, .72) 0%, rgba(8, 9, 10, .2) 55%, rgba(8, 9, 10, 0) 80%); }
+[dir="rtl"] .phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .6) 0%, rgba(13, 14, 16, .15) 35%, rgba(13, 14, 16, .9) 100%), linear-gradient(270deg, rgba(13, 14, 16, .65), transparent 70%); }
+[dir="rtl"] .phero::before { background: linear-gradient(270deg, var(--accent), transparent 60%); }
+/* the operations wall: keep geography, charts and clocks left-to-right */
+[dir="rtl"] .ow-map svg, [dir="rtl"] .ow-chart svg { direction: ltr; }
+[dir="rtl"] .ow-node text { font-family: "IBM Plex Sans Arabic", sans-serif; font-size: 10.5px; }
+[dir="rtl"] .opswall { font-family: "IBM Plex Sans Arabic", ui-monospace, monospace; }
+[dir="rtl"] .ow-time, [dir="rtl"] .ow-log time, [dir="rtl"] .ow-cam figcaption span, [dir="rtl"] [data-count] { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .ow-gpu b { transform: scaleX(-1); }
+/* phone numbers and emails read left-to-right */
+[dir="rtl"] a[href^="tel:"], [dir="rtl"] a[href^="mailto:"] { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .fact__v { direction: ltr; justify-self: start; }

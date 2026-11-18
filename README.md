@@ -23,6 +23,25 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 
 Plus `404.html`, `sitemap.xml` and `robots.txt`.
 
+**Arabic:** every page also exists in Arabic under `/ar/` (e.g. `ar/index.html`, `ar/capabilities/technology.html`),
+laid out right-to-left. Each page has a language switch (العربية / English) linking to its counterpart, plus `hreflang` tags.
+
+## Arabic version
+- Built from the same templates as the English site, so the two can't drift apart. After the English page is rendered,
+  every visible text and text attribute is translated using the dictionary in **`tools/i18n_ar.py`**.
+- When you add or change English copy, run `python3 tools/build.py`: any string without an Arabic translation is
+  listed, and stays in English until you add it to `tools/i18n_ar.py`.
+- Typography: IBM Plex Sans Arabic for text, Amiri for the accent words (the English site's serif italics). Letter-spacing and
+  capitalisation are switched off for Arabic, and arrows, gradients and layout are mirrored.
+- The live operations wall, the contact email and the project viewer are also localised (in `assets/js/site.js`).
+
+**Please verify (Arabic):**
+- **Company names:** "PROPER Developments" and "MIDRAR" are kept in Latin script, because no official Arabic names were
+  available (the current site has no Arabic content). Supply the official Arabic names if they should be used.
+- **Proper names:** the Headquarters Business Park is written as «ذا هيدكوارترز بزنس بارك». Project names are translated or
+  transliterated (Aramco Sail, High Mark, KEC and Tewergi are kept in Latin). Confirm them with the project owners.
+- Have a native-speaking reviewer proofread the copy before launch.
+
 ## Editing content
 All text, capabilities, projects and partners live in **`tools/build.py`**. Edit the data at the top,
 then regenerate every page:

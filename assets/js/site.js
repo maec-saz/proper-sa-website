@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var doc = document.documentElement;
+  var AR = doc.lang === 'ar', RTL = doc.dir === 'rtl';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
@@ -136,6 +137,11 @@
       ['SOC: anomalous login blocked', 'warn'], ['UPS-B battery test passed', 'ok'], ['HVAC data hall setpoint 22.0 °C', ''],
       ['Shift handover acknowledged', ''], ['Backup replication complete · DR site', 'ok'], ['Crowd density threshold · Plaza', 'warn'],
       ['Dispatch unit 07 en route', ''], ['Firmware update scheduled · 02:00', '']];
+    if (AR) EVENTS = [['تم منح الدخول · البوابة 3', ''], ['استدعاء مخطط جدار الفيديو «حادثة»', ''], ['مركز الشبكات: زمن الاستجابة بين الرياض وجدة 18 مللي ثانية', 'ok'],
+      ['رصد حركة · الكاميرا 12 · المحيط الخارجي', 'warn'], ['اكتمال مهمة GPU رقم 4471 · استدلال', 'ok'], ['إصدار بطاقة زائر · الردهة', ''],
+      ['مركز العمليات الأمنية: حظر محاولة دخول مشبوهة', 'warn'], ['نجاح اختبار بطارية UPS-B', 'ok'], ['ضبط حرارة قاعة البيانات على 22.0 °م', ''],
+      ['تأكيد تسليم المناوبة', ''], ['اكتمال النسخ الاحتياطي · موقع التعافي من الكوارث', 'ok'], ['تجاوز حد الكثافة البشرية · الساحة', 'warn'],
+      ['وحدة الإرسال 07 في الطريق', ''], ['جدولة تحديث البرنامج الثابت · 02:00', '']];
     var now = function () { return new Date().toLocaleTimeString('en-GB', { hour12: false, timeZone: 'Asia/Riyadh' }); };
     var path = function (arr, close) {
       var d = arr.map(function (v, k) { return (k ? 'L' : 'M') + (k * 300 / (N - 1)).toFixed(1) + ',' + (110 - v * 100).toFixed(1); }).join(' ');
@@ -156,7 +162,7 @@
       seed = Math.min(.92, Math.max(.25, seed + (Math.random() - .5) * .14));
       A.push(seed); A.shift(); B.push(.22 + Math.random() * .22); B.shift();
       line.setAttribute('d', path(A)); area.setAttribute('d', path(A, true)); line2.setAttribute('d', path(B));
-      tput.textContent = (seed * 40).toFixed(1) + ' Gbps';
+      tput.textContent = (seed * 40).toFixed(1) + (AR ? ' جيجابت/ث' : ' Gbps');
       if (tick % 2 === 1) bars.forEach(function (b, k) {
         var v = Math.round(55 + Math.random() * 44);
         b.style.width = v + '%'; b.classList.toggle('is-hot', v > 90); barv[k].textContent = v + '%';
@@ -224,7 +230,7 @@
         p.i.forEach(function (src, k) {
           var b = document.createElement('button');
           b.type = 'button';
-          b.setAttribute('aria-label', 'Image ' + (k + 1) + ' of ' + p.i.length);
+          b.setAttribute('aria-label', AR ? 'الصورة ' + (k + 1) + ' من ' + p.i.length : 'Image ' + (k + 1) + ' of ' + p.i.length);
           b.innerHTML = '<img alt="" src="' + DATA.base + src + '">';
           b.addEventListener('click', function () { showImg(k); });
           th.appendChild(b);
@@ -244,15 +250,15 @@
     $('#viewerClose').addEventListener('click', function () { viewer.close(); });
     viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
     viewer.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') show(cur + 1);
-      if (e.key === 'ArrowLeft') show(cur - 1);
+      if (e.key === 'ArrowRight') show(cur + (RTL ? -1 : 1));
+      if (e.key === 'ArrowLeft') show(cur + (RTL ? 1 : -1));
     });
     var tx = null;
     viewer.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
     viewer.addEventListener('touchend', function (e) {
       if (tx === null) return;
       var dx = e.changedTouches[0].clientX - tx;
-      if (Math.abs(dx) > 50) { var p = DATA.items[list[cur]]; if (p.i.length > 1) showImg(curImg + (dx < 0 ? 1 : -1)); else show(cur + (dx < 0 ? 1 : -1)); }
+      if (Math.abs(dx) > 50) { var step = (RTL ? dx > 0 : dx < 0) ? 1 : -1, p = DATA.items[list[cur]]; if (p.i.length > 1) showImg(curImg + step); else show(cur + step); }
       tx = null;
     });
   }
@@ -271,9 +277,11 @@
       });
       if (!ok) { $('.is-invalid', form).focus(); return; }
       var d = new FormData(form);
-      var body = ['Name: ' + d.get('name'), 'Organisation: ' + d.get('company'), 'Email: ' + d.get('email'), 'Phone: ' + d.get('phone'),
-        'Area of interest: ' + d.get('interest'), '', d.get('message')].join('\n');
-      window.location.href = 'mailto:sales@properholding.com?subject=' + encodeURIComponent('Website enquiry — ' + d.get('interest')) + '&body=' + encodeURIComponent(body);
+      var L = AR ? ['الاسم: ', 'الجهة: ', 'البريد الإلكتروني: ', 'الهاتف: ', 'مجال الاهتمام: ', 'استفسار من الموقع — ']
+                 : ['Name: ', 'Organisation: ', 'Email: ', 'Phone: ', 'Area of interest: ', 'Website enquiry — '];
+      var body = [L[0] + d.get('name'), L[1] + d.get('company'), L[2] + d.get('email'), L[3] + d.get('phone'),
+        L[4] + d.get('interest'), '', d.get('message')].join('\n');
+      window.location.href = 'mailto:sales@properholding.com?subject=' + encodeURIComponent(L[5] + d.get('interest')) + '&body=' + encodeURIComponent(body);
     });
   }
 
