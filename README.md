@@ -56,6 +56,19 @@ laid out right-to-left. Each page has a language switch (العربية / Englis
   `tools/build.py`. Add only genuine, approved quotes and certificates you hold. Certificate logos go in `assets/img/certs/`.
   New English text is reported by the build until its Arabic translation is added to `tools/i18n_ar.py`.
 
+## Design tooling (for AI-assisted work on this repo)
+Skills and MCP servers used when working on the site with Claude Code. The installed files aren't committed
+(they're large and GitHub Pages would publish them); restore them in a new session with:
+
+```bash
+npx skills@latest experimental_install -y
+npx impeccable@latest install -y --providers=claude --project
+```
+
+- `skills-lock.json` pins the taste-skill (`design-taste-frontend`) and Emil Kowalski's design/animation skills.
+- Impeccable needs network access to `impeccable.style` (already allowed in the cloud environment).
+- `.mcp.json` registers the Playwright MCP server (headless Chromium). Figma is connected as a claude.ai connector, not here.
+
 ## Editing content
 All text, capabilities, projects and partners live in **`tools/build.py`**. Edit the data at the top,
 then regenerate every page:
