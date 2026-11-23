@@ -102,8 +102,8 @@ CAPABILITIES = [
             ("Immersive Experiences", "Projection, LED and spatial sound environments that surround the audience."),
             ("Exhibition Solutions", "Showcases, lighting, media and content integrated into a single coherent experience."),
         ],
-        "gallery": [("hd/museum-gallery.jpg", "Museum development"),
-                    ("hd/museum-interactive.jpg", "Interactive Exhibitions"),
+        "gallery": [("hd/museum-immersive.jpg", "Museum development"),
+                    ("hd/museum-touch.jpg", "Interactive Exhibitions"),
                     ("hd/museum-dome.jpg", "Immersive installations")],
     },
     {
@@ -144,8 +144,8 @@ PARTNERS = [
     {"name": "VOD", "logo": "partners/vod.png", "role": "Distribution partner"},
     {"name": "CTF", "logo": "partners/ctf.jpg", "role": "Technical consoles & control room furniture"},
     {"name": "PUDU", "logo": "partners/pudu.svg", "role": "Service & delivery robotics"},
-    {"name": "LG", "logo": "partners/lg.jpg", "role": "Commercial displays & LED"},
-    {"name": "SAMSUNG", "logo": "partners/samsung.png", "role": "Commercial displays & LED"},
+    {"name": "LG", "logo": "partners/lg.svg", "role": "Commercial displays & LED"},
+    {"name": "SAMSUNG", "logo": "partners/samsung.svg", "role": "Commercial displays & LED"},
     {"name": "SOLUM", "logo": "partners/solum.png", "role": "Distribution partner"},
 ]
 
