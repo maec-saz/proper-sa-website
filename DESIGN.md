@@ -281,8 +281,6 @@ Small 500 with a 1px underline at 40% opacity, 8px below the text; the underline
 - **Tag:** static hairline box, Silver text, 8px × 12px padding.
 
 ### Cards / Containers
-- **Glass card (HQ):** charcoal raised at 86% with an 18px blur and a hairline border, padding clamp(32px, 3.5vw, 48px).
-- **Quote / certificate cards (stone sections):** white, 1px 6%-black border, 32px / 24px padding, square.
 
 ### Inputs / Fields
 - **Style:** transparent, bottom hairline only, Body text, 12px vertical padding; Label above, 8px gap.

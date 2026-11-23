@@ -58,16 +58,14 @@ Constraints:
 - Partner list and order: VOD, CTF, PUDU, LG, SAMSUNG, SOLUM.
 
 ## Evidence on Hand
-- The Headquarters Business Park photo (`assets/img/hero/hq-business-park-1920.jpg`), used in the "Our home" section.
-- Client logos collage: `assets/img/clients.jpg` (includes the Ministry of Culture).
-- Partner logos: `assets/img/partners/` (PUDU logo missing).
+- Partner logos: `assets/img/partners/` (PUDU: official SVG from pudurobotics.com).
 - Contact: +966 5499 662 66, sales@properholding.com, Headquarters Business Park, Al Corniche Road, Jeddah.
 - **Absent, must not be fabricated:** testimonials, certifications or accreditations, before/after design-and-completion pairs,
-  project outcomes or metrics, team members, official Arabic company names. Components for testimonials and certifications
-  exist and stay hidden until real content is supplied.
+  project outcomes or metrics, team members, official Arabic company names. (The Projects, "Our home" and Clients sections were removed at the client's request.)
+  Testimonials and certifications can be added later as genuine material arrives.
 
 ## Product Principles
-1. Earn trust with proof, not claims: real partners and real clients only; nothing invented.
+1. Earn trust with proof, not claims: real partners and real capabilities only; nothing invented.
 2. One accountable team: present the five disciplines as one integrated offer, not five separate businesses.
 3. Every path ends in a project enquiry.
 4. Equal standing for Arabic and English: neither language is a lesser translation of the other.

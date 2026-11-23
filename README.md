@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (cinematic intro, capabilities, HQ, partners, clients) | `index.html` |
+| Home (cinematic intro, introduction, capabilities, partners) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -39,12 +39,6 @@ laid out right-to-left. Each page has a language switch (العربية / Englis
   available (the current site has no Arabic content). Supply the official Arabic names if they should be used.
 - **Proper names:** the Headquarters Business Park is written as «ذا هيدكوارترز بزنس بارك». (The Projects section, and its project names, have been removed.)
 - Have a native-speaking reviewer proofread the copy before launch.
-
-## Trust section
-- **Trust (Home page):** client logos are shown now. **Testimonials** and **certifications & accreditations** (e.g. ISO 9001,
-  contractor classification) appear automatically once you add entries to `TESTIMONIALS` and `CERTIFICATIONS` in
-  `tools/build.py`. Add only genuine, approved quotes and certificates you hold. Certificate logos go in `assets/img/certs/`.
-  New English text is reported by the build until its Arabic translation is added to `tools/i18n_ar.py`.
 
 ## Design tooling (for AI-assisted work on this repo)
 Skills and MCP servers used when working on the site with Claude Code. The installed files aren't committed
@@ -80,8 +74,7 @@ The home page opens with a ~9-second, three-shot aerial sequence (Higgsfield-gen
   intro text. The film is rendered from the aerial photos by `tools/render_hero_film.py` (needs Pillow, NumPy, ffmpeg).
 - Phones, data-saver connections and reduce-motion users get the lighter CSS photo sequence instead (same shots and timing).
 - It plays once per browser session; repeat views open on the façade shot. There's a **Skip intro** button.
-- The hero imagery is illustrative; it does not depict the Headquarters Business Park. The real Headquarters photo
-  appears in the "Our home" section further down the page.
+- The hero imagery is illustrative; it does not depict the Headquarters Business Park.
 
 **Real drone footage:** export it as MP4 (H.264, 1920×1080, 10–16 s, ideally under 6 MB, no audio), save it over
 `assets/video/hero-film.mp4` and rebuild. Keep the first cut around 3 s and the final shot from ~6 s so the text still lands.
@@ -100,13 +93,9 @@ so it stays current), business verticals, technology partners and specialist ser
 ## Assets needed before launch
 The brief asks for real imagery only. These are the gaps:
 
-1. **Headquarters photography (optional).** The "Our home" section uses the only HQ photo available (1024×529).
-   A high-resolution photo would let it run full-width again.
-2. **PUDU logo.** Not on the current site; a typographic placeholder is shown. Supply the official logo (SVG preferred).
-3. **Partner logos in SVG/high resolution.** VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
+3. **Partner logos in SVG/high resolution.** PUDU now uses its official SVG logo (from pudurobotics.com); VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
    from the current site.
 4. **About and Partners headers** still use stock photos; generate replacements with Higgsfield if wanted.
-5. **Testimonials and certificates** (see "Trust section").
 6. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
 
 ## Imagery
@@ -154,3 +143,6 @@ save it in `assets/img/hd/` as `name.jpg` (2560px) plus `name-1280.jpg`, then re
 - The contact form opens the visitor's email app (mailto). Connect it to a form service or CRM for
   direct submissions.
 - The Arabic version from the previous site isn't part of this redesign; it can be added back as a parallel `/ar/` build.
+
+## Removed sections
+At the client's request the site no longer has a Projects section, an "Our home" (Headquarters Business Park) section or a Clients section; their images were deleted.

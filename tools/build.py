@@ -109,17 +109,22 @@ CAPABILITIES = [
     {
         "slug": "rental", "n": "05", "accent": "#a9a6c4",
         "name": "Exhibition & Equipment Rental", "short": "Rental",
-        "tagline": "Event-ready infrastructure, on demand.",
-        "intro": "Exhibition structures, audiovisual equipment and display technology — supplied, installed, operated and removed by our own teams, so your event runs exactly to plan.",
+        "tagline": "Event technology and activations that draw the crowd.",
+        "intro": "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, interactive installations, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.",
         "hero": "hd/rental-hero.jpg", "hero_caption": "",
         "services": [
+            ("Immersive Art Installations", "Kinetic structures, mechatronics and sensor-responsive pieces, built around your event theme to become the centrepiece of the space."),
+            ("Interactive Installations", "Touchscreens, transparent OLED, motion and proximity sensing, rotating product-reveal platforms and motorised sliding screens that let visitors explore at their own pace."),
+            ("Kinetic LED Walls", "LED walls whose tiles physically move in sync with the content, controlled from a tablet or triggered as visitors approach."),
+            ("LED Floors, Cubes & Immersive Rooms", "Interactive LED floors that react underfoot, and walk-in LED cubes and rooms that surround visitors with your story."),
+            ("Programming & Gaming Activations", "Custom applications and games for touchscreens, tablets and LED walls — built for events, quick to play and easy to update."),
             ("Exhibition Infrastructure", "Stands, structures and staging for exhibitions, conferences and launches."),
-            ("AV Equipment Rental", "Sound, lighting, cameras and control systems with on-site technical crews."),
+            ("AV Equipment Rental", "Flexible rental plans for sound, lighting, cameras, LED and control systems, with vetted equipment and on-site technical crews."),
             ("Display and Technology Rental", "LED walls, screens, kiosks and interactive displays for short- and long-term hire."),
         ],
-        "gallery": [("hd/rental-stage.jpg", "Event & stage technology"),
-                    ("hd/rental-equipment.jpg", "AV Equipment Rental"),
-                    ("hd/rental-kiosk.jpg", "Display rental")],
+        "gallery": [("hd/rental-kinetic-wall.jpg", "Kinetic LED Walls"),
+                    ("hd/rental-interactive-floor.jpg", "Interactive Installations"),
+                    ("hd/rental-led-cube.jpg", "LED Floors, Cubes & Immersive Rooms")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
@@ -133,20 +138,12 @@ YEARS = __import__("datetime").date.today().year - int(COMPANY["founded"])
 PARTNERS = [
     {"name": "VOD", "logo": "partners/vod.png", "role": "Distribution partner"},
     {"name": "CTF", "logo": "partners/ctf.jpg", "role": "Technical consoles & control room furniture"},
-    {"name": "PUDU", "logo": None, "role": "Service & delivery robotics"},
+    {"name": "PUDU", "logo": "partners/pudu.svg", "role": "Service & delivery robotics"},
     {"name": "LG", "logo": "partners/lg.jpg", "role": "Commercial displays & LED"},
     {"name": "SAMSUNG", "logo": "partners/samsung.png", "role": "Commercial displays & LED"},
     {"name": "SOLUM", "logo": "partners/solum.png", "role": "Distribution partner"},
 ]
 
-# --------------------------------------------------------------------------------------------
-# Trust: testimonials and certifications. Sections appear automatically once entries are added.
-# Only add genuine, approved quotes and certificates you hold.
-#   TESTIMONIALS: {"quote": "...", "name": "...", "role": "...", "org": "..."}
-#   CERTIFICATIONS: {"name": "ISO 9001:2015", "detail": "Quality management", "image": "certs/iso-9001.png" or None}
-# --------------------------------------------------------------------------------------------
-TESTIMONIALS = []
-CERTIFICATIONS = []
 
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
        ("partners.html", "Technology Partners"), ("contact.html", "Contact")]
@@ -338,13 +335,20 @@ def page(path, title, desc, body, active, body_class="", image="hd/home-facade.j
     return translate(doc) if ar else doc
 
 
+# Non-hd images with smaller versions for phones: source → [(file, width px), …]
+IMG_VARIANTS = {
+}
+
+
 def img(src, alt="", cls="", lazy=True, sizes="100vw"):
-    """<img> tag. Images in assets/img/hd/ get a 1280/2560 srcset so phones load the smaller file."""
+    """<img> tag. Images in assets/img/hd/ get a 640/1280/2560 srcset so phones load the smaller file."""
     attrs = f' class="{cls}"' if cls else ""
     attrs += ' loading="lazy"' if lazy else ' fetchpriority="high"'
     if src.startswith("hd/"):
         base = src[:-4]
-        attrs += (f' srcset="{{r}}assets/img/{base}-1280.jpg 1280w, {{r}}assets/img/{src} 2560w" sizes="{sizes}"')
+        attrs += (f' srcset="{{r}}assets/img/{base}-640.jpg 640w, {{r}}assets/img/{base}-1280.jpg 1280w, {{r}}assets/img/{src} 2560w" sizes="{sizes}"')
+    elif src in IMG_VARIANTS:
+        attrs += ' srcset="' + ", ".join(f"{{r}}assets/img/{v} {w}w" for v, w in IMG_VARIANTS[src]) + f'" sizes="{sizes}"'
     return f'<img src="{{r}}assets/img/{src}" alt="{e(alt)}"{attrs} decoding="async">'
 
 
@@ -384,24 +388,6 @@ ORG_LD = {
 # ============================================================================================
 # Pages
 # ============================================================================================
-def trust_section():
-    quotes = "".join(f'''<figure class="quote" data-reveal><blockquote><p>{e(t["quote"])}</p></blockquote>
-      <figcaption><b>{e(t["name"])}</b><span>{e(t["role"])}{", " + e(t["org"]) if t.get("org") else ""}</span></figcaption></figure>''' for t in TESTIMONIALS)
-    certs = "".join(f'''<li class="cert" data-reveal>{img(c["image"], c["name"]) if c.get("image") else '<span class="cert__seal" aria-hidden="true"></span>'}
-      <b>{e(c["name"])}</b><span>{e(c.get("detail", ""))}</span></li>''' for c in CERTIFICATIONS)
-    return f'''<section class="section section--stone trust" aria-labelledby="trust-title">
-  <div class="wrap">
-    <div class="sec-head sec-head--split" data-reveal>
-      <div>{eyebrow("Clients")}<h2 class="display-3" id="trust-title">Trusted by leading organisations</h2></div>
-      <a class="link" href="{{r}}about.html">About PROPER Developments {arrow()}</a>
-    </div>
-    <div class="trust__clients" data-reveal>{img("clients.jpg", "Logos of PROPER Developments clients, including the Ministry of Culture and leading Saudi organisations", sizes="(max-width: 980px) 100vw, 900px")}</div>
-    {f'<div class="quotes">{quotes}</div>' if quotes else ""}
-    {f'<div class="certs-wrap"><h3 class="certs__h" data-reveal>Certifications &amp; accreditations</h3><ul class="certs">{certs}</ul></div>' if certs else ""}
-  </div>
-</section>'''
-
-
 def home():
     v = COMPANY["hero_video"]
     caps = "".join(f'''
@@ -487,18 +473,6 @@ def home():
   </div>
 </section>
 
-<section class="hq" aria-labelledby="hq-title">
-  <div class="wrap hq__split">
-    <div class="hq__media" data-reveal="clip">{img("hero/hq-business-park-1920.jpg", "The Headquarters Business Park on Al Corniche Road, Jeddah", sizes="(max-width: 980px) 100vw, 50vw")}</div>
-    <div class="hq__card" data-reveal>
-      {eyebrow("Our home")}
-      <h2 class="display-3" id="hq-title">The Headquarters Business Park</h2>
-      <p>Owned by {COMPANY["parent"]}, the Headquarters Business Park on Jeddah’s Corniche is home to PROPER Developments — and a daily reminder of the scale and quality we build to.</p>
-      <a class="link" href="{{r}}contact.html">Visit us {arrow()}</a>
-    </div>
-  </div>
-</section>
-
 <section class="partners-strip" aria-labelledby="ps-title">
   <div class="wrap">
     <div class="sec-head sec-head--split" data-reveal>
@@ -509,7 +483,6 @@ def home():
   </div>
 </section>
 
-{trust_section()}
 {cta_band()}
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
@@ -526,8 +499,8 @@ OPS_SITES = [  # name, longitude, latitude (approximate city positions, used for
     ("Riyadh", 46.72, 24.71, False), ("Dammam", 50.10, 26.43, False), ("Tabuk", 36.57, 28.38, False),
     ("NEOM", 35.20, 28.00, False), ("Abha", 42.50, 18.22, False), ("Hail", 41.69, 27.52, False),
 ]
-OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-1280.jpg"), ("CAM 04 · Plaza", "hd/home-dive-1280.jpg"),
-            ("CAM 07 · Data hall", "hd/tech-gpu-1280.jpg"), ("CAM 12 · Perimeter", "hd/construction-infrastructure-1280.jpg")]
+OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-640.jpg"), ("CAM 04 · Plaza", "hd/home-dive-640.jpg"),
+            ("CAM 07 · Data hall", "hd/tech-gpu-640.jpg"), ("CAM 12 · Perimeter", "hd/construction-infrastructure-640.jpg")]
 
 
 def ops_wall():
@@ -639,12 +612,6 @@ def about():
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>{eyebrow("Clients")}<h2 class="display-3">Trusted by leading organisations</h2></div>
-    <div class="clients" data-reveal>{img("clients.jpg", "Logos of PROPER Developments clients, including the Ministry of Culture and leading Saudi organisations")}</div>
-  </div>
-</section>
 {cta_band()}'''
     return page("about.html", "About Us", "PROPER Developments is a multidisciplinary Saudi company operating under MIDRAR, bringing together technology, engineering, infrastructure and development expertise since 2007.",
                 body, "about.html", "has-hero")

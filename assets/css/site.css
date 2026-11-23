@@ -777,3 +777,46 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 @media (max-width: 760px) {
   .hero__shot--3 .hero__img { object-position: 74% 50% !important; }
 }
+
+/* =====================================================================
+   Mobile optimisation
+   ===================================================================== */
+/* Touch: no grey flash on tap, no double-tap zoom delay on controls */
+html { -webkit-tap-highlight-color: transparent; }
+a, button, select, input, textarea, label { touch-action: manipulation; }
+/* Long unbreakable strings (emails, phone numbers) never widen a column */
+.contact-grid > * { min-width: 0; }
+.contact-list dd, .footer__grid address, .footer__grid a { overflow-wrap: anywhere; }
+
+@media (max-width: 980px) {
+  /* Every link and control is at least 44px tall to tap */
+  .footer__grid a { display: inline-block; padding-block: 11px; min-width: 44px; }
+  .footer__grid ul { gap: 0; }
+  .link { min-height: 44px; }
+  .lang-switch, .brand { min-height: 44px; display: inline-flex; align-items: center; }
+  .lang-switch { padding-inline: 8px; }
+  .capx__link { min-height: 56px; }
+  .capblock h2 a { display: inline-block; padding-block: 8px; }
+  .contact-list a { display: inline-block; padding-block: 10px; }
+}
+@media (max-width: 760px) {
+  /* The scroll cue is a mouse affordance; phones scroll naturally */
+  .hero__scroll { display: none; }
+  /* Small labels never drop below 12px on phones */
+  .ow-bar, .ow-kpi__l, .ow-cam figcaption, .ow-gpu li, .ow-log ol, .partner__role { font-size: 12px; }
+  .ow-gpu li { grid-template-columns: 52px 1fr 40px; }
+  .ow-tile h3, .gallery figcaption, .ow-kpi__v small { font-size: 12px; }
+  /* The map scales down on phones (viewBox 400 → ~340px), so its labels are drawn larger to render at 12px+ */
+  .ow-node text { font-size: 14.5px; }
+  [dir="rtl"] .ow-node text { font-size: 15px; }
+}
+/* Form and header on the narrowest phones (320px) */
+.form__row > *, .form label { min-width: 0; }
+.form input, .form select, .form textarea { width: 100%; min-width: 0; box-sizing: border-box; }
+.menu-btn { flex-shrink: 0; }
+@media (max-width: 760px) {
+  .form input, .form select { min-height: 48px; }
+}
+@media (max-width: 380px) {
+  .form { padding: 20px; }
+}

@@ -436,6 +436,29 @@ AR = {
     "Thank you. Your email app should now open with your message ready to send. If it didn’t open, email us at": "شكرًا لك. سيُفتح الآن تطبيق البريد الإلكتروني لديك وتكون رسالتك جاهزة للإرسال. إن لم يُفتح، راسلنا على",
     "or call": "أو اتصل على",
     "Enter a phone number using digits, like +966 5X XXX XXXX.": "أدخل رقم هاتف بالأرقام، مثل ‎+966 5X XXX XXXX.",
+# ---------------------------------------------------------------- exhibition & rental: activations
+    "Event technology and activations that draw the crowd.": "تقنيات فعاليات وتجارب تفاعلية تجذب الجمهور.",
+    "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, interactive installations, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.":
+        "نهندس التقنيات التي تحوّل الجناح أو حفل الإطلاق أو المؤتمر إلى تجربة يقصدها الزوّار: جدران LED حركية، ومنشآت تفاعلية، وألعاب مخصصة، وأنظمة سمعية وبصرية متكاملة، مصممة حول موضوع فعاليتك، ومبرمجة لدينا، وتديرها فرقنا في الموقع.",
+    "Immersive Art Installations": "منشآت فنية غامرة",
+    "Kinetic structures, mechatronics and sensor-responsive pieces, built around your event theme to become the centrepiece of the space.":
+        "هياكل حركية وأنظمة ميكاترونيكس وقطع تستجيب للمستشعرات، تُصمم حول موضوع فعاليتك لتكون محور المساحة.",
+    "Interactive Installations": "منشآت تفاعلية",
+    "Touchscreens, transparent OLED, motion and proximity sensing, rotating product-reveal platforms and motorised sliding screens that let visitors explore at their own pace.":
+        "شاشات لمس، وشاشات OLED شفافة، واستشعار الحركة والاقتراب، ومنصات دوّارة لإطلاق المنتجات، وشاشات منزلقة آلية تتيح للزوّار الاستكشاف بالوتيرة التي تناسبهم.",
+    "Kinetic LED Walls": "جدران LED حركية",
+    "LED walls whose tiles physically move in sync with the content, controlled from a tablet or triggered as visitors approach.":
+        "جدران LED تتحرك وحداتها فعليًا بالتزامن مع المحتوى، ويُتحكم بها من جهاز لوحي أو تنطلق عند اقتراب الزوّار.",
+    "LED Floors, Cubes & Immersive Rooms": "أرضيات LED ومكعبات وغرف غامرة",
+    "Interactive LED floors that react underfoot, and walk-in LED cubes and rooms that surround visitors with your story.":
+        "أرضيات LED تفاعلية تستجيب لخطوات الزوّار، ومكعبات وغرف LED يدخلها الزوّار فتحيط بهم قصتك من كل جانب.",
+    "Programming & Gaming Activations": "البرمجة والألعاب التفاعلية",
+    "Exhibition & Equipment Rental by PROPER Developments: Immersive Art Installations, Interactive Installations, Kinetic LED Walls, LED Floors, Cubes & Immersive Rooms, Programming & Gaming Activations, Exhibition Infrastructure, AV Equipment Rental, Display and Technology Rental.":
+        "تأجير المعارض والمعدات من PROPER Developments: منشآت فنية غامرة، منشآت تفاعلية، جدران LED حركية، أرضيات LED ومكعبات وغرف غامرة، البرمجة والألعاب التفاعلية، البنية التحتية للمعارض، تأجير المعدات السمعية والبصرية، تأجير الشاشات والتقنيات.",
+    "Custom applications and games for touchscreens, tablets and LED walls — built for events, quick to play and easy to update.":
+        "تطبيقات وألعاب مخصصة لشاشات اللمس والأجهزة اللوحية وجدران LED، مصممة للفعاليات وسهلة اللعب والتحديث.",
+    "Flexible rental plans for sound, lighting, cameras, LED and control systems, with vetted equipment and on-site technical crews.":
+        "خطط تأجير مرنة لأنظمة الصوت والإضاءة والكاميرات وشاشات LED والتحكم، بمعدات موثوقة وفرق فنية في الموقع.",
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
