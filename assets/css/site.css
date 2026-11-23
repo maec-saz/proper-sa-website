@@ -772,3 +772,8 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 .cert__seal { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--metal); margin-bottom: 8px; }
 .cert b { font-weight: 500; color: var(--ink-text); }
 .cert span { font-size: 13.5px; color: var(--ink-mute); }
+
+/* Phones: frame the sunlit bronze face of the home façade shot (inline style sets the desktop framing) */
+@media (max-width: 760px) {
+  .hero__shot--3 .hero__img { object-position: 74% 50% !important; }
+}

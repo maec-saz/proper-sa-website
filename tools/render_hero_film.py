@@ -93,7 +93,7 @@ def grade(px, bright, warm=0.0, sat=1.0):
 
 
 def main():
-    city, dive, facade = load("aerial-city"), load("aerial-dive"), load("facade-golden")
+    city, dive, facade = load("home-altitude"), load("home-dive"), load("home-facade")
     fogs = [fog_layer(160, 60), fog_layer(90, 40)]
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     vignette = (1 - 0.38 * (((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2) ** 1.2).clip(0.35, 1)[..., None]
@@ -132,7 +132,7 @@ def main():
         if t >= 5.9:
             p = ease_out((t - 5.9) / 3.3)
             q = ease((t - 9.2) / (DUR - 9.2)) if t > 9.2 else 0.0
-            px = frame_of(facade, lerp(1.28, 1.06, p) + 0.07 * q, lerp(0.05, 0.0, p) - 0.025 * q, 0, fx=0.30)
+            px = frame_of(facade, lerp(1.28, 1.06, p) + 0.07 * q, lerp(0.05, 0.0, p) - 0.025 * q, 0, fx=0.62)
             px = grade(px, lerp(0.72, 1.0, p), warm=0.4 * p)
             a = ramp(t, 5.9, 7.3)
             out = out * (1 - a) + px * a

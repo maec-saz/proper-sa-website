@@ -70,7 +70,7 @@ python3 tools/build.py
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
 ## The cinematic hero
-The home page opens with a ~9-second, three-shot aerial sequence:
+The home page opens with a ~9-second, three-shot aerial sequence (Higgsfield-generated imagery):
 1. **High altitude:** descending through cloud over a city skyline, with the "A MIDRAR company" title card.
 2. **Drone dive:** a top-down view onto modern towers with a slight camera yaw.
 3. **Architectural flyover:** a golden-hour glass façade that pans in as the letterbox opens and the logo,
@@ -105,44 +105,33 @@ The brief asks for real imagery only. These are the gaps:
 2. **PUDU logo.** Not on the current site; a typographic placeholder is shown. Supply the official logo (SVG preferred).
 3. **Partner logos in SVG/high resolution.** VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
    from the current site.
-4. **New imagery for the home page and the five disciplines** (Higgsfield prompts in `docs/higgsfield-prompts.md`).
+4. **About and Partners headers** still use stock photos; generate replacements with Higgsfield if wanted.
 5. **Testimonials and certificates** (see "Trust section").
 6. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
 
 ## Imagery
-- **Capability pages, About, Partners and Capabilities headers** use high-resolution photography
-  (2560px, with 1280px versions served to phones) from **Unsplash**, which is free for commercial use and needs
-  no attribution. Credits are listed below as a courtesy. These photos are illustrative and are never presented
-  as PROPER work.
-- **Home hero** uses three illustrative aerial/architectural photos; the **Headquarters section** uses the real HQ photo.
-- **The Projects section was removed** (page, related-project blocks and all project photos).
+- **Home page and the five disciplines** use **AI-generated imagery made with Higgsfield** (Cinema Studio Image 2.5,
+  plus Nano Banana Pro for the home façade): 23 images generated at 5504×3072 and saved as 2560px with 1280px phone
+  versions. Prompts are in `docs/higgsfield-prompts.md`. They are illustrative environments, never presented as PROPER
+  projects, and contain no logos, readable text or recognisable landmarks.
+- **About and Partners headers** still use two Unsplash photos (free for commercial use; credited below as a courtesy).
+- The home opening film (`assets/video/hero-film.mp4`) is rendered from the three Higgsfield home shots by
+  `tools/render_hero_film.py`. Re-run it if those images change.
+- The full-resolution originals stay in the Higgsfield account (Presales workspace).
 
-| File (assets/img/hd/) | Photographer on Unsplash |
+| File (assets/img/hd/) | Source |
 |---|---|
-| video-wall | Frederic Köberl |
-| control-room-blue | Ana Garnica |
-| server-rack | Kevin Ache |
-| robotic-arm | ZHENYU LUO |
-| led-curved | Arno Senoner |
-| led-panels | Kier in Sight Archives |
-| stage-purple | Danny Pérez |
-| stage-lights | Samuel Fyfe |
-| towers-sunset | Eugene Chystiakov |
-| lobby | Aalo Lens |
-| workplace-interior | Don Kaveen |
-| architecture | Andrew Whitmore |
-| immersive-projection | Redd Francisco |
-| light-installation | Rodolfo Cuadros |
-| museum-gallery | Mustafa Yiğit |
-| gallery-hall | Darya Tryfanava |
-| network-cables | Taylor Vick |
-| jeddah-corniche | Asim Alghamdi |
-| aerial-city | Datingscout |
-| aerial-dive | Kate Trysh |
-| facade-golden | Joakim Honkasalo |
+| home-altitude, home-dive, home-facade | Higgsfield (home opening shots) |
+| tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
+| av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
+| construction-hero, construction-fitout, construction-site, construction-infrastructure | Higgsfield (Construction & Development) |
+| museum-hero, museum-gallery, museum-interactive, museum-dome | Higgsfield (Museums & Immersive Experiences) |
+| rental-hero, rental-stage, rental-equipment, rental-kiosk | Higgsfield (Exhibition & Equipment Rental) |
+| jeddah-corniche | Asim Alghamdi on Unsplash (About) |
+| network-cables | Taylor Vick on Unsplash (Partners) |
 
-To swap in AI-generated visuals (e.g. Higgsfield) later, save them in `assets/img/hd/` as `name.jpg` (2560px wide)
-plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
+To regenerate an image, run its prompt with the Higgsfield CLI (`higgsfield generate create cinematic_studio_2_5 --resolution 4k --aspect_ratio 16:9 --prompt "…" --wait`),
+save it in `assets/img/hd/` as `name.jpg` (2560px) plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
 
 ## Please verify
 - **Design visualisations** (control room, immersive dome, 360° room, executive lounge) come from the current

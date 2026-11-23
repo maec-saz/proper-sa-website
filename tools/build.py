@@ -45,7 +45,7 @@ CAPABILITIES = [
         "name": "Technology & Intelligent Infrastructure", "short": "Technology",
         "tagline": "Intelligent systems for mission-critical operations.",
         "intro": "We design, supply and integrate the compute, AI and operations infrastructure that keeps organisations informed and in control — from GPU platforms and robotics to command centres that run around the clock.",
-        "hero": "hd/video-wall.jpg", "hero_caption": "",
+        "hero": "hd/tech-hero.jpg", "hero_caption": "",
         "services": [
             ("AI Enablement", "Readiness assessments, use-case delivery and the data foundations needed to put AI into production."),
             ("GPU Solutions", "High-performance GPU compute, storage and networking for AI training and inference — on-premise or hybrid."),
@@ -54,16 +54,16 @@ CAPABILITIES = [
             ("Network Operations Centres (NOC)", "Purpose-built NOCs combining visualisation, monitoring platforms and resilient infrastructure."),
             ("Security Operations Centres (SOC)", "SOC environments that bring analysts, processes and security tooling together in one space."),
         ],
-        "gallery": [("hd/server-rack.jpg", "GPU & AI infrastructure"),
-                    ("hd/robotic-arm.jpg", "Robotics"),
-                    ("hd/control-room-blue.jpg", "Operations centres")],
+        "gallery": [("hd/tech-gpu.jpg", "GPU & AI infrastructure"),
+                    ("hd/tech-robotics.jpg", "Robotics"),
+                    ("hd/tech-noc.jpg", "Operations centres")],
     },
     {
         "slug": "audiovisual", "n": "02", "accent": "#c9a978",
         "name": "Audiovisual & Integrated Solutions", "short": "Audiovisual",
         "tagline": "Display, sound and control — engineered as one system.",
         "intro": "From curved LED walls to operator consoles, we engineer audiovisual environments where every screen, signal and control surface works together — reliably, every day.",
-        "hero": "hd/led-curved.jpg", "hero_caption": "",
+        "hero": "hd/av-hero.jpg", "hero_caption": "",
         "services": [
             ("Professional AV Solutions", "Boardrooms, auditoria, briefing centres and collaboration spaces, designed and integrated end to end."),
             ("LED Display Solutions", "Fine-pitch and large-format LED, curved and bespoke walls, calibrated for colour and longevity."),
@@ -71,31 +71,31 @@ CAPABILITIES = [
             ("Operator Consoles", "Ergonomic technical consoles and supervisor positions designed around the operator."),
             ("Integrated Technology Systems", "Unified control, scheduling and monitoring that bring AV, IT and building systems together."),
         ],
-        "gallery": [("hd/led-panels.jpg", "LED display engineering"),
-                    ("hd/stage-purple.jpg", "Display & show systems"),
-                    ("hd/network-cables.jpg", "Integrated technology systems")],
+        "gallery": [("hd/av-boardroom.jpg", "Professional AV Solutions"),
+                    ("hd/av-control-room.jpg", "Control Room Solutions"),
+                    ("hd/av-led-wall.jpg", "LED display engineering")],
     },
     {
         "slug": "construction", "n": "03", "accent": "#b7a68b",
         "name": "Construction & Development", "short": "Construction",
         "tagline": "From concept to completion — built to perform.",
         "intro": "We deliver commercial, residential and specialised buildings, interiors and infrastructure — combining planning, engineering and site expertise to build environments that last.",
-        "hero": "hd/towers-sunset.jpg", "hero_caption": "",
+        "hero": "hd/construction-hero.jpg", "hero_caption": "",
         "services": [
             ("Construction", "Commercial buildings and specialised facilities, delivered with precision, quality and safety."),
             ("Interior Fit-Out", "Workplace, hospitality and retail interiors, from design development to final handover."),
             ("Infrastructure Development", "Planning, engineering and delivery of the infrastructure that developments depend on."),
         ],
-        "gallery": [("hd/lobby.jpg", "Interior fit-out"),
-                    ("hd/workplace-interior.jpg", "Workplace interiors"),
-                    ("hd/architecture.jpg", "Architecture & structure")],
+        "gallery": [("hd/construction-fitout.jpg", "Interior fit-out"),
+                    ("hd/construction-site.jpg", "Construction"),
+                    ("hd/construction-infrastructure.jpg", "Infrastructure Development")],
     },
     {
         "slug": "museums", "n": "04", "accent": "#8fb3a5",
         "name": "Museums & Immersive Experiences", "short": "Museums & Immersive",
         "tagline": "Spaces where stories become places.",
         "intro": "We create museums, interactive exhibitions and immersive environments that hold attention — combining storytelling, architecture and technology into experiences visitors remember.",
-        "hero": "hd/immersive-projection.jpg", "hero_caption": "",
+        "hero": "hd/museum-hero.jpg", "hero_caption": "",
         "services": [
             ("Museum Development", "Galleries and visitor centres, from interpretive planning to fit-out and commissioning."),
             ("Interactive Exhibitions", "Touch, motion and sensor-driven exhibits that invite visitors to take part."),
@@ -103,22 +103,23 @@ CAPABILITIES = [
             ("Exhibition Solutions", "Showcases, lighting, media and content integrated into a single coherent experience."),
         ],
         "gallery": [("hd/museum-gallery.jpg", "Museum development"),
-                    ("hd/light-installation.jpg", "Immersive installations"),
-                    ("hd/gallery-hall.jpg", "Exhibition design")],
+                    ("hd/museum-interactive.jpg", "Interactive Exhibitions"),
+                    ("hd/museum-dome.jpg", "Immersive installations")],
     },
     {
         "slug": "rental", "n": "05", "accent": "#a9a6c4",
         "name": "Exhibition & Equipment Rental", "short": "Rental",
         "tagline": "Event-ready infrastructure, on demand.",
         "intro": "Exhibition structures, audiovisual equipment and display technology — supplied, installed, operated and removed by our own teams, so your event runs exactly to plan.",
-        "hero": "hd/stage-lights.jpg", "hero_caption": "",
+        "hero": "hd/rental-hero.jpg", "hero_caption": "",
         "services": [
             ("Exhibition Infrastructure", "Stands, structures and staging for exhibitions, conferences and launches."),
             ("AV Equipment Rental", "Sound, lighting, cameras and control systems with on-site technical crews."),
             ("Display and Technology Rental", "LED walls, screens, kiosks and interactive displays for short- and long-term hire."),
         ],
-        "gallery": [("hd/stage-purple.jpg", "Event & stage technology"),
-                    ("hd/led-panels.jpg", "Display rental")],
+        "gallery": [("hd/rental-stage.jpg", "Event & stage technology"),
+                    ("hd/rental-equipment.jpg", "AV Equipment Rental"),
+                    ("hd/rental-kiosk.jpg", "Display rental")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
@@ -282,7 +283,7 @@ INTRO_JS = ("try{if(!sessionStorage.getItem('proper-intro')&&!matchMedia('(prefe
             "document.documentElement.classList.add('is-intro')}catch(e){}")
 
 
-def page(path, title, desc, body, active, body_class="", image="hd/facade-golden.jpg", preload=None, jsonld=None):
+def page(path, title, desc, body, active, body_class="", image="hd/home-facade.jpg", preload=None, jsonld=None):
     ar = LANG == "ar"
     full_path = ("ar/" if ar else "") + path
     root = "../" * full_path.count("/")          # site root (shared assets)
@@ -419,10 +420,10 @@ def home():
     body = f'''
 <section class="hero" id="hero" data-hero data-video="{"{r}" + e(v) if v else ""}">
   <div class="hero__stage" aria-hidden="true">
-    <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-city.jpg" data-srcset="{{r}}assets/img/hd/aerial-city-1280.jpg 1280w, {{r}}assets/img/hd/aerial-city.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
-    <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="{{r}}assets/img/hd/aerial-dive.jpg" data-srcset="{{r}}assets/img/hd/aerial-dive-1280.jpg 1280w, {{r}}assets/img/hd/aerial-dive.jpg 1920w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
-    <div class="hero__shot hero__shot--3"><img class="hero__img" src="{{r}}assets/img/hd/facade-golden.jpg" srcset="{{r}}assets/img/hd/facade-golden-1280.jpg 1280w, {{r}}assets/img/hd/facade-golden.jpg 2560w" sizes="100vw" alt="" style="object-position:30% 50%" fetchpriority="high" decoding="async"></div>
-    <video class="hero__video" muted playsinline loop preload="none" poster="{{r}}assets/img/hd/facade-golden.jpg"></video>
+    <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="{{r}}assets/img/hd/home-altitude.jpg" data-srcset="{{r}}assets/img/hd/home-altitude-1280.jpg 1280w, {{r}}assets/img/hd/home-altitude.jpg 2560w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
+    <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="{{r}}assets/img/hd/home-dive.jpg" data-srcset="{{r}}assets/img/hd/home-dive-1280.jpg 1280w, {{r}}assets/img/hd/home-dive.jpg 2560w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
+    <div class="hero__shot hero__shot--3"><img class="hero__img" src="{{r}}assets/img/hd/home-facade.jpg" srcset="{{r}}assets/img/hd/home-facade-1280.jpg 1280w, {{r}}assets/img/hd/home-facade.jpg 2560w" sizes="100vw" alt="" style="object-position:62% 50%" fetchpriority="high" decoding="async"></div>
+    <video class="hero__video" muted playsinline loop preload="none" poster="{{r}}assets/img/hd/home-facade.jpg"></video>
     <div class="hero__grade"></div>
     <div class="hero__sweep"></div>
     <div class="hero__grain"></div>
@@ -513,7 +514,7 @@ def home():
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
-                body, "index.html", "has-hero is-home", image="hd/facade-golden.jpg", preload="hd/facade-golden.jpg", jsonld=ORG_LD)
+                body, "index.html", "has-hero is-home", image="hd/home-facade.jpg", preload="hd/home-facade.jpg", jsonld=ORG_LD)
 
 
 # --------------------------------------------------------------------------------------------
@@ -525,8 +526,8 @@ OPS_SITES = [  # name, longitude, latitude (approximate city positions, used for
     ("Riyadh", 46.72, 24.71, False), ("Dammam", 50.10, 26.43, False), ("Tabuk", 36.57, 28.38, False),
     ("NEOM", 35.20, 28.00, False), ("Abha", 42.50, 18.22, False), ("Hail", 41.69, 27.52, False),
 ]
-OPS_CAMS = [("CAM 01 · Lobby", "hd/lobby-1280.jpg"), ("CAM 04 · Plaza", "hd/architecture-1280.jpg"),
-            ("CAM 07 · Data hall", "hd/server-rack-1280.jpg"), ("CAM 12 · Perimeter", "hd/towers-sunset-1280.jpg")]
+OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-1280.jpg"), ("CAM 04 · Plaza", "hd/home-dive-1280.jpg"),
+            ("CAM 07 · Data hall", "hd/tech-gpu-1280.jpg"), ("CAM 12 · Perimeter", "hd/construction-infrastructure-1280.jpg")]
 
 
 def ops_wall():
@@ -662,7 +663,7 @@ def capabilities_overview():
     </div>
   </article>''' for c in CAPABILITIES)
     body = page_hero("Our <em>Capabilities</em>", "Five integrated business verticals — engineered to work together, from the first concept to long-term operation.",
-                     "hd/control-room-blue.jpg", "", "What We Do") + f'''
+                     "hd/tech-noc.jpg", "", "What We Do") + f'''
 <section class="section capblocks"><div class="wrap">{blocks}</div></section>
 {cta_band()}'''
     return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction & development, museums & immersive experiences, and exhibition & equipment rental.",
