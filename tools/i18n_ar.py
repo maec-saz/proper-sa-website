@@ -428,6 +428,14 @@ AR = {
     "Design visualisation": "تصوّر التصميم",
     "Completed": "المشروع المنجز",
     "Certifications & accreditations": "الشهادات والاعتمادات",
+
+    # ---------------------------------------------------------------- contact form feedback
+    "Enter your full name.": "أدخل اسمك الكامل.",
+    "Enter a valid email address, like name@company.com.": "أدخل بريدًا إلكترونيًا صحيحًا، مثل name@company.com.",
+    "Tell us briefly about your project.": "أخبرنا باختصار عن مشروعك.",
+    "Thank you. Your email app should now open with your message ready to send. If it didn’t open, email us at": "شكرًا لك. سيُفتح الآن تطبيق البريد الإلكتروني لديك وتكون رسالتك جاهزة للإرسال. إن لم يُفتح، راسلنا على",
+    "or call": "أو اتصل على",
+    "Enter a phone number using digits, like +966 5X XXX XXXX.": "أدخل رقم هاتف بالأرقام، مثل ‎+966 5X XXX XXXX.",
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

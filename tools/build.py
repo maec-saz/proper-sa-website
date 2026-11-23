@@ -927,17 +927,18 @@ def contact():
     </div>
     <form class="form" id="contactForm" novalidate data-reveal>
       <div class="form__row">
-        <label><span>Full name</span><input name="name" required autocomplete="name"></label>
+        <label><span>Full name</span><input name="name" required autocomplete="name" aria-describedby="err-name"><small class="form__error" id="err-name" hidden>Enter your full name.</small></label>
         <label><span>Organisation</span><input name="company" autocomplete="organization"></label>
       </div>
       <div class="form__row">
-        <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
-        <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+        <label><span>Email</span><input name="email" type="email" required autocomplete="email" aria-describedby="err-email"><small class="form__error" id="err-email" hidden>Enter a valid email address, like name@company.com.</small></label>
+        <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="err-phone"><small class="form__error" id="err-phone" hidden>Enter a phone number using digits, like +966 5X XXX XXXX.</small></label>
       </div>
       <label><span>Area of interest</span><select name="interest">{opts}</select></label>
-      <label><span>Message</span><textarea name="message" rows="5" required></textarea></label>
+      <label><span>Message</span><textarea name="message" rows="5" required aria-describedby="err-message"></textarea><small class="form__error" id="err-message" hidden>Tell us briefly about your project.</small></label>
       <button class="btn btn--metal" type="submit">Send message {arrow()}</button>
       <p class="form__note">Submitting opens your email application with the message addressed to {COMPANY["email"]}.</p>
+      <p class="form__status" id="formStatus" role="status" tabindex="-1" hidden>Thank you. Your email app should now open with your message ready to send. If it didn’t open, email us at <a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a> or call <a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a>.</p>
     </form>
   </div>
 </section>

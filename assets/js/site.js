@@ -21,8 +21,28 @@
     document.body.classList.toggle('menu-open', open);
     header.classList.toggle('is-solid', open || window.scrollY > 60);
   }
-  menuBtn.addEventListener('click', function () { setMenu(!nav.classList.contains('is-open')); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
+  // Everything a keyboard user can reach while the full-screen menu is open (visible items only).
+  function menuStops() {
+    return $$('#siteNav a, #siteNav button, .site-header .lang-switch, #menuBtn').filter(function (el) {
+      return el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden';
+    });
+  }
+  menuBtn.addEventListener('click', function () {
+    var open = !nav.classList.contains('is-open');
+    setMenu(open);
+    if (open) { var first = $('#siteNav a'); if (first) first.focus({ preventScroll: true }); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!nav.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { setMenu(false); menuBtn.focus(); return; }
+    if (e.key !== 'Tab') return;
+    // Keep focus inside the open menu: wrap from the last stop to the first and back.
+    var stops = menuStops(), i = stops.indexOf(document.activeElement);
+    if (!stops.length) return;
+    var next = e.shiftKey ? (i <= 0 ? stops.length - 1 : i - 1) : (i === -1 || i === stops.length - 1 ? 0 : i + 1);
+    e.preventDefault();
+    stops[next].focus();
+  });
   $$('.nav__toggle').forEach(function (t) {
     t.addEventListener('click', function () {
       var item = t.closest('.has-mega'), open = !item.classList.contains('is-open');
@@ -93,6 +113,14 @@
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
+  // Keyboard focus never lands on content that hasn't faded in yet: reveal it at once, without the fade.
+  document.addEventListener('focusin', function (e) {
+    var el = e.target.closest && e.target.closest('[data-reveal]:not(.is-in)');
+    while (el) {
+      el.classList.add('is-in', 'is-instant');
+      el = el.parentElement && el.parentElement.closest('[data-reveal]:not(.is-in)');
+    }
+  });
 
   /* ---------- Animated counters ---------- */
   var fmt = function (n, el) {
@@ -291,22 +319,44 @@
   /* ---------- Contact form (opens the visitor's email app) ---------- */
   var form = $('#contactForm');
   if (form) {
+    var status = $('#formStatus', form);
+    var isBad = function (f) {
+      var v = f.value.trim();
+      if (f.required && !v) return true;
+      if (f.type === 'email' && v && !/^\S+@\S+\.\S+$/.test(v)) return true;
+      // Phone is optional; when given it must be a plausible number: digits with spaces, dashes, dots or brackets, 7–15 digits.
+      if (f.type === 'tel' && v && (!/^\+?[\d\s().-]+$/.test(v) || v.replace(/\D/g, '').length < 7 || v.replace(/\D/g, '').length > 15)) return true;
+      return false;
+    };
+    // Show or clear one field's error: style, message, and aria-invalid together.
+    var mark = function (f, bad) {
+      f.classList.toggle('is-invalid', bad);
+      f.setAttribute('aria-invalid', String(bad));
+      var msg = f.getAttribute('aria-describedby') && document.getElementById(f.getAttribute('aria-describedby'));
+      if (msg) msg.hidden = !bad;
+    };
+    // Once a field has been flagged, re-check it as the visitor types so the error clears the moment it's fixed.
+    form.addEventListener('input', function (e) {
+      if (e.target.classList.contains('is-invalid')) mark(e.target, isBad(e.target));
+      if (status) status.hidden = true;
+    });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var ok = true;
-      $$('[required]', form).forEach(function (f) {
-        var bad = !f.value.trim() || (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value));
-        f.classList.toggle('is-invalid', bad);
-        f.setAttribute('aria-invalid', String(bad));
+      $$('input, textarea, select', form).forEach(function (f) {
+        var bad = isBad(f);
+        mark(f, bad);
         if (bad) ok = false;
       });
-      if (!ok) { $('.is-invalid', form).focus(); return; }
+      if (!ok) { if (status) status.hidden = true; $('.is-invalid', form).focus(); return; }
       var d = new FormData(form);
       var L = AR ? ['الاسم: ', 'الجهة: ', 'البريد الإلكتروني: ', 'الهاتف: ', 'مجال الاهتمام: ', 'استفسار من الموقع — ']
                  : ['Name: ', 'Organisation: ', 'Email: ', 'Phone: ', 'Area of interest: ', 'Website enquiry — '];
       var body = [L[0] + d.get('name'), L[1] + d.get('company'), L[2] + d.get('email'), L[3] + d.get('phone'),
         L[4] + d.get('interest'), '', d.get('message')].join('\n');
       window.location.href = 'mailto:sales@properholding.com?subject=' + encodeURIComponent(L[5] + d.get('interest')) + '&body=' + encodeURIComponent(body);
+      // Confirm on the page too: if no email app is set up, the visitor still sees what happened and how else to reach us.
+      if (status) { status.hidden = false; status.focus({ preventScroll: false }); }
     });
   }
 

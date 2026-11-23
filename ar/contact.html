@@ -63,17 +63,18 @@
     </div>
     <form class="form" id="contactForm" novalidate data-reveal>
       <div class="form__row">
-        <label><span>الاسم الكامل</span><input name="name" required autocomplete="name"></label>
+        <label><span>الاسم الكامل</span><input name="name" required autocomplete="name" aria-describedby="err-name"><small class="form__error" id="err-name" hidden>أدخل اسمك الكامل.</small></label>
         <label><span>الجهة</span><input name="company" autocomplete="organization"></label>
       </div>
       <div class="form__row">
-        <label><span>البريد الإلكتروني</span><input name="email" type="email" required autocomplete="email"></label>
-        <label><span>الهاتف</span><input name="phone" type="tel" autocomplete="tel"></label>
+        <label><span>البريد الإلكتروني</span><input name="email" type="email" required autocomplete="email" aria-describedby="err-email"><small class="form__error" id="err-email" hidden>أدخل بريدًا إلكترونيًا صحيحًا، مثل name@company.com.</small></label>
+        <label><span>الهاتف</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="err-phone"><small class="form__error" id="err-phone" hidden>أدخل رقم هاتف بالأرقام، مثل ‎+966 5X XXX XXXX.</small></label>
       </div>
       <label><span>مجال الاهتمام</span><select name="interest"><option>التقنية والبنية التحتية الذكية</option><option>الأنظمة السمعية والبصرية والحلول المتكاملة</option><option>الإنشاءات والتطوير</option><option>المتاحف والتجارب الغامرة</option><option>تأجير المعارض والمعدات</option><option>شركاء التقنية والتوزيع</option><option>أخرى</option></select></label>
-      <label><span>الرسالة</span><textarea name="message" rows="5" required></textarea></label>
+      <label><span>الرسالة</span><textarea name="message" rows="5" required aria-describedby="err-message"></textarea><small class="form__error" id="err-message" hidden>أخبرنا باختصار عن مشروعك.</small></label>
       <button class="btn btn--metal" type="submit">إرسال الرسالة <svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form__note">عند الإرسال سيُفتح تطبيق البريد الإلكتروني لديك وتكون الرسالة موجّهة إلى sales@properholding.com.</p>
+      <p class="form__status" id="formStatus" role="status" tabindex="-1" hidden>شكرًا لك. سيُفتح الآن تطبيق البريد الإلكتروني لديك وتكون رسالتك جاهزة للإرسال. إن لم يُفتح، راسلنا على <a href="mailto:sales@properholding.com">sales@properholding.com</a> أو اتصل على <a href="tel:+966549966266">+966 5499 662 66</a>.</p>
     </form>
   </div>
 </section>
