@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T00:00:00Z",
+  "title": "Design System: PROPER Developments",
+  "extensions": {
+    "colorMeta": {
+      "brushed-metal": { "role": "primary", "displayName": "Brushed Metal", "canonical": "#c3bcad", "gradient": "linear-gradient(115deg, #8e8879 0%, #d9d3c5 28%, #a9a293 48%, #ece8de 66%, #9b9586 100%)" },
+      "charcoal": { "role": "neutral", "displayName": "Charcoal" },
+      "graphite": { "role": "neutral", "displayName": "Graphite" },
+      "warm-white": { "role": "neutral", "displayName": "Warm White" },
+      "dim-grey": { "role": "neutral", "displayName": "Dim Grey", "note": "Raised from #6c727b (3.17–3.98:1) to pass 4.5:1 on every dark surface." },
+      "stone": { "role": "neutral", "displayName": "Stone" },
+      "slate-on-stone": { "role": "neutral", "displayName": "Slate on Stone" }
+    },
+    "typographyMeta": {
+      "display-xl": { "displayName": "Display XL", "purpose": "Hero statements." },
+      "display": { "displayName": "Display", "purpose": "Section headings." },
+      "headline": { "displayName": "Headline", "purpose": "Sub-headings, key figures, feature titles." },
+      "title": { "displayName": "Title", "purpose": "Card and list item titles." },
+      "lead": { "displayName": "Lead", "purpose": "Intro paragraphs and subtitles." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs and inputs." },
+      "small": { "displayName": "Small", "purpose": "Buttons, links, nav, chips, captions." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, form labels, uppercase meta." }
+    },
+    "shadows": [
+      { "name": "focus-halo", "value": "0 0 0 4px rgba(195, 188, 173, 0.2)", "purpose": "Focused form controls." },
+      { "name": "floating-panel", "value": "0 40px 120px -40px rgba(0, 0, 0, 0.8)", "purpose": "Operations-wall panel only." },
+      { "name": "status-glow", "value": "0 0 10px currentColor", "purpose": "Live status dots." },
+      { "name": "handle-lift", "value": "0 0 18px rgba(0, 0, 0, 0.5)", "purpose": "Before/after handle over photos." }
+    ],
+    "motion": [
+      { "name": "ease-architectural", "value": "cubic-bezier(.22, .7, .15, 1)", "purpose": "All transforms, reveals and slides." },
+      { "name": "duration-state", "value": "300ms", "purpose": "Colour and border state changes." },
+      { "name": "duration-reveal", "value": "1000ms", "purpose": "Scroll reveals and crossfades." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "980px" },
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    { "name": "Metal Button", "kind": "button", "refersTo": "button-metal", "description": "Primary call to action.",
+      "html": "<a class=\"ds-btn-metal\" href=\"#\">Contact Us <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-btn-metal{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 24px;border-radius:0;font:500 14px/1 'Inter Tight',Arial,sans-serif;color:#0d0e10;text-decoration:none;background:linear-gradient(115deg,#8e8879 0%,#d9d3c5 28%,#a9a293 48%,#ece8de 66%,#9b9586 100%);background-size:200% 100%;transition:background-position .35s cubic-bezier(.22,.7,.15,1)}.ds-btn-metal:hover{background-position:100% 0}.ds-btn-metal:focus-visible{outline:2px solid #c3bcad;outline-offset:4px}" },
+    { "name": "Line Button", "kind": "button", "refersTo": "button-line", "description": "Secondary action on dark.",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Explore Our Capabilities</a>",
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;height:56px;padding:0 24px;border:1px solid rgba(255,255,255,.18);border-radius:0;font:500 14px/1 'Inter Tight',Arial,sans-serif;color:#f3f2ef;text-decoration:none;background:#0d0e10;transition:border-color .3s,background .3s}.ds-btn-line:hover{border-color:#f3f2ef;background:rgba(255,255,255,.06)}.ds-btn-line:focus-visible{outline:2px solid #c3bcad;outline-offset:4px}" },
+    { "name": "Filter Chip", "kind": "chip", "refersTo": "chip", "description": "Project category filter.",
+      "html": "<button class=\"ds-chip\">All</button><button class=\"ds-chip is-active\">Construction &amp; Fit-Out</button>",
+      "css": ".ds-chip{margin:4px;padding:12px 20px;border:1px solid rgba(255,255,255,.1);border-radius:0;background:#0d0e10;color:#c9ccd1;font:400 14px/1.2 'Inter Tight',Arial,sans-serif;transition:border-color .3s,color .3s}.ds-chip:hover{border-color:rgba(255,255,255,.18);color:#fff}.ds-chip.is-active{background:#f3f2ef;color:#0d0e10;border-color:#f3f2ef}" },
+    { "name": "Underline Input", "kind": "input", "refersTo": "input", "description": "Contact form field.",
+      "html": "<label class=\"ds-field\"><span>Full name</span><input placeholder=\"\"></label>",
+      "css": ".ds-field{display:grid;gap:8px;background:#0d0e10;padding:16px;font:500 12px/1.4 'Inter Tight',Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9399a2}.ds-field input{font:400 17px/1.6 'Inter Tight',Arial,sans-serif;letter-spacing:0;color:#f3f2ef;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.18);padding:12px 0;border-radius:0;outline:none;transition:border-color .3s}.ds-field input:focus{border-color:#f3f2ef}" },
+    { "name": "Eyebrow", "kind": "custom", "refersTo": "eyebrow", "description": "Section kicker above headings.",
+      "html": "<p class=\"ds-eyebrow\">Our Capabilities</p>",
+      "css": ".ds-eyebrow{display:flex;align-items:center;gap:16px;margin:0;padding:16px;background:#0d0e10;font:500 12px/1.4 'Inter Tight',Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9399a2}.ds-eyebrow::before{content:'';width:32px;height:1px;background:#c3bcad}" },
+    { "name": "Project Card", "kind": "card", "refersTo": "project-card", "description": "Portfolio tile opening the project viewer.",
+      "html": "<a class=\"ds-pcard\" href=\"#\"><span class=\"ds-pcard__meta\">LED &amp; Audiovisual</span><span class=\"ds-pcard__title\">Aramco Sail</span></a>",
+      "css": ".ds-pcard{position:relative;display:grid;align-content:end;gap:8px;aspect-ratio:4/3;width:320px;padding:24px;background:linear-gradient(0deg,rgba(10,11,13,.85),rgba(10,11,13,0) 55%),#22252a;color:#f3f2ef;text-decoration:none;border-radius:0;transition:transform .5s cubic-bezier(.22,.7,.15,1)}.ds-pcard:hover{transform:translateY(-2px)}.ds-pcard__meta{font:500 12px/1.4 'Inter Tight',Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9ccd1}.ds-pcard__title{font:400 24px/1.2 'Inter Tight',Arial,sans-serif;letter-spacing:-.015em}" }
+  ],
+  "narrative": {
+    "northStar": "Charcoal & Brushed Metal",
+    "overview": "A dark, architectural corporate system: deep charcoal grounds, warm off-white type and a single brushed-metal accent. Large light-weight sans display type carries authority; one phrase per heading turns into an Instrument Serif italic as the human accent. The interface stays square, quiet and hairline-ruled so the imagery and the work lead.",
+    "keyCharacteristics": [
+      "Dark-first, with stone (light) sections as deliberate pauses.",
+      "One accent material, brushed metal.",
+      "Square corners; hairline borders instead of shadows.",
+      "Light display weights with tight negative tracking; uppercase tracked labels.",
+      "Fully mirrored right-to-left for Arabic."
+    ],
+    "rules": [
+      { "name": "The Two-Ground Rule", "section": "colors", "body": "Text colours are paired with their ground family: Warm White, Silver, Mist and Dim Grey on dark grounds; Ink and Slate on Stone. Mist Grey, Dim Grey and Brushed Metal never set text on Stone." },
+      { "name": "The 4.5 Floor", "section": "colors", "body": "Every text tier, including the quietest, clears 4.5:1 on the lightest surface it is allowed on." },
+      { "name": "The One Small Size Rule", "section": "typography", "body": "Interface text below body is either Small (14px) or Label (12px). No 13, 13.5, 14.5, 15 or half-pixel sizes." },
+      { "name": "The Light Display Rule", "section": "typography", "body": "Display XL, Display and Headline are always weight 300 with negative tracking; never bold." },
+      { "name": "The Four-Pixel Rule", "section": "layout", "body": "No spacing value outside the 4px scale. Optical nudges (1px hairline offsets, a 2px focus inset) are the only exceptions." },
+      { "name": "The Flat-By-Default Rule", "section": "elevation", "body": "Cards and sections never carry drop shadows; separation is a hairline or a tone step." }
+    ],
+    "dos": [
+      "Do pair every text colour with its ground family (The Two-Ground Rule) and keep every text tier at 4.5:1 or above.",
+      "Do take every spacing value from the 4px scale (4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 120, 160).",
+      "Do keep interface text to Small (14px) and Label (12px) below body, and display headings at weight 300.",
+      "Do put exactly one Accent Serif phrase in a display heading, at the end of the line.",
+      "Do keep corners square on buttons, chips, inputs, cards and dialogs.",
+      "Do mirror layout, arrows and gradients in Arabic, and drop letter-spacing and uppercase there."
+    ],
+    "donts": [
+      "Don't set Mist Grey, Dim Grey or Brushed Metal text on Stone or white.",
+      "Don't introduce half-pixel or in-between type sizes (13, 13.5, 14.5, 15, 15.5, 18px).",
+      "Don't add drop shadows to cards or sections; use a hairline or a tone step.",
+      "Don't use a second accent colour; Brushed Metal is the only one.",
+      "Don't add rounded corners to interface controls."
+    ]
+  }
+}
