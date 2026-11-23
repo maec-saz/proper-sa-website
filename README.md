@@ -118,6 +118,12 @@ The brief asks for real imagery only. These are the gaps:
 - The home opening film (`assets/video/hero-film.mp4`) is rendered from the three Higgsfield home shots by
   `tools/render_hero_film.py`. Re-run it if those images change.
 - The full-resolution originals stay in the Higgsfield account (Presales workspace).
+- Home façade prompt (Nano Banana Pro, 4K, 16:9): *"Golden-hour architectural photograph, low angle, of a premium contemporary
+  office building in Riyadh with floor-to-ceiling glass and slender vertical bronze fins. The setting sun rakes warm amber light
+  across the bronze fins, with long soft shadows; the sky is a deep gradient from dusky blue to warm amber. The building rises
+  along the right two thirds of the frame; the left third is open darkening sky, leaving space for a headline. A single building
+  only, no other towers or spires, no famous landmarks, no text, no logos, no people. Premium corporate campaign photography,
+  charcoal and bronze palette, high dynamic range, sharp detail."* All other prompts: `tools/higgsfield_generate.py`.
 
 | File (assets/img/hd/) | Source |
 |---|---|
