@@ -116,12 +116,15 @@ The brief asks for real imagery only. These are the gaps:
 
 | File (assets/img/hd/) | Source |
 |---|---|
-| home-altitude, home-dive, home-facade | Higgsfield (home opening shots) |
+| home-altitude | Unsplash, Datingscout (unsplash.com/photos/MAPTe538-vA): Riyadh skyline with Al Faisaliah and Kingdom Centre |
+| home-dive | Unsplash, Ibrahim Abdullah (unsplash.com/photos/_UxsPARhtOg): Kingdom Centre, Riyadh, at sunset |
+| home-facade | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
 | tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
 | construction-hero, construction-fitout, construction-site, construction-infrastructure | Higgsfield (Construction & Development) |
 | museum-hero, museum-gallery, museum-interactive, museum-dome | Higgsfield (Museums & Immersive Experiences) |
-| rental-hero, rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
+| rental-hero | Higgsfield Cinema Studio 2.5, 4K: premium exhibition stand with a curved gold-and-sapphire LED wall, crowds and light beams |
+| rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
 | rental-ai-face | Unsplash, photo by Phil Shaw (unsplash.com/photos/OgIsUsOo3QU): a real digital-human render on screen, cropped to remove product branding, illustrative only |
 | jeddah-corniche | Asim Alghamdi on Unsplash (About) |

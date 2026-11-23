@@ -47,7 +47,8 @@ Five disciplines (the site's core structure and terminology):
 
 Constraints:
 - The site has no projects section (removed at the client's request). Stock or generated imagery is illustrative and never presented as PROPER work.
-- Illustrative imagery must not imply PROPER built a recognisable real building or landmark.
+- Illustrative imagery must not imply PROPER built a recognisable real building or landmark. The home opening shots are real
+  photographs of Saudi landmarks (Riyadh skyline, Kingdom Centre, Jeddah Corniche), used as location imagery for the Kingdom and credited in README.
 - Pages: Home, About Us, Our Capabilities (overview and five discipline pages), Technology Partners, Contact.
 - Contact form opens the visitor's email app (mailto); no form backend yet.
 
