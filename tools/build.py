@@ -129,7 +129,7 @@ CAPABILITIES = [
                     ("hd/rental-led-cube.jpg", "LED Floors, Cubes & Immersive Rooms")],
         # Real-world reference photos (Unsplash licence), illustrative only, not PROPER projects.
         "gallery2": [("hd/rental-live-interaction.jpg", "Live Interaction"),
-                     ("hd/rental-ai-face.jpg", "AI Interaction & Digital Hosts")],
+                     ("hd/rental-ai-host.jpg", "AI Interaction & Digital Hosts")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}

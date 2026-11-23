@@ -123,10 +123,12 @@ The brief asks for real imagery only. These are the gaps:
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
 | construction-hero, construction-fitout, construction-site, construction-infrastructure | Higgsfield (Construction & Development) |
 | museum-hero, museum-gallery, museum-interactive, museum-dome | Higgsfield (Museums & Immersive Experiences) |
+| museum-immersive | Unsplash, Kwynett Bragado (unsplash.com/photos/FSPPPpLNlas): immersive multi-projection exhibition |
+| museum-touch | Unsplash, Karen Grigorean (unsplash.com/photos/9D6UlCW38Ss): museum touchscreen |
 | rental-hero | Higgsfield Cinema Studio 2.5, 4K: premium exhibition stand with a curved gold-and-sapphire LED wall, crowds and light beams |
 | rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
-| rental-ai-face | Unsplash, photo by Phil Shaw (unsplash.com/photos/OgIsUsOo3QU): a real digital-human render on screen, cropped to remove product branding, illustrative only |
+| rental-ai-host | Higgsfield Cinema Studio 2.5, 4K: life-size holographic digital host at an exhibition |
 | jeddah-corniche | Asim Alghamdi on Unsplash (About) |
 | network-cables | Taylor Vick on Unsplash (Partners) |
 
