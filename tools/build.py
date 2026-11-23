@@ -127,6 +127,9 @@ CAPABILITIES = [
         "gallery": [("hd/rental-kinetic-wall.jpg", "Kinetic LED Walls"),
                     ("hd/rental-interactive-floor.jpg", "Interactive Installations"),
                     ("hd/rental-led-cube.jpg", "LED Floors, Cubes & Immersive Rooms")],
+        # Real-world reference photos (Unsplash licence), illustrative only, not PROPER projects.
+        "gallery2": [("hd/rental-live-interaction.jpg", "Live Interaction"),
+                     ("hd/rental-ai-face.jpg", "AI Interaction & Digital Hosts")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
@@ -641,7 +644,10 @@ def capabilities_overview():
 
 def capability_page(c, idx):
     services = "".join(f'''<li class="svc" data-reveal><span class="svc__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
-    gallery = "".join(f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>' for src, cap in c["gallery"])
+    fig = lambda src, cap: f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>'
+    gallery = "".join(fig(src, cap) for src, cap in c["gallery"])
+    gallery2 = "".join(fig(src, cap) for src, cap in c.get("gallery2", []))
+    gallery2 = f'<div class="wrap gallery gallery--{len(c["gallery2"])}">{gallery2}</div>' if gallery2 else ""
     nxt = CAPABILITIES[(idx + 1) % len(CAPABILITIES)]
     steps = [("Consult", "Requirements, users, site and success criteria."), ("Design", "Engineering, technology selection and value engineering."),
              ("Deliver", "Supply, construction, installation and integration."), ("Support", "Commissioning, training, maintenance and upgrades.")]
@@ -654,7 +660,7 @@ def capability_page(c, idx):
 </section>
 
 {ops_wall() if c["slug"] == "technology" else ""}
-<section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div></section>
+<section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div>{gallery2}</section>
 
 <section class="section section--stone">
   <div class="wrap">

@@ -121,7 +121,9 @@ The brief asks for real imagery only. These are the gaps:
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
 | construction-hero, construction-fitout, construction-site, construction-infrastructure | Higgsfield (Construction & Development) |
 | museum-hero, museum-gallery, museum-interactive, museum-dome | Higgsfield (Museums & Immersive Experiences) |
-| rental-hero, rental-stage, rental-equipment, rental-kiosk | Higgsfield (Exhibition & Equipment Rental) |
+| rental-hero, rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
+| rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
+| rental-ai-face | Unsplash, photo by Phil Shaw (unsplash.com/photos/OgIsUsOo3QU): a real digital-human render on screen, cropped to remove product branding, illustrative only |
 | jeddah-corniche | Asim Alghamdi on Unsplash (About) |
 | network-cables | Taylor Vick on Unsplash (Partners) |
 
