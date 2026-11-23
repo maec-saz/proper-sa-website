@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (cinematic intro, capabilities, HQ, partners; projects live on their own page) | `index.html` |
+| Home (cinematic intro, capabilities, HQ, partners, clients) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -18,7 +18,6 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 | Museums & Immersive Experiences | `capabilities/museums.html` |
 | Exhibition & Equipment Rental | `capabilities/rental.html` |
 | Technology Partners | `partners.html` |
-| Projects | `projects.html` |
 | Contact | `contact.html` |
 
 Plus `404.html`, `sitemap.xml` and `robots.txt`.
@@ -33,24 +32,15 @@ laid out right-to-left. Each page has a language switch (العربية / Englis
   listed, and stays in English until you add it to `tools/i18n_ar.py`.
 - Typography: IBM Plex Sans Arabic for text, Amiri for the accent words (the English site's serif italics). Letter-spacing and
   capitalisation are switched off for Arabic, and arrows, gradients and layout are mirrored.
-- The live operations wall, the contact email and the project viewer are also localised (in `assets/js/site.js`).
+- The live operations wall and the contact email are also localised (in `assets/js/site.js`).
 
 **Please verify (Arabic):**
 - **Company names:** "PROPER Developments" and "MIDRAR" are kept in Latin script, because no official Arabic names were
   available (the current site has no Arabic content). Supply the official Arabic names if they should be used.
-- **Proper names:** the Headquarters Business Park is written as «ذا هيدكوارترز بزنس بارك». Project names are translated or
-  transliterated (Aramco Sail, High Mark, KEC and Tewergi are kept in Latin). Confirm them with the project owners.
+- **Proper names:** the Headquarters Business Park is written as «ذا هيدكوارترز بزنس بارك». (The Projects section, and its project names, have been removed.)
 - Have a native-speaking reviewer proofread the copy before launch.
 
-## Project story, before/after and trust sections
-- **Project story (Projects page):** a scroll-driven walkthrough. The photo stays pinned while each step scrolls past and
-  the image changes to match. On phones the steps stack with their own photos. It currently tells the **Aramco Sail**
-  story from its five real photos, describing only what the photos show. Please confirm the wording with the project team.
-  Add more stories in `PROJECT_STORIES` in `tools/build.py` (needs 3+ real photos per project).
-- **Before/after slider (Projects page, "Design to delivery"):** drag, tap or use the arrow keys to compare a design
-  visualisation with the finished project. It mirrors for Arabic. **It's hidden until a project has a real pair**: add
-  `"compare": {"before": "...render.jpg", "after": "...photo.jpg"}` to the project in `PROJECTS`. Use the same viewpoint
-  for both images.
+## Trust section
 - **Trust (Home page):** client logos are shown now. **Testimonials** and **certifications & accreditations** (e.g. ISO 9001,
   contractor classification) appear automatically once you add entries to `TESTIMONIALS` and `CERTIFICATIONS` in
   `tools/build.py`. Add only genuine, approved quotes and certificates you hold. Certificate logos go in `assets/img/certs/`.
@@ -70,7 +60,7 @@ npx impeccable@latest install -y --providers=claude --project
 - `.mcp.json` registers the Playwright MCP server (headless Chromium). Figma is connected as a claude.ai connector, not here.
 
 ## Editing content
-All text, capabilities, projects and partners live in **`tools/build.py`**. Edit the data at the top,
+All text, capabilities and partners live in **`tools/build.py`**. Edit the data at the top,
 then regenerate every page:
 
 ```bash
@@ -115,19 +105,17 @@ The brief asks for real imagery only. These are the gaps:
 2. **PUDU logo.** Not on the current site; a typographic placeholder is shown. Supply the official logo (SVG preferred).
 3. **Partner logos in SVG/high resolution.** VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
    from the current site.
-4. **Project photography for AI & robotics, command & control, NOC/SOC and museums.** No verified projects in
-   these categories exist on the current site, so none are shown. Add them to `PROJECTS` with real photos.
-5. **Before/after pairs, testimonials and certificates** (see "Project story, before/after and trust sections").
+4. **New imagery for the home page and the five disciplines** (Higgsfield prompts in `docs/higgsfield-prompts.md`).
+5. **Testimonials and certificates** (see "Trust section").
 6. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
 
 ## Imagery
-- **Capability pages, About, Partners, Projects and Capabilities headers** use high-resolution photography
+- **Capability pages, About, Partners and Capabilities headers** use high-resolution photography
   (2560px, with 1280px versions served to phones) from **Unsplash**, which is free for commercial use and needs
   no attribution. Credits are listed below as a courtesy. These photos are illustrative and are never presented
-  as PROPER projects.
-- **Projects** show only real project photography (Aramco Sail, Lexus and the construction portfolio). Their
-  resolution is limited to what the current site holds; supply originals to sharpen them.
+  as PROPER work.
 - **Home hero** uses three illustrative aerial/architectural photos; the **Headquarters section** uses the real HQ photo.
+- **The Projects section was removed** (page, related-project blocks and all project photos).
 
 | File (assets/img/hd/) | Photographer on Unsplash |
 |---|---|
@@ -157,8 +145,6 @@ To swap in AI-generated visuals (e.g. Higgsfield) later, save them in `assets/im
 plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
 
 ## Please verify
-- **Project descriptions and categories** in `PROJECTS`: they're kept deliberately short, but the
-  Aramco Sail and Lexus wording describes what's visible in the photos and should be confirmed.
 - **Design visualisations** (control room, immersive dome, 360° room, executive lounge) come from the current
   site's media library and are captioned "design visualisation". Confirm they may be published.
 - **Partner roles** (e.g. "Service & delivery robotics" for PUDU, "Distribution partner" for VOD and SOLUM).
@@ -168,7 +154,7 @@ plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
 - Cross-page fade transitions use the browser's View Transitions API (Chrome/Edge/Safari 18+), with no effect elsewhere.
 - Each page has its own title, description, canonical URL and Open Graph tags; the home page includes
   Organization structured data (with MIDRAR as parent organisation). `SITE` in `tools/build.py` sets the domain.
-- Accessible: skip link, landmark structure, keyboard-operable menu, capability list and project viewer,
+- Accessible: skip link, landmark structure, keyboard-operable menu and capability list,
   visible focus states, alt text, reduced-motion support.
 - The contact form opens the visitor's email app (mailto). Connect it to a form service or CRM for
   direct submissions.

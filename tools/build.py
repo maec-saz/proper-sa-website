@@ -2,7 +2,7 @@
 """
 PROPER Developments — static site generator.
 
-All page content lives in this file (CAPABILITIES, PROJECTS, PARTNERS, COMPANY).
+All page content lives in this file (CAPABILITIES, PARTNERS, COMPANY).
 Edit it, then run:   python3 tools/build.py
 It writes every .html page, sitemap.xml and robots.txt into the site root.
 No dependencies beyond the Python 3 standard library.
@@ -126,45 +126,6 @@ SERVICE_COUNT = [s for c in CAPABILITIES for s in c["services"]]
 YEARS = __import__("datetime").date.today().year - int(COMPANY["founded"])
 
 # --------------------------------------------------------------------------------------------
-# Projects — ONLY verified projects with real imagery. Each entry is from the current proper-sa.com
-# portfolio. Confirm wording/categories with the project teams before launch (see README).
-# Optional before/after slider on the Projects page — add a real design render and a real photo of the same view:
-#   "compare": {"before": "projects/x-render.jpg", "after": "projects/x-photo.jpg",
-#               "before_label": "Design visualisation", "after_label": "Completed"}
-# --------------------------------------------------------------------------------------------
-PROJECTS = [
-    {"id": "aramco-sail", "title": "Aramco Sail", "cats": ["LED & Audiovisual", "Immersive Experiences"],
-     "caps": ["audiovisual", "museums", "technology"], "featured": True,
-     "summary": "Curved large-format LED walls, interactive displays and integrated audiovisual systems for an immersive technology environment.",
-     "images": ["real/aramco-sail-led-wall.jpg", "real/aramco-sail-panorama.jpg", "real/aramco-sail-robot.jpg", "real/aramco-sail-gallery.jpg", "real/aramco-sail-kiosk.jpg"]},
-    {"id": "lexus", "title": "Lexus Flagship Showroom", "cats": ["LED & Audiovisual"], "caps": ["audiovisual", "rental"], "featured": True,
-     "summary": "Brand display wall and showroom media for the Lexus flagship showroom.",
-     "images": ["projects/lexus-showroom.jpg"]},
-    {"id": "hq", "title": "The Headquarters Business Park", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "location": "Al Corniche Road, Jeddah",
-     "summary": "MIDRAR’s landmark business park on Jeddah’s Corniche — and home of PROPER Developments.",
-     "images": ["hero/hq-business-park-1920.jpg"]},
-    {"id": "hospital", "title": "Private Hospital Extension & Medical College", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Hospital extension and medical college.", "images": ["projects/hospital-medical-college.jpg"]},
-    {"id": "bin-sulaiman", "title": "Bin Sulaiman Business Center", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Commercial business centre.", "images": ["projects/bin-sulaiman.jpg"]},
-    {"id": "high-mark", "title": "High Mark", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Retail interior development.", "images": ["projects/high-mark.jpg"]},
-    {"id": "madinah", "title": "Madinah Office Building", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Office building.", "images": ["projects/madinah-office.jpg"]},
-    {"id": "al-salheah", "title": "Al-Salheah Building", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Commercial building.", "images": ["projects/al-salheah.jpg"]},
-    {"id": "tewergi", "title": "Tewergi Mixed-Use Building", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Mixed-use building.", "images": ["projects/tewergi.jpg"]},
-    {"id": "al-juwan", "title": "Al Juwan Residential Community", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Residential community.", "images": ["projects/al-juwan.jpg"]},
-    {"id": "suhail", "title": "Suhail Al Riyadh Community", "cats": ["Construction & Fit-Out"], "caps": ["construction"],
-     "summary": "Residential community.", "images": ["projects/suhail-al-riyadh.jpg"]},
-    {"id": "kec", "title": "KEC – Dar Al Jewar", "cats": ["Construction & Fit-Out"], "caps": ["construction", "museums"], "featured": True,
-     "summary": "Heritage-inspired arcaded interior.", "images": ["projects/kec-dar-al-jewar.jpg"]},
-]
-
-# --------------------------------------------------------------------------------------------
 # Technology partners & distribution (order as specified in the brief)
 # logo=None → typographic placeholder until the official logo file is supplied.
 # --------------------------------------------------------------------------------------------
@@ -178,27 +139,6 @@ PARTNERS = [
 ]
 
 # --------------------------------------------------------------------------------------------
-# Project stories: scroll-driven walkthroughs on the Projects page. Use real project photos only,
-# and describe what the photos show (confirm wording with the project team — see README).
-# --------------------------------------------------------------------------------------------
-PROJECT_STORIES = [
-    {"project": "aramco-sail", "title": "Inside Aramco Sail",
-     "lead": "An immersive technology environment where large-format LED, interactive displays and live demonstrations work as one space.",
-     "steps": [
-         ("real/aramco-sail-panorama.jpg", "Behind the glass",
-          "A large-format LED video wall runs the length of a glass-fronted space, visible from across the gallery."),
-         ("real/aramco-sail-gallery.jpg", "A curved story wall",
-          "Curved LED walls follow the line of the gallery, presenting each technology use case above a demonstration counter."),
-         ("real/aramco-sail-led-wall.jpg", "Live demonstrations",
-          "Equipment sits on the counter directly beneath its story on the wall, so visitors see the device and the explanation together."),
-         ("real/aramco-sail-kiosk.jpg", "Freestanding displays",
-          "Portrait display totems present individual solutions beside the exhibits themselves."),
-         ("real/aramco-sail-robot.jpg", "Robotics on show",
-          "A humanoid robot joins the exhibits, in a space built to show emerging technology at work."),
-     ]},
-]
-
-# --------------------------------------------------------------------------------------------
 # Trust: testimonials and certifications. Sections appear automatically once entries are added.
 # Only add genuine, approved quotes and certificates you hold.
 #   TESTIMONIALS: {"quote": "...", "name": "...", "role": "...", "org": "..."}
@@ -208,7 +148,7 @@ TESTIMONIALS = []
 CERTIFICATIONS = []
 
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
-       ("partners.html", "Technology Partners"), ("projects.html", "Projects"), ("contact.html", "Contact")]
+       ("partners.html", "Technology Partners"), ("contact.html", "Contact")]
 
 
 # ============================================================================================
@@ -324,22 +264,11 @@ def _tr_attr(m):
     return f'{name}="{e(tr(val.strip()))}"' if val.strip() else m.group(0)
 
 
-def _tr_project_json(m):
-    data = json.loads(m.group(2))
-    for item in data["items"].values():
-        for k in ("t", "c", "d", "l"):
-            if item[k]:
-                item[k] = tr(item[k])
-    return m.group(1) + json.dumps(data, ensure_ascii=False) + m.group(3)
-
-
 def translate(doc):
     parts = re.split(r"(<script\b.*?</script>|<style\b.*?</style>)", doc, flags=re.S)
     out = []
     for part in parts:
-        if part.startswith("<script"):
-            part = re.sub(r'(<script type="application/json" id="projectData">)(.*?)(</script>)', _tr_project_json, part, flags=re.S)
-        elif not part.startswith("<style"):
+        if not part.startswith("<script") and not part.startswith("<style"):
             part = re.sub(r">([^<>]+)<", _tr_node, part)
             part = re.sub(r'\b(alt|aria-label|title|placeholder|data-filter|data-cats)="([^"]*)"', _tr_attr, part)
             part = re.sub(r'(<meta (?:name="description"|property="og:(?:title|description)") content=)"([^"]*)"',
@@ -434,40 +363,6 @@ def cta_band(title="Let’s build what’s next.", text="Tell us about your proj
 </section>'''
 
 
-def project_card(p, size=""):
-    meta = " · ".join(p["cats"])
-    return f'''<button type="button" class="pcard {size}" data-project="{p["id"]}" data-cats="{e("|".join(p["cats"]))}" data-reveal>
-  <span class="pcard__img">{img(p["images"][0], p["title"])}</span>
-  <span class="pcard__body">
-    <span class="pcard__meta">{e(meta)}</span>
-    <span class="pcard__title">{e(p["title"])}</span>
-    {f'<span class="pcard__loc">{e(p["location"])}</span>' if p.get("location") else ""}
-  </span>
-  <span class="pcard__go" aria-hidden="true">{arrow()}</span>
-</button>'''
-
-
-def project_viewer():
-    data = {p["id"]: {"t": p["title"], "c": " · ".join(p["cats"]), "d": p["summary"], "l": p.get("location", ""),
-                      "i": p["images"]} for p in PROJECTS}
-    return f'''<dialog class="viewer" id="viewer" aria-labelledby="viewerTitle">
-  <div class="viewer__media"><img id="viewerImg" alt=""><div class="viewer__thumbs" id="viewerThumbs"></div></div>
-  <div class="viewer__info">
-    <p class="eyebrow" id="viewerCat"></p>
-    <h2 id="viewerTitle"></h2>
-    <p class="viewer__loc" id="viewerLoc"></p>
-    <p id="viewerDesc"></p>
-    <div class="viewer__nav">
-      <button type="button" class="round" id="viewerPrev" aria-label="Previous project"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-      <span id="viewerCount"></span>
-      <button type="button" class="round" id="viewerNext" aria-label="Next project"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    </div>
-  </div>
-  <button type="button" class="viewer__close" id="viewerClose" aria-label="Close">×</button>
-</dialog>
-<script type="application/json" id="projectData">{json.dumps({"base": "{r}assets/img/", "order": [p["id"] for p in PROJECTS], "items": data}, ensure_ascii=False)}</script>'''
-
-
 def partner_tile(p, big=False):
     inner = (f'<img src="{{r}}assets/img/{p["logo"]}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
              else f'<span class="logo-type" title="Placeholder — official logo to be supplied">{e(p["name"])}</span>')
@@ -488,55 +383,6 @@ ORG_LD = {
 # ============================================================================================
 # Pages
 # ============================================================================================
-def compare_slider(c, title):
-    """Before/after slider. c = {"before": img, "after": img, "before_label": str, "after_label": str}."""
-    bl, al = c.get("before_label", "Design visualisation"), c.get("after_label", "Completed")
-    return f'''<figure class="ba" data-ba style="--pos:50%">
-  {img(c["after"], f"{title} · {al}", "ba__img")}
-  <div class="ba__before">{img(c["before"], f"{title} · {bl}", "ba__img")}</div>
-  <span class="ba__label ba__label--before">{e(bl)}</span><span class="ba__label ba__label--after">{e(al)}</span>
-  <span class="ba__handle" aria-hidden="true"><i></i></span>
-  <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="{e("Compare: " + bl + " and " + al)}">
-  <figcaption>{e(title)}</figcaption>
-</figure>'''
-
-
-def compare_section():
-    items = [p for p in PROJECTS if p.get("compare")]
-    if not items:
-        return ""
-    return f'''<section class="section section--stone compare-sec">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>{eyebrow("Design to delivery")}<h2 class="display-3">From visualisation <em>to reality.</em></h2>
-      <p class="sec-head__lead">Drag the handle to compare the approved design with the finished project.</p></div>
-    <div class="compare-grid">{"".join(f'<div data-reveal>{compare_slider(p["compare"], p["title"])}</div>' for p in items)}</div>
-  </div>
-</section>'''
-
-
-def project_story(s):
-    p = next(x for x in PROJECTS if x["id"] == s["project"])
-    media = "".join(f'<figure class="story__fig{" is-active" if i == 0 else ""}" data-story-fig="{i}">{img(src, t, sizes="(max-width: 980px) 100vw, 58vw")}</figure>'
-                    for i, (src, t, d) in enumerate(s["steps"]))
-    steps = "".join(f'''<li class="story__step{" is-active" if i == 0 else ""}" data-story-step="{i}">
-        <span class="story__n">{i + 1:02d}<i>/ {len(s["steps"]):02d}</i></span>
-        <h3>{e(t)}</h3><p>{e(d)}</p>
-        <div class="story__inline">{img(src, t, sizes="100vw")}</div>
-      </li>''' for i, (src, t, d) in enumerate(s["steps"]))
-    return f'''<section class="story dark" data-story aria-labelledby="story-{p["id"]}">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>{eyebrow("Project story", True)}<h2 class="display-2" id="story-{p["id"]}">{e(s["title"])}</h2>
-      <p class="sec-head__lead">{e(s["lead"])}</p></div>
-    <div class="story__grid">
-      <div class="story__media" aria-hidden="true"><div class="story__stage">{media}
-        <div class="story__progress"><i></i></div></div></div>
-      <ol class="story__steps">{steps}</ol>
-    </div>
-    <p class="story__meta">{e(" · ".join(p["cats"]))}</p>
-  </div>
-</section>'''
-
-
 def trust_section():
     quotes = "".join(f'''<figure class="quote" data-reveal><blockquote><p>{e(t["quote"])}</p></blockquote>
       <figcaption><b>{e(t["name"])}</b><span>{e(t["role"])}{", " + e(t["org"]) if t.get("org") else ""}</span></figcaption></figure>''' for t in TESTIMONIALS)
@@ -826,13 +672,6 @@ def capabilities_overview():
 def capability_page(c, idx):
     services = "".join(f'''<li class="svc" data-reveal><span class="svc__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
     gallery = "".join(f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>' for src, cap in c["gallery"])
-    related = [p for p in PROJECTS if c["slug"] in p["caps"]][:3]
-    rel = f'''<section class="section section--graphite">
-  <div class="wrap">
-    <div class="sec-head sec-head--split" data-reveal><div>{eyebrow("Related projects", True)}<h2 class="display-3">Selected work</h2></div><a class="link link--light" href="{{r}}projects.html">All projects {arrow()}</a></div>
-    <div class="featured__grid{" featured__grid--3" if len(related) == 3 else ""}">{"".join(project_card(p, "pcard--xl" if len(related) == 1 else "") for p in related)}</div>
-  </div>
-</section>''' if related else ""
     nxt = CAPABILITIES[(idx + 1) % len(CAPABILITIES)]
     steps = [("Consult", "Requirements, users, site and success criteria."), ("Design", "Engineering, technology selection and value engineering."),
              ("Deliver", "Supply, construction, installation and integration."), ("Support", "Commissioning, training, maintenance and upgrades.")]
@@ -853,15 +692,14 @@ def capability_page(c, idx):
     <ol class="steps">{"".join(f'<li data-reveal><span>{i + 1:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(steps))}</ol>
   </div>
 </section>
-{rel}
+
 <section class="next-cap" style="--accent:{nxt["accent"]}">
   <a class="wrap next-cap__link" href="{{r}}capabilities/{nxt["slug"]}.html">
     <span class="eyebrow">Next capability · {nxt["n"]}</span>
     <span class="display-2">{e(nxt["name"])} {arrow()}</span>
   </a>
 </section>
-{cta_band(f"Let’s discuss your {e(c['short'].lower())} project.")}
-{project_viewer() if related else ""}'''
+{cta_band(f"Let’s discuss your {e(c['short'].lower())} project.")}'''
     return page(f'capabilities/{c["slug"]}.html', c["name"], f'{c["name"]} by PROPER Developments: {", ".join(s[0] for s in c["services"])}.',
                 body, "capabilities.html", "has-hero", image=c["hero"])
 
@@ -886,28 +724,6 @@ def partners():
 {cta_band("Looking for a technology partner?")}'''
     return page("partners.html", "Technology Partners", "PROPER Developments technology partners and distribution brands: VOD, CTF, PUDU, LG, Samsung and SOLUM.",
                 body, "partners.html", "has-hero")
-
-
-def projects():
-    cats = []
-    for p in PROJECTS:
-        for c in p["cats"]:
-            if c not in cats:
-                cats.append(c)
-    filters = '<button type="button" class="chip is-active" data-filter="*">All</button>' + "".join(f'<button type="button" class="chip" data-filter="{e(c)}">{e(c)}</button>' for c in cats)
-    body = page_hero("Projects <em>&amp; Experience</em>", "A selection of completed work across audiovisual, immersive environments, construction and fit-out.",
-                     "hd/architecture.jpg", "", "Portfolio") + "".join(project_story(st) for st in PROJECT_STORIES) + f'''
-<section class="section">
-  <div class="wrap">
-    <div class="filters" role="group" aria-label="Filter projects" data-reveal>{filters}</div>
-    <div class="pgrid" id="pgrid">{"".join(project_card(p, "pcard--xl" if i == 0 else "") for i, p in enumerate(PROJECTS))}</div>
-  </div>
-</section>
-{compare_section()}
-{cta_band("Have a project in mind?")}
-{project_viewer()}'''
-    return page("projects.html", "Projects", "Selected PROPER Developments projects including Aramco Sail, the Lexus Flagship Showroom and the Headquarters Business Park.",
-                body, "projects.html", "has-hero", image="hd/architecture.jpg")
 
 
 def contact():
@@ -956,7 +772,7 @@ def not_found():
 
 def build_pages():
     out = {"index.html": home(), "about.html": about(), "capabilities.html": capabilities_overview(),
-           "partners.html": partners(), "projects.html": projects(), "contact.html": contact(), "404.html": not_found()}
+           "partners.html": partners(), "contact.html": contact(), "404.html": not_found()}
     for i, c in enumerate(CAPABILITIES):
         out[f'capabilities/{c["slug"]}.html'] = capability_page(c, i)
     return out

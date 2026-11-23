@@ -19,7 +19,7 @@ Buyers and evaluators of complex built and technology environments in Saudi Arab
 
 ## Product Purpose
 The corporate website of PROPER Developments, a MIDRAR company headquartered in Jeddah. It presents five integrated
-disciplines, real projects and technology partners, and turns a convinced visitor into a project enquiry.
+disciplines and its technology partners, and turns a convinced visitor into a project enquiry.
 
 Success is a qualified **project enquiry** (contact form or email to sales@properholding.com), the primary action on every page.
 WhatsApp and phone are secondary contact routes.
@@ -46,9 +46,9 @@ Five disciplines (the site's core structure and terminology):
 5. **Exhibition & Equipment Rental:** exhibition infrastructure, AV equipment rental, display and technology rental.
 
 Constraints:
-- Only verified projects with real imagery are shown as PROPER work; stock or generated imagery is illustrative and never presented as a PROPER project.
+- The site has no projects section (removed at the client's request). Stock or generated imagery is illustrative and never presented as PROPER work.
 - Illustrative imagery must not imply PROPER built a recognisable real building or landmark.
-- Pages: Home, About Us, Our Capabilities (overview and five discipline pages), Technology Partners, Projects, Contact.
+- Pages: Home, About Us, Our Capabilities (overview and five discipline pages), Technology Partners, Contact.
 - Contact form opens the visitor's email app (mailto); no form backend yet.
 
 ## Brand Commitments
@@ -58,21 +58,20 @@ Constraints:
 - Partner list and order: VOD, CTF, PUDU, LG, SAMSUNG, SOLUM.
 
 ## Evidence on Hand
-- Real project photography: Aramco Sail (5 photos, `assets/img/real/`), Lexus Flagship Showroom, KEC – Dar Al Jewar, Bin Sulaiman Business Center, the Headquarters Business Park (`assets/img/projects/`, `assets/img/hero/`).
-  Several construction project images are architectural renders, not photos of completed buildings.
+- The Headquarters Business Park photo (`assets/img/hero/hq-business-park-1920.jpg`), used in the "Our home" section.
 - Client logos collage: `assets/img/clients.jpg` (includes the Ministry of Culture).
 - Partner logos: `assets/img/partners/` (PUDU logo missing).
 - Contact: +966 5499 662 66, sales@properholding.com, Headquarters Business Park, Al Corniche Road, Jeddah.
 - **Absent, must not be fabricated:** testimonials, certifications or accreditations, before/after design-and-completion pairs,
-  project outcomes or metrics, team members, official Arabic company names. Components for testimonials, certifications and
-  before/after exist and stay hidden until real content is supplied.
+  project outcomes or metrics, team members, official Arabic company names. Components for testimonials and certifications
+  exist and stay hidden until real content is supplied.
 
 ## Product Principles
-1. Earn trust with proof, not claims: real projects, real partners and real clients only.
+1. Earn trust with proof, not claims: real partners and real clients only; nothing invented.
 2. One accountable team: present the five disciplines as one integrated offer, not five separate businesses.
 3. Every path ends in a project enquiry.
 4. Equal standing for Arabic and English: neither language is a lesser translation of the other.
 
 ## Accessibility & Inclusion
 Full right-to-left support for Arabic. Reduced-motion support for the cinematic intro and animations. Keyboard-operable
-navigation, project viewer and before/after slider. No product-specific standard has been specified beyond this.
+navigation and capability list. No product-specific standard has been specified beyond this.

@@ -134,11 +134,6 @@ components:
   eyebrow:
     textColor: "{colors.mist-grey}"
     typography: "{typography.label}"
-  project-card:
-    backgroundColor: "{colors.graphite}"
-    textColor: "{colors.warm-white}"
-    rounded: "{rounded.none}"
-    padding: "clamp(20px, 2.4vw, 32px)"
 ---
 
 <!-- Reviewed 2026-11-23 (Impeccable document + taste-skill system checks). Values here are the reviewed target.
@@ -286,8 +281,6 @@ Small 500 with a 1px underline at 40% opacity, 8px below the text; the underline
 - **Tag:** static hairline box, Silver text, 8px × 12px padding.
 
 ### Cards / Containers
-- **Project card:** photo at 4:3 on graphite, bottom gradient scrim, Label meta, Title (Headline on the large card), Small
-  location; 48px square hairline "go" button in the corner. Hover: photo scales slowly (1.4s) and the go button fills.
 - **Glass card (HQ):** charcoal raised at 86% with an 18px blur and a hairline border, padding clamp(32px, 3.5vw, 48px).
 - **Quote / certificate cards (stone sections):** white, 1px 6%-black border, 32px / 24px padding, square.
 
@@ -310,10 +303,8 @@ Label in Mist Grey (Slate on Stone) preceded by a 32px brushed-metal rule with a
   Display XL statement, Lead and two buttons; plays once per session, with a "Skip intro" control.
 - **Capabilities accordion:** a numbered list of the five disciplines beside a crossfading image; the active row extends a
   brushed-metal rule and reveals its services as tags.
-- **Project story:** sticky photo stage with a progress rule, beside numbered steps that activate as they reach mid-screen.
 - **Operations wall:** a dark data panel (map, KPIs, chart, cameras, GPU bars, log); the one place 8–12px radii, monospace
   type and the floating-panel shadow appear.
-- **Before/after slider:** square-ish photo frame (4px), white 2px divider with a 48px circular handle, Label tags in each corner.
 
 ## Do's and Don'ts
 
