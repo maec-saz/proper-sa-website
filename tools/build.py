@@ -138,7 +138,7 @@ YEARS = __import__("datetime").date.today().year - int(COMPANY["founded"])
 # --------------------------------------------------------------------------------------------
 PARTNERS = [
     {"name": "VOD", "logo": "partners/vod.png", "role": "Distribution partner"},
-    {"name": "CTF", "logo": "partners/ctf.jpg", "role": "Technical consoles & control room furniture"},
+    {"name": "CTF", "logo": "partners/ctf.png", "role": "Technical consoles & control room furniture"},
     {"name": "PUDU", "logo": "partners/pudu.svg", "role": "Service & delivery robotics"},
     {"name": "LG", "logo": "partners/lg.svg", "role": "Commercial displays & LED"},
     {"name": "SAMSUNG", "logo": "partners/samsung.svg", "role": "Commercial displays & LED"},
