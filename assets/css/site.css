@@ -1145,3 +1145,24 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .pv__back:hover, .pv__back:focus-visible { background: var(--metal); border-color: var(--metal); color: #0d0e10; }
 .hero--pano.is-open .pv__s { cursor: zoom-out; }
 @media (max-width: 600px) { .pv__back { height: 44px; padding: 0 14px; font-size: 12px; } }
+
+/* =====================================================================
+   Home hero text: quiet by default so the imagery leads; brightens when
+   the cursor rests on it (touch screens get a middle, always-readable level)
+   ===================================================================== */
+.hero--pano .hero__title, .hero--pano .hero__lead { pointer-events: auto; }
+.hero--pano .hero__title { font-size: clamp(28px, 3.5vw, 54px); color: rgba(243, 242, 239, .55); transition: color .5s ease; }
+.hero--pano .hero__title em { opacity: .55; transition: opacity .5s ease, filter .5s ease; }
+.hero--pano .hero__lead { color: rgba(201, 204, 209, .55); transition: color .5s ease; }
+.hero--pano .hero__content:has(.hero__title:hover, .hero__lead:hover) .hero__title,
+.hero--pano .hero__title:hover { color: #fff; }
+.hero--pano .hero__content:has(.hero__title:hover, .hero__lead:hover) .hero__title em,
+.hero--pano .hero__title:hover em { opacity: 1; filter: brightness(1.15); }
+.hero--pano .hero__content:has(.hero__title:hover, .hero__lead:hover) .hero__lead,
+.hero--pano .hero__lead:hover { color: #e4e6e9; }
+@media (hover: none) {
+  .hero--pano .hero__title { color: rgba(243, 242, 239, .78); }
+  .hero--pano .hero__title em { opacity: .8; }
+  .hero--pano .hero__lead { color: rgba(201, 204, 209, .8); }
+}
+@media (max-width: 760px) { .hero--pano .hero__title { font-size: clamp(26px, 7.4vw, 34px); } }
