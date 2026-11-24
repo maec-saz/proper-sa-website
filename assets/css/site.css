@@ -1166,3 +1166,31 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .hero--pano .hero__lead { color: rgba(201, 204, 209, .8); }
 }
 @media (max-width: 760px) { .hero--pano .hero__title { font-size: clamp(26px, 7.4vw, 34px); } }
+
+/* =====================================================================
+   Phone alignment: centred controls, full-width actions, centred footer
+   ===================================================================== */
+@media (max-width: 760px) {
+  /* home hero: discipline caption and arrows centred */
+  .pv__nav { left: 0; right: 0; inset-inline: 0; justify-content: center; }
+  .hp__caps { inset-inline: 16px; width: auto; }
+  .hp__cap { text-align: center; justify-items: center; }
+
+  /* standalone text links become full-width, centred actions */
+  .link { display: flex; justify-content: center; width: 100%; padding: 14px 18px; border: 1px solid var(--line-2); border-radius: 0; }
+  .link:hover { border-color: var(--metal); }
+  .cta-band .wrap { display: grid; justify-items: center; text-align: center; gap: 18px; }
+
+  /* contact form: full-width submit */
+  form .btn[type="submit"] { width: 100%; justify-content: center; }
+
+  /* footer centred */
+  .footer__grid { text-align: center; justify-items: center; }
+  .footer__grid img { margin-inline: auto; }
+  .footer__bottom { justify-content: center; text-align: center; }
+}
+@media (max-width: 760px) { .cta-band__inner { flex-direction: column; align-items: stretch; text-align: center; } }
+@media (max-width: 760px) { .cta-band .wrap { justify-items: stretch; } .cta-band__inner > * { text-align: center; } }
+@media (max-width: 760px) { .cta-band .wrap { grid-template-columns: 1fr; justify-content: stretch; } }
+@media (max-width: 760px) { .hero__actions .btn { flex: 1 1 100%; justify-content: center; } }
+.pv__count { direction: ltr; unicode-bidi: isolate; }
