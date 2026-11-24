@@ -117,7 +117,7 @@ The brief asks for real imagery only. These are the gaps:
 | rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
 | rental-anamorphic | Higgsfield Cinema Studio 2.5, 4K: anamorphic 3D corner LED wall at an exhibition stand, golden falcon |
-| rental-ai-host, rental-ai-host2 | Unsplash, Enchanted Tools (unsplash.com/photos/sqj85Qm11yc, q0IVUzp9sFY): visitors interacting with an AI humanoid robot at an exhibition |
+| rental-ai-host | Unsplash, Enchanted Tools (unsplash.com/photos/sqj85Qm11yc): visitors interacting with an AI humanoid robot at an exhibition |
 | jeddah-corniche | Asim Alghamdi on Unsplash (About) |
 | network-cables | Taylor Vick on Unsplash (Partners) |
 

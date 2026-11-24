@@ -464,8 +464,6 @@ AR = {
     "AI-powered digital hosts with a lifelike face and natural voice that greet visitors, answer questions in Arabic and English and capture leads — on kiosks, LED totems and holographic displays.":
         "مضيفون رقميون مدعومون بالذكاء الاصطناعي بوجه واقعي وصوت طبيعي، يرحّبون بالزوّار ويجيبون عن أسئلتهم بالعربية والإنجليزية ويجمعون بيانات المهتمين، عبر الأكشاك وأعمدة LED والشاشات الهولوغرافية.",
     "Live Interaction": "التفاعل المباشر",
-    "AI Interaction": "التفاعل بالذكاء الاصطناعي",
-    "Digital Hosts": "المضيفون الرقميون",
     "Real-time experiences that respond to the people in front of them: face and gesture tracking, AI photo and video booths, live polls, social walls and content on the LED wall that reacts to the crowd.":
         "تجارب فورية تستجيب لمن يقف أمامها: تتبّع الوجه والإيماءات، وأكشاك تصوير بالذكاء الاصطناعي، واستطلاعات مباشرة، وجدران تواصل اجتماعي، ومحتوى على جدار LED يتفاعل مع الجمهور.",
     "Exhibition & Equipment Rental by PROPER Developments: Immersive Art Installations, Interactive Installations, Kinetic LED Walls, LED Floors, Cubes & Immersive Rooms, Anamorphic 3D Content, AI Interaction & Digital Hosts, Live Interaction, Programming & Gaming Activations, Exhibition Infrastructure, AV Equipment Rental, Display and Technology Rental.":
