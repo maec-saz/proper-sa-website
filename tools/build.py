@@ -167,6 +167,27 @@ PARTNERS = [
     {"name": "LG", "logo": "partners/lg.svg", "role": "Commercial displays & LED"},
     {"name": "SAMSUNG", "logo": "partners/samsung.svg", "role": "Commercial displays & LED"},
     {"name": "SOLUM", "logo": "partners/solum.png", "role": "Distribution partner"},
+    {"name": "TCL", "logo": "partners/tcl.png", "role": "Commercial displays"},
+    {"name": "HUAWEI", "logo": "partners/huawei.png", "role": "Networking & enterprise ICT"},
+    {"name": "MAXHUB", "logo": "partners/maxhub.png", "role": "Interactive displays & collaboration"},
+    {"name": "HP", "logo": "partners/hp.png", "role": "Computing & printing"},
+    {"name": "DELL", "logo": "partners/dell.png", "role": "Computing, servers & storage"},
+    {"name": "Lenovo", "logo": "partners/lenovo.png", "role": "Computing & data centre"},
+    {"name": "AOPEN", "logo": "partners/aopen.png", "role": "Digital signage players"},
+    {"name": "SimSign", "logo": "partners/simsign.png", "role": "Digital signage software"},
+    {"name": "BOE", "logo": "partners/boe.png", "role": "Display & LED technology"},
+    {"name": "SHLED", "logo": "partners/shled.png", "role": "LED displays"},
+    {"name": "Yealink", "light": True, "logo": "partners/yealink.png", "role": "Video conferencing & unified communications"},
+    {"name": "PANPHONICS", "logo": "partners/panphonics.png", "role": "Directional audio"},
+    {"name": "SHURE", "light": True, "logo": "partners/shure.png", "role": "Microphones & conferencing audio"},
+    {"name": "Televes", "logo": "partners/televes.png", "role": "TV distribution & IPTV"},
+    {"name": "HYPERSIGN", "light": True, "logo": "partners/hypersign.png", "role": "Digital signage software"},
+    {"name": "KMXG", "logo": "partners/kmxg.png", "role": "Display technology"},
+    {"name": "itC", "logo": "partners/itc.png", "role": "Public address & professional audio"},
+    {"name": "biamp", "logo": "partners/biamp.png", "role": "Audio & conferencing systems"},
+    {"name": "NAVORI", "logo": "partners/navori.png", "role": "Digital signage software"},
+    {"name": "QSC", "logo": "partners/qsc.png", "role": "Audio, video & control"},
+    {"name": "TRICOLOR", "logo": "partners/tricolor.png", "role": "Display technology"},
 ]
 
 
@@ -440,7 +461,7 @@ def partner_tile(p, big=False):
     inner = (f'<img src="{{r}}assets/img/{p["logo"]}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
              else f'<span class="logo-type" title="Placeholder — official logo to be supplied">{e(p["name"])}</span>')
     role = f'<span class="partner__role">{e(p["role"])}</span>' if big else ""
-    return f'<li class="partner{" partner--big" if big else ""}" data-reveal><span class="partner__logo">{inner}</span>{role}</li>'
+    return f'<li class="partner{" partner--big" if big else ""}{" partner--light" if p.get("light") else ""}" data-reveal><span class="partner__logo">{inner}</span>{role}</li>'
 
 
 ORG_LD = {
@@ -918,7 +939,7 @@ def partners():
     </div>
   </div>
 </section>'''
-    return page("partners.html", "Technology Partners", "PROPER Developments technology partners and distribution brands: VOD, CTF, PUDU, LG, Samsung and SOLUM.",
+    return page("partners.html", "Technology Partners", "PROPER Developments technology partners and distribution brands, including LG, Samsung, Huawei, Dell, Lenovo, MAXHUB, Yealink, Shure, QSC, Biamp, CTF and VOD.",
                 body, "partners.html", "has-hero")
 
 

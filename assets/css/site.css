@@ -1038,3 +1038,6 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .cap-over__count span { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
 .grp__here { font-family: var(--sans); }
 @media (max-width: 980px) { .cap-over__side { grid-template-columns: 1fr auto; align-items: end; } .cap-over__count { justify-items: end; } }
+/* light-coloured logos (e.g. lime, green, orange) need extra depth to read in the grey tile style */
+.partner--light .partner__logo img { filter: grayscale(1) brightness(.5) contrast(1.6); opacity: .85; }
+.partner--light:hover .partner__logo img { filter: none; opacity: 1; }
