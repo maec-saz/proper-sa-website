@@ -1116,3 +1116,25 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .cmarq__track img, .cmarq__track li:hover img { filter: none; }
 .steps li, .value { border-top-color: var(--line-2); }
 .steps span { color: var(--metal); }
+
+/* Home hero: photo mosaics — each tile eases in from a slight zoom, one after another */
+.mosaic--photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.12); opacity: .2; transition: transform 6s cubic-bezier(.2, .6, .3, 1), opacity 1s ease; }
+.pv__s.is-on .mosaic--photo img { transform: scale(1); opacity: 1; }
+.pv__s.is-on .mosaic--photo img:nth-child(2) { transition-delay: .12s; }
+.pv__s.is-on .mosaic--photo img:nth-child(3) { transition-delay: .24s; }
+.pv__s.is-on .mosaic--photo img:nth-child(4) { transition-delay: .36s; }
+.pv__s.is-on .mosaic--photo img:nth-child(5) { transition-delay: .48s; }
+.pv__s.is-on .mosaic--photo img:nth-child(6) { transition-delay: .6s; }
+@media (prefers-reduced-motion: reduce) { .mosaic--photo img { transform: none; transition: opacity .3s; } }
+.hp__cn { display: none; }
+
+/* Proof band: real-work evidence on the home and discipline pages */
+.proof { border-top: 1px solid var(--line); }
+.proof__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.proof__media { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; height: clamp(300px, 30vw, 440px); }
+.proof__media figure { overflow: hidden; background: #15171a; }
+.proof__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.proof__media figure:hover img { transform: scale(1.05); }
+.proof__big { grid-row: span 2; }
+.proof__text p { color: #c3c6cb; margin: 18px 0 26px; max-width: 46ch; }
+@media (max-width: 900px) { .proof__grid { grid-template-columns: 1fr; } .proof__media { height: 320px; } }

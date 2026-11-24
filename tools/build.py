@@ -496,6 +496,7 @@ def hero_panels():
         out += (f'<a class="pv__s" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1" style="--i:{i}">'
                 f'<img class="pv__z" src="{{r}}assets/img/hd/hero-panorama.jpg" alt="" {prio} decoding="async">'
                 + (clip_mosaic("pv__hd pv__mosaic") if c["slug"] == "rental" else
+                   photo_mosaic("pv__hd pv__mosaic", HERO_MOSAIC[c["slug"]]) if c["slug"] in HERO_MOSAIC else
                    f'<img class="pv__hd" src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, '
                    f'{{r}}assets/img/{b}-1280.jpg 1280w, {{r}}assets/img/{c["hero"]} 2560w" sizes="100vw" alt="" loading="eager" decoding="async">')
                 + '</a>')
@@ -564,6 +565,8 @@ def home():
 </section>
 
 {reel()}
+
+{proof_band("aramco")}
 
 {image_band("hd/riyadh-kafd-night.jpg", "Built in the Kingdom", "Engineering the Kingdom’s <em>next chapter.</em>",
             "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.")}
@@ -766,7 +769,7 @@ def about():
     <div class="grp__tree">
       <div class="grp__root" data-reveal>
         <span class="grp__halo" aria-hidden="true"></span>
-        <img src="{{r}}assets/img/logo-holding-white.png" alt="PROPER Holding" width="1259" height="334">
+        <img src="{{r}}assets/img/logo-holding-white.png" alt="PROPER Holding" width="640" height="170">
         <span class="grp__role">Parent company</span>
       </div>
       <div class="grp__wire grp__wire--split" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -776,14 +779,14 @@ def about():
           <div class="grp__co-bg" style="background-image:url({{r}}assets/img/hd/tech-hero-1280.jpg)"></div>
           <div class="grp__co-body">
             <em class="grp__here">You are here</em>
-            <img class="grp__logo" src="{{r}}assets/img/logo-developments-white.png" alt="PROPER Developments" width="645" height="174">
+            <img class="grp__logo" src="{{r}}assets/img/logo-developments-white.png" alt="PROPER Developments" width="640" height="173">
             <p>Technology and real estate development.</p>
           </div>
         </article>
         <article class="grp__co" data-reveal>
           <div class="grp__co-bg" style="background-image:url({{r}}assets/img/maec/headquarters-business-park.jpg)"></div>
           <div class="grp__co-body">
-            <img class="grp__logo grp__logo--midrar" src="{{r}}assets/img/logo-midrar-white.png" alt="MIDRAR" width="797" height="272">
+            <img class="grp__logo grp__logo--midrar" src="{{r}}assets/img/logo-midrar-white.png" alt="MIDRAR" width="640" height="218">
             <p>Project management and engineering consulting.</p>
           </div>
         </article>
@@ -886,6 +889,29 @@ RENTAL_REEL = [
 ]
 
 
+# Home hero: six photographs per discipline, shown as a mosaic when the discipline is opened
+HERO_MOSAIC = {
+    "technology": ["hd/tech-hero", "hd/tech-noc", "hd/tech-gpu", "hd/tech-robotics", "hd/capabilities-hero", "projects/aramco-lab"],
+    "audiovisual": ["hd/av-hero", "hd/av-led-wall", "hd/av-control-room", "projects/aramco-heritage-wall", "hd/av-boardroom", "projects/aramco-curve-wall"],
+    "construction": ["hd/construction-hero", "hd/construction-architecture", "hd/construction-site", "hd/construction-fitout", "hd/construction-infrastructure", "hd/riyadh-kafd-night"],
+    "real-estate": ["hd/realestate-hero", "hd/realestate-masterplan", "hd/realestate-residential", "hd/realestate-hospitality", "hd/jeddah-corniche-hd", "hd/riyadh-dusk"],
+    "museums": ["hd/museum-hero", "hd/museum-immersive", "hd/museum-touch", "hd/museum-dome", "hd/rental-anamorphic", "hd/rental-led-cube"],
+}
+
+
+def photo_mosaic(cls, images):
+    """Six photographs as one 3 x 2 mosaic; tiles settle in with a slow, staggered zoom when shown."""
+    def tile(path):
+        if path.startswith("hd/"):
+            srcset = f"{{r}}assets/img/{path}-640.jpg 640w, {{r}}assets/img/{path}-1280.jpg 1280w"
+            src = f"{{r}}assets/img/{path}-1280.jpg"
+        else:
+            srcset = f"{{r}}assets/img/{path}-640.jpg 640w, {{r}}assets/img/{path}.jpg 1200w"
+            src = f"{{r}}assets/img/{path}.jpg"
+        return f'<img data-src="{src}" data-srcset="{srcset}" sizes="(max-width: 760px) 50vw, 34vw" alt="" decoding="async">'
+    return f'<div class="{cls} mosaic mosaic--photo">' + "".join(tile(i) for i in images) + "</div>"
+
+
 def clip_mosaic(cls):
     """All six installation clips as one 3 x 2 moving mosaic (muted; played only while visible)."""
     return f'<div class="{cls} mosaic">' + "".join(
@@ -919,6 +945,35 @@ def svc_cols(n):
     return 2 if n in (2, 4) else 3
 
 
+def proof_band(kind):
+    """A compact band of real-work evidence: the Saudi Aramco project, or MIDRAR's group track record."""
+    if kind == "aramco":
+        imgs = ["projects/aramco-heritage-wall", "projects/aramco-lab", "projects/aramco-curve-wall"]
+        eb, title, text = "Featured project", "Saudi Aramco, <em>Dammam.</em>", "Curved LED walls, digital signage, IPTV, AV systems and meeting rooms for an IT lab and experience space, designed, supplied, installed and integrated by PROPER Developments."
+        link, label = "about.html#featured-project", "See the project"
+    else:
+        imgs = ["maec/headquarters-business-park", "maec/hajj-street-hotels", "maec/al-bukhariya-lane"]
+        eb, title, text = "Group track record", "27 projects across <em>the Kingdom.</em>", "Design, project management and construction supervision by MIDRAR’s engineering practice, MAEC Architects &amp; Engineers, from the Headquarters Business Park in Jeddah to Hajj Street Hotels in Makkah."
+        link, label = "about.html#group-projects", "View group projects"
+    def pic(path, big):
+        if path.startswith("projects/"):
+            return f'<img src="{{r}}assets/img/{path}.jpg" srcset="{{r}}assets/img/{path}-640.jpg 640w, {{r}}assets/img/{path}.jpg 1200w" sizes="{"(max-width: 900px) 100vw, 40vw" if big else "20vw"}" alt="" loading="lazy" decoding="async">'
+        return f'<img src="{{r}}assets/img/{path}.jpg" alt="" loading="lazy" decoding="async">'
+    media = "".join(f'<figure class="{"proof__big" if i == 0 else ""}">{pic(x, i == 0)}</figure>' for i, x in enumerate(imgs))
+    return f'''
+<section class="section proof">
+  <div class="wrap proof__grid">
+    <div class="proof__media" data-reveal>{media}</div>
+    <div class="proof__text" data-reveal>
+      {eyebrow(eb)}
+      <h2 class="display-3">{title}</h2>
+      <p>{text}</p>
+      <a class="link" href="{{r}}{link}">{label} {arrow()}</a>
+    </div>
+  </div>
+</section>'''
+
+
 def capability_page(c, idx):
     n_svc, cols = len(c["services"]), svc_cols(len(c["services"]))
     last_span = cols - (n_svc % cols) + 1 if n_svc % cols else 1
@@ -941,6 +996,7 @@ def capability_page(c, idx):
 {ops_wall() if c["slug"] == "technology" else ""}
 <section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div>{gallery2}</section>
 {rental_reel() if c["slug"] == "rental" else ""}
+{proof_band("aramco") if c["slug"] in ("technology", "audiovisual") else proof_band("group") if c["slug"] in ("construction", "real-estate") else ""}
 
 <section class="section section--stone">
   <div class="wrap">

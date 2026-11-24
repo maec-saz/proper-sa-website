@@ -79,6 +79,9 @@
       stage.classList.toggle('is-focus', i >= 0);
       strips.forEach(function (s, k) {
         s.classList.toggle('is-on', k === i);
+        if (k === i) $$('img[data-src]', s).forEach(function (im) {   // load this mosaic on first open
+          im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src'); im.removeAttribute('data-src');
+        });
         $$('video', s).forEach(function (v) {
           if (k === i && !reduce) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
           else v.pause();

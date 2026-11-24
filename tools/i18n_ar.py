@@ -717,6 +717,11 @@ AR = {
     'Al Balad Development Company': 'Al Balad Development Company',
     'SEDCO Holding': 'SEDCO Holding',
     'Sumou': 'Sumou',
+    'Curved LED walls, digital signage, IPTV, AV systems and meeting rooms for an IT lab and experience space, designed, supplied, installed and integrated by PROPER Developments.': 'شاشات LED منحنية ولوحات رقمية وتلفزيون تفاعلي وأنظمة سمعية وبصرية وغرف اجتماعات لمختبر تقنية ومساحة تجربة، صممتها PROPER Developments وورّدتها وركّبتها ودمجتها.',
+    'See the project': 'استعرض المشروع',
+    '27 projects across': '27 مشروعًا في أنحاء',
+    'Design, project management and construction supervision by MIDRAR’s engineering practice, MAEC Architects & Engineers, from the Headquarters Business Park in Jeddah to Hajj Street Hotels in Makkah.': 'التصميم وإدارة المشاريع والإشراف على التنفيذ من ممارسة مدرار الهندسية، MAEC للعمارة والهندسة، من المركز الرئيسي للأعمال في جدة إلى فنادق طريق الحج في مكة المكرمة.',
+    'View group projects': 'استعرض مشاريع المجموعة',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
