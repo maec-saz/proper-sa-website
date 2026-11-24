@@ -30,10 +30,6 @@ COMPANY = {
     "address_short": "Headquarters Business Park, Al Corniche Road, Jeddah",
     "hours": "Monday – Saturday, 7:00 – 17:00",
     "whatsapp": "https://wa.me/966549966266",
-    # Hero film (MP4/H.264, 1920×1080, 16 s loop, < 6 MB), timed to the intro text. Rendered from the aerial
-    # photos by tools/render_hero_film.py; replace the file with real drone footage when available.
-    # The photo sequence stays as poster and fallback. Set to "" to use the photo sequence only.
-    "hero_video": "assets/video/hero-film.mp4",
 }
 
 # --------------------------------------------------------------------------------------------
@@ -280,12 +276,9 @@ def translate(doc):
     return "".join(out)
 
 
-# First visit per session with motion allowed → play the cinematic intro (decided before first paint).
-INTRO_JS = ("try{if(!sessionStorage.getItem('proper-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)"
-            "document.documentElement.classList.add('is-intro')}catch(e){}")
 
 
-def page(path, title, desc, body, active, body_class="", image="hd/home-facade.jpg", preload=None, jsonld=None):
+def page(path, title, desc, body, active, body_class="", image="hd/riyadh-dusk.jpg", preload=None, jsonld=None):
     ar = LANG == "ar"
     full_path = ("ar/" if ar else "") + path
     root = "../" * full_path.count("/")          # site root (shared assets)
@@ -296,7 +289,11 @@ def page(path, title, desc, body, active, body_class="", image="hd/home-facade.j
     hreflang = (f'<link rel="alternate" hreflang="en" href="{url(path)}">\n<link rel="alternate" hreflang="ar" href="{url("ar/" + path)}">\n'
                 f'<link rel="alternate" hreflang="x-default" href="{url(path)}">')
     ld = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ""
-    pre = f'<link rel="preload" as="image" href="{r}assets/img/{preload}" fetchpriority="high">' if preload else ""
+    pre = ""
+    if preload:
+        b = preload[:-4]
+        pre = (f'<link rel="preload" as="image" href="{r}assets/img/{preload}" fetchpriority="high" imagesizes="100vw" '
+               f'imagesrcset="{r}assets/img/{b}-640.jpg 640w, {r}assets/img/{b}-1280.jpg 1280w, {r}assets/img/{preload} 2560w">')
     full_title = title if path == "index.html" else f"{title} | PROPER Developments"
     doc = f'''<!doctype html>
 <html lang="{"ar" if ar else "en"}" dir="{"rtl" if ar else "ltr"}">
@@ -317,7 +314,7 @@ def page(path, title, desc, body, active, body_class="", image="hd/home-facade.j
 <meta property="og:image" content="{SITE}/assets/img/{image}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{r}assets/img/favicon.svg" type="image/svg+xml">
-<script>document.documentElement.classList.add('js');{INTRO_JS if path == "index.html" else ""}</script>
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1{"&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:wght@400;700" if ar else ""}&display=swap">
@@ -394,7 +391,6 @@ ORG_LD = {
 # Pages
 # ============================================================================================
 def home():
-    v = COMPANY["hero_video"]
     caps = "".join(f'''
         <li class="capx__item{" is-active" if i == 0 else ""}" style="--accent:{c["accent"]}" data-cap="{i}">
           <a href="{{r}}capabilities/{c["slug"]}.html" class="capx__link">
@@ -409,23 +405,13 @@ def home():
         </li>''' for i, c in enumerate(CAPABILITIES))
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     body = f'''
-<section class="hero" id="hero" data-hero data-video="{"{r}" + e(v) if v else ""}">
+<section class="hero hero--dn" id="hero" data-hero data-dn>
   <div class="hero__stage" aria-hidden="true">
-    <div class="hero__shot hero__shot--1"><img class="hero__img" data-src="{{r}}assets/img/hd/home-altitude.jpg" data-srcset="{{r}}assets/img/hd/home-altitude-1280.jpg 1280w, {{r}}assets/img/hd/home-altitude.jpg 2560w" sizes="100vw" alt="" style="object-position:50% 55%" decoding="async"></div>
-    <div class="hero__shot hero__shot--2"><img class="hero__img" data-src="{{r}}assets/img/hd/home-dive.jpg" data-srcset="{{r}}assets/img/hd/home-dive-1280.jpg 1280w, {{r}}assets/img/hd/home-dive.jpg 2560w" sizes="100vw" alt="" style="object-position:50% 50%" decoding="async"></div>
-    <div class="hero__shot hero__shot--3"><img class="hero__img" src="{{r}}assets/img/hd/home-facade.jpg" srcset="{{r}}assets/img/hd/home-facade-1280.jpg 1280w, {{r}}assets/img/hd/home-facade.jpg 2560w" sizes="100vw" alt="" style="object-position:62% 50%" fetchpriority="high" decoding="async"></div>
-    <video class="hero__video" muted playsinline loop preload="none" poster="{{r}}assets/img/hd/home-facade.jpg"></video>
+    <div class="hero__shot dn__day"><img class="hero__img" src="{{r}}assets/img/hd/riyadh-dusk.jpg" srcset="{{r}}assets/img/hd/riyadh-dusk-640.jpg 640w, {{r}}assets/img/hd/riyadh-dusk-1280.jpg 1280w, {{r}}assets/img/hd/riyadh-dusk.jpg 2560w" sizes="100vw" alt="" fetchpriority="high" decoding="async"></div>
+    <div class="hero__shot dn__night"><img class="hero__img" src="{{r}}assets/img/hd/riyadh-night.jpg" srcset="{{r}}assets/img/hd/riyadh-night-640.jpg 640w, {{r}}assets/img/hd/riyadh-night-1280.jpg 1280w, {{r}}assets/img/hd/riyadh-night.jpg 2560w" sizes="100vw" alt="" decoding="async"></div>
+    <div class="dn__glow"></div>
     <div class="hero__grade"></div>
-    <div class="hero__sweep"></div>
     <div class="hero__grain"></div>
-  </div>
-  <script>/* intro shots load only when the intro plays */(function(){{if(!document.documentElement.classList.contains('is-intro'))return;document.querySelectorAll('.hero__img[data-src]').forEach(function(i){{i.srcset=i.dataset.srcset;i.src=i.dataset.src;}});}})();</script>
-  <div class="hero__bars" aria-hidden="true"><i></i><i></i></div>
-
-  <div class="hero__slate" aria-hidden="true">
-    <span class="hero__slate-k">A {COMPANY["parent"]} company</span>
-    <span class="hero__slate-t">Intelligent environments, built in the Kingdom</span>
-    <span class="hero__slate-l">Technology · Infrastructure · Development</span>
   </div>
 
   <div class="wrap hero__content">
@@ -439,8 +425,8 @@ def home():
   </div>
 
   <div class="hero__foot wrap">
-    <span class="hero__loc"><i></i>Jeddah · Kingdom of Saudi Arabia</span>
-    <button type="button" class="hero__skip" id="heroSkip">Skip intro</button>
+    <span class="hero__loc"><i></i>Riyadh · Kingdom of Saudi Arabia</span>
+    <div class="dn__ctl"><label for="dnRange">Dusk</label><input class="dn__range" id="dnRange" type="range" min="0" max="100" value="0" aria-label="Riyadh from dusk to night"><label for="dnRange">Night</label><span class="dn__hint">· Move across the city</span></div>
     <a class="hero__scroll" href="#intro" aria-label="Scroll to content"><span></span></a>
   </div>
 </section>
@@ -492,7 +478,7 @@ def home():
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
-                body, "index.html", "has-hero is-home", image="hd/home-facade.jpg", preload="hd/home-facade.jpg", jsonld=ORG_LD)
+                body, "index.html", "has-hero is-home", image="hd/riyadh-dusk.jpg", preload="hd/riyadh-dusk.jpg", jsonld=ORG_LD)
 
 
 # --------------------------------------------------------------------------------------------
@@ -504,7 +490,7 @@ OPS_SITES = [  # name, longitude, latitude (approximate city positions, used for
     ("Riyadh", 46.72, 24.71, False), ("Dammam", 50.10, 26.43, False), ("Tabuk", 36.57, 28.38, False),
     ("NEOM", 35.20, 28.00, False), ("Abha", 42.50, 18.22, False), ("Hail", 41.69, 27.52, False),
 ]
-OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-640.jpg"), ("CAM 04 · Plaza", "hd/home-dive-640.jpg"),
+OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-640.jpg"), ("CAM 04 · Plaza", "hd/riyadh-dusk-640.jpg"),
             ("CAM 07 · Data hall", "hd/tech-gpu-640.jpg"), ("CAM 12 · Perimeter", "hd/construction-infrastructure-640.jpg")]
 
 
@@ -635,7 +621,7 @@ def capabilities_overview():
     </div>
   </article>''' for c in CAPABILITIES)
     body = page_hero("Our <em>Capabilities</em>", "Five integrated business verticals — engineered to work together, from the first concept to long-term operation.",
-                     "hd/tech-noc.jpg", "", "What We Do") + f'''
+                     "hd/capabilities-hero.jpg", "", "What We Do") + f'''
 <section class="section capblocks"><div class="wrap">{blocks}</div></section>
 {cta_band()}'''
     return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction & development, museums & immersive experiences, and exhibition & equipment rental.",

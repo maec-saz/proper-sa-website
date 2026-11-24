@@ -50,7 +50,11 @@ AR = {
     "Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team. A MIDRAR company.":
         "التقنية والبنية التحتية الذكية والإنشاءات والتجارب الغامرة، يقدّمها فريق واحد متعدد التخصصات. إحدى شركات MIDRAR.",
     "Jeddah · Kingdom of Saudi Arabia": "جدة · المملكة العربية السعودية",
-    "Skip intro": "تخطَّ المقدمة",
+    "Riyadh · Kingdom of Saudi Arabia": "الرياض · المملكة العربية السعودية",
+    "Dusk": "الغروب",
+    "Night": "الليل",
+    "· Move across the city": "· حرّك المؤشر عبر المدينة",
+    "Riyadh from dusk to night": "الرياض من الغروب إلى الليل",
     "Scroll to content": "انتقل إلى المحتوى",
 
     # ---------------------------------------------------------------- home: intro & facts

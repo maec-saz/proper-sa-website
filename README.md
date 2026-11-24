@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (cinematic intro, introduction, capabilities, partners) | `index.html` |
+| Home (interactive dusk-to-night hero, introduction, capabilities, partners) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -63,21 +63,17 @@ python3 tools/build.py
 
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
-## The cinematic hero
-The home page opens with a ~9-second, three-shot aerial sequence (Higgsfield-generated imagery):
-1. **High altitude:** descending through cloud over a city skyline, with the "A MIDRAR company" title card.
-2. **Drone dive:** a top-down view onto modern towers with a slight camera yaw.
-3. **Architectural flyover:** a golden-hour glass façade that pans in as the letterbox opens and the logo,
-   statement and calls to action are revealed. It then drifts slowly and the film loops.
+## The home hero: Riyadh, dusk to night
+The home page opens directly on one full-screen photograph of the Riyadh skyline (Al Faisaliah Tower and the Kingdom Centre).
+There is no intro sequence and no video.
 
-- On desktop it plays as a **film** (`assets/video/hero-film.mp4`, 1920×1080, 16 s loop, ~4.4 MB) kept in sync with the
-  intro text. The film is rendered from the aerial photos by `tools/render_hero_film.py` (needs Pillow, NumPy, ffmpeg).
-- Phones, data-saver connections and reduce-motion users get the lighter CSS photo sequence instead (same shots and timing).
-- It plays once per browser session; repeat views open on the façade shot. There's a **Skip intro** button.
-- The hero imagery is illustrative; it does not depict the Headquarters Business Park.
-
-**Real drone footage:** export it as MP4 (H.264, 1920×1080, 10–16 s, ideally under 6 MB, no audio), save it over
-`assets/video/hero-film.mp4` and rebuild. Keep the first cut around 3 s and the final shot from ~6 s so the text still lands.
+- **Desktop:** moving the cursor across the hero sweeps the city from golden dusk into night, with the towers and streets
+  lighting up; a soft warm light and a gentle parallax follow the pointer.
+- **Phones and tablets:** the city drifts slowly from dusk to night and back on its own.
+- **Everyone:** a Dusk / Night slider in the hero footer controls it directly (keyboard accessible). With reduced motion
+  turned on, nothing moves by itself.
+- The two images (`hd/riyadh-dusk.jpg`, `hd/riyadh-night.jpg`) are relit versions of one real photograph (credited below),
+  made with Nano Banana Pro so both share exactly the same framing.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,
@@ -104,21 +100,13 @@ The brief asks for real imagery only. These are the gaps:
   versions. Prompts are in `docs/higgsfield-prompts.md`. They are illustrative environments, never presented as PROPER
   projects, and contain no logos, readable text or recognisable landmarks.
 - **About and Partners headers** still use two Unsplash photos (free for commercial use; credited below as a courtesy).
-- The home opening film (`assets/video/hero-film.mp4`) is rendered from the three Higgsfield home shots by
-  `tools/render_hero_film.py`. Re-run it if those images change.
 - The full-resolution originals stay in the Higgsfield account (Presales workspace).
-- Home façade prompt (Nano Banana Pro, 4K, 16:9): *"Golden-hour architectural photograph, low angle, of a premium contemporary
-  office building in Riyadh with floor-to-ceiling glass and slender vertical bronze fins. The setting sun rakes warm amber light
-  across the bronze fins, with long soft shadows; the sky is a deep gradient from dusky blue to warm amber. The building rises
-  along the right two thirds of the frame; the left third is open darkening sky, leaving space for a headline. A single building
-  only, no other towers or spires, no famous landmarks, no text, no logos, no people. Premium corporate campaign photography,
-  charcoal and bronze palette, high dynamic range, sharp detail."* All other prompts: `tools/higgsfield_generate.py`.
+- Prompts: `tools/higgsfield_generate.py` (earlier images) and `docs/higgsfield-prompts.md`.
 
 | File (assets/img/hd/) | Source |
 |---|---|
-| home-altitude | Unsplash, Datingscout (unsplash.com/photos/MAPTe538-vA): Riyadh skyline with Al Faisaliah and Kingdom Centre |
-| home-dive | Unsplash, Ibrahim Abdullah (unsplash.com/photos/_UxsPARhtOg): Kingdom Centre, Riyadh, at sunset |
-| home-facade | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
+| riyadh-dusk, riyadh-night | Unsplash, Oualid Lakhrouti (unsplash.com/photos/NCD37SPA2wk): Riyadh skyline, relit as dusk and night with Nano Banana Pro |
+| capabilities-hero, tech-hero, tech-noc, av-control-room | Higgsfield Nano Banana Pro, 4K, with CTF console product photos (ctfconsoles.com) as references |
 | tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
 | construction-hero, construction-fitout, construction-site, construction-infrastructure | Higgsfield (Construction & Development) |

@@ -51,42 +51,39 @@
     });
   });
 
-  /* ---------- Cinematic hero ---------- */
-  var hero = $('[data-hero]');
+  /* ---------- Home hero: Riyadh from dusk to night ----------
+     Desktop: the cursor's horizontal position sweeps the city into night and a warm light follows it.
+     Touch screens: the city drifts slowly from dusk to night and back until the visitor uses the slider.
+     The slider works everywhere (keyboard included). */
+  var hero = $('[data-dn]');
   if (hero) {
-    var INTRO_MS = 9300;
-    var finishIntro = function () {
-      doc.classList.remove('is-intro');
-      try { sessionStorage.setItem('proper-intro', '1'); } catch (e) { /* storage unavailable */ }
+    var range = $('#dnRange'), target = 0, p = 0, raf = 0, auto = !matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var mx = 50, my = 45, px = 0, py = 0, tpx = 0, tpy = 0, visible = true, t0 = performance.now();
+    var render = function () {
+      raf = 0;
+      if (auto && !reduce) target = 0.5 - 0.5 * Math.cos((performance.now() - t0) / 9000 * Math.PI * 2);
+      p += (target - p) * (reduce ? 1 : 0.08);
+      px += (tpx - px) * 0.08; py += (tpy - py) * 0.08;
+      hero.style.setProperty('--p', p.toFixed(4));
+      hero.style.setProperty('--px', px.toFixed(3)); hero.style.setProperty('--py', py.toFixed(3));
+      hero.style.setProperty('--mx', mx + '%'); hero.style.setProperty('--my', my + '%');
+      if (document.activeElement !== range) range.value = Math.round(p * 100);
+      if (visible && (auto || Math.abs(target - p) > 0.001 || Math.abs(tpx - px) > 0.001 || Math.abs(tpy - py) > 0.001)) raf = requestAnimationFrame(render);
     };
-    if (doc.classList.contains('is-intro')) {
-      var t = setTimeout(finishIntro, INTRO_MS);
-      $('#heroSkip').addEventListener('click', function () { clearTimeout(t); finishIntro(); });
-    }
-    // Optional drone film: plays only when configured, motion is allowed and the visitor isn't saving data.
-    var src = hero.getAttribute('data-video');
-    var conn = navigator.connection || {};
-    if (src && !reduce && !conn.saveData && window.innerWidth >= 760) {
-      var v = $('.hero__video', hero);
-      var t0 = performance.now(), intro = doc.classList.contains('is-intro');
-      v.src = src;
-      // Keep the film in step with the intro text; repeat visits open on the façade shot.
-      v.addEventListener('loadedmetadata', function () {
-        var at = intro ? (performance.now() - t0) / 1000 : 6.6;
-        if (at > 0.3 && at < v.duration - 1) v.currentTime = at;
-      }, { once: true });
-      v.addEventListener('playing', function () { hero.classList.add('has-video'); }, { once: true });
-      v.play().catch(function () { /* autoplay blocked — the photo sequence remains */ });
-    }
-    // Pause the background motion when the hero is off-screen
+    var kick = function () { if (!raf) raf = requestAnimationFrame(render); };
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      if (e.target.closest && e.target.closest('.dn__ctl')) { kick(); return; }
+      target = Math.min(1, Math.max(0, (x - 0.12) / 0.76));
+      mx = x * 100; my = y * 100; tpx = x * 2 - 1; tpy = y * 2 - 1;
+      kick();
+    });
+    range.addEventListener('input', function () { auto = false; target = range.value / 100; kick(); });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        var on = es[0].isIntersecting;
-        $$('.hero__img, .hero__grain', hero).forEach(function (el) { el.style.animationPlayState = on ? 'running' : 'paused'; });
-        var vid = $('.hero__video', hero);
-        if (hero.classList.contains('has-video')) { if (on) vid.play().catch(function () {}); else vid.pause(); }
-      }).observe(hero);
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(hero);
     }
+    kick();
   }
 
   /* ---------- Home: interactive capabilities list ---------- */
