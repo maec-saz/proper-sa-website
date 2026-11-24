@@ -674,8 +674,16 @@ CLIENTS = [('alkhabeer-capital', 'Alkhabeer Capital'), ('bcg', 'BCG'), ('ministr
 
 
 def clients_section():
-    logos = "".join(f'<li data-reveal><img src="{{r}}assets/img/clients/{slug}.png" alt="{e(name)}" title="{e(name)}" loading="lazy" decoding="async"></li>'
-                    for slug, name in CLIENTS)
+    """Client logos as two endless rows drifting in opposite directions (paused on hover, still with reduced motion)."""
+    def item(slug, name, hidden=False):
+        return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/clients/{slug}.png" alt="{"" if hidden else e(name)}"'
+                f' title="{e(name)}" loading="lazy" decoding="async"></li>')
+    half = (len(CLIENTS) + 1) // 2
+    rows = []
+    for k, group in enumerate((CLIENTS[:half], CLIENTS[half:])):
+        once = "".join(item(sl, n) for sl, n in group)
+        twice = "".join(item(sl, n, True) for sl, n in group)   # duplicate set for a seamless loop
+        rows.append(f'<div class="cmarq__row{" cmarq__row--rev" if k else ""}"><ul class="cmarq__track">{once}{twice}</ul></div>')
     return f'''
 <section class="section clients" id="clients">
   <div class="wrap">
@@ -683,8 +691,8 @@ def clients_section():
       <div data-reveal>{eyebrow("Our clients")}<h2 class="display-3">Trusted across <em>the Kingdom.</em></h2></div>
       <p class="lead" data-reveal>Government ministries, development authorities, investors and leading Saudi groups.</p>
     </div>
-    <ul class="clients__wall">{logos}</ul>
   </div>
+  <div class="cmarq" data-reveal>{"".join(rows)}</div>
 </section>'''
 
 
