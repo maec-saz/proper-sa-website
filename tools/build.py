@@ -453,7 +453,7 @@ def home():
   <div class="wrap hero__content">
     <img class="hero__logo" src="{{r}}assets/img/logo-white.png" alt="" width="220" height="63">
     <h1 class="hero__title"><span class="line"><span>{COMPANY["statement"]}</span></span><span class="line"><em>{COMPANY["statement_em"]}</em></span></h1>
-    <p class="hero__lead">Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team. A {COMPANY["parent"]} company.</p>
+    <p class="hero__lead">Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team.</p>
     <div class="hero__actions">
       <a class="btn btn--metal" href="{{r}}capabilities.html">Explore Our Capabilities {arrow()}</a>
       <a class="btn btn--line" href="{{r}}contact.html">Contact Us</a>
@@ -462,26 +462,7 @@ def home():
 
   <div class="hero__foot wrap">
     <span class="hero__loc"><i></i>Riyadh · Kingdom of Saudi Arabia</span>
-    <a class="hero__scroll" href="#intro" aria-label="Scroll to content"><span></span></a>
-  </div>
-</section>
-
-<section class="intro" id="intro">
-  <div class="wrap intro__grid">
-    <div data-reveal>
-      {eyebrow("PROPER Developments")}
-      <h2 class="display-2">One partner for the environments where organisations <em>work, operate and engage.</em></h2>
-    </div>
-    <div class="intro__text" data-reveal>
-      <p>PROPER Developments brings technology, engineering, infrastructure and development expertise together under one roof. Founded in {COMPANY["founded"]} and operating under {COMPANY["parent"]}, we deliver integrated solutions — from AI-ready infrastructure and command centres to construction, fit-out and immersive visitor experiences.</p>
-      <a class="link" href="{{r}}about.html">About PROPER Developments {arrow()}</a>
-    </div>
-  </div>
-  <div class="wrap facts" data-reveal>
-    <div class="fact"><span class="fact__v"><span data-count="{YEARS}" data-since="{COMPANY["founded"]}">{YEARS}</span><sup>+</sup></span><span class="fact__l">Years of delivery, since {COMPANY["founded"]}</span></div>
-    <div class="fact"><span class="fact__v"><span data-count="{len(CAPABILITIES)}" data-pad="2">{len(CAPABILITIES):02d}</span></span><span class="fact__l">Integrated business verticals</span></div>
-    <div class="fact"><span class="fact__v"><span data-count="{len(PARTNERS)}" data-pad="2">{len(PARTNERS):02d}</span></span><span class="fact__l">Global technology partners</span></div>
-    <div class="fact"><span class="fact__v"><span data-count="{len(SERVICE_COUNT)}" data-pad="2">{len(SERVICE_COUNT):02d}</span></span><span class="fact__l">Specialist services, one team</span></div>
+    <a class="hero__scroll" href="#capabilities" aria-label="Scroll to content"><span></span></a>
   </div>
 </section>
 
@@ -501,19 +482,8 @@ def home():
 
 {reel()}
 
-<section class="partners-strip" aria-labelledby="ps-title">
-  <div class="wrap">
-    <div class="sec-head sec-head--split" data-reveal>
-      <div>{eyebrow("Technology Partners & Distribution")}<h2 class="display-3" id="ps-title">Global brands, delivered locally.</h2></div>
-      <a class="link" href="{{r}}partners.html">Our partners {arrow()}</a>
-    </div>
-    <ul class="partners">{"".join(partner_tile(p) for p in PARTNERS)}</ul>
-  </div>
-</section>
-
 {image_band("hd/riyadh-kafd-night.jpg", "Built in the Kingdom", "Engineering the Kingdom’s <em>next chapter.</em>",
-            "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.",
-            ("about.html", "About PROPER Developments"))}
+            "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.")}
 
 {cta_band()}
 '''

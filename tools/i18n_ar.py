@@ -47,8 +47,8 @@ AR = {
     "Technology": "التقنية",
     "Infrastructure": "البنية التحتية",
     "Development": "التطوير",
-    "Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team. A MIDRAR company.":
-        "التقنية والبنية التحتية الذكية والإنشاءات والتجارب الغامرة، يقدّمها فريق واحد متعدد التخصصات. إحدى شركات MIDRAR.",
+    "Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team.":
+        "التقنية والبنية التحتية الذكية والإنشاءات والتجارب الغامرة، يقدّمها فريق واحد متعدد التخصصات.",
     "Jeddah · Kingdom of Saudi Arabia": "جدة · المملكة العربية السعودية",
     "Riyadh · Kingdom of Saudi Arabia": "الرياض · المملكة العربية السعودية",
     "Scroll to content": "انتقل إلى المحتوى",
