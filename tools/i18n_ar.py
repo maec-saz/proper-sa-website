@@ -723,6 +723,8 @@ AR = {
     'Design, project management and construction supervision by MIDRAR’s engineering practice, MAEC Architects & Engineers, from the Headquarters Business Park in Jeddah to Hajj Street Hotels in Makkah.': 'التصميم وإدارة المشاريع والإشراف على التنفيذ من ممارسة مدرار الهندسية، MAEC للعمارة والهندسة، من المركز الرئيسي للأعمال في جدة إلى فنادق طريق الحج في مكة المكرمة.',
     'View group projects': 'استعرض مشاريع المجموعة',
     'All disciplines': 'جميع التخصصات',
+    'Numerous projects across': 'مشاريع عديدة في أنحاء',
+    'Cities across the Kingdom': 'مدن في أنحاء المملكة',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

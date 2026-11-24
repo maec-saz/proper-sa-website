@@ -163,7 +163,7 @@ muted on a loop while visible, and stay still when reduced motion is turned on.
 The site stays framework-free; these effects are written in plain CSS/JS after 21st.dev components:
 - **Spotlight cards** ("Spotlight Card"): a soft light and lit edge follow the cursor over service cards, partner tiles,
   project cards and the group-structure tiles (pointer devices only).
-- **Count-up figures** ("Count Up"): the About figures (27 / 100+ / 5.7M m²) and each discipline's service count
+- **Count-up figures** ("Count Up"): the About figures (7 / 100+ / 5.7M m²) and each discipline's service count
   count up when scrolled into view.
 - **Border beam** ("Border Beam"): a gold light travels around the PROPER Holding card in the group structure.
 - **Reading reveal** ("Reading Text Reveal"): each discipline's overview paragraph lights up word by word on scroll.

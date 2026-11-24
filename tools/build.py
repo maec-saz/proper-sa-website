@@ -733,7 +733,7 @@ def maec_section():
       </div>
     </div>
     <dl class="projects__facts" data-reveal>
-      <div><dt>27</dt><dd>Selected projects</dd></div>
+      <div><dt>7</dt><dd>Cities across the Kingdom</dd></div>
       <div><dt>100+</dt><dd>Years of cumulative team experience</dd></div>
       <div><dt>5.7M m²</dt><dd>Largest project site</dd></div>
     </dl>
@@ -952,7 +952,7 @@ def proof_band(kind):
         link, label = "about.html#featured-project", "See the project"
     else:
         imgs = ["maec/headquarters-business-park", "maec/hajj-street-hotels", "maec/al-bukhariya-lane"]
-        eb, title, text = "Group track record", "27 projects across <em>the Kingdom.</em>", "Design, project management and construction supervision by MIDRAR’s engineering practice, MAEC Architects &amp; Engineers, from the Headquarters Business Park in Jeddah to Hajj Street Hotels in Makkah."
+        eb, title, text = "Group track record", "Numerous projects across <em>the Kingdom.</em>", "Design, project management and construction supervision by MIDRAR’s engineering practice, MAEC Architects &amp; Engineers, from the Headquarters Business Park in Jeddah to Hajj Street Hotels in Makkah."
         link, label = "about.html#group-projects", "View group projects"
     def pic(path, big):
         if path.startswith("projects/"):
