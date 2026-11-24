@@ -731,11 +731,11 @@ def about():
       </dl>
     </div>
     <div class="feature__media" data-reveal>
-      <figure class="feature__big"><img src="{{r}}assets/img/projects/aramco-heritage-wall.jpg" alt="Curved LED wall showing a heritage scene, Saudi Aramco, Dammam" loading="lazy" decoding="async" width="1165" height="744"></figure>
-      <figure><img src="{{r}}assets/img/projects/aramco-curve-wall.jpg" alt="Curved LED journey wall" loading="lazy" decoding="async" width="1165" height="703"></figure>
-      <figure><img src="{{r}}assets/img/projects/aramco-lab.jpg" alt="IT Lab of Excellence LED wall" loading="lazy" decoding="async" width="1197" height="744"></figure>
-      <figure><img src="{{r}}assets/img/projects/aramco-immersive.jpg" alt="Interactive LED wall" loading="lazy" decoding="async" width="1197" height="748"></figure>
-      <figure><img src="{{r}}assets/img/projects/aramco-led-corridor.jpg" alt="LED corridor" loading="lazy" decoding="async" width="1165" height="748"></figure>
+      <figure class="feature__big"><img src="{{r}}assets/img/projects/aramco-heritage-wall.jpg" srcset="{{r}}assets/img/projects/aramco-heritage-wall-640.jpg 640w, {{r}}assets/img/projects/aramco-heritage-wall.jpg 1200w" sizes="(max-width: 980px) 100vw, 55vw" alt="Curved LED wall showing a heritage scene, Saudi Aramco, Dammam" loading="lazy" decoding="async" width="1165" height="744"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-curve-wall.jpg" srcset="{{r}}assets/img/projects/aramco-curve-wall-640.jpg 640w, {{r}}assets/img/projects/aramco-curve-wall.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="Curved LED journey wall" loading="lazy" decoding="async" width="1165" height="703"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-lab.jpg" srcset="{{r}}assets/img/projects/aramco-lab-640.jpg 640w, {{r}}assets/img/projects/aramco-lab.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="IT Lab of Excellence LED wall" loading="lazy" decoding="async" width="1197" height="744"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-immersive.jpg" srcset="{{r}}assets/img/projects/aramco-immersive-640.jpg 640w, {{r}}assets/img/projects/aramco-immersive.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="Interactive LED wall" loading="lazy" decoding="async" width="1197" height="748"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-led-corridor.jpg" srcset="{{r}}assets/img/projects/aramco-led-corridor-640.jpg 640w, {{r}}assets/img/projects/aramco-led-corridor.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="LED corridor" loading="lazy" decoding="async" width="1165" height="748"></figure>
     </div>
   </div>
 </section>
@@ -790,6 +790,38 @@ def capabilities_overview():
                 body, "capabilities.html", "has-hero")
 
 
+# Exhibition & Rental: installation clips (illustrative, generated with Higgsfield after the PROPER Technology Catalogue)
+RENTAL_REEL = [
+    ("kinetic-facade", "Kinetic Facade", "Rotating LED pillars that move as one wall or in waves."),
+    ("kinetic-wall", "Kinetic Wall", "LED blocks that shift in sync with content and react to visitors."),
+    ("led-sphere", "Expandable LED Sphere", "A 1.5 m LED globe that opens out to 3 m."),
+    ("kinetic-ceiling", "Kinetic Ceiling", "An overhead canvas of moving panels, light and shadow."),
+    ("led-rings", "Kinetic LED Rings", "Suspended rings that rise, tilt and change colour."),
+    ("immersive-room", "Rotating Immersive Room", "An LED-clad room on a rotating platform."),
+]
+
+
+def rental_reel():
+    tiles = "".join(f'''
+      <figure class="vreel__item" data-reveal>
+        <div class="vreel__media"><video muted loop playsinline preload="none" poster="{{r}}assets/video/{slug}.jpg" data-autoplay aria-label="{e(name)}">
+          <source src="{{r}}assets/video/{slug}.mp4" type="video/mp4"></video></div>
+        <figcaption><span class="vreel__n">{i + 1:02d}</span><h3>{e(name)}</h3><p>{e(text)}</p></figcaption>
+      </figure>''' for i, (slug, name, text) in enumerate(RENTAL_REEL))
+    return f'''
+<section class="section vreel" id="in-motion">
+  <div class="wrap">
+    <div class="split vreel__head">
+      <div data-reveal>{eyebrow("In motion")}<h2 class="display-3">Installations that <em>move.</em></h2></div>
+      <div class="prose" data-reveal><p class="lead">Kinetic LED, holographic and interactive installations from our technology catalogue, with more than 250 activations delivered since 2023.</p>
+        <p>Each piece is programmed in-house and can be themed to your brand, your content and your stand.</p></div>
+    </div>
+    <div class="vreel__grid">{tiles}
+    </div>
+  </div>
+</section>'''
+
+
 def capability_page(c, idx):
     services = "".join(f'''<li class="svc" data-reveal><span class="svc__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
     fig = lambda src, cap: f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>'
@@ -809,6 +841,7 @@ def capability_page(c, idx):
 
 {ops_wall() if c["slug"] == "technology" else ""}
 <section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div>{gallery2}</section>
+{rental_reel() if c["slug"] == "rental" else ""}
 
 <section class="section section--stone">
   <div class="wrap">

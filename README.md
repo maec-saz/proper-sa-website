@@ -153,3 +153,11 @@ At the client's request the site no longer has a Projects section, an "Our home"
 ## About Us content sources
 - **Group structure, Aramco project, 21 technology solutions:** PROPER Holding company profile (Proper profile v4).
 - **Group track record:** MAEC Architects & Engineers firm profile; shown as MIDRAR's engineering practice, not as PROPER Developments projects.
+
+## Exhibition & Rental: installation clips
+The "In motion" section on the Exhibition & Rental page shows six short silent clips in `assets/video/`
+(kinetic facade, kinetic wall, expandable LED sphere, kinetic ceiling, kinetic LED rings, rotating immersive room).
+They are **original clips generated with Higgsfield** (a Nano Banana Pro still animated with Seedance 2.5), modelled
+on installations in the PROPER Holding Technology Catalogue. They are illustrations, not footage of specific projects.
+Clips are 1280×720 H.264 without audio, with a poster frame each; they load only when scrolled into view, play
+muted on a loop while visible, and stay still when reduced motion is turned on.

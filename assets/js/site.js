@@ -51,6 +51,19 @@
     });
   });
 
+  /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
+  var clips = $$('video[data-autoplay]');
+  if (clips.length && !reduce && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: .35 });
+    clips.forEach(function (v) { vio.observe(v); });
+  }
+
   /* ---------- Home hero: one image, five disciplines ----------
      At rest the hero shows one continuous photograph split into five strips, one per discipline.
      With a mouse, the discipline under the cursor opens full screen; moving across the hero switches

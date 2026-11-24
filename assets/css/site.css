@@ -882,8 +882,8 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .org__root { padding: 28px 52px; border-color: rgba(195, 188, 173, .55); }
 .org__word { font-family: var(--serif); font-size: clamp(30px, 3vw, 42px); letter-spacing: .14em; line-height: 1; padding-inline-start: .14em; }
 .org__word--s { font-size: clamp(22px, 2.1vw, 28px); }
-.org__sub { font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--mute); padding-inline-start: .32em; }
-.org__here { font-family: var(--sans); position: absolute; top: -11px; inset-inline-end: -12px; padding: 3px 9px; font-style: normal; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; background: var(--metal); color: #0d0e10; }
+.org__sub { font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--mute); padding-inline-start: .32em; }
+.org__here { font-family: var(--sans); position: absolute; top: -11px; inset-inline-end: -12px; padding: 3px 9px; font-style: normal; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; background: var(--metal); color: #0d0e10; }
 .org__root::after, .org__node::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 36px; background: var(--line-2); }
 .org__branches { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; padding-top: 36px; }
 .org__branches::before { content: ""; position: absolute; top: 0; left: 25%; right: 25%; height: 1px; background: var(--line-2); }
@@ -893,7 +893,7 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .org__leaves::before { content: ""; position: absolute; top: 0; left: 25%; right: 25%; height: 1px; background: var(--line-2); }
 .org__leaves li { position: relative; display: grid; gap: 8px; padding: 22px 14px; background: var(--graphite-2); font-size: 15px; line-height: 1.35; }
 .org__leaves li::before { content: ""; position: absolute; left: 50%; top: -30px; width: 1px; height: 30px; background: var(--line-2); }
-.org__n { font-size: 11px; letter-spacing: .18em; color: var(--metal); }
+.org__n { font-size: 12px; letter-spacing: .18em; color: var(--metal); }
 .org__branch.is-us .org__node { border-color: rgba(195, 188, 173, .55); }
 @media (max-width: 760px) {
   .org__branches { grid-template-columns: 1fr; gap: 56px; }
@@ -906,7 +906,7 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .feature__text .lead { margin: 18px 0 30px; }
 .feature__facts { display: grid; gap: 0; border-top: 1px solid var(--line); }
 .feature__facts > div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
-.feature__facts dt { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); padding-top: 3px; }
+.feature__facts dt { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); padding-top: 3px; }
 .feature__facts dd { margin: 0; }
 .feature__media { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(90px, 9vw, 140px); gap: 8px; }
 .feature__media figure { overflow: hidden; background: #15171a; }
@@ -918,6 +918,21 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 
 .solutions__list { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: clamp(24px, 3vw, 48px); border-top: 1px solid var(--line); counter-reset: none; }
 .solutions__list li { display: grid; grid-template-columns: 38px 1fr; gap: 10px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
-.solutions__list li span { font-size: 11px; letter-spacing: .14em; color: var(--metal); }
+.solutions__list li span { font-size: 12px; letter-spacing: .14em; color: var(--metal); }
 @media (max-width: 980px) { .solutions__list { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .solutions__list { grid-template-columns: 1fr; } }
+
+/* =====================================================================
+   Exhibition & Rental — installation clips
+   ===================================================================== */
+.vreel__head { margin-bottom: clamp(36px, 5vw, 64px); }
+.vreel__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.8vw, 26px) clamp(16px, 1.8vw, 26px); }
+.vreel__item { display: grid; gap: 16px; align-content: start; }
+.vreel__media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0a0b0d; }
+.vreel__media video { width: 100%; height: 100%; object-fit: cover; }
+.vreel__item figcaption { display: grid; grid-template-columns: 34px 1fr; column-gap: 8px; }
+.vreel__n { grid-row: span 2; font-size: 12px; letter-spacing: .14em; color: var(--metal); padding-top: 5px; }
+.vreel__item h3 { font-size: 17px; font-weight: 400; margin: 0 0 4px; }
+.vreel__item p { margin: 0; font-size: 14px; color: var(--mute); }
+@media (max-width: 1000px) { .vreel__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .vreel__grid { grid-template-columns: 1fr; } }

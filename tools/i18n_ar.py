@@ -622,6 +622,23 @@ AR = {
     'What we deliver': 'ما نقدّمه',
     'You are here': 'أنت هنا',
     'end to end.': 'من البداية إلى النهاية.',
+    'A 1.5 m LED globe that opens out to 3 m.': 'كرة LED بقطر 1.5 متر تتمدد إلى 3 أمتار.',
+    'An LED-clad room on a rotating platform.': 'غرفة مكسوة بشاشات LED على منصة دوّارة.',
+    'An overhead canvas of moving panels, light and shadow.': 'سقف من ألواح متحركة وضوء وظلال.',
+    'Each piece is programmed in-house and can be themed to your brand, your content and your stand.': 'نبرمج كل قطعة داخليًا، ونصممها وفق علامتك التجارية ومحتواك وجناحك.',
+    'Expandable LED Sphere': 'كرة LED قابلة للتمدد',
+    'In motion': 'في حركة',
+    'Installations that': 'تركيبات',
+    'Kinetic Ceiling': 'السقف الحركي',
+    'Kinetic Facade': 'الواجهة الحركية',
+    'Kinetic LED Rings': 'حلقات LED الحركية',
+    'Kinetic LED, holographic and interactive installations from our technology catalogue, with more than 250 activations delivered since 2023.': 'تركيبات LED حركية وهولوغرافية وتفاعلية من كتالوج تقنياتنا، مع أكثر من 250 تفعيلًا منذ عام 2023.',
+    'Kinetic Wall': 'الجدار الحركي',
+    'LED blocks that shift in sync with content and react to visitors.': 'كتل LED تتحرك بتزامن مع المحتوى وتتفاعل مع الزوار.',
+    'Rotating Immersive Room': 'الغرفة الغامرة الدوّارة',
+    'Rotating LED pillars that move as one wall or in waves.': 'أعمدة LED دوّارة تتحرك كجدار واحد أو على شكل موجات.',
+    'Suspended rings that rise, tilt and change colour.': 'حلقات معلّقة ترتفع وتميل وتتغير ألوانها.',
+    'move.': 'تتحرك.',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
