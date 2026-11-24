@@ -1194,3 +1194,27 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 @media (max-width: 760px) { .cta-band .wrap { grid-template-columns: 1fr; justify-content: stretch; } }
 @media (max-width: 760px) { .hero__actions .btn { flex: 1 1 100%; justify-content: center; } }
 .pv__count { direction: ltr; unicode-bidi: isolate; }
+
+/* =====================================================================
+   Phone sizing: controls in proportion to the 15px body text
+   (44px tall = comfortable tap size; 14px labels; width fits the label)
+   ===================================================================== */
+@media (max-width: 760px) {
+  .btn { min-height: 44px; height: 44px; padding: 0 18px; font-size: 14px; gap: 8px; }
+  .btn .i-arrow { width: 16px; height: 16px; }
+  .hero__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hero__actions .btn { flex: none; width: 100%; padding: 0 10px; }
+
+  .link { display: flex; width: fit-content; max-width: 100%; margin-inline: auto; min-height: 44px; padding: 0 22px; font-size: 14px; gap: 8px; }
+  .cta-band .wrap { justify-items: center; }
+
+  form .btn[type="submit"] { width: fit-content; margin-inline: auto; display: flex; padding: 0 26px; }
+
+  .pv__arrow { width: 44px; height: 44px; }
+  .capx__go { width: 44px; height: 44px; }
+}
+@media (max-width: 360px) { .hero__actions { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .hero__actions { grid-template-columns: max-content; justify-content: center; gap: 10px; }
+  .hero__actions .btn { padding: 0 26px; }
+}
