@@ -65,15 +65,16 @@ Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
 ## The home hero: one image, five disciplines
 The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showing all five disciplines side by side as
-five strips: Technology, Audiovisual, Construction, Museums and Exhibition & Rental. There is no intro sequence and no video.
+six strips: Technology, Audiovisual, Construction/Architecture/Engineering, Real Estate Development, Museums and Exhibition & Rental. There is no intro sequence and no video.
 
 - **Desktop:** the discipline under the cursor opens full screen. Its strip widens across the whole hero and its
   full-size photograph (the discipline page's own hero image) fades in, with its name, tagline and link at the bottom
-  right. Moving the cursor across the hero switches between disciplines (the hero stays divided into five invisible
+  right. Moving the cursor across the hero switches between disciplines (the hero stays divided into six invisible
   columns). Moving off the hero returns to the five strips, and clicking the open image goes to that discipline's page.
 - **On its own:** when no cursor is on it (and on phones), the hero tours the five disciplines full screen in turn,
   then returns to the five-strip view.
 - **Phones:** tapping a strip opens it; tapping the open image goes to its page.
+- **Arrows:** the round arrows at the bottom right step through the disciplines one by one (with a 01 / 06 counter).
 - **Reduced motion:** nothing tours by itself.
 
 ## Live operations wall
@@ -109,7 +110,10 @@ The brief asks for real imagery only. These are the gaps:
 | riyadh-kafd-night | Unsplash, Saif Aldhaher (unsplash.com/photos/vAkHAP27QMk): Riyadh at night |
 | jeddah-corniche-hd | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
 | riyadh-dusk, riyadh-night | Unsplash, Oualid Lakhrouti (unsplash.com/photos/NCD37SPA2wk): Riyadh skyline, relit as dusk and night with Nano Banana Pro |
-| hero-panorama | Higgsfield Nano Banana Pro: one continuous five-discipline photograph used by the home hero |
+| hero-panorama | Higgsfield Nano Banana Pro: one continuous six-discipline photograph used by the home hero |
+| realestate-hero, realestate-masterplan, realestate-residential, realestate-hospitality, construction-architecture | Higgsfield (Cinema Studio 2.5 / Nano Banana Pro) |
+| projects/aramco-* | PROPER Holding company profile: Saudi Aramco project, Dammam (PROPER Developments) |
+| maec/* | MAEC Architects & Engineers firm profile: selected projects (MIDRAR) |
 | capabilities-hero, tech-hero, tech-noc, av-control-room | Higgsfield Nano Banana Pro, 4K, with CTF console product photos (ctfconsoles.com) as references |
 | tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
@@ -145,3 +149,7 @@ save it in `assets/img/hd/` as `name.jpg` (2560px) plus `name-1280.jpg`, then re
 
 ## Removed sections
 At the client's request the site no longer has a Projects section, an "Our home" (Headquarters Business Park) section or a Clients section; their images were deleted.
+
+## About Us content sources
+- **Group structure, Aramco project, 21 technology solutions:** PROPER Holding company profile (Proper profile v4).
+- **Group track record:** MAEC Architects & Engineers firm profile; shown as MIDRAR's engineering practice, not as PROPER Developments projects.

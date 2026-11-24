@@ -59,9 +59,9 @@
      With no pointer on it, the hero tours the five on its own; reduced motion: no tour. */
   var pv = $('[data-pano]');
   if (pv) {
-    var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv);
+    var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv), countEl = $('.pv__count b', pv);
     var cur = -1, step = 0, timer = 0, hoverT = 0, leaveT = 0, inside = false, seen = true, REST = 3800, OPEN = 5200;
-    var TOUR = [-1, 0, 1, 2, 3, 4];
+    var TOUR = [-1].concat(strips.map(function (s, k) { return k; }));
     var rtl = document.documentElement.dir === 'rtl';
     var show = function (i) {
       if (i === cur) return;
@@ -69,6 +69,7 @@
       stage.classList.toggle('is-focus', i >= 0);
       strips.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
       caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
+      if (countEl) countEl.textContent = i < 0 ? '00' : ('0' + (i + 1)).slice(-2);
     };
     var schedule = function () {
       clearTimeout(timer);
@@ -82,8 +83,10 @@
       var k = Math.max(0, Math.min(strips.length - 1, Math.floor((x - r.left) / r.width * strips.length)));
       return rtl ? strips.length - 1 - k : k;
     };
+    var onControls = function (el) { return !!(el && el.closest && el.closest('.pv__nav, .hp__caps')); };
     pv.addEventListener('pointermove', function (e) {
       if (e.pointerType !== 'mouse') return;
+      if (onControls(e.target)) { inside = true; clearTimeout(timer); clearTimeout(leaveT); clearTimeout(hoverT); return; }
       inside = true; clearTimeout(timer); clearTimeout(leaveT);
       var k = zoneAt(e.clientX);
       if (k === cur) { clearTimeout(hoverT); return; }
@@ -101,6 +104,14 @@
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) schedule(); else clearTimeout(timer); }).observe(pv);
     }
+    // Arrows: step through the disciplines (and pause the tour until the pointer leaves the hero)
+    $$('.pv__arrow', pv).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var d = +b.getAttribute('data-step'), n = strips.length;
+        var k = cur < 0 ? (d > 0 ? 0 : n - 1) : (cur + d + n) % n;
+        step = TOUR.indexOf(k); show(k); schedule();
+      });
+    });
     show(-1); schedule();
   }
 

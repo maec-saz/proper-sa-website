@@ -33,7 +33,7 @@ COMPANY = {
 }
 
 # --------------------------------------------------------------------------------------------
-# Capabilities (five verticals). Images: prefer real project photos / design visualisations.
+# Capabilities (six verticals). Images: prefer real project photos / design visualisations.
 # --------------------------------------------------------------------------------------------
 CAPABILITIES = [
     {
@@ -73,21 +73,43 @@ CAPABILITIES = [
     },
     {
         "slug": "construction", "n": "03", "accent": "#b7a68b",
-        "name": "Construction & Development", "short": "Construction",
-        "tagline": "From concept to completion — built to perform.",
-        "intro": "We deliver commercial, residential and specialised buildings, interiors and infrastructure — combining planning, engineering and site expertise to build environments that last.",
+        "name": "Construction, Architecture & Engineering", "short": "Construction & Engineering",
+        "tagline": "From design to completion — built to perform.",
+        "intro": "We design, engineer and build commercial, residential, hospitality and specialised projects — bringing architecture, engineering, construction management and site expertise together under one accountable team, so environments are delivered as designed and built to last.",
         "hero": "hd/construction-hero.jpg", "hero_caption": "",
         "services": [
+            ("Architectural Design", "Concept, schematic and detailed design for commercial, residential, hospitality and cultural buildings."),
+            ("Engineering Design", "Structural, mechanical, electrical and infrastructure engineering, coordinated across disciplines."),
+            ("Design & Construction Management", "Design reviews, value engineering, tendering and contract management that keep projects on time and on budget."),
             ("Construction", "Commercial buildings and specialised facilities, delivered with precision, quality and safety."),
+            ("Construction Supervision", "Independent site supervision and quality control from mobilisation to handover."),
             ("Interior Fit-Out", "Workplace, hospitality and retail interiors, from design development to final handover."),
             ("Infrastructure Development", "Planning, engineering and delivery of the infrastructure that developments depend on."),
         ],
-        "gallery": [("hd/construction-fitout.jpg", "Interior fit-out"),
+        "gallery": [("hd/construction-architecture.jpg", "Architecture & engineering design"),
                     ("hd/construction-site.jpg", "Construction"),
-                    ("hd/construction-infrastructure.jpg", "Infrastructure Development")],
+                    ("hd/construction-fitout.jpg", "Interior fit-out")],
     },
     {
-        "slug": "museums", "n": "04", "accent": "#8fb3a5",
+        "slug": "real-estate", "n": "04", "accent": "#c9a27e",
+        "name": "Real Estate Development", "short": "Real Estate",
+        "tagline": "Places that create lasting value.",
+        "intro": "We take developments from opportunity to operation — market and feasibility studies, masterplanning, development and portfolio management — shaping residential, hospitality, retail and mixed-use destinations across the Kingdom with the whole lifecycle in mind.",
+        "hero": "hd/realestate-hero.jpg", "hero_caption": "",
+        "services": [
+            ("Market & Feasibility Studies", "Market research, highest-and-best-use analysis and financial feasibility that define the right development."),
+            ("Masterplanning", "Land use, phasing and infrastructure strategies for communities and large mixed-use sites."),
+            ("Development Management", "Leading a project on the owner’s behalf, from brief and approvals to design, delivery and launch."),
+            ("Portfolio & Programme Management", "Coordinating several developments as one programme, with clear governance, reporting and controls."),
+            ("Mixed-Use & Hospitality Development", "Residential, hospitality, retail and office destinations, including operator selection for hotels."),
+            ("Value Engineering", "Design and cost optimisation that protects quality while improving project returns."),
+        ],
+        "gallery": [("hd/realestate-masterplan.jpg", "Masterplanning"),
+                    ("hd/realestate-residential.jpg", "Residential communities"),
+                    ("hd/realestate-hospitality.jpg", "Mixed-use & hospitality")],
+    },
+    {
+        "slug": "museums", "n": "05", "accent": "#8fb3a5",
         "name": "Museums & Immersive Experiences", "short": "Museums & Immersive",
         "tagline": "Spaces where stories become places.",
         "intro": "We create museums, interactive exhibitions and immersive environments that hold attention — combining storytelling, architecture and technology into experiences visitors remember.",
@@ -103,7 +125,7 @@ CAPABILITIES = [
                     ("hd/museum-dome.jpg", "Immersive installations")],
     },
     {
-        "slug": "rental", "n": "05", "accent": "#a9a6c4",
+        "slug": "rental", "n": "06", "accent": "#a9a6c4",
         "name": "Exhibition & Equipment Rental", "short": "Rental",
         "tagline": "Event technology and activations that draw the crowd.",
         "intro": "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, anamorphic 3D content, interactive installations, AI-powered digital hosts, live interaction, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.",
@@ -435,7 +457,7 @@ ORG_LD = {
 # Pages
 # ============================================================================================
 def hero_panels():
-    """Home hero strips: each shows its own part of one continuous five-discipline photograph
+    """Home hero strips: each shows its own part of one continuous six-discipline photograph
     (hd/hero-panorama.jpg); when a discipline opens full screen, its full-size photograph fades in."""
     out = ""
     for i, c in enumerate(CAPABILITIES):
@@ -480,7 +502,7 @@ def home():
   <div class="wrap hero__content">
     <img class="hero__logo" src="{{r}}assets/img/logo-white.png" alt="" width="220" height="63">
     <h1 class="hero__title"><span class="line"><span>{COMPANY["statement"]}</span></span><span class="line"><em>{COMPANY["statement_em"]}</em></span></h1>
-    <p class="hero__lead">Technology, intelligent infrastructure, construction and immersive experiences — delivered by one multidisciplinary team.</p>
+    <p class="hero__lead">Technology, construction, real estate development and immersive experiences — delivered by one multidisciplinary team.</p>
     <div class="hero__actions">
       <a class="btn btn--metal" href="{{r}}capabilities.html">Explore Our Capabilities {arrow()}</a>
       <a class="btn btn--line" href="{{r}}contact.html">Contact Us</a>
@@ -488,13 +510,18 @@ def home():
   </div>
 
   <div class="hp__caps">{hero_caps()}</div>
+  <div class="pv__nav">
+    <button type="button" class="pv__arrow pv__arrow--prev" data-step="-1" aria-label="Previous discipline">{arrow()}</button>
+    <span class="pv__count" aria-live="polite"><b>00</b> / {len(CAPABILITIES):02d}</span>
+    <button type="button" class="pv__arrow pv__arrow--next" data-step="1" aria-label="Next discipline">{arrow()}</button>
+  </div>
 </section>
 
 <section class="capx dark" id="capabilities" aria-labelledby="capx-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
       {eyebrow("Our Capabilities", True)}
-      <h2 class="display-2" id="capx-title">Five disciplines. <em>One accountable team.</em></h2>
+      <h2 class="display-2" id="capx-title">Six disciplines. <em>One accountable team.</em></h2>
     </div>
     <div class="capx__grid">
       <ol class="capx__list">{caps}
@@ -512,7 +539,7 @@ def home():
 {cta_band()}
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
-                "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
+                "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction, architecture & engineering, real estate development, museums & immersive experiences and exhibition rental across Saudi Arabia.",
                 body, "index.html", "has-hero is-home", image="hd/hero-panorama.jpg", preload=None, jsonld=ORG_LD)
 
 
@@ -592,6 +619,70 @@ def page_hero(title, sub, image, caption="", kicker="", accent=None):
 </section>'''
 
 
+# Selected projects of MAEC Architects & Engineers (MIDRAR's engineering practice), from its firm profile.
+MAEC_PROJECTS = [
+    ("headquarters-business-park", "The Headquarters Business Park", "Jeddah", "187,000 m²", "Design & project management"),
+    ("hajj-street-hotels", "Hajj Street Hotels", "Makkah", "300,000 m²", "Design management"),
+    ("kudai-hotels", "Kudai Hotels", "Makkah", "200,000 m²", "Design management"),
+    ("abha-the-point", "Abha The Point", "Abha", "75,000 m²", "Design & project management"),
+    ("corniche-towers", "Corniche Towers", "Jeddah", "30,000 m²", "Project management & supervision"),
+    ("al-bukhariya-lane", "Al Bukhariya Lane, Al Balad", "Jeddah", "41,000 m²", "Design management"),
+    ("hilton-duba", "Hilton Duba", "Duba", "3,000 m²", "Full design & operator selection"),
+    ("mbs-calligraphy-center", "MBS Global Center for Arabic Calligraphy", "Diriyah", "", "Heritage & cultural advisory"),
+]
+MAEC_MORE = ["Crown Plaza & Holiday Inn Makkah", "Souq 7 Mixed-Use", "Jeddah Vibes", "Al Balad Cultural Square",
+             "Red Sea Mall Expansion", "Bin Sulaiman Center", "Umm Al-Qura University", "KEC Dar Al Jiwar",
+             "Retaj Masterplan", "Al Shara’i Masterplan", "Badi’ah Palace Redesign", "Jeddah Central Project"]
+
+
+TECH_SOLUTIONS = ['LED Display Solutions', 'Digital Signage Solutions', 'Intelligent Command & Control Solutions', 'NOC (Network Operations Centre) Solutions', 'AV (Audio-Visual) Solutions', 'System Integration (AV, IT & ELV)', 'Immersive Experience Solutions', 'Interactive Technology Solutions', 'Museum Technology Solutions', 'Exhibition & Event Technology', 'Smart Fit-Out & Turnkey Solutions', 'Luxury Retail Solutions', 'Automotive Showroom Solutions', 'Hospitality & Hotel Technology Solutions', 'Education & EdTech Solutions', 'AI & Automation Solutions', 'Facade & Architectural Lighting Solutions', 'Meeting Room & Collaboration Solutions', 'Content Development & CMS Solutions', 'AMC & Managed Services', 'IPTV (Interactive TV) Solutions']
+
+
+def tech_solutions_section():
+    items = "".join(f'<li><span>{i + 1:02d}</span>{e(t)}</li>' for i, t in enumerate(TECH_SOLUTIONS))
+    return f'''
+<section class="section solutions" id="solutions">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("What we deliver")}<h2 class="display-3">Twenty-one technology solutions, <em>end to end.</em></h2>
+      <p class="sec-head__lead">Design, supply, installation, system integration, commissioning and support, under one roof.</p></div>
+    <ol class="solutions__list" data-reveal>{items}</ol>
+  </div>
+</section>'''
+
+
+def maec_section():
+    cards = "".join(f'''
+      <article class="proj" data-reveal>
+        <div class="proj__media"><img src="{{r}}assets/img/maec/{slug}.jpg" alt="{e(name)}" loading="lazy" decoding="async" width="960" height="720"></div>
+        <div class="proj__body">
+          <h3>{e(name)}</h3>
+          <p class="proj__meta"><span>{e(city)}</span>{f"<span>{e(area)}</span>" if area else ""}</p>
+          <p class="proj__svc">{e(svc)}</p>
+        </div>
+      </article>''' for slug, name, city, area, svc in MAEC_PROJECTS)
+    more = "".join(f"<li>{e(m)}</li>" for m in MAEC_MORE)
+    return f'''
+<section class="section projects" id="group-projects">
+  <div class="wrap">
+    <div class="split projects__head">
+      <div data-reveal>{eyebrow("Group track record")}<h2 class="display-3">Projects across <em>the Kingdom.</em></h2></div>
+      <div class="prose" data-reveal>
+        <p class="lead">Selected work from MIDRAR’s project management and engineering consulting practice, MAEC Architects &amp; Engineers.</p>
+        <p>Design, project management and construction supervision for hospitality, commercial, residential and cultural landmarks in Jeddah, Makkah, Madinah, Riyadh, Abha, Duba and Diriyah.</p>
+      </div>
+    </div>
+    <dl class="projects__facts" data-reveal>
+      <div><dt>27</dt><dd>Selected projects</dd></div>
+      <div><dt>100+</dt><dd>Years of cumulative team experience</dd></div>
+      <div><dt>5.7M m²</dt><dd>Largest project site</dd></div>
+    </dl>
+    <div class="projects__grid">{cards}
+    </div>
+    <div class="projects__more" data-reveal><h3>Also in the portfolio</h3><ul class="tags">{more}</ul></div>
+  </div>
+</section>'''
+
+
 def about():
     body = page_hero("A multidisciplinary group, <em>built on delivery.</em>", "Technology, engineering, infrastructure and development expertise — brought together to deliver integrated solutions across industries.",
                      "hd/jeddah-corniche-hd.jpg", "Jeddah, Kingdom of Saudi Arabia", "About Us") + f'''
@@ -601,17 +692,50 @@ def about():
     <div class="prose" data-reveal>
       <p class="lead">PROPER Developments is a Saudi company delivering innovative solutions across technology, intelligent infrastructure, construction, fit-out, digital environments and immersive experiences.</p>
       <p>Founded in {COMPANY["founded"]}, the company began with a vision to deliver innovative solutions in technology and infrastructure. Over the years, our expertise has expanded across audiovisual, ICT, construction and project development — and today spans AI enablement, command and control environments, museums and exhibition services.</p>
+      <p>We help organisations turn spaces into intelligent, high-performance environments, from LED displays, digital signage and command centres to audiovisual systems, immersive experiences and architectural lighting.</p>
       <p>Our multidisciplinary approach means one accountable team across every stage: consultancy and design, supply and construction, integration and commissioning, and long-term support.</p>
     </div>
   </div>
 </section>
 
-<section class="section dark midrar">
-  <div class="wrap split">
-    <div data-reveal>{eyebrow("Part of " + COMPANY["parent"], True)}<h2 class="display-3">Backed by {COMPANY["parent"]}.</h2></div>
-    <div class="prose" data-reveal>
-      <p class="lead">PROPER Developments operates under {COMPANY["parent"]}, owner of the Headquarters Business Park on Jeddah’s Corniche.</p>
-      <p>The association gives our clients the confidence of an established group, and gives us a home that reflects the standards we deliver to — in architecture, technology and the day-to-day experience of the people who use the spaces we build.</p>
+<section class="section dark org" id="group">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("Group structure", True)}<h2 class="display-3">One group. <em>Four specialisms.</em></h2>
+      <p class="sec-head__lead">PROPER Holding brings together PROPER Developments and MIDRAR, covering technology, real estate development, project management and engineering consulting.</p></div>
+    <div class="org__tree" data-reveal>
+      <div class="org__root"><span class="org__word">PROPER</span><span class="org__sub">Holding</span></div>
+      <div class="org__branches">
+        <div class="org__branch is-us">
+          <div class="org__node"><span class="org__word org__word--s">PROPER</span><span class="org__sub">Developments</span><em class="org__here">You are here</em></div>
+          <ul class="org__leaves"><li><span class="org__n">01</span>Information Technology</li><li><span class="org__n">02</span>Real Estate Development</li></ul>
+        </div>
+        <div class="org__branch">
+          <div class="org__node"><span class="org__word org__word--s">MIDRAR</span><span class="org__sub">مدرار</span></div>
+          <ul class="org__leaves"><li><span class="org__n">03</span>Project Management</li><li><span class="org__n">04</span>Engineering Consulting</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section feature" id="featured-project">
+  <div class="wrap feature__grid">
+    <div class="feature__text" data-reveal>
+      {eyebrow("Featured project")}
+      <h2 class="display-3">Saudi Aramco, <em>Dammam.</em></h2>
+      <p class="lead">An IT lab and experience space wrapped in curved LED walls, with digital signage, IPTV, AV systems and meeting rooms, designed, supplied, installed and integrated by PROPER Developments.</p>
+      <dl class="feature__facts">
+        <div><dt>Location</dt><dd>Dammam, Saudi Arabia</dd></div>
+        <div><dt>Solutions</dt><dd>IPTV · Digital signage · AV systems · Meeting rooms</dd></div>
+        <div><dt>Scope</dt><dd>Design, supply, installation &amp; integration</dd></div>
+      </dl>
+    </div>
+    <div class="feature__media" data-reveal>
+      <figure class="feature__big"><img src="{{r}}assets/img/projects/aramco-heritage-wall.jpg" alt="Curved LED wall showing a heritage scene, Saudi Aramco, Dammam" loading="lazy" decoding="async" width="1165" height="744"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-curve-wall.jpg" alt="Curved LED journey wall" loading="lazy" decoding="async" width="1165" height="703"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-lab.jpg" alt="IT Lab of Excellence LED wall" loading="lazy" decoding="async" width="1197" height="744"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-immersive.jpg" alt="Interactive LED wall" loading="lazy" decoding="async" width="1197" height="748"></figure>
+      <figure><img src="{{r}}assets/img/projects/aramco-led-corridor.jpg" alt="LED corridor" loading="lazy" decoding="async" width="1165" height="748"></figure>
     </div>
   </div>
 </section>
@@ -640,6 +764,8 @@ def about():
     </div>
   </div>
 </section>
+{tech_solutions_section()}
+{maec_section()}
 '''
     return page("about.html", "About Us", "PROPER Developments is a multidisciplinary Saudi company operating under MIDRAR, bringing together technology, engineering, infrastructure and development expertise since 2007.",
                 body, "about.html", "has-hero")
@@ -657,10 +783,10 @@ def capabilities_overview():
       <a class="link" href="{{r}}capabilities/{c["slug"]}.html">Explore {e(c["short"])} {arrow()}</a>
     </div>
   </article>''' for c in CAPABILITIES)
-    body = page_hero("Our <em>Capabilities</em>", "Five integrated business verticals — engineered to work together, from the first concept to long-term operation.",
+    body = page_hero("Our <em>Capabilities</em>", "Six integrated business verticals — engineered to work together, from the first concept to long-term operation.",
                      "hd/capabilities-hero.jpg", "", "What We Do") + f'''
 <section class="section capblocks"><div class="wrap">{blocks}</div></section>'''
-    return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction & development, museums & immersive experiences, and exhibition & equipment rental.",
+    return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction, architecture & engineering, real estate development, museums & immersive experiences, and exhibition & equipment rental.",
                 body, "capabilities.html", "has-hero")
 
 
