@@ -936,3 +936,35 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .vreel__item p { margin: 0; font-size: 14px; color: var(--mute); }
 @media (max-width: 1000px) { .vreel__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .vreel__grid { grid-template-columns: 1fr; } }
+
+/* =====================================================================
+   Clip mosaic (Exhibition & Rental hero, home hero rental panel)
+   ===================================================================== */
+.mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 3px; background: #050506; }
+.mosaic video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phero__media--mosaic { inset: 0; }
+.phero__media--mosaic video { animation: pheroIn 2.2s var(--ease) both; }
+.phero--mosaic .phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .55) 0%, rgba(13, 14, 16, .05) 30%, rgba(13, 14, 16, .1) 60%, rgba(13, 14, 16, .85) 100%); }
+[dir="rtl"] .phero--mosaic .phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .55) 0%, rgba(13, 14, 16, .05) 30%, rgba(13, 14, 16, .1) 60%, rgba(13, 14, 16, .85) 100%); }
+.phero--mosaic { min-height: min(86vh, 860px); }
+.pv__mosaic { position: absolute; inset: 0; }
+@media (max-width: 760px) { .mosaic { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); } }
+
+/* =====================================================================
+   Quieter titles: the imagery leads, the words support
+   ===================================================================== */
+.hero__logo { width: clamp(130px, 11vw, 176px); }
+.hero__title { font-size: clamp(32px, 4.1vw, 64px); font-weight: 200; color: rgba(243, 242, 239, .9); max-width: 18ch; }
+.hero__title em { font-size: 1.04em; opacity: .9; }
+.hero__lead { font-size: clamp(15px, 1.1vw, 17px); color: #b9bdc3; margin: 20px 0 30px; max-width: 500px; }
+.phero .display-1 { font-size: clamp(32px, 4.2vw, 62px); font-weight: 200; color: rgba(243, 242, 239, .9); max-width: 20ch; }
+.phero__sub { font-size: clamp(15px, 1.15vw, 17px); color: #b9bdc3; margin-top: 18px; }
+.phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .5) 0%, rgba(13, 14, 16, .08) 35%, rgba(13, 14, 16, .82) 100%), linear-gradient(90deg, rgba(13, 14, 16, .5), transparent 65%); }
+[dir="rtl"] .phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .5) 0%, rgba(13, 14, 16, .08) 35%, rgba(13, 14, 16, .82) 100%), linear-gradient(270deg, rgba(13, 14, 16, .5), transparent 65%); }
+@media (max-width: 760px) {
+  .hero__title { font-size: clamp(28px, 8vw, 36px); }
+  .phero .display-1 { font-size: clamp(28px, 8vw, 38px); }
+}
+@media (max-width: 760px) {
+  .phero--mosaic .phero__media::after, [dir="rtl"] .phero--mosaic .phero__media::after { background: linear-gradient(180deg, rgba(13, 14, 16, .5) 0%, rgba(13, 14, 16, .1) 25%, rgba(13, 14, 16, .55) 55%, rgba(13, 14, 16, .92) 100%); }
+}

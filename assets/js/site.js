@@ -52,7 +52,7 @@
   });
 
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
-  var clips = $$('video[data-autoplay]');
+  var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {
     var vio = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
@@ -80,7 +80,13 @@
       if (i === cur) return;
       cur = i;
       stage.classList.toggle('is-focus', i >= 0);
-      strips.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
+      strips.forEach(function (s, k) {
+        s.classList.toggle('is-on', k === i);
+        $$('video', s).forEach(function (v) {
+          if (k === i && !reduce) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+          else v.pause();
+        });
+      });
       caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
       if (countEl) countEl.textContent = i < 0 ? '00' : ('0' + (i + 1)).slice(-2);
     };

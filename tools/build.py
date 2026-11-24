@@ -465,8 +465,10 @@ def hero_panels():
         prio = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
         out += (f'<a class="pv__s" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1" style="--i:{i}">'
                 f'<img class="pv__z" src="{{r}}assets/img/hd/hero-panorama.jpg" alt="" {prio} decoding="async">'
-                f'<img class="pv__hd" src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, '
-                f'{{r}}assets/img/{b}-1280.jpg 1280w, {{r}}assets/img/{c["hero"]} 2560w" sizes="100vw" alt="" loading="eager" decoding="async"></a>')
+                + (clip_mosaic("pv__hd pv__mosaic") if c["slug"] == "rental" else
+                   f'<img class="pv__hd" src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, '
+                   f'{{r}}assets/img/{b}-1280.jpg 1280w, {{r}}assets/img/{c["hero"]} 2560w" sizes="100vw" alt="" loading="eager" decoding="async">')
+                + '</a>')
     return out
 
 
@@ -606,10 +608,11 @@ def ops_wall():
 </section>'''
 
 
-def page_hero(title, sub, image, caption="", kicker="", accent=None):
+def page_hero(title, sub, image, caption="", kicker="", accent=None, mosaic=False):
     style = f' style="--accent:{accent}"' if accent else ""
-    return f'''<section class="phero"{style}>
-  <div class="phero__media">{img(image, "", lazy=False)}</div>
+    media = clip_mosaic("phero__media phero__media--mosaic") if mosaic else f'<div class="phero__media">{img(image, "", lazy=False)}</div>'
+    return f'''<section class="phero{" phero--mosaic" if mosaic else ""}"{style}>
+  {media}
   <div class="wrap phero__content">
     {eyebrow(kicker, True) if kicker else ""}
     <h1 class="display-1">{title}</h1>
@@ -801,6 +804,13 @@ RENTAL_REEL = [
 ]
 
 
+def clip_mosaic(cls):
+    """All six installation clips as one 3 x 2 moving mosaic (muted; played only while visible)."""
+    return f'<div class="{cls} mosaic">' + "".join(
+        f'<video muted loop playsinline preload="none" poster="{{r}}assets/video/{slug}.jpg" data-autoplay aria-hidden="true">'
+        f'<source src="{{r}}assets/video/{slug}.mp4" type="video/mp4"></video>' for slug, _, _ in RENTAL_REEL) + '</div>'
+
+
 def rental_reel():
     tiles = "".join(f'''
       <figure class="vreel__item" data-reveal>
@@ -831,7 +841,7 @@ def capability_page(c, idx):
     nxt = CAPABILITIES[(idx + 1) % len(CAPABILITIES)]
     steps = [("Consult", "Requirements, users, site and success criteria."), ("Design", "Engineering, technology selection and value engineering."),
              ("Deliver", "Supply, construction, installation and integration."), ("Support", "Commissioning, training, maintenance and upgrades.")]
-    body = page_hero(e(c["name"]), e(c["tagline"]), c["hero"], c["hero_caption"], f'Capability {c["n"]}', c["accent"]) + f'''
+    body = page_hero(e(c["name"]), e(c["tagline"]), c["hero"], c["hero_caption"], f'Capability {c["n"]}', c["accent"], mosaic=c["slug"] == "rental") + f'''
 <section class="section" style="--accent:{c["accent"]}">
   <div class="wrap split">
     <div data-reveal>{eyebrow("Overview")}<p class="display-3 cap-intro">{e(c["intro"])}</p></div>
