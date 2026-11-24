@@ -87,6 +87,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .mega__inner a span { color: var(--mute-2); font-size: 12px; padding-top: 2px; }
 .mega__inner a:hover { background: rgba(255, 255, 255, .05); color: #fff; }
 .header-cta { margin-inline-start: 8px; }
+@media (min-width: 1181px) { .nav__item--contact { display: none; } }
 .menu-btn { display: none; width: 44px; height: 44px; background: none; border: 0; position: relative; }
 .menu-btn i { position: absolute; left: 10px; right: 10px; height: 1.5px; background: #fff; transition: transform .35s var(--ease), top .35s; }
 .menu-btn i:first-of-type { top: 17px; }

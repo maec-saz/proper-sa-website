@@ -149,7 +149,7 @@ PARTNERS = [
 
 
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
-       ("partners.html", "Technology Partners"), ("contact.html", "Contact")]
+       ("partners.html", "Technology Partners"), ("contact.html", "Contact Us")]
 
 
 # ============================================================================================
@@ -170,6 +170,8 @@ def header(r, active):
           <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Show capabilities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="mega"><div class="mega__inner">{sub}</div></div>
         </div>''')
+        elif href == "contact.html":   # shown in the menu only where the header "Contact Us" button is hidden
+            links.append(f'<div class="nav__item nav__item--contact"><a href="{r}{href}"{cur}>{label}</a></div>')
         else:
             links.append(f'<div class="nav__item"><a href="{r}{href}"{cur}>{label}</a></div>')
     return f'''<header class="site-header" id="siteHeader">
@@ -181,7 +183,7 @@ def header(r, active):
       {''.join(links)}
     </nav>
     <a class="lang-switch" href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a>
-    <a class="btn btn--line btn--sm header-cta" href="{r}contact.html">Contact Us</a>
+    <a class="btn btn--line btn--sm header-cta" href="{r}contact.html"{' aria-current="page"' if active == "contact.html" else ""}>Contact Us</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav"><span class="sr">Menu</span><i></i><i></i></button>
   </div>
 </header>'''
