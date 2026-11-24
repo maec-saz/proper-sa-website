@@ -53,54 +53,57 @@
 
   /* ---------- Home hero: one image, five disciplines ----------
      At rest the hero shows one continuous photograph split into five strips, one per discipline.
-     Hovering (or focusing) a discipline's name opens that discipline full screen; tapping a strip
-     does the same, and tapping the open one goes to its page. On its own it tours the five and
-     returns to the overview. Pointer on the names or caption pauses the tour; reduced motion: no tour. */
+     With a mouse, the discipline under the cursor opens full screen; moving across the hero switches
+     between them (the hero stays divided into five invisible columns), and leaving it returns to the
+     five strips. On touch screens, tapping a strip opens it and tapping the open one goes to its page.
+     With no pointer on it, the hero tours the five on its own; reduced motion: no tour. */
   var pv = $('[data-pano]');
   if (pv) {
-    var stage = $('.pv', pv), strips = $$('.pv__s', pv), tabs = $$('.pv__tab', pv), caps = $$('.hp__cap', pv);
-    var cur = -1, step = 0, timer = 0, held = false, seen = true, REST = 3800, OPEN = 5200;
+    var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv);
+    var cur = -1, step = 0, timer = 0, hoverT = 0, leaveT = 0, inside = false, seen = true, REST = 3800, OPEN = 5200;
     var TOUR = [-1, 0, 1, 2, 3, 4];
-    pv.style.setProperty('--pv-dur', OPEN + 'ms');
+    var rtl = document.documentElement.dir === 'rtl';
     var show = function (i) {
+      if (i === cur) return;
       cur = i;
       stage.classList.toggle('is-focus', i >= 0);
-      pv.classList.toggle('is-focus', i >= 0);
       strips.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
       caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
-      tabs.forEach(function (b, k) {
-        var on = k === i;
-        b.classList.remove('is-on'); void b.offsetWidth;   // restart the progress line
-        b.classList.toggle('is-on', on); b.setAttribute('aria-selected', String(on));
-      });
     };
     var schedule = function () {
       clearTimeout(timer);
-      if (reduce || held || !seen) return;
+      if (reduce || inside || !seen) return;
       timer = setTimeout(function () {
         step = (step + 1) % TOUR.length; show(TOUR[step]); schedule();
       }, cur < 0 ? REST : OPEN);
     };
-    var open = function (i) { step = TOUR.indexOf(i); show(i); schedule(); };
-    var hold = function (on) { held = on; pv.classList.toggle('is-paused', on); if (!on) schedule(); else clearTimeout(timer); };
-    var bar = $('.pv__bar', pv), capBox = $('.hp__caps', pv);
-    tabs.forEach(function (b, k) {
-      b.addEventListener('mouseenter', function () { if (cur !== k) open(k); });
-      b.addEventListener('focus', function () { if (cur !== k) open(k); });
-      b.addEventListener('click', function () { if (cur !== k) open(k); });
+    var zoneAt = function (x) {
+      var r = pv.getBoundingClientRect();
+      var k = Math.max(0, Math.min(strips.length - 1, Math.floor((x - r.left) / r.width * strips.length)));
+      return rtl ? strips.length - 1 - k : k;
+    };
+    pv.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      inside = true; clearTimeout(timer); clearTimeout(leaveT);
+      var k = zoneAt(e.clientX);
+      if (k === cur) { clearTimeout(hoverT); return; }
+      clearTimeout(hoverT);
+      hoverT = setTimeout(function () { show(k); }, cur < 0 ? 120 : 260);   // short dwell avoids flicker
     });
-    [bar, capBox].forEach(function (el) {
-      el.addEventListener('mouseenter', function () { hold(true); });
-      el.addEventListener('mouseleave', function () { hold(false); });
+    pv.addEventListener('pointerleave', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      clearTimeout(hoverT);
+      leaveT = setTimeout(function () { inside = false; show(-1); step = 0; schedule(); }, 450);
     });
     strips.forEach(function (s, k) {
-      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); open(k); } });
+      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); step = TOUR.indexOf(k); show(k); schedule(); } });
     });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) schedule(); else clearTimeout(timer); }).observe(pv);
     }
     show(-1); schedule();
   }
+
 
 
 

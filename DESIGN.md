@@ -298,8 +298,8 @@ Label in Mist Grey (Slate on Stone) preceded by a 32px brushed-metal rule with a
 
 ### Signature components
 - **Five-discipline hero:** one continuous photograph cut into five equal strips (one per discipline) under the logo,
-  Display XL statement, Lead and two buttons. Hovering or focusing a discipline name in the bottom bar widens its strip
-  to full screen and crossfades in its full-size photograph; it tours the five on its own, then returns to the overview.
+  Display XL statement, Lead and two buttons. The strip under the cursor widens to full screen and crossfades in its
+  full-size photograph, with a caption at the bottom right; it tours the five on its own when no cursor is on it.
 - **Capabilities accordion:** a numbered list of the five disciplines beside a crossfading image; the active row extends a
   brushed-metal rule and reveals its services as tags.
 - **Operations wall:** a dark data panel (map, KPIs, chart, cameras, GPU bars, log); the one place 8–12px radii, monospace

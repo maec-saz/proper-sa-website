@@ -806,50 +806,32 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
    five strips. A discipline opens full screen (its strip widens to the
    whole hero and its full-size photograph fades in), then closes again.
    ===================================================================== */
-.hero--pano .hero__content { padding-bottom: clamp(190px, 24vh, 230px); pointer-events: none; }
+.hero--pano .hero__content { padding-bottom: clamp(100px, 15vh, 150px); pointer-events: none; }
 .hero--pano .hero__content a, .hero--pano .hero__content button { pointer-events: auto; }
 .pv { position: absolute; inset: 0; z-index: -2; display: flex; background: #050506; }
 .pv__s { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; transition: flex-grow 1.25s cubic-bezier(.7, 0, .2, 1); }
 .pv__s + .pv__s::before { content: ""; position: absolute; z-index: 2; inset-block: 0; inset-inline-start: 0; width: 1px; background: rgba(255, 255, 255, .16); transition: opacity .6s; }
 .pv__z { position: absolute; top: 0; left: 50%; height: 100%; width: auto; max-width: none; transform: translateX(calc(var(--i) * -20% - 10%)); transition: filter .6s ease; }
 .pv__hd { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.1); transition: opacity .9s ease .3s, transform 7s cubic-bezier(.2, .6, .3, 1); }
-.pv:not(.is-focus):hover .pv__z { filter: brightness(.62) saturate(.8); }
-.pv:not(.is-focus) .pv__s:hover .pv__z { filter: none; }
 .pv.is-focus .pv__s { flex-grow: .0001; }
 .pv.is-focus .pv__s.is-on { flex-grow: 1; }
 .pv.is-focus .pv__s::before { opacity: 0; }
 .pv.is-focus .pv__s.is-on .pv__hd { opacity: 1; transform: scale(1.02); }
 .hero--pano .hero__grade { z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(5, 5, 6, .55) 0%, transparent 20%, transparent 50%, rgba(5, 5, 6, .94) 100%), linear-gradient(90deg, rgba(5, 5, 6, .8) 0%, rgba(5, 5, 6, .42) 36%, transparent 60%); }
 [dir="rtl"] .hero--pano .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .55) 0%, transparent 20%, transparent 50%, rgba(5, 5, 6, .94) 100%), linear-gradient(270deg, rgba(5, 5, 6, .8) 0%, rgba(5, 5, 6, .42) 36%, transparent 60%); }
-.hp__caps { position: absolute; z-index: 3; inset-inline-end: max(24px, calc((100vw - 1320px) / 2)); bottom: clamp(140px, 17vh, 170px); width: min(400px, 38vw); height: 120px; }
+.hp__caps { position: absolute; z-index: 3; inset-inline-end: max(24px, calc((100vw - 1320px) / 2)); bottom: clamp(60px, 9vh, 96px); width: min(400px, 38vw); height: 120px; }
 .hp__cap { position: absolute; inset: 0; display: grid; align-content: end; gap: 6px; text-align: end; opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s var(--ease); pointer-events: none; }
 .hp__cap.is-on { opacity: 1; transform: none; pointer-events: auto; transition-delay: .45s; }
 .hp__cn { font-size: 12px; letter-spacing: .2em; color: var(--metal); }
 .hp__cname { font-size: clamp(19px, 1.7vw, 24px); font-weight: 300; letter-spacing: -.01em; }
 .hp__ctag { font-size: 14px; color: #c9ccd1; }
 .hp__cap:hover .hp__cname { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
-.pv__bar { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
-.pv__tab { display: grid; gap: 8px; min-height: 44px; padding: 20px clamp(14px, 1.8vw, 28px) 28px; background: none; border: 0; color: #c3c7cd; font: inherit; text-align: start; cursor: pointer; transition: color .4s, background .4s; }
-.pv__tab:hover, .pv__tab.is-on { color: #fff; }
-.pv__tab:hover { background: linear-gradient(0deg, rgba(255, 255, 255, .06), transparent); }
-.pv__tab i { display: block; height: 2px; background: rgba(255, 255, 255, .22); overflow: hidden; }
-.pv__tab b { display: block; height: 100%; width: 0; background: var(--metal); }
-.pv__tab.is-on b { animation: hpfill var(--pv-dur, 5.2s) linear forwards; }
-.hero--pano.is-paused .pv__tab.is-on b { animation-play-state: paused; }
-.pv__tab:focus-visible { outline: 2px solid var(--metal); outline-offset: -6px; }
-.hp__tn { font-size: 12px; letter-spacing: .14em; color: var(--metal); }
-.hp__tt { font-size: 13.5px; line-height: 1.35; }
-@keyframes hpfill { to { width: 100%; } }
-[dir="rtl"] .pv__tab b { margin-inline-start: auto; }
 @media (max-width: 900px) {
-  .hp__tt { display: none; }
-  .pv__tab { padding: 14px 10px 22px; }
-  .hp__caps { inset-inline: 16px; width: auto; bottom: 92px; height: 96px; }
+  .hp__caps { inset-inline: 16px; width: auto; bottom: 28px; height: 96px; }
   .hp__cap { text-align: start; }
-  .hero--pano .hero__content { padding-bottom: 210px; }
+  .hero--pano .hero__content { padding-bottom: 150px; }
   .hero--pano .hero__grade, [dir="rtl"] .hero--pano .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .6) 0%, rgba(5, 5, 6, .25) 18%, rgba(5, 5, 6, .55) 45%, rgba(5, 5, 6, .95) 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .pv__s, .pv__hd { transition: none; }
-  .pv__tab.is-on b { animation: none; width: 100%; }
 }

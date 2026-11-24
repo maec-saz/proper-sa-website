@@ -67,14 +67,14 @@ Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showing all five disciplines side by side as
 five strips: Technology, Audiovisual, Construction, Museums and Exhibition & Rental. There is no intro sequence and no video.
 
-- **Desktop:** pointing at a discipline's name along the bottom opens that discipline full screen. Its strip widens across
-  the whole hero and its full-size photograph (the discipline page's own hero image) fades in, with its name, tagline
-  and link on the right. Clicking a strip does the same, and clicking the open one goes to that discipline's page.
-- **On its own:** the hero tours the five disciplines, opening each one full screen in turn (a progress line runs under
-  its name), then returns to the five-strip overview. Pointing at the names or caption pauses the tour.
-- **Phones:** tapping a number (or a strip) opens that discipline; tapping the open one goes to its page.
-- **Keyboard and reduced motion:** the names are buttons, and focusing one opens it. With reduced motion turned on,
-  nothing tours by itself.
+- **Desktop:** the discipline under the cursor opens full screen. Its strip widens across the whole hero and its
+  full-size photograph (the discipline page's own hero image) fades in, with its name, tagline and link at the bottom
+  right. Moving the cursor across the hero switches between disciplines (the hero stays divided into five invisible
+  columns). Moving off the hero returns to the five strips, and clicking the open image goes to that discipline's page.
+- **On its own:** when no cursor is on it (and on phones), the hero tours the five disciplines full screen in turn,
+  then returns to the five-strip view.
+- **Phones:** tapping a strip opens it; tapping the open image goes to its page.
+- **Reduced motion:** nothing tours by itself.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,

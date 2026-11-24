@@ -455,12 +455,6 @@ def hero_caps():
                    for i, c in enumerate(CAPABILITIES))
 
 
-def hero_tabs():
-    return "".join(f'<button type="button" class="pv__tab" role="tab" aria-selected="false" data-i="{i}">'
-                   f'<i><b></b></i><span class="hp__tn">{c["n"]}</span><span class="hp__tt">{e(c["name"])}</span></button>'
-                   for i, c in enumerate(CAPABILITIES))
-
-
 def home():
     caps = "".join(f'''
         <li class="capx__item{" is-active" if i == 0 else ""}" style="--accent:{c["accent"]}" data-cap="{i}">
@@ -494,7 +488,6 @@ def home():
   </div>
 
   <div class="hp__caps">{hero_caps()}</div>
-  <div class="pv__bar" role="tablist" aria-label="Our disciplines">{hero_tabs()}</div>
 </section>
 
 <section class="capx dark" id="capabilities" aria-labelledby="capx-title">
