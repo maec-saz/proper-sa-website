@@ -490,7 +490,7 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 /* =====================================================================
    Animated counters
    ===================================================================== */
-[data-count] { font-variant-numeric: tabular-nums; }
+[data-countup] { font-variant-numeric: tabular-nums; }
 .fact__v sup { font-size: .45em; vertical-align: .9em; margin-inline-start: 2px; color: var(--ink-mute); font-weight: 400; }
 
 /* =====================================================================
@@ -1218,3 +1218,43 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .hero__actions { grid-template-columns: max-content; justify-content: center; gap: 10px; }
   .hero__actions .btn { padding: 0 26px; }
 }
+
+/* =====================================================================
+   21st.dev-inspired effects (rebuilt natively)
+   ===================================================================== */
+/* 1. Spotlight: soft light + lit edge that follow the cursor (hover devices only) */
+@media (hover: hover) {
+  .svccard, .partner, .proj, .grp__specs a, .capblock { position: relative; }
+  .svccard::after, .partner::after, .proj::after, .grp__specs a::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s ease; z-index: 1;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(214, 200, 170, .13), transparent 62%);
+  }
+  .svccard::before { z-index: 2; }
+  [data-spot].is-lit::after { opacity: 1; }
+  [data-spot].is-lit { box-shadow: inset 0 0 0 1px rgba(214, 200, 170, .22); }
+  .proj[data-spot]::after { inset: 0 0 auto 0; aspect-ratio: 4 / 3; }
+}
+
+/* 2. Count-up figures keep their width while counting */
+[data-countup] { font-variant-numeric: tabular-nums; }
+
+/* 3. Border beam on the PROPER Holding card */
+@property --beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.grp__root::before {
+  content: ""; position: absolute; inset: -1px; padding: 1px; pointer-events: none;
+  background: conic-gradient(from var(--beam), transparent 0 70%, rgba(242, 223, 176, .9) 82%, transparent 92%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: beam 5s linear infinite;
+}
+@keyframes beam { to { --beam: 360deg; } }
+
+/* 4. Scroll word reveal for overview text */
+.wreveal .w { opacity: .22; transition: opacity .35s ease; }
+.wreveal .w.is-on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .grp__root::before { animation: none; display: none; }
+  .wreveal .w { opacity: 1; transition: none; }
+}
+.grp__root::before { inset: -2px; padding: 2px; background: conic-gradient(from var(--beam), transparent 0 62%, rgba(242, 223, 176, .35) 72%, #f6e6bd 84%, rgba(242, 223, 176, .35) 90%, transparent 96%); filter: drop-shadow(0 0 6px rgba(242, 223, 176, .45)); }

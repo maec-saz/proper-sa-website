@@ -158,3 +158,13 @@ They are **original clips generated with Higgsfield** (a Nano Banana Pro still a
 on installations in the PROPER Holding Technology Catalogue. They are illustrations, not footage of specific projects.
 Clips are 1280×720 H.264 without audio, with a poster frame each; they load only when scrolled into view, play
 muted on a loop while visible, and stay still when reduced motion is turned on.
+
+## Interaction details (patterns from the 21st.dev library, rebuilt natively)
+The site stays framework-free; these effects are written in plain CSS/JS after 21st.dev components:
+- **Spotlight cards** ("Spotlight Card"): a soft light and lit edge follow the cursor over service cards, partner tiles,
+  project cards and the group-structure tiles (pointer devices only).
+- **Count-up figures** ("Count Up"): the About figures (27 / 100+ / 5.7M m²) and each discipline's service count
+  count up when scrolled into view.
+- **Border beam** ("Border Beam"): a gold light travels around the PROPER Holding card in the group structure.
+- **Reading reveal** ("Reading Text Reveal"): each discipline's overview paragraph lights up word by word on scroll.
+All four switch off with reduced motion.

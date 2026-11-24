@@ -51,6 +51,65 @@
     });
   });
 
+  /* ---------- Spotlight cards: a soft light follows the cursor (21st.dev "Spotlight Card") ---------- */
+  if (window.matchMedia('(hover: hover)').matches) {
+    $$('.svccard, .partner, .proj, .grp__specs a').forEach(function (el) {
+      el.setAttribute('data-spot', '');
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      el.addEventListener('pointerenter', function () { el.classList.add('is-lit'); });
+      el.addEventListener('pointerleave', function () { el.classList.remove('is-lit'); });
+    });
+  }
+
+  /* ---------- Count-up figures when scrolled into view (21st.dev "Count Up") ---------- */
+  var countups = $$('.projects__facts dt, .cap-over__count b');
+  if (countups.length && !reduce && 'IntersectionObserver' in window) {
+    countups.forEach(function (el) {
+      var m = el.textContent.match(/^(\D*)([\d.,]+)(.*)$/);
+      if (!m) return;
+      var target = parseFloat(m[2].replace(/,/g, '')), dec = (m[2].split('.')[1] || '').length, pad = /^0\d/.test(m[2]) ? m[2].length : 0;
+      el.setAttribute('data-countup', '');
+      el.textContent = m[1] + (pad ? '0'.repeat(pad) : '0') + m[3];
+      var io = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return; io.disconnect();
+        var t0 = performance.now(), D = 1400;
+        (function tick(now) {
+          var k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3), v = target * e;
+          var s = dec ? v.toFixed(dec) : String(Math.round(v));
+          if (pad) s = ('0'.repeat(pad) + s).slice(-pad);
+          el.textContent = m[1] + s + m[3];
+          if (k < 1) requestAnimationFrame(tick);
+        })(t0);
+      }, { threshold: .6 });
+      io.observe(el);
+    });
+  }
+
+  /* ---------- Overview text lights up word by word as it scrolls (21st.dev "Reading Text Reveal") ---------- */
+  var reveals = $$('.cap-over .cap-intro');
+  if (reveals.length && !reduce) {
+    reveals.forEach(function (el) {
+      el.classList.add('wreveal');
+      el.innerHTML = el.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
+    });
+    var paint = function () {
+      var vh = window.innerHeight;
+      reveals.forEach(function (el) {
+        var r = el.getBoundingClientRect(), words = el.querySelectorAll('.w');
+        var p = Math.max(0, Math.min(1, (vh * .9 - r.top) / (vh * .55 + r.height * .5)));
+        var n = Math.round(p * words.length);
+        for (var i = 0; i < words.length; i++) words[i].classList.toggle('is-on', i < n);
+      });
+    };
+    window.addEventListener('scroll', paint, { passive: true });
+    window.addEventListener('resize', paint);
+    paint();
+  }
+
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
   var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {
