@@ -284,7 +284,7 @@ _ROOT = __import__("pathlib").Path(__file__).resolve().parent.parent
 ASSET_V = {k: _hl.md5((_ROOT / f).read_bytes()).hexdigest()[:8] for k, f in (("css", "assets/css/site.css"), ("js", "assets/js/site.js"))}
 
 
-def page(path, title, desc, body, active, body_class="", image="hd/riyadh-dusk.jpg", preload=None, jsonld=None):
+def page(path, title, desc, body, active, body_class="", image="hd/tech-hero.jpg", preload=None, jsonld=None):
     ar = LANG == "ar"
     full_path = ("ar/" if ar else "") + path
     root = "../" * full_path.count("/")          # site root (shared assets)
@@ -434,6 +434,32 @@ ORG_LD = {
 # ============================================================================================
 # Pages
 # ============================================================================================
+def hero_panels():
+    """Home hero: five vertical photo panels, one per discipline; the highlighted one opens wide."""
+    out = ""
+    for i, c in enumerate(CAPABILITIES):
+        b = c["hero"][:-4]
+        prio = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
+        out += (f'<a class="hp__panel{" is-on" if i == 0 else ""}" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1">'
+                f'<img src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, {{r}}assets/img/{b}-1280.jpg 1280w, '
+                f'{{r}}assets/img/{c["hero"]} 2560w" sizes="(max-width: 760px) 90vw, 70vw" alt="" {prio} decoding="async">'
+                f'<span class="hp__pl"><em>{c["n"]}</em>{e(c["name"])}</span></a>')
+    return out
+
+
+def hero_caps():
+    return "".join(f'<a class="hp__cap{" is-on" if i == 0 else ""}" data-i="{i}" href="{{r}}capabilities/{c["slug"]}.html"'
+                   f'{"" if i == 0 else " tabindex=-1"}><span class="hp__cn">{c["n"]} / {len(CAPABILITIES):02d}</span>'
+                   f'<span class="hp__cname">{e(c["name"])}</span><span class="hp__ctag">{e(c["tagline"])}</span></a>'
+                   for i, c in enumerate(CAPABILITIES))
+
+
+def hero_tabs():
+    return "".join(f'<button type="button" class="hp__tab{" is-on" if i == 0 else ""}" role="tab" aria-selected="{"true" if i == 0 else "false"}" data-i="{i}">'
+                   f'<i><b></b></i><span class="hp__tn">{c["n"]}</span><span class="hp__tt">{e(c["name"])}</span></button>'
+                   for i, c in enumerate(CAPABILITIES))
+
+
 def home():
     caps = "".join(f'''
         <li class="capx__item{" is-active" if i == 0 else ""}" style="--accent:{c["accent"]}" data-cap="{i}">
@@ -452,14 +478,9 @@ def home():
         </li>''' for i, c in enumerate(CAPABILITIES))
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     body = f'''
-<section class="hero hero--dn" id="hero" data-hero data-dn>
-  <div class="hero__stage" aria-hidden="true">
-    <div class="hero__shot dn__day"><img class="hero__img" src="{{r}}assets/img/hd/riyadh-dusk.jpg" srcset="{{r}}assets/img/hd/riyadh-dusk-640.jpg 640w, {{r}}assets/img/hd/riyadh-dusk-1280.jpg 1280w, {{r}}assets/img/hd/riyadh-dusk.jpg 2560w" sizes="100vw" alt="" fetchpriority="high" decoding="async"></div>
-    <div class="hero__shot dn__night"><img class="hero__img" src="{{r}}assets/img/hd/riyadh-night.jpg" srcset="{{r}}assets/img/hd/riyadh-night-640.jpg 640w, {{r}}assets/img/hd/riyadh-night-1280.jpg 1280w, {{r}}assets/img/hd/riyadh-night.jpg 2560w" sizes="100vw" alt="" decoding="async"></div>
-    <div class="dn__glow"></div>
-    <div class="hero__grade"></div>
-    <div class="hero__grain"></div>
-  </div>
+<section class="hero hero--panels" id="hero" data-panels>
+  <div class="hp" aria-hidden="true">{hero_panels()}</div>
+  <div class="hero__grade" aria-hidden="true"></div>
 
   <div class="wrap hero__content">
     <img class="hero__logo" src="{{r}}assets/img/logo-white.png" alt="" width="220" height="63">
@@ -471,10 +492,8 @@ def home():
     </div>
   </div>
 
-  <div class="hero__foot wrap">
-    <span class="hero__loc"><i></i>Riyadh · Kingdom of Saudi Arabia</span>
-    <a class="hero__scroll" href="#capabilities" aria-label="Scroll to content"><span></span></a>
-  </div>
+  <div class="hp__caps">{hero_caps()}</div>
+  <div class="hp__bar"><div class="wrap hp__tabs" role="tablist" aria-label="Our disciplines">{hero_tabs()}</div></div>
 </section>
 
 <section class="capx dark" id="capabilities" aria-labelledby="capx-title">
@@ -500,7 +519,7 @@ def home():
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
-                body, "index.html", "has-hero is-home", image="hd/riyadh-dusk.jpg", preload="hd/riyadh-dusk.jpg", jsonld=ORG_LD)
+                body, "index.html", "has-hero is-home", image="hd/tech-hero.jpg", preload="hd/tech-hero.jpg", jsonld=ORG_LD)
 
 
 # --------------------------------------------------------------------------------------------

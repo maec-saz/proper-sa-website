@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (interactive dusk-to-night hero, introduction, capabilities, partners) | `index.html` |
+| Home (five-discipline panel hero, capabilities, showcase reel, closing band) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -63,17 +63,18 @@ python3 tools/build.py
 
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
-## The home hero: Riyadh, dusk to night
-The home page opens directly on one full-screen photograph of the Riyadh skyline (Al Faisaliah Tower and the Kingdom Centre).
-There is no intro sequence and no video.
+## The home hero: five disciplines
+The home page opens on five tall photo panels, one per discipline (Technology, Audiovisual, Construction, Museums,
+Exhibition & Rental), using each discipline page's own hero image. There is no intro sequence and no video.
 
-- **Desktop:** moving the cursor across the hero sweeps the city from golden dusk into night, with the towers and streets
-  lighting up; a soft warm light and a gentle parallax follow the pointer.
-- **Phones and tablets:** the city drifts slowly from dusk to night and back on its own.
-- **Everyone:** a Dusk / Night slider in the hero footer controls it directly (keyboard accessible). With reduced motion
-  turned on, nothing moves by itself.
-- The two images (`hd/riyadh-dusk.jpg`, `hd/riyadh-night.jpg`) are relit versions of one real photograph (credited below),
-  made with Nano Banana Pro so both share exactly the same framing.
+- One discipline at a time opens wide in full colour while the other four stay narrow and dimmed, with their names
+  written vertically. It moves to the next discipline every 5.5 seconds, and a progress line under the matching tab
+  shows the timing.
+- **Desktop:** hovering a panel opens it and pauses the cycle. Clicking the open panel, or its caption on the right,
+  goes to that discipline's page.
+- **Phones:** tapping a narrow panel opens it, and tapping the open panel goes to the page.
+- **Everyone:** the numbered tabs along the bottom jump to a discipline (keyboard accessible). With reduced motion
+  turned on, nothing advances by itself.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,

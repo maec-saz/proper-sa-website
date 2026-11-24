@@ -51,47 +51,45 @@
     });
   });
 
-  /* ---------- Home hero: Riyadh from dusk to night ----------
-     The city sweeps on its own from golden dusk into night and back (hold, sweep, hold, sweep).
-     On desktop a warm light and a gentle parallax follow the pointer. Reduced motion: a still dusk view. */
-  var hero = $('[data-dn]');
-  if (hero) {
-    var p = 0, raf = 0, visible = true, t0 = performance.now(), paused = 0, pauseAt = 0;
-    var mx = 50, my = 45, px = 0, py = 0, tpx = 0, tpy = 0;
-    var HOLD = 3200, SWEEP = 4200, CYCLE = 2 * (HOLD + SWEEP);
-    var ease = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
-    var phase = function (t) {            // 0 = dusk, 1 = night
-      t = t % CYCLE;
-      if (t < HOLD) return 0;
-      if (t < HOLD + SWEEP) return ease((t - HOLD) / SWEEP);
-      if (t < 2 * HOLD + SWEEP) return 1;
-      return 1 - ease((t - 2 * HOLD - SWEEP) / SWEEP);
+  /* ---------- Home hero: five discipline panels ----------
+     The highlighted discipline opens wide; it moves on every few seconds (pausing while the pointer
+     rests on the hero or the page is off-screen). Tabs jump to a discipline; tapping a narrow panel
+     opens it, tapping the open panel goes to that discipline's page. Reduced motion: no auto-advance. */
+  var hp = $('[data-panels]');
+  if (hp) {
+    var panels = $$('.hp__panel', hp), tabs = $$('.hp__tab', hp), caps = $$('.hp__cap', hp);
+    var cur = 0, timer = 0, hovering = false, seen = true, DUR = 5500;
+    hp.style.setProperty('--hp-dur', DUR + 'ms');
+    var schedule = function () {
+      clearTimeout(timer);
+      if (reduce || hovering || !seen) return;
+      timer = setTimeout(function () { show(cur + 1); }, DUR);
     };
-    var render = function (now) {
-      raf = 0;
-      if (!reduce) p = phase(now - t0 - paused);
-      px += (tpx - px) * 0.06; py += (tpy - py) * 0.06;
-      hero.style.setProperty('--p', p.toFixed(4));
-      hero.style.setProperty('--px', px.toFixed(3)); hero.style.setProperty('--py', py.toFixed(3));
-      hero.style.setProperty('--mx', mx + '%'); hero.style.setProperty('--my', my + '%');
-      if (visible && !reduce) raf = requestAnimationFrame(render);
+    var show = function (i) {
+      cur = (i + panels.length) % panels.length;
+      panels.forEach(function (p, k) { p.classList.toggle('is-on', k === cur); });
+      caps.forEach(function (c, k) { var on = k === cur; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
+      tabs.forEach(function (b, k) {
+        var on = k === cur;
+        b.classList.remove('is-on'); void b.offsetWidth;   // restart the progress line
+        b.classList.toggle('is-on', on); b.setAttribute('aria-selected', String(on));
+      });
+      hp.classList.toggle('is-paused', reduce || hovering);
+      schedule();
     };
-    var kick = function () { if (!raf) raf = requestAnimationFrame(render); };
-    hero.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse' || reduce) return;
-      var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      mx = x * 100; my = y * 100; tpx = x * 2 - 1; tpy = y * 2 - 1;
+    tabs.forEach(function (b, k) { b.addEventListener('click', function () { show(k); }); });
+    panels.forEach(function (p, k) {
+      p.addEventListener('click', function (e) { if (k !== cur) { e.preventDefault(); show(k); } });
+      p.addEventListener('mouseenter', function () { if (matchMedia('(hover: hover)').matches && k !== cur) show(k); });
     });
+    hp.addEventListener('mouseenter', function () { hovering = true; hp.classList.add('is-paused'); clearTimeout(timer); });
+    hp.addEventListener('mouseleave', function () { hovering = false; hp.classList.remove('is-paused'); show(cur); });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        var now = performance.now();
-        if (!es[0].isIntersecting && visible) pauseAt = now;          // freeze the cycle off-screen
-        if (es[0].isIntersecting && !visible) paused += now - pauseAt;
-        visible = es[0].isIntersecting; if (visible) kick();
-      }).observe(hero);
+      new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) show(cur); else clearTimeout(timer); }).observe(hp);
     }
-    kick();
+    show(0);
   }
+
 
   /* ---------- Home: capabilities accordion ----------
      Tapping a row opens its list of services (one open at a time) and shows its image;

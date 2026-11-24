@@ -17,6 +17,7 @@ AR = {
     "Projects": "المشاريع",
     "Contact": "تواصل معنا",
     "Contact Us": "تواصل معنا",
+    "Our disciplines": "تخصصاتنا",
     "English": "English",
     "Main": "القائمة الرئيسية",
     "Menu": "القائمة",

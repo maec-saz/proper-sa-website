@@ -297,8 +297,9 @@ language switch (العربية / English) sits before the header button.
 Label in Mist Grey (Slate on Stone) preceded by a 32px brushed-metal rule with a 16px gap; 24px below to the heading.
 
 ### Signature components
-- **Dusk-to-night hero:** full-viewport Riyadh skyline; the cursor (or a Dusk/Night slider, or slow auto-play on touch
-  screens) sweeps the city into night with a soft-edged mask, under the logo, Display XL statement, Lead and two buttons.
+- **Five-panel hero:** five full-height photo panels, one per discipline; the highlighted one opens wide (flex 5.2) in
+  full colour, the others stay dimmed with vertical labels. It auto-advances every 5.5s with progress tabs below, under
+  the logo, Display XL statement, Lead and two buttons; a caption at the right names the open discipline.
 - **Capabilities accordion:** a numbered list of the five disciplines beside a crossfading image; the active row extends a
   brushed-metal rule and reveals its services as tags.
 - **Operations wall:** a dark data panel (map, KPIs, chart, cameras, GPU bars, log); the one place 8–12px radii, monospace
