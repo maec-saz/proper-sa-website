@@ -435,27 +435,28 @@ ORG_LD = {
 # Pages
 # ============================================================================================
 def hero_panels():
-    """Home hero: five vertical photo panels, one per discipline; the highlighted one opens wide."""
+    """Home hero strips: each shows its own part of one continuous five-discipline photograph
+    (hd/hero-panorama.jpg); when a discipline opens full screen, its full-size photograph fades in."""
     out = ""
     for i, c in enumerate(CAPABILITIES):
         b = c["hero"][:-4]
         prio = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
-        out += (f'<a class="hp__panel{" is-on" if i == 0 else ""}" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1">'
-                f'<img src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, {{r}}assets/img/{b}-1280.jpg 1280w, '
-                f'{{r}}assets/img/{c["hero"]} 2560w" sizes="(max-width: 760px) 90vw, 70vw" alt="" {prio} decoding="async">'
-                f'<span class="hp__pl"><em>{c["n"]}</em>{e(c["name"])}</span></a>')
+        out += (f'<a class="pv__s" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1" style="--i:{i}">'
+                f'<img class="pv__z" src="{{r}}assets/img/hd/hero-panorama.jpg" alt="" {prio} decoding="async">'
+                f'<img class="pv__hd" src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, '
+                f'{{r}}assets/img/{b}-1280.jpg 1280w, {{r}}assets/img/{c["hero"]} 2560w" sizes="100vw" alt="" loading="eager" decoding="async"></a>')
     return out
 
 
 def hero_caps():
-    return "".join(f'<a class="hp__cap{" is-on" if i == 0 else ""}" data-i="{i}" href="{{r}}capabilities/{c["slug"]}.html"'
-                   f'{"" if i == 0 else " tabindex=-1"}><span class="hp__cn">{c["n"]} / {len(CAPABILITIES):02d}</span>'
+    return "".join(f'<a class="hp__cap" data-i="{i}" href="{{r}}capabilities/{c["slug"]}.html" tabindex=-1>'
+                   f'<span class="hp__cn">{c["n"]} / {len(CAPABILITIES):02d}</span>'
                    f'<span class="hp__cname">{e(c["name"])}</span><span class="hp__ctag">{e(c["tagline"])}</span></a>'
                    for i, c in enumerate(CAPABILITIES))
 
 
 def hero_tabs():
-    return "".join(f'<button type="button" class="hp__tab{" is-on" if i == 0 else ""}" role="tab" aria-selected="{"true" if i == 0 else "false"}" data-i="{i}">'
+    return "".join(f'<button type="button" class="pv__tab" role="tab" aria-selected="false" data-i="{i}">'
                    f'<i><b></b></i><span class="hp__tn">{c["n"]}</span><span class="hp__tt">{e(c["name"])}</span></button>'
                    for i, c in enumerate(CAPABILITIES))
 
@@ -478,8 +479,8 @@ def home():
         </li>''' for i, c in enumerate(CAPABILITIES))
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     body = f'''
-<section class="hero hero--panels" id="hero" data-panels>
-  <div class="hp" aria-hidden="true">{hero_panels()}</div>
+<section class="hero hero--pano" id="hero" data-pano>
+  <div class="pv" aria-hidden="true">{hero_panels()}</div>
   <div class="hero__grade" aria-hidden="true"></div>
 
   <div class="wrap hero__content">
@@ -493,7 +494,7 @@ def home():
   </div>
 
   <div class="hp__caps">{hero_caps()}</div>
-  <div class="hp__bar"><div class="wrap hp__tabs" role="tablist" aria-label="Our disciplines">{hero_tabs()}</div></div>
+  <div class="pv__bar" role="tablist" aria-label="Our disciplines">{hero_tabs()}</div>
 </section>
 
 <section class="capx dark" id="capabilities" aria-labelledby="capx-title">
@@ -519,7 +520,7 @@ def home():
 '''
     return page("index.html", "PROPER Developments | Building Intelligent Environments. Enabling Tomorrow.",
                 "PROPER Developments, a MIDRAR company, delivers technology & intelligent infrastructure, audiovisual, construction & fit-out, museums & immersive experiences and exhibition rental across Saudi Arabia.",
-                body, "index.html", "has-hero is-home", image="hd/tech-hero.jpg", preload="hd/tech-hero.jpg", jsonld=ORG_LD)
+                body, "index.html", "has-hero is-home", image="hd/hero-panorama.jpg", preload=None, jsonld=ORG_LD)
 
 
 # --------------------------------------------------------------------------------------------

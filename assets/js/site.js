@@ -51,44 +51,57 @@
     });
   });
 
-  /* ---------- Home hero: five discipline panels ----------
-     The highlighted discipline opens wide; it moves on every few seconds (pausing while the pointer
-     rests on the hero or the page is off-screen). Tabs jump to a discipline; tapping a narrow panel
-     opens it, tapping the open panel goes to that discipline's page. Reduced motion: no auto-advance. */
-  var hp = $('[data-panels]');
-  if (hp) {
-    var panels = $$('.hp__panel', hp), tabs = $$('.hp__tab', hp), caps = $$('.hp__cap', hp);
-    var cur = 0, timer = 0, hovering = false, seen = true, DUR = 5500;
-    hp.style.setProperty('--hp-dur', DUR + 'ms');
-    var schedule = function () {
-      clearTimeout(timer);
-      if (reduce || hovering || !seen) return;
-      timer = setTimeout(function () { show(cur + 1); }, DUR);
-    };
+  /* ---------- Home hero: one image, five disciplines ----------
+     At rest the hero shows one continuous photograph split into five strips, one per discipline.
+     Hovering (or focusing) a discipline's name opens that discipline full screen; tapping a strip
+     does the same, and tapping the open one goes to its page. On its own it tours the five and
+     returns to the overview. Pointer on the names or caption pauses the tour; reduced motion: no tour. */
+  var pv = $('[data-pano]');
+  if (pv) {
+    var stage = $('.pv', pv), strips = $$('.pv__s', pv), tabs = $$('.pv__tab', pv), caps = $$('.hp__cap', pv);
+    var cur = -1, step = 0, timer = 0, held = false, seen = true, REST = 3800, OPEN = 5200;
+    var TOUR = [-1, 0, 1, 2, 3, 4];
+    pv.style.setProperty('--pv-dur', OPEN + 'ms');
     var show = function (i) {
-      cur = (i + panels.length) % panels.length;
-      panels.forEach(function (p, k) { p.classList.toggle('is-on', k === cur); });
-      caps.forEach(function (c, k) { var on = k === cur; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
+      cur = i;
+      stage.classList.toggle('is-focus', i >= 0);
+      pv.classList.toggle('is-focus', i >= 0);
+      strips.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
+      caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
       tabs.forEach(function (b, k) {
-        var on = k === cur;
+        var on = k === i;
         b.classList.remove('is-on'); void b.offsetWidth;   // restart the progress line
         b.classList.toggle('is-on', on); b.setAttribute('aria-selected', String(on));
       });
-      hp.classList.toggle('is-paused', reduce || hovering);
-      schedule();
     };
-    tabs.forEach(function (b, k) { b.addEventListener('click', function () { show(k); }); });
-    panels.forEach(function (p, k) {
-      p.addEventListener('click', function (e) { if (k !== cur) { e.preventDefault(); show(k); } });
-      p.addEventListener('mouseenter', function () { if (matchMedia('(hover: hover)').matches && k !== cur) show(k); });
+    var schedule = function () {
+      clearTimeout(timer);
+      if (reduce || held || !seen) return;
+      timer = setTimeout(function () {
+        step = (step + 1) % TOUR.length; show(TOUR[step]); schedule();
+      }, cur < 0 ? REST : OPEN);
+    };
+    var open = function (i) { step = TOUR.indexOf(i); show(i); schedule(); };
+    var hold = function (on) { held = on; pv.classList.toggle('is-paused', on); if (!on) schedule(); else clearTimeout(timer); };
+    var bar = $('.pv__bar', pv), capBox = $('.hp__caps', pv);
+    tabs.forEach(function (b, k) {
+      b.addEventListener('mouseenter', function () { if (cur !== k) open(k); });
+      b.addEventListener('focus', function () { if (cur !== k) open(k); });
+      b.addEventListener('click', function () { if (cur !== k) open(k); });
     });
-    hp.addEventListener('mouseenter', function () { hovering = true; hp.classList.add('is-paused'); clearTimeout(timer); });
-    hp.addEventListener('mouseleave', function () { hovering = false; hp.classList.remove('is-paused'); show(cur); });
+    [bar, capBox].forEach(function (el) {
+      el.addEventListener('mouseenter', function () { hold(true); });
+      el.addEventListener('mouseleave', function () { hold(false); });
+    });
+    strips.forEach(function (s, k) {
+      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); open(k); } });
+    });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) show(cur); else clearTimeout(timer); }).observe(hp);
+      new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) schedule(); else clearTimeout(timer); }).observe(pv);
     }
-    show(0);
+    show(-1); schedule();
   }
+
 
 
   /* ---------- Home: capabilities accordion ----------

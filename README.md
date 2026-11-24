@@ -9,7 +9,7 @@ No frameworks, no build tooling beyond one Python script: fast to load, easy to 
 ## Pages
 | Page | File |
 |---|---|
-| Home (five-discipline panel hero, capabilities, showcase reel, closing band) | `index.html` |
+| Home (five-discipline image hero, capabilities, showcase reel, closing band) | `index.html` |
 | About Us | `about.html` |
 | Our Capabilities (overview) | `capabilities.html` |
 | Technology & Intelligent Infrastructure | `capabilities/technology.html` |
@@ -63,18 +63,18 @@ python3 tools/build.py
 
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
-## The home hero: five disciplines
-The home page opens on five tall photo panels, one per discipline (Technology, Audiovisual, Construction, Museums,
-Exhibition & Rental), using each discipline page's own hero image. There is no intro sequence and no video.
+## The home hero: one image, five disciplines
+The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showing all five disciplines side by side as
+five strips: Technology, Audiovisual, Construction, Museums and Exhibition & Rental. There is no intro sequence and no video.
 
-- One discipline at a time opens wide in full colour while the other four stay narrow and dimmed, with their names
-  written vertically. It moves to the next discipline every 5.5 seconds, and a progress line under the matching tab
-  shows the timing.
-- **Desktop:** hovering a panel opens it and pauses the cycle. Clicking the open panel, or its caption on the right,
-  goes to that discipline's page.
-- **Phones:** tapping a narrow panel opens it, and tapping the open panel goes to the page.
-- **Everyone:** the numbered tabs along the bottom jump to a discipline (keyboard accessible). With reduced motion
-  turned on, nothing advances by itself.
+- **Desktop:** pointing at a discipline's name along the bottom opens that discipline full screen. Its strip widens across
+  the whole hero and its full-size photograph (the discipline page's own hero image) fades in, with its name, tagline
+  and link on the right. Clicking a strip does the same, and clicking the open one goes to that discipline's page.
+- **On its own:** the hero tours the five disciplines, opening each one full screen in turn (a progress line runs under
+  its name), then returns to the five-strip overview. Pointing at the names or caption pauses the tour.
+- **Phones:** tapping a number (or a strip) opens that discipline; tapping the open one goes to its page.
+- **Keyboard and reduced motion:** the names are buttons, and focusing one opens it. With reduced motion turned on,
+  nothing tours by itself.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,
