@@ -297,9 +297,9 @@ language switch (العربية / English) sits before the header button.
 Label in Mist Grey (Slate on Stone) preceded by a 32px brushed-metal rule with a 16px gap; 24px below to the heading.
 
 ### Signature components
-- **Five-discipline hero:** one continuous photograph cut into five equal strips (one per discipline) under the logo,
-  Display XL statement, Lead and two buttons. The strip under the cursor widens to full screen and crossfades in its
-  full-size photograph, with a caption at the bottom right; it tours the five on its own when no cursor is on it.
+- **Six-discipline hero:** one continuous photograph cut into six equal strips under the logo, Display XL statement,
+  Lead and two buttons. Clicking a strip (or the arrows) widens it to full screen and crossfades in its full-size
+  photograph; nothing changes on hover or on a timer.
 - **Capabilities accordion:** a numbered list of the five disciplines beside a crossfading image; the active row extends a
   brushed-metal rule and reveals its services as tags.
 - **Operations wall:** a dark data panel (map, KPIs, chart, cameras, GPU bars, log); the one place 8–12px radii, monospace

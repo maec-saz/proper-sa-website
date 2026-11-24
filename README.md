@@ -63,19 +63,16 @@ python3 tools/build.py
 
 Styles: `assets/css/site.css` · Behaviour: `assets/js/site.js`.
 
-## The home hero: one image, five disciplines
-The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showing all five disciplines side by side as
-six strips: Technology, Audiovisual, Construction/Architecture/Engineering, Real Estate Development, Museums and Exhibition & Rental. There is no intro sequence and no video.
+## The home hero: one image, six disciplines
+The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showing all six disciplines side by side as
+six strips. There is no intro sequence, no automatic advance and no hover effect: the hero changes only when the
+visitor asks it to.
 
-- **Desktop:** the discipline under the cursor opens full screen. Its strip widens across the whole hero and its
-  full-size photograph (the discipline page's own hero image) fades in, with its name, tagline and link at the bottom
-  right. Moving the cursor across the hero switches between disciplines (the hero stays divided into six invisible
-  columns). Moving off the hero returns to the five strips, and clicking the open image goes to that discipline's page.
-- **On its own:** when no cursor is on it (and on phones), the hero tours the five disciplines full screen in turn,
-  then returns to the five-strip view.
-- **Phones:** tapping a strip opens it; tapping the open image goes to its page.
-- **Arrows:** the round arrows at the bottom right step through the disciplines one by one (with a 01 / 06 counter).
-- **Reduced motion:** nothing tours by itself.
+- **Click or tap a strip:** that discipline opens full screen with its full-size photograph (Exhibition & Rental opens
+  onto the six-clip mosaic) and its name, tagline and link at the bottom right. Clicking the open image goes to that
+  discipline's page.
+- **Arrows:** the round arrows at the bottom right step through the six disciplines, with a 01 / 06 counter.
+- **Escape** returns to the six strips.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,

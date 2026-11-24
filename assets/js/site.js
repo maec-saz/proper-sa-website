@@ -64,18 +64,15 @@
     clips.forEach(function (v) { vio.observe(v); });
   }
 
-  /* ---------- Home hero: one image, five disciplines ----------
-     At rest the hero shows one continuous photograph split into five strips, one per discipline.
-     With a mouse, the discipline under the cursor opens full screen; moving across the hero switches
-     between them (the hero stays divided into five invisible columns), and leaving it returns to the
-     five strips. On touch screens, tapping a strip opens it and tapping the open one goes to its page.
-     With no pointer on it, the hero tours the five on its own; reduced motion: no tour. */
+  /* ---------- Home hero: one image, six disciplines ----------
+     At rest the hero shows one continuous photograph split into six strips, one per discipline.
+     Nothing changes on its own or on hover: clicking (tapping) a strip opens that discipline full
+     screen, clicking the open one goes to its page, and the arrows step through the disciplines.
+     Escape returns to the six strips. */
   var pv = $('[data-pano]');
   if (pv) {
     var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv), countEl = $('.pv__count b', pv);
-    var cur = -1, step = 0, timer = 0, hoverT = 0, leaveT = 0, inside = false, seen = true, REST = 3800, OPEN = 5200;
-    var TOUR = [-1].concat(strips.map(function (s, k) { return k; }));
-    var rtl = document.documentElement.dir === 'rtl';
+    var cur = -1;
     var show = function (i) {
       if (i === cur) return;
       cur = i;
@@ -90,48 +87,17 @@
       caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
       if (countEl) countEl.textContent = i < 0 ? '00' : ('0' + (i + 1)).slice(-2);
     };
-    var schedule = function () {
-      clearTimeout(timer);
-      if (reduce || inside || !seen) return;
-      timer = setTimeout(function () {
-        step = (step + 1) % TOUR.length; show(TOUR[step]); schedule();
-      }, cur < 0 ? REST : OPEN);
-    };
-    var zoneAt = function (x) {
-      var r = pv.getBoundingClientRect();
-      var k = Math.max(0, Math.min(strips.length - 1, Math.floor((x - r.left) / r.width * strips.length)));
-      return rtl ? strips.length - 1 - k : k;
-    };
-    var onControls = function (el) { return !!(el && el.closest && el.closest('.pv__nav, .hp__caps')); };
-    pv.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      if (onControls(e.target)) { inside = true; clearTimeout(timer); clearTimeout(leaveT); clearTimeout(hoverT); return; }
-      inside = true; clearTimeout(timer); clearTimeout(leaveT);
-      var k = zoneAt(e.clientX);
-      if (k === cur) { clearTimeout(hoverT); return; }
-      clearTimeout(hoverT);
-      hoverT = setTimeout(function () { show(k); }, cur < 0 ? 120 : 260);   // short dwell avoids flicker
-    });
-    pv.addEventListener('pointerleave', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      clearTimeout(hoverT);
-      leaveT = setTimeout(function () { inside = false; show(-1); step = 0; schedule(); }, 450);
-    });
     strips.forEach(function (s, k) {
-      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); step = TOUR.indexOf(k); show(k); schedule(); } });
+      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); show(k); } });
     });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (seen) schedule(); else clearTimeout(timer); }).observe(pv);
-    }
-    // Arrows: step through the disciplines (and pause the tour until the pointer leaves the hero)
     $$('.pv__arrow', pv).forEach(function (b) {
       b.addEventListener('click', function () {
         var d = +b.getAttribute('data-step'), n = strips.length;
-        var k = cur < 0 ? (d > 0 ? 0 : n - 1) : (cur + d + n) % n;
-        step = TOUR.indexOf(k); show(k); schedule();
+        show(cur < 0 ? (d > 0 ? 0 : n - 1) : (cur + d + n) % n);
       });
     });
-    show(-1); schedule();
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cur >= 0) show(-1); });
+    show(-1);
   }
 
 
