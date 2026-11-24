@@ -116,7 +116,7 @@ The brief asks for real imagery only. These are the gaps:
 | rental-hero | Higgsfield Cinema Studio 2.5, 4K: premium exhibition stand with a curved gold-and-sapphire LED wall, crowds and light beams |
 | rental-kinetic-wall, rental-interactive-floor, rental-led-cube | Higgsfield (Exhibition & Equipment Rental) |
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
-| rental-anamorphic | Higgsfield Cinema Studio 2.5, 4K: anamorphic 3D corner LED screen with a crowd |
+| rental-anamorphic | Higgsfield Cinema Studio 2.5, 4K: anamorphic 3D corner LED wall at an exhibition stand, golden falcon |
 | rental-ai-host | Higgsfield Cinema Studio 2.5, 4K: life-size holographic digital host at an exhibition |
 | jeddah-corniche | Asim Alghamdi on Unsplash (About) |
 | network-cables | Taylor Vick on Unsplash (Partners) |
