@@ -1080,3 +1080,39 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .cmarq__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; padding-inline: var(--gutter); }
   .cmarq__track li[aria-hidden="true"] { display: none; }
 }
+
+/* =====================================================================
+   All sections on the dark palette (formerly light "stone" bands)
+   Logos switch to clean white marks that brighten on hover.
+   ===================================================================== */
+.section--stone, .intro, .partners-strip, .clients {
+  --ink-text: var(--white); --ink-mute: var(--mute);
+  background: var(--ink-2); color: var(--white); color-scheme: dark;
+  border-block: 1px solid var(--line);
+}
+.section--stone .eyebrow, .intro .eyebrow, .partners-strip .eyebrow, .clients .eyebrow { color: var(--mute); }
+.section--stone .eyebrow::before, .intro .eyebrow::before, .partners-strip .eyebrow::before, .clients .eyebrow::before { background: var(--metal); }
+
+/* partner tiles */
+.partners { border-top-color: var(--line); border-inline-start-color: var(--line); }
+.partner { border-inline-end-color: var(--line); border-bottom-color: var(--line); }
+.partner:hover { background: rgba(255, 255, 255, .03); }
+.partner__logo img, .partner--light .partner__logo img { mix-blend-mode: normal; filter: brightness(0) invert(1); opacity: .62; transition: opacity .5s, transform .5s var(--ease); }
+.partner:hover .partner__logo img, .partner--light:hover .partner__logo img { filter: brightness(0) invert(1); opacity: 1; transform: scale(1.04); }
+
+/* client marquee */
+.cmarq__track li { background: rgba(255, 255, 255, .03); border-color: var(--line); }
+.cmarq__track li:hover { background: rgba(255, 255, 255, .07); border-color: var(--line-2); }
+.cmarq__track img { mix-blend-mode: normal; filter: brightness(0) invert(1); opacity: .7; transition: opacity .4s; }
+.cmarq__track li:hover img { opacity: 1; }
+
+/* cards that were white on the light bands */
+.trust__clients, .quote, .cert { background: var(--graphite); border-color: var(--line); }
+.facts { border-top-color: var(--line); }
+.fact + .fact { border-inline-start-color: var(--line); }
+@media (max-width: 760px) { .fact, .fact + .fact { border-bottom-color: var(--line); } }
+/* logos are pre-rendered white (assets/img/*/mono) — no colour filters needed */
+.partner__logo img, .partner--light .partner__logo img, .partner:hover .partner__logo img, .partner--light:hover .partner__logo img,
+.cmarq__track img, .cmarq__track li:hover img { filter: none; }
+.steps li, .value { border-top-color: var(--line-2); }
+.steps span { color: var(--metal); }

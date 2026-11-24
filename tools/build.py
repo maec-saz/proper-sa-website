@@ -466,7 +466,8 @@ def reel():
 
 
 def partner_tile(p, big=False):
-    inner = (f'<img src="{{r}}assets/img/{p["logo"]}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
+    mono = p["logo"].rsplit("/", 1)[0] + "/mono/" + p["logo"].rsplit("/", 1)[1].rsplit(".", 1)[0] + ".png" if p["logo"] else ""
+    inner = (f'<img src="{{r}}assets/img/{mono}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
              else f'<span class="logo-type" title="Placeholder — official logo to be supplied">{e(p["name"])}</span>')
     role = f'<span class="partner__role">{e(p["role"])}</span>' if big else ""
     return f'<li class="partner{" partner--big" if big else ""}{" partner--light" if p.get("light") else ""}" data-reveal><span class="partner__logo">{inner}</span>{role}</li>'
@@ -676,7 +677,7 @@ CLIENTS = [('alkhabeer-capital', 'Alkhabeer Capital'), ('bcg', 'BCG'), ('ministr
 def clients_section():
     """Client logos as two endless rows drifting in opposite directions (paused on hover, still with reduced motion)."""
     def item(slug, name, hidden=False):
-        return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/clients/{slug}.png" alt="{"" if hidden else e(name)}"'
+        return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/clients/mono/{slug}.png" alt="{"" if hidden else e(name)}"'
                 f' title="{e(name)}" loading="lazy" decoding="async"></li>')
     half = (len(CLIENTS) + 1) // 2
     rows = []
