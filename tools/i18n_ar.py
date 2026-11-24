@@ -442,8 +442,8 @@ AR = {
     "Enter a phone number using digits, like +966 5X XXX XXXX.": "أدخل رقم هاتف بالأرقام، مثل ‎+966 5X XXX XXXX.",
 # ---------------------------------------------------------------- exhibition & rental: activations
     "Event technology and activations that draw the crowd.": "تقنيات فعاليات وتجارب تفاعلية تجذب الجمهور.",
-    "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, interactive installations, AI-powered digital hosts, live interaction, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.":
-        "نهندس التقنيات التي تحوّل الجناح أو حفل الإطلاق أو المؤتمر إلى تجربة يقصدها الزوّار: جدران LED حركية، ومنشآت تفاعلية، ومضيفون رقميون بالذكاء الاصطناعي، وتفاعل مباشر، وألعاب مخصصة، وأنظمة سمعية وبصرية متكاملة، مصممة حول موضوع فعاليتك، ومبرمجة لدينا، وتديرها فرقنا في الموقع.",
+    "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, anamorphic 3D content, interactive installations, AI-powered digital hosts, live interaction, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.":
+        "نهندس التقنيات التي تحوّل الجناح أو حفل الإطلاق أو المؤتمر إلى تجربة يقصدها الزوّار: جدران LED حركية، ومحتوى ثلاثي الأبعاد أنامورفي، ومنشآت تفاعلية، ومضيفون رقميون بالذكاء الاصطناعي، وتفاعل مباشر، وألعاب مخصصة، وأنظمة سمعية وبصرية متكاملة، مصممة حول موضوع فعاليتك، ومبرمجة لدينا، وتديرها فرقنا في الموقع.",
     "Immersive Art Installations": "منشآت فنية غامرة",
     "Kinetic structures, mechatronics and sensor-responsive pieces, built around your event theme to become the centrepiece of the space.":
         "هياكل حركية وأنظمة ميكاترونيكس وقطع تستجيب للمستشعرات، تُصمم حول موضوع فعاليتك لتكون محور المساحة.",
@@ -457,14 +457,17 @@ AR = {
     "Interactive LED floors that react underfoot, and walk-in LED cubes and rooms that surround visitors with your story.":
         "أرضيات LED تفاعلية تستجيب لخطوات الزوّار، ومكعبات وغرف LED يدخلها الزوّار فتحيط بهم قصتك من كل جانب.",
     "Programming & Gaming Activations": "البرمجة والألعاب التفاعلية",
+    "Anamorphic 3D Content": "محتوى ثلاثي الأبعاد أنامورفي",
+    "Naked-eye 3D content designed for corner and curved LED screens, so objects appear to leap out of the display, rendered to the exact screen geometry and viewing point for your stand, façade or venue.":
+        "محتوى ثلاثي الأبعاد يُرى بالعين المجردة، مصمم لشاشات LED الزاوية والمنحنية بحيث تبدو العناصر وكأنها تخرج من الشاشة، ويُنتَج وفق أبعاد الشاشة وزاوية المشاهدة الدقيقة لجناحك أو واجهتك أو موقع فعاليتك.",
     "AI Interaction & Digital Hosts": "التفاعل بالذكاء الاصطناعي والمضيفون الرقميون",
     "AI-powered digital hosts with a lifelike face and natural voice that greet visitors, answer questions in Arabic and English and capture leads — on kiosks, LED totems and holographic displays.":
         "مضيفون رقميون مدعومون بالذكاء الاصطناعي بوجه واقعي وصوت طبيعي، يرحّبون بالزوّار ويجيبون عن أسئلتهم بالعربية والإنجليزية ويجمعون بيانات المهتمين، عبر الأكشاك وأعمدة LED والشاشات الهولوغرافية.",
     "Live Interaction": "التفاعل المباشر",
     "Real-time experiences that respond to the people in front of them: face and gesture tracking, AI photo and video booths, live polls, social walls and content on the LED wall that reacts to the crowd.":
         "تجارب فورية تستجيب لمن يقف أمامها: تتبّع الوجه والإيماءات، وأكشاك تصوير بالذكاء الاصطناعي، واستطلاعات مباشرة، وجدران تواصل اجتماعي، ومحتوى على جدار LED يتفاعل مع الجمهور.",
-    "Exhibition & Equipment Rental by PROPER Developments: Immersive Art Installations, Interactive Installations, Kinetic LED Walls, LED Floors, Cubes & Immersive Rooms, AI Interaction & Digital Hosts, Live Interaction, Programming & Gaming Activations, Exhibition Infrastructure, AV Equipment Rental, Display and Technology Rental.":
-        "تأجير المعارض والمعدات من PROPER Developments: منشآت فنية غامرة، منشآت تفاعلية، جدران LED حركية، أرضيات LED ومكعبات وغرف غامرة، التفاعل بالذكاء الاصطناعي والمضيفون الرقميون، التفاعل المباشر، البرمجة والألعاب التفاعلية، البنية التحتية للمعارض، تأجير المعدات السمعية والبصرية، تأجير الشاشات والتقنيات.",
+    "Exhibition & Equipment Rental by PROPER Developments: Immersive Art Installations, Interactive Installations, Kinetic LED Walls, LED Floors, Cubes & Immersive Rooms, Anamorphic 3D Content, AI Interaction & Digital Hosts, Live Interaction, Programming & Gaming Activations, Exhibition Infrastructure, AV Equipment Rental, Display and Technology Rental.":
+        "تأجير المعارض والمعدات من PROPER Developments: منشآت فنية غامرة، منشآت تفاعلية، جدران LED حركية، أرضيات LED ومكعبات وغرف غامرة، محتوى ثلاثي الأبعاد أنامورفي، التفاعل بالذكاء الاصطناعي والمضيفون الرقميون، التفاعل المباشر، البرمجة والألعاب التفاعلية، البنية التحتية للمعارض، تأجير المعدات السمعية والبصرية، تأجير الشاشات والتقنيات.",
     "Custom applications and games for touchscreens, tablets and LED walls — built for events, quick to play and easy to update.":
         "تطبيقات وألعاب مخصصة لشاشات اللمس والأجهزة اللوحية وجدران LED، مصممة للفعاليات وسهلة اللعب والتحديث.",
     "Flexible rental plans for sound, lighting, cameras, LED and control systems, with vetted equipment and on-site technical crews.":
