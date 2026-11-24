@@ -70,7 +70,7 @@ visitor asks it to.
 
 - **Click or tap a strip:** that discipline opens full screen as a mosaic of six images (Exhibition & Rental shows
   six installation clips), with its name, tagline and a link to its page at the bottom right.
-- **Going back:** clicking the open mosaic again, the "All disciplines" button beside the arrows, or Escape returns
+- **Going back:** clicking the open mosaic again (or pressing Escape) returns
   to the six strips.
 - **Arrows:** the round arrows at the bottom right step through the six disciplines, with a 01 / 06 counter.
 
