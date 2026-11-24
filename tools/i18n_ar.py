@@ -639,6 +639,11 @@ AR = {
     'Rotating LED pillars that move as one wall or in waves.': 'أعمدة LED دوّارة تتحرك كجدار واحد أو على شكل موجات.',
     'Suspended rings that rise, tilt and change colour.': 'حلقات معلّقة ترتفع وتميل وتتغير ألوانها.',
     'move.': 'تتحرك.',
+    'PROPER Holding': 'PROPER Holding',
+    'Parent company': 'الشركة الأم',
+    'Project management and engineering consulting.': 'إدارة المشاريع والاستشارات الهندسية.',
+    'Technology and real estate development.': 'التقنية والتطوير العقاري.',
+    'Core services': 'خدمات رئيسية',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

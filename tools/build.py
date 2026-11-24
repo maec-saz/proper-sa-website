@@ -701,22 +701,46 @@ def about():
   </div>
 </section>
 
-<section class="section dark org" id="group">
+<section class="section grp" id="group">
+  <div class="grp__bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="sec-head" data-reveal>{eyebrow("Group structure", True)}<h2 class="display-3">One group. <em>Four specialisms.</em></h2>
+    <div class="sec-head grp__head" data-reveal>{eyebrow("Group structure", True)}<h2 class="display-3">One group. <em>Four specialisms.</em></h2>
       <p class="sec-head__lead">PROPER Holding brings together PROPER Developments and MIDRAR, covering technology, real estate development, project management and engineering consulting.</p></div>
-    <div class="org__tree" data-reveal>
-      <div class="org__root"><span class="org__word">PROPER</span><span class="org__sub">Holding</span></div>
-      <div class="org__branches">
-        <div class="org__branch is-us">
-          <div class="org__node"><span class="org__word org__word--s">PROPER</span><span class="org__sub">Developments</span><em class="org__here">You are here</em></div>
-          <ul class="org__leaves"><li><span class="org__n">01</span>Information Technology</li><li><span class="org__n">02</span>Real Estate Development</li></ul>
-        </div>
-        <div class="org__branch">
-          <div class="org__node"><span class="org__word org__word--s">MIDRAR</span><span class="org__sub">مدرار</span></div>
-          <ul class="org__leaves"><li><span class="org__n">03</span>Project Management</li><li><span class="org__n">04</span>Engineering Consulting</li></ul>
-        </div>
+
+    <div class="grp__tree">
+      <div class="grp__root" data-reveal>
+        <span class="grp__halo" aria-hidden="true"></span>
+        <img src="{{r}}assets/img/logo-holding-white.png" alt="PROPER Holding" width="1259" height="334">
+        <span class="grp__role">Parent company</span>
       </div>
+      <div class="grp__wire grp__wire--split" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="grp__cos">
+        <article class="grp__co is-us" data-reveal>
+          <div class="grp__co-bg" style="background-image:url({{r}}assets/img/hd/tech-hero-1280.jpg)"></div>
+          <div class="grp__co-body">
+            <em class="grp__here">You are here</em>
+            <img class="grp__logo" src="{{r}}assets/img/logo-developments-white.png" alt="PROPER Developments" width="645" height="174">
+            <p>Technology and real estate development.</p>
+          </div>
+        </article>
+        <article class="grp__co" data-reveal>
+          <div class="grp__co-bg" style="background-image:url({{r}}assets/img/maec/headquarters-business-park.jpg)"></div>
+          <div class="grp__co-body">
+            <img class="grp__logo grp__logo--midrar" src="{{r}}assets/img/logo-midrar-white.png" alt="MIDRAR" width="797" height="272">
+            <p>Project management and engineering consulting.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grp__wires" aria-hidden="true"><div class="grp__wire grp__wire--split"><i></i><i></i><i></i></div><div class="grp__wire grp__wire--split"><i></i><i></i><i></i></div></div>
+
+      <ul class="grp__specs">
+        <li data-reveal><a href="{{r}}capabilities/technology.html"><span class="grp__img" style="background-image:url({{r}}assets/img/hd/tech-noc-640.jpg)"></span><span class="grp__n">01</span><b>Information Technology</b></a></li>
+        <li data-reveal><a href="{{r}}capabilities/real-estate.html"><span class="grp__img" style="background-image:url({{r}}assets/img/hd/realestate-hero-640.jpg)"></span><span class="grp__n">02</span><b>Real Estate Development</b></a></li>
+        <li data-reveal><a href="#group-projects"><span class="grp__img" style="background-image:url({{r}}assets/img/maec/hajj-street-hotels.jpg)"></span><span class="grp__n">03</span><b>Project Management</b></a></li>
+        <li data-reveal><a href="#group-projects"><span class="grp__img" style="background-image:url({{r}}assets/img/hd/construction-architecture-640.jpg)"></span><span class="grp__n">04</span><b>Engineering Consulting</b></a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -832,8 +856,15 @@ def rental_reel():
 </section>'''
 
 
+def svc_cols(n):
+    """Columns for a services grid: 2 for 4 items, otherwise 3 (the last card stretches to close the row)."""
+    return 2 if n in (2, 4) else 3
+
+
 def capability_page(c, idx):
-    services = "".join(f'''<li class="svc" data-reveal><span class="svc__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
+    n_svc, cols = len(c["services"]), svc_cols(len(c["services"]))
+    last_span = cols - (n_svc % cols) + 1 if n_svc % cols else 1
+    services = "".join(f'''<li class="svccard" data-reveal{f' style="grid-column:span {last_span}"' if i == n_svc - 1 and last_span > 1 else ""}><span class="svccard__n">{i + 1:02d}</span><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>''' for i, s in enumerate(c["services"]))
     fig = lambda src, cap: f'<figure data-reveal>{img(src, cap or c["name"], sizes="(max-width: 640px) 100vw, 50vw")}{f"<figcaption>{e(cap)}</figcaption>" if cap else ""}</figure>'
     gallery = "".join(fig(src, cap) for src, cap in c["gallery"])
     gallery2 = "".join(fig(src, cap) for src, cap in c.get("gallery2", []))
@@ -842,10 +873,10 @@ def capability_page(c, idx):
     steps = [("Consult", "Requirements, users, site and success criteria."), ("Design", "Engineering, technology selection and value engineering."),
              ("Deliver", "Supply, construction, installation and integration."), ("Support", "Commissioning, training, maintenance and upgrades.")]
     body = page_hero(e(c["name"]), e(c["tagline"]), c["hero"], c["hero_caption"], f'Capability {c["n"]}', c["accent"], mosaic=c["slug"] == "rental") + f'''
-<section class="section" style="--accent:{c["accent"]}">
-  <div class="wrap split">
-    <div data-reveal>{eyebrow("Overview")}<p class="display-3 cap-intro">{e(c["intro"])}</p></div>
-    <ol class="svcs">{services}</ol>
+<section class="section cap-over" style="--accent:{c["accent"]}">
+  <div class="wrap">
+    <div class="cap-over__intro" data-reveal><div class="cap-over__side">{eyebrow("Overview")}<p class="cap-over__count"><b>{n_svc:02d}</b><span>Core services</span></p></div><p class="cap-intro">{e(c["intro"])}</p></div>
+    <ol class="svcgrid svcgrid--{svc_cols(len(c["services"]))}">{services}</ol>
   </div>
 </section>
 

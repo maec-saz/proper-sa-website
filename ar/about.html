@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap">
 
-<link rel="stylesheet" href="../assets/css/site.css?v=02d5c11a">
+<link rel="stylesheet" href="../assets/css/site.css?v=1ae26a78">
 <script src="../assets/js/site.js?v=7a5723f8" defer></script>
 
 </head>
@@ -69,22 +69,46 @@
   </div>
 </section>
 
-<section class="section dark org" id="group">
+<section class="section grp" id="group">
+  <div class="grp__bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="sec-head" data-reveal><p class="eyebrow eyebrow--light">هيكل المجموعة</p><h2 class="display-3">مجموعة واحدة. <em>أربعة تخصصات.</em></h2>
+    <div class="sec-head grp__head" data-reveal><p class="eyebrow eyebrow--light">هيكل المجموعة</p><h2 class="display-3">مجموعة واحدة. <em>أربعة تخصصات.</em></h2>
       <p class="sec-head__lead">تجمع PROPER Holding بين PROPER Developments ومدرار، لتغطي التقنية والتطوير العقاري وإدارة المشاريع والاستشارات الهندسية.</p></div>
-    <div class="org__tree" data-reveal>
-      <div class="org__root"><span class="org__word">PROPER</span><span class="org__sub">Holding</span></div>
-      <div class="org__branches">
-        <div class="org__branch is-us">
-          <div class="org__node"><span class="org__word org__word--s">PROPER</span><span class="org__sub">Developments</span><em class="org__here">أنت هنا</em></div>
-          <ul class="org__leaves"><li><span class="org__n">01</span>تقنية المعلومات</li><li><span class="org__n">02</span>التطوير العقاري</li></ul>
-        </div>
-        <div class="org__branch">
-          <div class="org__node"><span class="org__word org__word--s">MIDRAR</span><span class="org__sub">مدرار</span></div>
-          <ul class="org__leaves"><li><span class="org__n">03</span>إدارة المشاريع</li><li><span class="org__n">04</span>الاستشارات الهندسية</li></ul>
-        </div>
+
+    <div class="grp__tree">
+      <div class="grp__root" data-reveal>
+        <span class="grp__halo" aria-hidden="true"></span>
+        <img src="../assets/img/logo-holding-white.png" alt="PROPER Holding" width="1259" height="334">
+        <span class="grp__role">الشركة الأم</span>
       </div>
+      <div class="grp__wire grp__wire--split" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="grp__cos">
+        <article class="grp__co is-us" data-reveal>
+          <div class="grp__co-bg" style="background-image:url(../assets/img/hd/tech-hero-1280.jpg)"></div>
+          <div class="grp__co-body">
+            <em class="grp__here">أنت هنا</em>
+            <img class="grp__logo" src="../assets/img/logo-developments-white.png" alt="PROPER Developments" width="645" height="174">
+            <p>التقنية والتطوير العقاري.</p>
+          </div>
+        </article>
+        <article class="grp__co" data-reveal>
+          <div class="grp__co-bg" style="background-image:url(../assets/img/maec/headquarters-business-park.jpg)"></div>
+          <div class="grp__co-body">
+            <img class="grp__logo grp__logo--midrar" src="../assets/img/logo-midrar-white.png" alt="MIDRAR" width="797" height="272">
+            <p>إدارة المشاريع والاستشارات الهندسية.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grp__wires" aria-hidden="true"><div class="grp__wire grp__wire--split"><i></i><i></i><i></i></div><div class="grp__wire grp__wire--split"><i></i><i></i><i></i></div></div>
+
+      <ul class="grp__specs">
+        <li data-reveal><a href="../ar/capabilities/technology.html"><span class="grp__img" style="background-image:url(../assets/img/hd/tech-noc-640.jpg)"></span><span class="grp__n">01</span><b>تقنية المعلومات</b></a></li>
+        <li data-reveal><a href="../ar/capabilities/real-estate.html"><span class="grp__img" style="background-image:url(../assets/img/hd/realestate-hero-640.jpg)"></span><span class="grp__n">02</span><b>التطوير العقاري</b></a></li>
+        <li data-reveal><a href="#group-projects"><span class="grp__img" style="background-image:url(../assets/img/maec/hajj-street-hotels.jpg)"></span><span class="grp__n">03</span><b>إدارة المشاريع</b></a></li>
+        <li data-reveal><a href="#group-projects"><span class="grp__img" style="background-image:url(../assets/img/hd/construction-architecture-640.jpg)"></span><span class="grp__n">04</span><b>الاستشارات الهندسية</b></a></li>
+      </ul>
     </div>
   </div>
 </section>
