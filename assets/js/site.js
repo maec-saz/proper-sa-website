@@ -52,36 +52,43 @@
   });
 
   /* ---------- Home hero: Riyadh from dusk to night ----------
-     Desktop: the cursor's horizontal position sweeps the city into night and a warm light follows it.
-     Touch screens: the city drifts slowly from dusk to night and back until the visitor uses the slider.
-     The slider works everywhere (keyboard included). */
+     The city sweeps on its own from golden dusk into night and back (hold, sweep, hold, sweep).
+     On desktop a warm light and a gentle parallax follow the pointer. Reduced motion: a still dusk view. */
   var hero = $('[data-dn]');
   if (hero) {
-    var range = $('#dnRange'), target = 0, p = 0, raf = 0, auto = !matchMedia('(hover: hover) and (pointer: fine)').matches;
-    var mx = 50, my = 45, px = 0, py = 0, tpx = 0, tpy = 0, visible = true, t0 = performance.now();
-    var render = function () {
+    var p = 0, raf = 0, visible = true, t0 = performance.now(), paused = 0, pauseAt = 0;
+    var mx = 50, my = 45, px = 0, py = 0, tpx = 0, tpy = 0;
+    var HOLD = 3200, SWEEP = 4200, CYCLE = 2 * (HOLD + SWEEP);
+    var ease = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+    var phase = function (t) {            // 0 = dusk, 1 = night
+      t = t % CYCLE;
+      if (t < HOLD) return 0;
+      if (t < HOLD + SWEEP) return ease((t - HOLD) / SWEEP);
+      if (t < 2 * HOLD + SWEEP) return 1;
+      return 1 - ease((t - 2 * HOLD - SWEEP) / SWEEP);
+    };
+    var render = function (now) {
       raf = 0;
-      if (auto && !reduce) target = 0.5 - 0.5 * Math.cos((performance.now() - t0) / 9000 * Math.PI * 2);
-      p += (target - p) * (reduce ? 1 : 0.08);
-      px += (tpx - px) * 0.08; py += (tpy - py) * 0.08;
+      if (!reduce) p = phase(now - t0 - paused);
+      px += (tpx - px) * 0.06; py += (tpy - py) * 0.06;
       hero.style.setProperty('--p', p.toFixed(4));
       hero.style.setProperty('--px', px.toFixed(3)); hero.style.setProperty('--py', py.toFixed(3));
       hero.style.setProperty('--mx', mx + '%'); hero.style.setProperty('--my', my + '%');
-      if (document.activeElement !== range) range.value = Math.round(p * 100);
-      if (visible && (auto || Math.abs(target - p) > 0.001 || Math.abs(tpx - px) > 0.001 || Math.abs(tpy - py) > 0.001)) raf = requestAnimationFrame(render);
+      if (visible && !reduce) raf = requestAnimationFrame(render);
     };
     var kick = function () { if (!raf) raf = requestAnimationFrame(render); };
     hero.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse') return;
+      if (e.pointerType !== 'mouse' || reduce) return;
       var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      if (e.target.closest && e.target.closest('.dn__ctl')) { kick(); return; }
-      target = Math.min(1, Math.max(0, (x - 0.12) / 0.76));
       mx = x * 100; my = y * 100; tpx = x * 2 - 1; tpy = y * 2 - 1;
-      kick();
     });
-    range.addEventListener('input', function () { auto = false; target = range.value / 100; kick(); });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(hero);
+      new IntersectionObserver(function (es) {
+        var now = performance.now();
+        if (!es[0].isIntersecting && visible) pauseAt = now;          // freeze the cycle off-screen
+        if (es[0].isIntersecting && !visible) paused += now - pauseAt;
+        visible = es[0].isIntersecting; if (visible) kick();
+      }).observe(hero);
     }
     kick();
   }
@@ -98,6 +105,26 @@
       it.addEventListener('mouseenter', function () { setCap(i); });
       it.addEventListener('focusin', function () { setCap(i); });
     });
+  }
+
+  /* ---------- Parallax: page-header photos and image bands drift slower than the page ---------- */
+  var plx = $$('[data-parallax], .phero__media');
+  if (plx.length && !reduce) {
+    var ticking = false;
+    var doPlx = function () {
+      ticking = false;
+      var vh = window.innerHeight;
+      plx.forEach(function (el) {
+        var r = el.parentElement.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        var k = el.classList.contains('phero__media') ? 0.18 : 0.12;
+        var y = (r.top + r.height / 2 - vh / 2) * -k;
+        el.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+      });
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(doPlx); } }, { passive: true });
+    window.addEventListener('resize', doPlx);
+    doPlx();
   }
 
   /* ---------- Reveal on scroll ---------- */

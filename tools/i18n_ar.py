@@ -51,10 +51,6 @@ AR = {
         "التقنية والبنية التحتية الذكية والإنشاءات والتجارب الغامرة، يقدّمها فريق واحد متعدد التخصصات. إحدى شركات MIDRAR.",
     "Jeddah · Kingdom of Saudi Arabia": "جدة · المملكة العربية السعودية",
     "Riyadh · Kingdom of Saudi Arabia": "الرياض · المملكة العربية السعودية",
-    "Dusk": "الغروب",
-    "Night": "الليل",
-    "· Move across the city": "· حرّك المؤشر عبر المدينة",
-    "Riyadh from dusk to night": "الرياض من الغروب إلى الليل",
     "Scroll to content": "انتقل إلى المحتوى",
 
     # ---------------------------------------------------------------- home: intro & facts
@@ -440,6 +436,23 @@ AR = {
     "Thank you. Your email app should now open with your message ready to send. If it didn’t open, email us at": "شكرًا لك. سيُفتح الآن تطبيق البريد الإلكتروني لديك وتكون رسالتك جاهزة للإرسال. إن لم يُفتح، راسلنا على",
     "or call": "أو اتصل على",
     "Enter a phone number using digits, like +966 5X XXX XXXX.": "أدخل رقم هاتف بالأرقام، مثل ‎+966 5X XXX XXXX.",
+# ---------------------------------------------------------------- showcase reel & image bands
+    "In the field": "في الميدان",
+    "Environments we": "بيئات",
+    "engineer.": "نهندسها.",
+    "Built in the Kingdom": "من قلب المملكة",
+    "Engineering the Kingdom’s": "نهندس الفصل",
+    "next chapter.": "القادم للمملكة.",
+    "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.":
+        "من جدة إلى الرياض، نقدّم التقنيات والبنية التحتية والتجارب التي تقف خلف الأماكن التي يعمل فيها الناس ويديرون أعمالهم ويجتمعون — بما يتماشى مع رؤية 2030.",
+    "Our reach": "نطاق عملنا",
+    "Delivering across": "ننجز في أنحاء",
+    "the Kingdom.": "المملكة.",
+    "Headquartered in Jeddah and working across Saudi Arabia, with an ambition that reaches across the GCC.":
+        "مقرنا في جدة ونعمل في أنحاء المملكة العربية السعودية، بطموح يمتد إلى دول مجلس التعاون الخليجي.",
+    "Visit us on": "زورونا على",
+    "Jeddah’s Corniche.": "كورنيش جدة.",
+    "The Headquarters Business Park, Al Corniche Road — open Monday to Saturday.": "مجمع المقر للأعمال، طريق الكورنيش — نستقبلكم من الإثنين إلى السبت.",
 # ---------------------------------------------------------------- exhibition & rental: activations
     "Event technology and activations that draw the crowd.": "تقنيات فعاليات وتجارب تفاعلية تجذب الجمهور.",
     "We engineer the technology that turns a stand, launch or conference into an experience people walk over to see — kinetic LED walls, anamorphic 3D content, interactive installations, AI-powered digital hosts, live interaction, custom games and complete AV — designed around your theme, programmed in-house and run on site by our own crews.":

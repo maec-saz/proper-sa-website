@@ -140,7 +140,7 @@ body:not(.has-hero) .site-header, .site-header.is-solid { background: rgba(13, 1
 
 /* ---------- Page hero (inner pages) ---------- */
 .phero { position: relative; min-height: min(78vh, 760px); display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; padding: calc(var(--header-h) + 60px) 0 clamp(60px, 9vh, 100px); }
-.phero__media { position: absolute; inset: 0; z-index: -1; }
+.phero__media { position: absolute; inset: -9% 0; z-index: -1; will-change: transform; }
 .phero__media img { width: 100%; height: 100%; object-fit: cover; animation: pheroIn 2.2s var(--ease) both; }
 @keyframes pheroIn { from { transform: scale(1.08); filter: brightness(.6); } }
 .phero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13, 14, 16, .6) 0%, rgba(13, 14, 16, .15) 35%, rgba(13, 14, 16, .9) 100%), linear-gradient(90deg, rgba(13, 14, 16, .65), transparent 70%); }
@@ -755,8 +755,8 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 
 /* =====================================================================
    Home hero — Riyadh, dusk to night. The night photo is revealed by a
-   soft-edged sweep that follows the cursor (or the slider / auto-play on
-   touch screens); a warm light and a gentle parallax follow the pointer.
+   soft-edged sweep that plays on its own (hold, sweep, hold, sweep back);
+   on desktop a warm light and a gentle parallax follow the pointer.
    ===================================================================== */
 .hero--dn { --p: 0; --mx: 50%; --my: 45%; --px: 0; --py: 0; }
 .hero--dn .hero__img { animation: none; object-position: 50% 62%; transform: scale(1.07) translate3d(calc(var(--px) * -1.1%), calc(var(--py) * -1.1%), 0); transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
@@ -766,22 +766,52 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .hero--dn .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .5) 0%, transparent 22%, transparent 66%, rgba(5, 5, 6, .78) 100%), linear-gradient(90deg, rgba(5, 5, 6, .74) 0%, rgba(5, 5, 6, .46) 32%, transparent 56%); }
 [dir="rtl"] .hero--dn .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .5) 0%, transparent 22%, transparent 66%, rgba(5, 5, 6, .78) 100%), linear-gradient(270deg, rgba(5, 5, 6, .74) 0%, rgba(5, 5, 6, .46) 32%, transparent 56%); }
 .hero--dn .hero__grain { opacity: .035; }
-.dn__ctl { direction: ltr; display: inline-flex; align-items: center; gap: 12px; padding: 0 16px; border: 1px solid var(--line-2); border-radius: 999px; background: rgba(10, 11, 13, .45); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #d6d8dc; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
-.dn__ctl label { cursor: pointer; }
-.dn__range { -webkit-appearance: none; appearance: none; width: clamp(110px, 14vw, 180px); height: 44px; background: transparent; cursor: pointer; margin: 0; }
-.dn__range::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, #e3a35d, #2b3a66); border-radius: 2px; }
-.dn__range::-moz-range-track { height: 2px; background: linear-gradient(90deg, #e3a35d, #2b3a66); border-radius: 2px; }
-.dn__range::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -7px; border-radius: 50%; background: #f4ecdf; box-shadow: 0 0 0 4px rgba(244, 236, 223, .18), 0 0 18px rgba(255, 200, 130, .6); }
-.dn__range::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #f4ecdf; box-shadow: 0 0 0 4px rgba(244, 236, 223, .18), 0 0 18px rgba(255, 200, 130, .6); }
-.dn__range:focus-visible { outline: 2px solid var(--metal); outline-offset: 4px; border-radius: 4px; }
-.dn__hint { color: #9aa0a8; letter-spacing: .1em; }
-@media (hover: none), (max-width: 760px) { .dn__glow { display: none; } .dn__hint { display: none; } }
+@media (hover: none), (max-width: 760px) { .dn__glow { display: none; } }
 @media (max-width: 760px) {
-  .hero__foot { justify-content: center; }
   .hero--dn .hero__img { object-position: 46% 62%; }
-  .dn__ctl { padding: 0 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .hero--dn .hero__img { transition: none; transform: scale(1.02); } }
 @media (max-width: 760px) {
   .hero--dn .hero__grade, [dir="rtl"] .hero--dn .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .55) 0%, rgba(5, 5, 6, .15) 18%, rgba(5, 5, 6, .55) 42%, rgba(5, 5, 6, .9) 100%); }
+}
+
+/* =====================================================================
+   Image band — full-bleed photograph with a statement; gentle parallax
+   ===================================================================== */
+.iband { position: relative; min-height: clamp(520px, 86vh, 860px); display: flex; align-items: flex-end; overflow: hidden; background: #050506; color: #fff; isolation: isolate; }
+.iband__media { position: absolute; inset: -12% 0; z-index: -1; will-change: transform; }
+.iband__media img { width: 100%; height: 100%; object-fit: cover; }
+.iband::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(5, 5, 6, .55) 0%, rgba(5, 5, 6, .05) 35%, rgba(5, 5, 6, .35) 62%, rgba(5, 5, 6, .92) 100%), linear-gradient(90deg, rgba(5, 5, 6, .55), transparent 60%); }
+[dir="rtl"] .iband::after { background: linear-gradient(180deg, rgba(5, 5, 6, .55) 0%, rgba(5, 5, 6, .05) 35%, rgba(5, 5, 6, .35) 62%, rgba(5, 5, 6, .92) 100%), linear-gradient(270deg, rgba(5, 5, 6, .55), transparent 60%); }
+.iband__content { padding-block: clamp(80px, 12vw, 160px) clamp(60px, 8vw, 110px); }
+.iband__content .display-1 { font-size: clamp(40px, 5.4vw, 86px); max-width: 15ch; margin-bottom: 22px; }
+.iband__content p { max-width: 560px; color: #d6d8dc; font-size: clamp(16px, 1.3vw, 19px); font-weight: 300; margin-bottom: 28px; }
+.link--light { color: #fff; border-color: rgba(255, 255, 255, .45); }
+
+/* =====================================================================
+   Showcase reel — two rows of large images gliding in opposite directions
+   ===================================================================== */
+.reel { padding-block: clamp(80px, 10vw, 140px); overflow: hidden; }
+.reel .sec-head { margin-bottom: clamp(36px, 5vw, 60px); }
+.reel__rows { display: grid; gap: clamp(12px, 1.4vw, 20px); }
+.reel__row { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.reel__track { display: flex; gap: clamp(12px, 1.4vw, 20px); width: max-content; animation: reel 90s linear infinite; }
+.reel__row--rev .reel__track { animation-direction: reverse; animation-duration: 110s; }
+.reel__rows:hover .reel__track, .reel__rows:focus-within .reel__track { animation-play-state: paused; }
+@keyframes reel { to { transform: translateX(-50%); } }
+[dir="rtl"] .reel__track { animation-name: reel-rtl; }
+@keyframes reel-rtl { to { transform: translateX(50%); } }
+.reel__card { position: relative; flex: none; width: clamp(280px, 34vw, 560px); aspect-ratio: 16 / 10; overflow: hidden; display: block; background: #15171a; }
+.reel__card img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 1.2s var(--ease), filter .6s; filter: saturate(.92) brightness(.9); }
+.reel__card:hover img, .reel__card:focus-visible img { transform: scale(1.08); filter: none; }
+.reel__card span { position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 18px 16px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #e9eaec; background: linear-gradient(0deg, rgba(0, 0, 0, .7), transparent); }
+.reel__card:focus-visible { outline: 2px solid var(--metal); outline-offset: -2px; }
+@media (max-width: 760px) {
+  .reel__card { width: 72vw; }
+  .iband { min-height: 560px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel__track { animation: none; }
+  .reel__row { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .iband__media { inset: 0; }
 }

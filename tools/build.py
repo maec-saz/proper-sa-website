@@ -372,6 +372,46 @@ def cta_band(title="Let’s build what’s next.", text="Tell us about your proj
 </section>'''
 
 
+def image_band(src, kicker, title, text, link=None):
+    """Full-bleed photograph with a statement over it; the photo drifts with a gentle parallax."""
+    cta = f'<a class="link link--light" href="{{r}}{link[0]}">{link[1]} {arrow()}</a>' if link else ""
+    return f'''<section class="iband">
+  <div class="iband__media" data-parallax>{img(src, "", sizes="100vw")}</div>
+  <div class="wrap iband__content" data-reveal>{eyebrow(kicker, True)}<h2 class="display-1">{title}</h2><p>{text}</p>{cta}</div>
+</section>'''
+
+
+REEL = [
+    [("hd/tech-hero.jpg", "Command & Control Centres", "technology"), ("hd/av-hero.jpg", "LED Display Solutions", "audiovisual"),
+     ("hd/rental-kinetic-wall.jpg", "Kinetic LED Walls", "rental"), ("hd/museum-hero.jpg", "Museum Development", "museums"),
+     ("hd/construction-hero.jpg", "Construction", "construction"), ("hd/capabilities-hero.jpg", "Network Operations Centres (NOC)", "technology")],
+    [("hd/tech-gpu.jpg", "GPU Solutions", "technology"), ("hd/museum-immersive.jpg", "Immersive Experiences", "museums"),
+     ("hd/rental-anamorphic.jpg", "Anamorphic 3D Content", "rental"), ("hd/av-control-room.jpg", "Control Room Solutions", "audiovisual"),
+     ("hd/tech-robotics.jpg", "Robotics", "technology"), ("hd/museum-touch.jpg", "Interactive Exhibitions", "museums"),
+     ("hd/construction-infrastructure.jpg", "Infrastructure Development", "construction")],
+]
+
+
+def reel():
+    """Two rows of large images gliding in opposite directions; each card links to its discipline."""
+    def cards(items, hidden=False):
+        extra = ' aria-hidden="true" tabindex="-1"' if hidden else ""
+        out = ""
+        for src, cap, slug in items:
+            b = src[:-4]
+            out += (f'<a class="reel__card" href="{{r}}capabilities/{slug}.html"{extra}>'
+                    f'<img src="{{r}}assets/img/{b}-640.jpg" srcset="{{r}}assets/img/{b}-640.jpg 640w, {{r}}assets/img/{b}-1280.jpg 1280w" '
+                    f'sizes="(max-width: 760px) 72vw, 34vw" alt="{"" if hidden else e(cap)}" loading="lazy" decoding="async">'
+                    f'<span>{e(cap)}</span></a>')
+        return out
+    rows = "".join(f'<div class="reel__row{" reel__row--rev" if i else ""}"><div class="reel__track">{cards(r)}{cards(r, True)}</div></div>'
+                   for i, r in enumerate(REEL))
+    return f'''<section class="reel dark" aria-labelledby="reel-title">
+  <div class="wrap sec-head" data-reveal>{eyebrow("In the field", True)}<h2 class="display-2" id="reel-title">Environments we <em>engineer.</em></h2></div>
+  <div class="reel__rows">{rows}</div>
+</section>'''
+
+
 def partner_tile(p, big=False):
     inner = (f'<img src="{{r}}assets/img/{p["logo"]}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
              else f'<span class="logo-type" title="Placeholder — official logo to be supplied">{e(p["name"])}</span>')
@@ -428,7 +468,6 @@ def home():
 
   <div class="hero__foot wrap">
     <span class="hero__loc"><i></i>Riyadh · Kingdom of Saudi Arabia</span>
-    <div class="dn__ctl"><label for="dnRange">Dusk</label><input class="dn__range" id="dnRange" type="range" min="0" max="100" value="0" aria-label="Riyadh from dusk to night"><label for="dnRange">Night</label><span class="dn__hint">· Move across the city</span></div>
     <a class="hero__scroll" href="#intro" aria-label="Scroll to content"><span></span></a>
   </div>
 </section>
@@ -466,6 +505,8 @@ def home():
   </div>
 </section>
 
+{reel()}
+
 <section class="partners-strip" aria-labelledby="ps-title">
   <div class="wrap">
     <div class="sec-head sec-head--split" data-reveal>
@@ -475,6 +516,10 @@ def home():
     <ul class="partners">{"".join(partner_tile(p) for p in PARTNERS)}</ul>
   </div>
 </section>
+
+{image_band("hd/riyadh-kafd-night.jpg", "Built in the Kingdom", "Engineering the Kingdom’s <em>next chapter.</em>",
+            "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.",
+            ("about.html", "About PROPER Developments"))}
 
 {cta_band()}
 '''
@@ -561,7 +606,7 @@ def page_hero(title, sub, image, caption="", kicker="", accent=None):
 
 def about():
     body = page_hero("A multidisciplinary group, <em>built on delivery.</em>", "Technology, engineering, infrastructure and development expertise — brought together to deliver integrated solutions across industries.",
-                     "hd/jeddah-corniche.jpg", "Jeddah, Kingdom of Saudi Arabia", "About Us") + f'''
+                     "hd/jeddah-corniche-hd.jpg", "Jeddah, Kingdom of Saudi Arabia", "About Us") + f'''
 <section class="section">
   <div class="wrap split">
     <div data-reveal>{eyebrow("Who we are")}<h2 class="display-3">Integrated solutions, from concept to completion.</h2></div>
@@ -582,6 +627,9 @@ def about():
     </div>
   </div>
 </section>
+
+{image_band("hd/riyadh-night.jpg", "Our reach", "Delivering across <em>the Kingdom.</em>",
+            "Headquartered in Jeddah and working across Saudi Arabia, with an ambition that reaches across the GCC.")}
 
 <section class="section">
   <div class="wrap">
@@ -670,7 +718,7 @@ def capability_page(c, idx):
 
 def partners():
     body = page_hero("Technology Partners <em>&amp; Distribution</em>", "We work with global technology leaders — and distribute selected brands — to deliver proven, supported solutions in the Kingdom.",
-                     "hd/network-cables.jpg", "", "Partners") + f'''
+                     "hd/partners-hero.jpg", "", "Partners") + f'''
 <section class="section section--stone">
   <div class="wrap">
     <ul class="partners partners--big">{"".join(partner_tile(p, True) for p in PARTNERS)}</ul>
@@ -722,6 +770,8 @@ def contact():
     </form>
   </div>
 </section>
+{image_band("hd/jeddah-corniche-hd.jpg", "Headquarters", "Visit us on <em>Jeddah’s Corniche.</em>",
+            "The Headquarters Business Park, Al Corniche Road — open Monday to Saturday.")}
 <section class="map-sec">
   <iframe title="Map — Headquarters Business Park, Jeddah" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=The+Headquarters+Business+Park+Jeddah&amp;output=embed"></iframe>
 </section>'''

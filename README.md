@@ -89,22 +89,24 @@ so it stays current), business verticals, technology partners and specialist ser
 ## Assets needed before launch
 The brief asks for real imagery only. These are the gaps:
 
-3. **Partner logos in SVG/high resolution.** PUDU now uses its official SVG logo (from pudurobotics.com); VOD, CTF, LG, Samsung and SOLUM are 165–205 px wide images
-   from the current site.
-4. **About and Partners headers** still use stock photos; generate replacements with Higgsfield if wanted.
-6. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
+1. **Partner logos in SVG/high resolution.** PUDU, LG and Samsung use official vector logos and CTF uses its official
+   transparent logo (ctfconsoles.com); VOD and SOLUM are still 165–205 px wide images from the current site.
+2. **Real project photography.** Generated and stock images are illustrative; replace them with PROPER's own project photos when available.
+3. **MIDRAR details.** Logo, a short description and a link, if MIDRAR should appear more prominently.
 
 ## Imagery
 - **Home page and the five disciplines** use **AI-generated imagery made with Higgsfield** (Cinema Studio Image 2.5,
   plus Nano Banana Pro for the home façade): 23 images generated at 5504×3072 and saved as 2560px with 1280px phone
   versions. Prompts are in `docs/higgsfield-prompts.md`. They are illustrative environments, never presented as PROPER
   projects, and contain no logos, readable text or recognisable landmarks.
-- **About and Partners headers** still use two Unsplash photos (free for commercial use; credited below as a courtesy).
+- **About header:** a real photo of Jeddah's Corniche (Unsplash). **Partners header:** a Higgsfield-generated technology showroom.
 - The full-resolution originals stay in the Higgsfield account (Presales workspace).
 - Prompts: `tools/higgsfield_generate.py` (earlier images) and `docs/higgsfield-prompts.md`.
 
 | File (assets/img/hd/) | Source |
 |---|---|
+| riyadh-kafd-night | Unsplash, Saif Aldhaher (unsplash.com/photos/vAkHAP27QMk): Riyadh at night |
+| jeddah-corniche-hd | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
 | riyadh-dusk, riyadh-night | Unsplash, Oualid Lakhrouti (unsplash.com/photos/NCD37SPA2wk): Riyadh skyline, relit as dusk and night with Nano Banana Pro |
 | capabilities-hero, tech-hero, tech-noc, av-control-room | Higgsfield Nano Banana Pro, 4K, with CTF console product photos (ctfconsoles.com) as references |
 | tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
@@ -118,8 +120,7 @@ The brief asks for real imagery only. These are the gaps:
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
 | rental-anamorphic | Higgsfield Cinema Studio 2.5, 4K: anamorphic 3D corner LED wall at an exhibition stand, golden falcon |
 | rental-ai-host | Unsplash, Enchanted Tools (unsplash.com/photos/sqj85Qm11yc): visitors interacting with an AI humanoid robot at an exhibition |
-| jeddah-corniche | Asim Alghamdi on Unsplash (About) |
-| network-cables | Taylor Vick on Unsplash (Partners) |
+| partners-hero | Higgsfield Cinema Studio 2.5, 4K: technology experience centre with LED walls, robot and consoles |
 
 To regenerate an image, run its prompt with the Higgsfield CLI (`higgsfield generate create cinematic_studio_2_5 --resolution 4k --aspect_ratio 16:9 --prompt "…" --wait`),
 save it in `assets/img/hd/` as `name.jpg` (2560px) plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
