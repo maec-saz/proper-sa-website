@@ -429,12 +429,15 @@ ORG_LD = {
 def home():
     caps = "".join(f'''
         <li class="capx__item{" is-active" if i == 0 else ""}" style="--accent:{c["accent"]}" data-cap="{i}">
-          <a href="{{r}}capabilities/{c["slug"]}.html" class="capx__link">
-            <span class="capx__n">{c["n"]}</span>
-            <span class="capx__name">{e(c["name"])}</span>
-            <span class="capx__go">{arrow()}</span>
-          </a>
-          <div class="capx__detail"><div>
+          <div class="capx__head">
+            <button type="button" class="capx__toggle" aria-expanded="{"true" if i == 0 else "false"}" aria-controls="capx-d{i}">
+              <span class="capx__n">{c["n"]}</span>
+              <span class="capx__name">{e(c["name"])}</span>
+              <span class="capx__chev" aria-hidden="true"></span>
+            </button>
+            <a class="capx__go" href="{{r}}capabilities/{c["slug"]}.html" aria-label="{e(c["name"])}">{arrow()}</a>
+          </div>
+          <div class="capx__detail" id="capx-d{i}"><div>
             <p>{e(c["tagline"])}</p>
             <ul>{"".join(f"<li>{e(s[0])}</li>" for s in c["services"])}</ul>
           </div></div>

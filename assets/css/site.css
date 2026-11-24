@@ -178,11 +178,17 @@ body:not(.has-hero) .site-header, .site-header.is-solid { background: rgba(13, 1
 .capx__item { border-bottom: 1px solid var(--line); position: relative; }
 .capx__item::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease); }
 .capx__item.is-active::before { transform: scaleX(1); }
-.capx__link { display: grid; grid-template-columns: 56px 1fr 30px; align-items: center; gap: 10px; padding: 26px 0; }
+.capx__head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; }
+.capx__toggle { display: grid; grid-template-columns: 56px 1fr 22px; align-items: center; gap: 10px; padding: 26px 0; width: 100%; background: none; border: 0; color: inherit; font: inherit; text-align: start; cursor: pointer; }
+.capx__toggle:focus-visible { outline: 2px solid var(--metal); outline-offset: 4px; }
+.capx__chev { width: 9px; height: 9px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-3px); color: var(--mute-2); transition: transform .5s var(--ease), color .4s; justify-self: center; }
+.capx__item.is-active .capx__chev { transform: rotate(-135deg) translateY(-2px); color: var(--accent); }
 .capx__n { font-size: 13px; color: var(--mute-2); transition: color .4s; }
 .capx__name { font-size: clamp(20px, 2vw, 28px); font-weight: 300; letter-spacing: -.02em; line-height: 1.2; color: #b9bdc3; transition: color .4s, transform .5s var(--ease); }
-.capx__go { color: var(--mute-2); transition: color .4s; }
-.capx__item.is-active .capx__name, .capx__link:hover .capx__name { color: #fff; transform: translateX(6px); }
+.capx__go { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 50%; color: var(--mute-2); transition: color .4s, border-color .4s, background .4s, transform .4s var(--ease); }
+.capx__go:hover, .capx__go:focus-visible { color: #0d0e10; background: var(--accent); border-color: var(--accent); transform: translateX(3px); }
+[dir="rtl"] .capx__go:hover, [dir="rtl"] .capx__go:focus-visible { transform: translateX(-3px); }
+.capx__item.is-active .capx__name, .capx__toggle:hover .capx__name { color: #fff; transform: translateX(6px); }
 .capx__item.is-active .capx__n, .capx__item.is-active .capx__go { color: var(--accent); }
 .capx__detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); padding-inline-start: 66px; }
 .capx__detail > * { overflow: hidden; }
@@ -448,7 +454,7 @@ body:not(.has-hero) .site-header, .site-header.is-solid { background: rgba(13, 1
   .gallery--3 figure:first-child { grid-column: auto; }
   .contact-list > div { grid-template-columns: 1fr; gap: 4px; }
   .footer__grid { grid-template-columns: 1fr; }
-  .capx__link { grid-template-columns: 40px 1fr 24px; }
+  .capx__toggle { grid-template-columns: 40px 1fr 18px; }
   .capx__detail { padding-inline-start: 50px; }
   .map-sec iframe { height: 320px; }
 }
@@ -603,7 +609,7 @@ body.menu-open .site-header { backdrop-filter: none; -webkit-backdrop-filter: no
 [dir="rtl"] .btn:hover .i-arrow, [dir="rtl"] .link:hover .i-arrow { transform: scaleX(-1) translateX(5px); }
 [dir="rtl"] .next-cap__link:hover .i-arrow { transform: scaleX(-1) translateX(10px); }
 [dir="rtl"] .viewer__nav svg { transform: scaleX(-1); }
-[dir="rtl"] .capx__item.is-active .capx__name, [dir="rtl"] .capx__link:hover .capx__name { transform: translateX(-6px); }
+[dir="rtl"] .capx__item.is-active .capx__name, [dir="rtl"] .capx__toggle:hover .capx__name { transform: translateX(-6px); }
 [dir="rtl"] .nav__item > a::after, [dir="rtl"] .capx__item::before { transform-origin: right; }
 /* positioned elements */
 [dir="rtl"] .mega { left: auto; right: -12px; }
@@ -727,7 +733,7 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .link { min-height: 44px; }
   .lang-switch, .brand { min-height: 44px; display: inline-flex; align-items: center; }
   .lang-switch { padding-inline: 8px; }
-  .capx__link { min-height: 56px; }
+  .capx__toggle { min-height: 56px; }
   .capblock h2 a { display: inline-block; padding-block: 8px; }
   .contact-list a { display: inline-block; padding-block: 10px; }
 }

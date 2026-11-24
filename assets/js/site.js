@@ -93,19 +93,27 @@
     kick();
   }
 
-  /* ---------- Home: interactive capabilities list ---------- */
+  /* ---------- Home: capabilities accordion ----------
+     Tapping a row opens its list of services (one open at a time) and shows its image;
+     the arrow beside each row goes to that discipline's page. */
   var capItems = $$('.capx__item');
   if (capItems.length) {
     var figs = $$('.capx__fig');
     var setCap = function (i) {
-      capItems.forEach(function (it, k) { it.classList.toggle('is-active', k === i); });
-      figs.forEach(function (f, k) { f.classList.toggle('is-active', k === i); });
+      capItems.forEach(function (it, k) {
+        var on = k === i;
+        it.classList.toggle('is-active', on);
+        $('.capx__toggle', it).setAttribute('aria-expanded', String(on));
+      });
+      if (i >= 0) figs.forEach(function (f, k) { f.classList.toggle('is-active', k === i); });
     };
     capItems.forEach(function (it, i) {
-      it.addEventListener('mouseenter', function () { setCap(i); });
-      it.addEventListener('focusin', function () { setCap(i); });
+      $('.capx__toggle', it).addEventListener('click', function () {
+        setCap(it.classList.contains('is-active') ? -1 : i);
+      });
     });
   }
+
 
   /* ---------- Parallax: page-header photos and image bands drift slower than the page ---------- */
   var plx = $$('[data-parallax], .phero__media');
