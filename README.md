@@ -109,6 +109,7 @@ The brief asks for real imagery only. These are the gaps:
 | riyadh-kafd-night | Unsplash, Saif Aldhaher (unsplash.com/photos/vAkHAP27QMk): Riyadh at night |
 | jeddah-corniche-hd | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
 | riyadh-dusk, riyadh-night | Unsplash, Oualid Lakhrouti (unsplash.com/photos/NCD37SPA2wk): Riyadh skyline, relit as dusk and night with Nano Banana Pro |
+| hero-panorama | Higgsfield Nano Banana Pro: one continuous five-discipline photograph used by the home hero |
 | capabilities-hero, tech-hero, tech-noc, av-control-room | Higgsfield Nano Banana Pro, 4K, with CTF console product photos (ctfconsoles.com) as references |
 | tech-hero, tech-gpu, tech-robotics, tech-noc | Higgsfield (Technology & Intelligent Infrastructure; tech-noc also heads Our Capabilities) |
 | av-hero, av-boardroom, av-control-room, av-led-wall | Higgsfield (Audiovisual & Integrated Solutions) |
