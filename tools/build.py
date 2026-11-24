@@ -192,10 +192,6 @@ def footer(r):
     nav = "".join(f'<li><a href="{r}{h}">{l}</a></li>' for h, l in NAV)
     return f'''<footer class="site-footer">
   <div class="wrap">
-    <div class="footer__top">
-      <p class="footer__statement">{COMPANY["statement"]} <em>{COMPANY["statement_em"]}</em></p>
-      <a class="btn btn--metal" href="{r}contact.html">Start a conversation {arrow()}</a>
-    </div>
     <div class="footer__grid">
       <div>
         <img src="{r}assets/img/logo-white.png" alt="PROPER Developments" width="140" height="40" loading="lazy">
@@ -360,14 +356,12 @@ def eyebrow(text, light=False):
     return f'<p class="eyebrow{" eyebrow--light" if light else ""}">{e(text)}</p>'
 
 
-def cta_band(title="Let’s build what’s next.", text="Tell us about your project — our team will respond within one working day."):
+def cta_band(title="Let’s build what’s next."):
+    """A quiet closing line with one link — used once, at the end of the home page."""
     return f'''<section class="cta-band" data-reveal>
   <div class="wrap cta-band__inner">
-    <div><h2 class="display-2">{title}</h2><p>{text}</p></div>
-    <div class="cta-band__actions">
-      <a class="btn btn--metal" href="{{r}}contact.html">Contact Us {arrow()}</a>
-      <a class="btn btn--line" href="{{r}}capabilities.html">Explore Our Capabilities</a>
-    </div>
+    <h2 class="display-3">{title}</h2>
+    <a class="link" href="{{r}}contact.html">Start a conversation {arrow()}</a>
   </div>
 </section>'''
 
@@ -652,8 +646,7 @@ def about():
     </div>
   </div>
 </section>
-
-{cta_band()}'''
+'''
     return page("about.html", "About Us", "PROPER Developments is a multidisciplinary Saudi company operating under MIDRAR, bringing together technology, engineering, infrastructure and development expertise since 2007.",
                 body, "about.html", "has-hero")
 
@@ -672,8 +665,7 @@ def capabilities_overview():
   </article>''' for c in CAPABILITIES)
     body = page_hero("Our <em>Capabilities</em>", "Five integrated business verticals — engineered to work together, from the first concept to long-term operation.",
                      "hd/capabilities-hero.jpg", "", "What We Do") + f'''
-<section class="section capblocks"><div class="wrap">{blocks}</div></section>
-{cta_band()}'''
+<section class="section capblocks"><div class="wrap">{blocks}</div></section>'''
     return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction & development, museums & immersive experiences, and exhibition & equipment rental.",
                 body, "capabilities.html", "has-hero")
 
@@ -710,8 +702,7 @@ def capability_page(c, idx):
     <span class="eyebrow">Next capability · {nxt["n"]}</span>
     <span class="display-2">{e(nxt["name"])} {arrow()}</span>
   </a>
-</section>
-{cta_band(f"Let’s discuss your {e(c['short'].lower())} project.")}'''
+</section>'''
     return page(f'capabilities/{c["slug"]}.html', c["name"], f'{c["name"]} by PROPER Developments: {", ".join(s[0] for s in c["services"])}.',
                 body, "capabilities.html", "has-hero", image=c["hero"])
 
@@ -732,8 +723,7 @@ def partners():
       <p>As a distributor we connect global brands to local markets with dependable availability, logistics and after-sales support.</p>
     </div>
   </div>
-</section>
-{cta_band("Looking for a technology partner?")}'''
+</section>'''
     return page("partners.html", "Technology Partners", "PROPER Developments technology partners and distribution brands: VOD, CTF, PUDU, LG, Samsung and SOLUM.",
                 body, "partners.html", "has-hero")
 
