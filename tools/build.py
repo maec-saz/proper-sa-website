@@ -127,7 +127,8 @@ CAPABILITIES = [
         # Real-world reference photos (Unsplash licence), illustrative only, not PROPER projects.
         "gallery2": [("hd/rental-anamorphic.jpg", "Anamorphic 3D Content"),
                      ("hd/rental-live-interaction.jpg", "Live Interaction"),
-                     ("hd/rental-ai-host.jpg", "AI Interaction & Digital Hosts")],
+                     ("hd/rental-ai-host.jpg", "AI Interaction"),
+                     ("hd/rental-ai-host2.jpg", "Digital Hosts")],
     },
 ]
 CAP = {c["slug"]: c for c in CAPABILITIES}
