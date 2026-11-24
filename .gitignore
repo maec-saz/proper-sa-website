@@ -7,3 +7,6 @@ __pycache__/
 .claude/skills/
 .claude/agents/
 .claude/settings.local.json
+
+# Local hero previews (not published)
+preview-*.html
