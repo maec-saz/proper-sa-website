@@ -670,6 +670,24 @@ MAEC_MORE = ["Crown Plaza & Holiday Inn Makkah", "Souq 7 Mixed-Use", "Jeddah Vib
 TECH_SOLUTIONS = ['LED Display Solutions', 'Digital Signage Solutions', 'Intelligent Command & Control Solutions', 'NOC (Network Operations Centre) Solutions', 'AV (Audio-Visual) Solutions', 'System Integration (AV, IT & ELV)', 'Immersive Experience Solutions', 'Interactive Technology Solutions', 'Museum Technology Solutions', 'Exhibition & Event Technology', 'Smart Fit-Out & Turnkey Solutions', 'Luxury Retail Solutions', 'Automotive Showroom Solutions', 'Hospitality & Hotel Technology Solutions', 'Education & EdTech Solutions', 'AI & Automation Solutions', 'Facade & Architectural Lighting Solutions', 'Meeting Room & Collaboration Solutions', 'Content Development & CMS Solutions', 'AMC & Managed Services', 'IPTV (Interactive TV) Solutions']
 
 
+CLIENTS = [('alkhabeer-capital', 'Alkhabeer Capital'), ('bcg', 'BCG'), ('ministry-of-culture', 'Ministry of Culture'), ('ministry-of-commerce', 'Ministry of Commerce'), ('knowledge-economic-city', 'Knowledge Economic City'), ('aldar-alkhasa', 'Aldar Alkhasa'), ('aramco-digital', 'Aramco Digital'), ('dallah-albaraka', 'Dallah Albaraka'), ('dar', 'Dar'), ('ministry-of-health', 'Ministry of Health'), ('abdul-latif-jameel', 'Abdul Latif Jameel'), ('jeddah-central', 'Jeddah Central Development Company'), ('diriyah-gate', 'Diriyah Gate Development Authority'), ('thakher-makkah', 'Thakher Makkah'), ('kinan', 'Kinan'), ('development-authorities-support-office', 'Development Authorities Support Office'), ('al-balad-development', 'Al Balad Development Company'), ('sedco-holding', 'SEDCO Holding'), ('sumou', 'Sumou')]
+
+
+def clients_section():
+    logos = "".join(f'<li data-reveal><img src="{{r}}assets/img/clients/{slug}.png" alt="{e(name)}" title="{e(name)}" loading="lazy" decoding="async"></li>'
+                    for slug, name in CLIENTS)
+    return f'''
+<section class="section clients" id="clients">
+  <div class="wrap">
+    <div class="split clients__head">
+      <div data-reveal>{eyebrow("Our clients")}<h2 class="display-3">Trusted across <em>the Kingdom.</em></h2></div>
+      <p class="lead" data-reveal>Government ministries, development authorities, investors and leading Saudi groups.</p>
+    </div>
+    <ul class="clients__wall">{logos}</ul>
+  </div>
+</section>'''
+
+
 def tech_solutions_section():
     items = "".join(f'<li><span>{i + 1:02d}</span>{e(t)}</li>' for i, t in enumerate(TECH_SOLUTIONS))
     return f'''
@@ -795,6 +813,8 @@ def about():
     </div>
   </div>
 </section>
+
+{clients_section()}
 
 {image_band("hd/riyadh-night.jpg", "Our reach", "Delivering across <em>the Kingdom.</em>",
             "Headquartered in Jeddah and working across Saudi Arabia, with an ambition that reaches across the GCC.")}
