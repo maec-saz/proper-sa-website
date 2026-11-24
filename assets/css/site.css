@@ -1041,3 +1041,6 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 /* light-coloured logos (e.g. lime, green, orange) need extra depth to read in the grey tile style */
 .partner--light .partner__logo img { filter: grayscale(1) brightness(.5) contrast(1.6); opacity: .85; }
 .partner--light:hover .partner__logo img { filter: none; opacity: 1; }
+.partners__sub { margin: clamp(56px, 7vw, 96px) 0 clamp(24px, 3vw, 40px); }
+.partners--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .partners--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

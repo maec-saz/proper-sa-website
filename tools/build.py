@@ -191,6 +191,14 @@ PARTNERS = [
 ]
 
 
+# Solution partners (software, AI, engineering and security specialists)
+SOLUTION_PARTNERS = [
+    {"name": "Gruve AI", "light": True, "logo": "partners/gruve.png", "role": "AIOC and AI enablement"},
+    {"name": "Assystem", "logo": "partners/assystem.png", "role": "BIM, NRM2, PSOC, NOC and digital twin"},
+    {"name": "Aarcalev", "light": True, "logo": "partners/aarcalev.png", "role": "Cybersecurity and SOC"},
+    {"name": "Smart Solutions", "logo": "partners/smart-solutions.png", "role": "Data visualisation and integration design"},
+]
+
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
        ("partners.html", "Technology Partners"), ("contact.html", "Contact Us")]
 
@@ -928,6 +936,8 @@ def partners():
 <section class="section section--stone">
   <div class="wrap">
     <ul class="partners partners--big">{"".join(partner_tile(p, True) for p in PARTNERS)}</ul>
+    <div class="sec-head partners__sub" data-reveal>{eyebrow("Solution partners")}<h2 class="display-3">Specialists in AI, BIM, security and data.</h2></div>
+    <ul class="partners partners--big partners--four">{"".join(partner_tile(p, True) for p in SOLUTION_PARTNERS)}</ul>
   </div>
 </section>
 <section class="section">

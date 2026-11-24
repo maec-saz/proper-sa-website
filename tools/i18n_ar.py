@@ -684,6 +684,16 @@ AR = {
     'biamp': 'biamp',
     'itC': 'itC',
     'PROPER Developments technology partners and distribution brands, including LG, Samsung, Huawei, Dell, Lenovo, MAXHUB, Yealink, Shure, QSC, Biamp, CTF and VOD.': 'شركاء التقنية وعلامات التوزيع لدى PROPER Developments، ومنها LG وSamsung وHuawei وDell وLenovo وMAXHUB وYealink وShure وQSC وBiamp وCTF وVOD.',
+    'Gruve AI': 'Gruve AI',
+    'Assystem': 'Assystem',
+    'Aarcalev': 'Aarcalev',
+    'Smart Solutions': 'Smart Solutions',
+    'AIOC and AI enablement': 'مراكز عمليات الذكاء الاصطناعي وتمكين الذكاء الاصطناعي',
+    'BIM, NRM2, PSOC, NOC and digital twin': 'نمذجة معلومات البناء (BIM) وNRM2 وPSOC وNOC والتوأم الرقمي',
+    'Cybersecurity and SOC': 'الأمن السيبراني ومراكز العمليات الأمنية',
+    'Data visualisation and integration design': 'تصوير البيانات وتصميم التكامل',
+    'Solution partners': 'شركاء الحلول',
+    'Specialists in AI, BIM, security and data.': 'متخصصون في الذكاء الاصطناعي ونمذجة معلومات البناء والأمن والبيانات.',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
