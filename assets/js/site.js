@@ -72,7 +72,7 @@
   var pv = $('[data-pano]');
   if (pv) {
     var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv), countEl = $('.pv__count b', pv);
-    var cur = -1;
+    var cur = -1, lastClick = 0;
     var show = function (i) {
       if (i === cur) return;
       cur = i;
@@ -92,7 +92,16 @@
       pv.classList.toggle('is-open', i >= 0);
     };
     strips.forEach(function (s, k) {
-      s.addEventListener('click', function (e) { e.preventDefault(); show(cur === k ? -1 : k); });
+      // While a discipline is open, any click on the images returns to the six strips (even one that lands
+      // on a neighbouring strip mid-animation); clicks within 350 ms are ignored so a double-click can't
+      // open and immediately close.
+      s.addEventListener('click', function (e) {
+        e.preventDefault();
+        var now = Date.now();
+        if (now - lastClick < 350) return;
+        lastClick = now;
+        show(cur >= 0 ? -1 : k);
+      });
     });
     $$('.pv__arrow', pv).forEach(function (b) {
       b.addEventListener('click', function () {
@@ -103,6 +112,15 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cur >= 0) show(-1); });
     var back = $('.pv__back', pv);
     if (back) back.addEventListener('click', function () { show(-1); });
+    // Load every mosaic's photos once the page has settled (skipped with Data Saver), so opening a
+    // discipline shows all six images straight away; opening one before then still loads it at once.
+    var hydrate = function (im) { im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); };
+    var warm = function () {
+      if (navigator.connection && navigator.connection.saveData) return;
+      $$('.pv img[data-src]', pv).forEach(hydrate);
+    };
+    var warmLater = function () { setTimeout(function () { ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 2500 }) : warm(); }, 1500); };
+    if (document.readyState === 'complete') warmLater(); else window.addEventListener('load', warmLater);
     show(-1);
   }
 
