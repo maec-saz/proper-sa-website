@@ -125,7 +125,8 @@ CAPABILITIES = [
                     ("hd/rental-interactive-floor.jpg", "Interactive Installations"),
                     ("hd/rental-led-cube.jpg", "LED Floors, Cubes & Immersive Rooms")],
         # Real-world reference photos (Unsplash licence), illustrative only, not PROPER projects.
-        "gallery2": [("hd/rental-live-interaction.jpg", "Live Interaction"),
+        "gallery2": [("hd/rental-anamorphic.jpg", "Anamorphic 3D Content"),
+                     ("hd/rental-live-interaction.jpg", "Live Interaction"),
                      ("hd/rental-ai-host.jpg", "AI Interaction & Digital Hosts")],
     },
 ]
