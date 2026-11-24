@@ -589,7 +589,7 @@ AR = {
     'Exhibition & Event Technology': 'حلول تقنيات المعارض والفعاليات',
     'Facade & Architectural Lighting Solutions': 'حلول الإضاءة المعمارية وإضاءة الواجهات',
     'Featured project': 'مشروع مميز',
-    'Four specialisms.': 'أربعة تخصصات.',
+    'Four core domains.': 'أربعة مجالات رئيسية.',
     'Group structure': 'هيكل المجموعة',
     'Holding': 'Holding',
     'Hospitality & Hotel Technology Solutions': 'حلول تقنيات الضيافة والفنادق',

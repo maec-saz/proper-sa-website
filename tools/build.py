@@ -759,7 +759,7 @@ def about():
 <section class="section grp" id="group">
   <div class="grp__bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="sec-head grp__head" data-reveal>{eyebrow("Group structure", True)}<h2 class="display-3">One group. <em>Four specialisms.</em></h2>
+    <div class="sec-head grp__head" data-reveal>{eyebrow("Group structure", True)}<h2 class="display-3">One group. <em>Four core domains.</em></h2>
       <p class="sec-head__lead">PROPER Holding brings together PROPER Developments and MIDRAR, covering technology, real estate development, project management and engineering consulting.</p></div>
 
     <div class="grp__tree">
