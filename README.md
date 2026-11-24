@@ -68,11 +68,11 @@ The home page opens on one continuous photograph (`hd/hero-panorama.jpg`) showin
 six strips. There is no intro sequence, no automatic advance and no hover effect: the hero changes only when the
 visitor asks it to.
 
-- **Click or tap a strip:** that discipline opens full screen with its full-size photograph (Exhibition & Rental opens
-  onto the six-clip mosaic) and its name, tagline and link at the bottom right. Clicking the open image goes to that
-  discipline's page.
+- **Click or tap a strip:** that discipline opens full screen as a mosaic of six images (Exhibition & Rental shows
+  six installation clips), with its name, tagline and a link to its page at the bottom right.
+- **Going back:** clicking the open mosaic again, the "All disciplines" button beside the arrows, or Escape returns
+  to the six strips.
 - **Arrows:** the round arrows at the bottom right step through the six disciplines, with a 01 / 06 counter.
-- **Escape** returns to the six strips.
 
 ## Live operations wall
 The Technology page includes an animated operations-centre "video wall": a schematic site network across the Kingdom,

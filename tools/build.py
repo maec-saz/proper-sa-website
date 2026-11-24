@@ -544,6 +544,7 @@ def home():
 
   <div class="hp__caps">{hero_caps()}</div>
   <div class="pv__nav">
+    <button type="button" class="pv__back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>All disciplines</button>
     <button type="button" class="pv__arrow pv__arrow--prev" data-step="-1" aria-label="Previous discipline">{arrow()}</button>
     <span class="pv__count" aria-live="polite"><b>00</b> / {len(CAPABILITIES):02d}</span>
     <button type="button" class="pv__arrow pv__arrow--next" data-step="1" aria-label="Next discipline">{arrow()}</button>

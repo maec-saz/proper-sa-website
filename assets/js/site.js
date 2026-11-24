@@ -67,8 +67,8 @@
   /* ---------- Home hero: one image, six disciplines ----------
      At rest the hero shows one continuous photograph split into six strips, one per discipline.
      Nothing changes on its own or on hover: clicking (tapping) a strip opens that discipline full
-     screen, clicking the open one goes to its page, and the arrows step through the disciplines.
-     Escape returns to the six strips. */
+     screen; clicking it again, the 'All disciplines' button or Escape returns to the six strips. The
+     arrows step through the disciplines, and the caption links to the open discipline's page. */
   var pv = $('[data-pano]');
   if (pv) {
     var stage = $('.pv', pv), strips = $$('.pv__s', pv), caps = $$('.hp__cap', pv), countEl = $('.pv__count b', pv);
@@ -89,9 +89,10 @@
       });
       caps.forEach(function (c, k) { var on = k === i; c.classList.toggle('is-on', on); c.tabIndex = on ? 0 : -1; });
       if (countEl) countEl.textContent = i < 0 ? '00' : ('0' + (i + 1)).slice(-2);
+      pv.classList.toggle('is-open', i >= 0);
     };
     strips.forEach(function (s, k) {
-      s.addEventListener('click', function (e) { if (cur !== k) { e.preventDefault(); show(k); } });
+      s.addEventListener('click', function (e) { e.preventDefault(); show(cur === k ? -1 : k); });
     });
     $$('.pv__arrow', pv).forEach(function (b) {
       b.addEventListener('click', function () {
@@ -100,6 +101,8 @@
       });
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cur >= 0) show(-1); });
+    var back = $('.pv__back', pv);
+    if (back) back.addEventListener('click', function () { show(-1); });
     show(-1);
   }
 

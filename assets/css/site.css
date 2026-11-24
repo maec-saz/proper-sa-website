@@ -1138,3 +1138,11 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .proof__big { grid-row: span 2; }
 .proof__text p { color: #c3c6cb; margin: 18px 0 26px; max-width: 46ch; }
 @media (max-width: 900px) { .proof__grid { grid-template-columns: 1fr; } .proof__media { height: 320px; } }
+
+/* Home hero: way back to the six strips while a discipline is open */
+.pv__back { display: inline-flex; align-items: center; gap: 9px; height: 48px; padding: 0 18px; margin-inline-end: 6px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 24px; background: rgba(5, 5, 6, .28); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #fff; font: inherit; font-size: 13px; letter-spacing: .04em; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .4s, transform .4s var(--ease), visibility 0s .4s, background .3s, border-color .3s, color .3s; }
+.pv__back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.hero--pano.is-open .pv__back { opacity: 1; visibility: visible; transform: none; transition: opacity .4s, transform .4s var(--ease), visibility 0s, background .3s, border-color .3s, color .3s; }
+.pv__back:hover, .pv__back:focus-visible { background: var(--metal); border-color: var(--metal); color: #0d0e10; }
+.hero--pano.is-open .pv__s { cursor: zoom-out; }
+@media (max-width: 600px) { .pv__back { height: 44px; padding: 0 14px; font-size: 12px; } }
