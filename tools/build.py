@@ -718,7 +718,7 @@ def capability_page(c, idx):
 
 def partners():
     body = page_hero("Technology Partners <em>&amp; Distribution</em>", "We work with global technology leaders — and distribute selected brands — to deliver proven, supported solutions in the Kingdom.",
-                     "hd/partners-hero.jpg", "", "Partners") + f'''
+                     "hd/network-cables.jpg", "", "Partners") + f'''
 <section class="section section--stone">
   <div class="wrap">
     <ul class="partners partners--big">{"".join(partner_tile(p, True) for p in PARTNERS)}</ul>

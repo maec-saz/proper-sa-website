@@ -99,7 +99,7 @@ The brief asks for real imagery only. These are the gaps:
   plus Nano Banana Pro for the home façade): 23 images generated at 5504×3072 and saved as 2560px with 1280px phone
   versions. Prompts are in `docs/higgsfield-prompts.md`. They are illustrative environments, never presented as PROPER
   projects, and contain no logos, readable text or recognisable landmarks.
-- **About header:** a real photo of Jeddah's Corniche (Unsplash). **Partners header:** a Higgsfield-generated technology showroom.
+- **About header:** a real photo of Jeddah's Corniche (Unsplash). **Partners header:** an Unsplash photo of network cabling.
 - The full-resolution originals stay in the Higgsfield account (Presales workspace).
 - Prompts: `tools/higgsfield_generate.py` (earlier images) and `docs/higgsfield-prompts.md`.
 
@@ -120,7 +120,7 @@ The brief asks for real imagery only. These are the gaps:
 | rental-live-interaction | Unsplash, photo by Fujiphilm (unsplash.com/photos/pQh3wvcsWj4): real visitors at an interactive wall, illustrative, not a PROPER project |
 | rental-anamorphic | Higgsfield Cinema Studio 2.5, 4K: anamorphic 3D corner LED wall at an exhibition stand, golden falcon |
 | rental-ai-host | Unsplash, Enchanted Tools (unsplash.com/photos/sqj85Qm11yc): visitors interacting with an AI humanoid robot at an exhibition |
-| partners-hero | Higgsfield Cinema Studio 2.5, 4K: technology experience centre with LED walls, robot and consoles |
+| network-cables | Taylor Vick on Unsplash (Partners) |
 
 To regenerate an image, run its prompt with the Higgsfield CLI (`higgsfield generate create cinematic_studio_2_5 --resolution 4k --aspect_ratio 16:9 --prompt "…" --wait`),
 save it in `assets/img/hd/` as `name.jpg` (2560px) plus `name-1280.jpg`, then reference `hd/name.jpg` in `tools/build.py`.
