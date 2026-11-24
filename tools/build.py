@@ -276,6 +276,12 @@ def translate(doc):
 
 
 
+# Cache-busting: a short hash of each file, so browsers always fetch the newest CSS/JS after an update.
+import hashlib as _hl
+_ROOT = __import__("pathlib").Path(__file__).resolve().parent.parent
+ASSET_V = {k: _hl.md5((_ROOT / f).read_bytes()).hexdigest()[:8] for k, f in (("css", "assets/css/site.css"), ("js", "assets/js/site.js"))}
+
+
 def page(path, title, desc, body, active, body_class="", image="hd/riyadh-dusk.jpg", preload=None, jsonld=None):
     ar = LANG == "ar"
     full_path = ("ar/" if ar else "") + path
@@ -317,8 +323,8 @@ def page(path, title, desc, body, active, body_class="", image="hd/riyadh-dusk.j
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1{"&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:wght@400;700" if ar else ""}&display=swap">
 {pre}
-<link rel="stylesheet" href="{r}assets/css/site.css">
-<script src="{r}assets/js/site.js" defer></script>
+<link rel="stylesheet" href="{r}assets/css/site.css?v={ASSET_V["css"]}">
+<script src="{r}assets/js/site.js?v={ASSET_V["js"]}" defer></script>
 {ld}
 </head>
 <body class="{body_class}">
