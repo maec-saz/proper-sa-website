@@ -108,6 +108,7 @@ The brief asks for real imagery only. These are the gaps:
 | jeddah-corniche-hd | Unsplash, Asim Alghamdi (unsplash.com/photos/635VLTHmmdI): Jeddah Corniche |
 | riyadh-dusk, riyadh-night | Unsplash, Oualid Lakhrouti (unsplash.com/photos/NCD37SPA2wk): Riyadh skyline, relit as dusk and night with Nano Banana Pro |
 | hero-panorama | Higgsfield Nano Banana Pro: one continuous six-discipline photograph used by the home hero |
+| tech-ai-lab, av-led-experience, av-briefing-centre, av-boardroom (motorised monitors) | Higgsfield (Cinema Studio 2.5 / Nano Banana Pro) |
 | realestate-hero, realestate-masterplan, realestate-residential, realestate-hospitality, construction-architecture | Higgsfield (Cinema Studio 2.5 / Nano Banana Pro) |
 | projects/aramco-* | PROPER Holding company profile: Saudi Aramco project, Dammam (PROPER Developments) |
 | maec/* | MAEC Architects & Engineers firm profile: selected projects (MIDRAR) |

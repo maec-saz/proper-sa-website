@@ -986,8 +986,8 @@ RENTAL_REEL = [
 
 # Home hero: six photographs per discipline, shown as a mosaic when the discipline is opened
 HERO_MOSAIC = {
-    "technology": ["hd/tech-hero", "hd/tech-noc", "hd/tech-gpu", "hd/tech-robotics", "hd/capabilities-hero", "projects/aramco-lab"],
-    "audiovisual": ["hd/av-hero", "hd/av-led-wall", "hd/av-control-room", "projects/aramco-heritage-wall", "hd/av-boardroom", "projects/aramco-curve-wall"],
+    "technology": ["hd/tech-hero", "hd/tech-noc", "hd/tech-gpu", "hd/tech-robotics", "hd/capabilities-hero", "hd/tech-ai-lab"],
+    "audiovisual": ["hd/av-hero", "hd/av-led-wall", "hd/av-control-room", "hd/av-led-experience", "hd/av-boardroom", "hd/av-briefing-centre"],
     "construction": ["hd/construction-hero", "hd/construction-architecture", "hd/construction-site", "hd/construction-fitout", "hd/construction-infrastructure", "hd/riyadh-kafd-night"],
     "real-estate": ["hd/realestate-hero", "hd/realestate-masterplan", "hd/realestate-residential", "hd/realestate-hospitality", "hd/jeddah-corniche-hd", "hd/riyadh-dusk"],
     "museums": ["hd/museum-hero", "hd/museum-immersive", "hd/museum-touch", "hd/museum-dome", "hd/rental-anamorphic", "hd/rental-led-cube"],
