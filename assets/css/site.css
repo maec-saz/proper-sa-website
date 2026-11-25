@@ -1473,3 +1473,34 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .footer__wa svg { width: 18px; height: 18px; fill: #25d366; }
 .footer__wa:hover { background: rgba(37, 211, 102, .12); border-color: #25d366; }
 .section.clients { padding-inline: 0; }
+
+/* =====================================================================
+   Home hero on phones: six full-screen swipeable discipline slides
+   ===================================================================== */
+.mx { display: none; }
+@media (max-width: 760px) {
+  .pv, .pv__nav, .hp__caps, .hero--pano .hero__grade { display: none !important; }
+  .hero--pano { min-height: 100svh; }
+  .mx { display: block; position: absolute; inset: 0; z-index: -1; }
+  .mx__track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  .mx__track::-webkit-scrollbar { display: none; }
+  .mx__s { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; overflow: hidden; }
+  .mx__s img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .mx__s::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5, 5, 6, .75) 0%, rgba(5, 5, 6, .15) 30%, rgba(5, 5, 6, .1) 50%, rgba(5, 5, 6, .9) 100%); }
+  .mx__cap { position: absolute; z-index: 2; left: 20px; right: 20px; bottom: 96px; display: grid; gap: 8px; text-align: center; justify-items: center; }
+  .mx__n { font-size: 12px; letter-spacing: .2em; color: var(--metal); direction: ltr; }
+  .mx__cap h2 { margin: 0; font-size: 24px; font-weight: 300; line-height: 1.2; color: #fff; }
+  .mx__cap p { margin: 0; font-size: 14px; color: #d6d8dc; }
+  .mx__go { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; height: 44px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .45); color: #fff; font-size: 14px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); background: rgba(5, 5, 6, .25); }
+  .mx__go .i-arrow, .mx__hint .i-arrow { width: 16px; height: 16px; }
+  [dir="rtl"] .mx__go .i-arrow, [dir="rtl"] .mx__hint .i-arrow { transform: scaleX(-1); }
+  .mx__dots { position: absolute; z-index: 3; left: 0; right: 0; bottom: 44px; display: flex; justify-content: center; gap: 4px; }
+  .mx__dots button { width: 22px; height: 22px; padding: 7px; border: 0; background: none; cursor: pointer; }
+  .mx__dots button::before { content: ""; display: block; width: 8px; height: 8px; margin: auto; border-radius: 4px; background: rgba(255, 255, 255, .4); transition: width .35s, background .35s; }
+  .mx__dots button.is-on { width: 34px; }
+  .mx__dots button.is-on::before { width: 24px; background: var(--metal); }
+  .mx__hint { position: absolute; z-index: 3; left: 0; right: 0; bottom: 14px; margin: 0; display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .6); }
+  .hero--pano .hero__content, .hero--pano.is-open .hero__content { position: absolute; top: calc(var(--header-h) + 18px); bottom: auto; left: 0; right: 0; padding: 0 20px; text-align: center; z-index: 2; opacity: 1; visibility: visible; transform: none; }
+  .hero--pano .hero__title { font-size: 26px; color: #fff; }
+  .hero--pano .hero__lead { font-size: 14px; margin: 10px auto 0; color: #e2e4e7; }
+}

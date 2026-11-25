@@ -564,6 +564,19 @@ def hero_panels():
     return out
 
 
+def mobile_slides():
+    """Phones only: the hero becomes six full-screen, swipeable discipline slides (desktop keeps the six strips)."""
+    n = len(hero_list())
+    slides = "".join(f'''<article class="mx__s">
+  <img src="{{r}}assets/img/{c["hero"][:-4]}-1280.jpg" srcset="{{r}}assets/img/{c["hero"][:-4]}-640.jpg 640w, {{r}}assets/img/{c["hero"][:-4]}-1280.jpg 1280w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="mx__cap"><span class="mx__n">{i + 1:02d} / {n:02d}</span><h2>{e(c["name"])}</h2><p>{e(c["tagline"])}</p>
+  <a class="mx__go" href="{{r}}capabilities/{c["slug"]}.html">Explore {arrow()}</a></div>
+</article>''' for i, c in enumerate(hero_list()))
+    dots = "".join(f'<button type="button" aria-label="Slide {i + 1}"{" class=\"is-on\"" if i == 0 else ""}></button>' for i in range(n))
+    return (f'<div class="mx" aria-label="Our Expertise"><div class="mx__track">{slides}</div>'
+            f'<div class="mx__dots">{dots}</div><p class="mx__hint">Swipe {arrow()}</p></div>')
+
+
 def hero_caps():
     return "".join(f'<a class="hp__cap" data-i="{i}" href="{{r}}capabilities/{c["slug"]}.html" tabindex=-1>'
                    f'<span class="hp__cn">{c["n"]} / {len(CAPABILITIES):02d}</span>'
@@ -590,6 +603,7 @@ def home():
     cap_imgs = "".join(f'<figure class="capx__fig{" is-active" if i == 0 else ""}" data-cap-fig="{i}">{img(c["hero"], "", sizes="(max-width: 980px) 100vw, 50vw")}<figcaption>{e(c["name"])}</figcaption></figure>' for i, c in enumerate(CAPABILITIES))
     body = f'''
 <section class="hero hero--pano" id="hero" data-pano>
+  {mobile_slides()}
   <div class="pv" aria-hidden="true">{hero_panels()}</div>
   <div class="hero__grade" aria-hidden="true"></div>
 

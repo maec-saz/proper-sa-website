@@ -157,6 +157,22 @@
     if ('ResizeObserver' in window) new ResizeObserver(fitWall).observe(owFit);
   }
 
+  /* ---------- Home hero on phones: swipe slides with dots ---------- */
+  var mxTrack = $('.mx__track');
+  if (mxTrack) {
+    var mxDots = $$('.mx__dots button');
+    var mxIndex = function () { return Math.round(Math.abs(mxTrack.scrollLeft) / mxTrack.clientWidth); };
+    mxTrack.addEventListener('scroll', function () {
+      var i = mxIndex(); mxDots.forEach(function (b, k) { b.classList.toggle('is-on', k === i); b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    }, { passive: true });
+    mxDots.forEach(function (b, k) {
+      b.addEventListener('click', function () {
+        var dir = getComputedStyle(mxTrack).direction === 'rtl' ? -1 : 1;
+        mxTrack.scrollTo({ left: dir * k * mxTrack.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+  }
+
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
   var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {

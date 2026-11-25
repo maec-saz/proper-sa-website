@@ -823,6 +823,14 @@ AR = {
     'Chat with us on WhatsApp': 'تواصل معنا عبر واتساب',
     'WhatsApp': 'واتساب',
     'Chat on WhatsApp': 'تواصل عبر واتساب',
+    'Explore': 'استكشف',
+    'Swipe': 'اسحب',
+    'Slide 1': 'الشريحة 1',
+    'Slide 2': 'الشريحة 2',
+    'Slide 3': 'الشريحة 3',
+    'Slide 4': 'الشريحة 4',
+    'Slide 5': 'الشريحة 5',
+    'Slide 6': 'الشريحة 6',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
