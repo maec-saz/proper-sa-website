@@ -1561,3 +1561,26 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .footer__bottom { padding-top: 16px; gap: 4px; font-size: 12px; }
 }
 @media (max-width: 760px) { .footer__bottom { border-top: 0; padding-top: 4px; } }
+
+/* Phones: a compact org chart that keeps the tree shape (desktop unchanged) */
+@media (max-width: 760px) {
+  .grp__tree { margin-top: 24px; }
+  .grp__root { width: min(260px, 100%); padding: 20px 18px 16px; gap: 10px; }
+  .grp__root img { width: 160px; }
+  .grp__role { font-size: 11px; letter-spacing: .22em; }
+  .grp__wire { height: 34px; }
+  .grp__wire--split i:nth-child(2), .grp__wire--split i:nth-child(3) { display: block !important; }
+  .grp__cos, .grp__wires { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grp__wires .grp__wire + .grp__wire { display: block !important; }
+  .grp__co, .grp__co-body { min-height: 132px; }
+  .grp__co-body { padding: 26px 10px 14px; gap: 8px; }
+  .grp__logo { width: 82%; }
+  .grp__logo--midrar { width: 72%; }
+  .grp__co-body p { font-size: 11.5px; line-height: 1.4; }
+  .grp__here { top: 8px; inset-inline-start: 8px; font-size: 9px; padding: 3px 6px; letter-spacing: .1em; }
+  /* each company's two domains sit directly beneath it */
+  .grp__specs { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; grid-auto-flow: column; gap: 8px 10px; }
+  .grp__specs a { min-height: 84px; padding: 10px; gap: 3px; }
+  .grp__specs b { font-size: 13px; line-height: 1.25; }
+  .grp__n { font-size: 10px; }
+}
