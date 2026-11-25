@@ -165,6 +165,22 @@
     mxTrack.addEventListener('scroll', function () {
       var i = mxIndex(); mxDots.forEach(function (b, k) { b.classList.toggle('is-on', k === i); b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
     }, { passive: true });
+    // one slide per swipe: remember where the swipe started and never settle more than one slide away
+    var mxStart = 0, mxSettle = 0, mxDir = function () { return getComputedStyle(mxTrack).direction === 'rtl' ? -1 : 1; };
+    mxTrack.addEventListener('touchstart', function () { mxStart = mxIndex(); }, { passive: true });
+    mxTrack.addEventListener('scroll', function () {
+      clearTimeout(mxSettle);
+      mxSettle = setTimeout(function () {
+        var i = mxIndex();
+        if (Math.abs(i - mxStart) > 1) {
+          var to = mxStart + (i > mxStart ? 1 : -1);
+          mxStart = to;
+          mxTrack.scrollTo({ left: mxDir() * to * mxTrack.clientWidth, behavior: 'smooth' });
+          return;
+        }
+        mxStart = i;
+      }, 140);
+    }, { passive: true });
     mxDots.forEach(function (b, k) {
       b.addEventListener('click', function () {
         var dir = getComputedStyle(mxTrack).direction === 'rtl' ? -1 : 1;

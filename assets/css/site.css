@@ -1504,3 +1504,15 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .hero--pano .hero__title { font-size: 26px; color: #fff; }
   .hero--pano .hero__lead { font-size: 14px; margin: 10px auto 0; color: #e2e4e7; }
 }
+
+/* Phones: the language switch lives in the menu, not the top bar; desktop unchanged */
+.nav__item--lang { display: none; }
+@media (max-width: 760px) {
+  .site-header .lang-switch { display: none; }
+  .nav__item--lang { display: block; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .nav__item--lang a[lang="ar"] { font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Geeza Pro", Tahoma, sans-serif; }
+  .nav__item--lang a[lang="en"] { font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif; }
+  /* swipe moves exactly one slide */
+  .mx__s { scroll-snap-stop: always; }
+}
+@media (max-width: 760px) { .nav__item--lang { margin-top: 0; padding-top: 0; border-top: 0; } }

@@ -265,6 +265,7 @@ def header(r, active):
     </a>
     <nav class="nav" id="siteNav" aria-label="Main">
       {''.join(links)}
+      <div class="nav__item nav__item--lang"><a href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a></div>
     </nav>
     <a class="lang-switch" href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a>
     <a class="btn btn--line btn--sm header-cta" href="{r}contact.html"{' aria-current="page"' if active == "contact.html" else ""}>Contact Us</a>
