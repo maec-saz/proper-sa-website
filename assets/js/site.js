@@ -112,8 +112,8 @@
 
   /* ---------- Company profiles: ask for name, email and company before opening ----------
      Details are kept in this browser so a returning visitor isn't asked again. If GATE_ENDPOINT is set
-     (e.g. a Formspree form URL), each request is also sent there so the team receives the lead. */
-  var GATE_ENDPOINT = '';
+     (FormSubmit, forwarding to sales@properholding.com), each request is emailed to the team. */
+  var GATE_ENDPOINT = 'https://formsubmit.co/ajax/sales@properholding.com';
   var gate = $('#docGate');
   if (gate && typeof gate.showModal === 'function') {
     var gForm = $('.gate__form', gate), gErr = $('.gate__err', gate), gDoc = $('[data-gate-doc]', gate), pending = null;
@@ -121,7 +121,7 @@
     var openDoc = function (a) { window.open(a.href, '_blank', 'noopener'); };
     var send = function (who, doc) {
       if (!GATE_ENDPOINT) return;
-      try { fetch(GATE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ name: who.name, email: who.email, company: who.company, document: doc, page: location.href }) }); } catch (e) {}
+      try { fetch(GATE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ _subject: 'Company profile request: ' + (doc || ''), _template: 'table', _captcha: 'false', name: who.name, email: who.email, company: who.company, document: doc, page: location.href }) }); } catch (e) {}
     };
     $$('a[data-gated]').forEach(function (a) {
       a.addEventListener('click', function (e) {

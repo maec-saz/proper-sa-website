@@ -26,6 +26,7 @@ COMPANY = {
     "phone": "+966 5499 662 66",
     "phone_href": "+966549966266",
     "email": "sales@properholding.com",
+    "email_info": "info@properholding.com",
     "address": "The Headquarters Business Park, Al Corniche Road, P.O. Box 23511, Jeddah 2444, Kingdom of Saudi Arabia",
     "address_short": "Headquarters Business Park, Al Corniche Road, Jeddah",
     "hours": "Monday – Saturday, 7:00 – 17:00",
@@ -284,7 +285,7 @@ def footer(r):
       <div><h2 class="footer__h">Capabilities</h2><ul>{caps}</ul></div>
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
       <div><h2 class="footer__h">Contact</h2>
-        <p class="footer__contact"><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
+        <p class="footer__contact"><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a><br><a href="mailto:{COMPANY["email_info"]}">{COMPANY["email_info"]}</a></p>
       </div>
     </div>
     <table class="offices-t">
@@ -1151,7 +1152,7 @@ def contact():
       <dl class="contact-list">
         <div><dt>Headquarters</dt><dd>{e(COMPANY["address"])}</dd></div>
         <div><dt>Phone</dt><dd><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a></dd></div>
-        <div><dt>Email</dt><dd><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a><br><a href="mailto:{COMPANY["email_info"]}">{COMPANY["email_info"]}</a></dd></div>
         <div><dt>Hours</dt><dd>{COMPANY["hours"]}</dd></div>
         <div><dt>WhatsApp</dt><dd><a href="{COMPANY["whatsapp"]}" target="_blank" rel="noopener">Chat with our team</a></dd></div>
       </dl>

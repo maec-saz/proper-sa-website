@@ -1355,3 +1355,20 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .gate__err { margin: 0; color: #e9a08f; font-size: 13px; }
 .gate .btn { justify-self: start; }
 @media (max-width: 560px) { .gate .btn { justify-self: center; } }
+
+/* Home hero tagline — desktop: a frosted band across the bottom (tagline · description · buttons) */
+@media (min-width: 901px) {
+  .hero--pano .hero__content { position: absolute; left: 0; right: 0; bottom: clamp(108px, 14vh, 130px); max-width: none; padding: 22px max(24px, calc((100vw - 1320px) / 2)); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; background: rgba(10, 11, 13, .42); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-block: 1px solid rgba(255, 255, 255, .12); }
+  .hero--pano .hero__title { font-size: clamp(20px, 1.9vw, 30px); max-width: none; white-space: nowrap; }
+  .hero--pano .hero__lead { margin: 0; max-width: none; font-size: 14px; }
+  .hero--pano .hero__actions { margin: 0; flex-wrap: nowrap; }
+  .hero--pano .hero__actions .btn { height: 44px; padding: 0 18px; font-size: 14px; }
+  .hp__caps { bottom: calc(clamp(108px, 14vh, 130px) + 120px); }
+}
+/* Phone: the whole tagline centred across the screen, description and buttons centred beneath */
+@media (max-width: 900px) {
+  .hero--pano .hero__content { text-align: center; max-width: none; }
+  .hero--pano .hero__title { max-width: none; margin-inline: auto; }
+  .hero--pano .hero__lead { margin-inline: auto; }
+  .hero--pano .hero__actions { justify-content: center; }
+}
