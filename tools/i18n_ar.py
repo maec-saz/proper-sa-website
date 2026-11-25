@@ -798,6 +798,8 @@ AR = {
     'Branch offices': 'الفروع',
     'Riyadh, KSA': 'الرياض، المملكة العربية السعودية',
     'Hyderabad, Telangana, India': 'حيدر آباد، تيلانغانا، الهند',
+    'Infinix Innovations': 'Infinix Innovations',
+    'Interactive & kinetic installations': 'التركيبات التفاعلية والحركية',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
