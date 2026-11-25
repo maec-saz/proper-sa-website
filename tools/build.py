@@ -232,7 +232,7 @@ def offices_section():
   </div>
 </section>'''
 
-NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
+NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Expertise"),
        ("partners.html", "Technology Partners"), ("contact.html", "Contact Us")]
 
 
@@ -251,7 +251,7 @@ def header(r, active):
             sub = "".join(f'<a href="{r}capabilities/{c["slug"]}.html"><span>{c["n"]}</span>{e(c["name"])}</a>' for c in CAPABILITIES)
             links.append(f'''<div class="nav__item has-mega">
           <a href="{r}{href}"{cur}>{label}</a>
-          <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Show capabilities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Show expertise"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="mega"><div class="mega__inner">{sub}</div></div>
         </div>''')
         elif href == "contact.html":   # shown in the menu only where the header "Contact Us" button is hidden
@@ -283,7 +283,7 @@ def footer(r):
         <img src="{r}assets/img/logo-white.png" alt="PROPER Developments" width="140" height="40" loading="lazy">
         <p class="footer__parent">A {COMPANY["parent"]} company</p>
       </div>
-      <div><h2 class="footer__h">Capabilities</h2><ul>{caps}</ul></div>
+      <div><h2 class="footer__h">Expertise</h2><ul>{caps}</ul></div>
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
       <div><h2 class="footer__h">Contact</h2>
         <p class="footer__contact"><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a><br><a href="mailto:{COMPANY["email_info"]}">{COMPANY["email_info"]}</a></p>
@@ -302,7 +302,11 @@ def footer(r):
       <span>A member of {COMPANY["parent"]}</span>
     </div>
   </div>
-</footer>'''
+</footer>
+<a class="wa-fab" href="{COMPANY["whatsapp"]}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C9 3 3.3 8.66 3.3 15.65c0 2.24.6 4.43 1.73 6.36L3.2 29l7.17-1.86a12.8 12.8 0 0 0 5.66 1.32h.01c7.03 0 12.74-5.66 12.74-12.65C28.78 8.66 23.07 3 16.04 3zm0 23.25h-.01a10.6 10.6 0 0 1-5.4-1.47l-.39-.23-4.26 1.1 1.14-4.13-.25-.42a10.42 10.42 0 0 1-1.61-5.55c0-5.8 4.75-10.52 10.6-10.52 5.84 0 10.59 4.72 10.59 10.53 0 5.8-4.75 10.52-10.59 10.52zm5.81-7.88c-.32-.16-1.89-.93-2.18-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.58a9.6 9.6 0 0 1-1.78-2.2c-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.72-.98-2.36-.26-.62-.52-.53-.72-.54h-.61c-.21 0-.56.08-.85.4-.29.31-1.11 1.08-1.11 2.64 0 1.56 1.14 3.07 1.3 3.28.16.21 2.24 3.4 5.42 4.77.76.33 1.35.52 1.81.67.76.24 1.45.2 2 .12.61-.09 1.89-.77 2.15-1.51.27-.74.27-1.37.19-1.5-.08-.14-.29-.22-.61-.38z"/></svg>
+  <span>WhatsApp</span>
+</a>'''
 
 
 # ============================================================================================
@@ -608,7 +612,7 @@ def home():
 <section class="capx dark" id="capabilities" aria-labelledby="capx-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      {eyebrow("Our Capabilities", True)}
+      {eyebrow("Our Expertise", True)}
       <h2 class="display-2" id="capx-title">Six disciplines. <em>One accountable team.</em></h2>
     </div>
     <div class="capx__grid">
@@ -651,6 +655,14 @@ CONTROL_ROOMS = [
     ("hd/cr-soc.jpg", "Security operations centre"),
     ("hd/cr-airport.jpg", "Airport operations centre"),
 ]
+BACKEND = [
+    ("hd/be-datahall.jpg", "Data centres"),
+    ("hd/be-equipment-room.jpg", "Technical equipment rooms"),
+    ("hd/be-network.jpg", "Network core"),
+    ("hd/be-gpu.jpg", "GPU & AI clusters"),
+    ("hd/be-cabling.jpg", "Structured cabling & fibre"),
+    ("hd/be-power.jpg", "Critical power & UPS"),
+]
 
 
 def ops_wall():
@@ -673,13 +685,14 @@ def ops_wall():
     kpis = [("Platform availability", "99.98", "%", "2"), ("Connected sites", "48", "", "0"),
             ("Events processed today", "12840", "", "0"), ("Mean response", "42", "s", "0")]
     kp = "".join(f'<div class="ow-kpi"><span class="ow-kpi__v"><span data-count="{v}" data-dec="{d}" data-ow-kpi="{k}">{v}</span><small>{u}</small></span><span class="ow-kpi__l">{e(l)}</span></div>' for k, (l, v, u, d) in enumerate(kpis))
-    tiles = "".join(f'<figure class="crg__item" data-reveal>{img(src, cap, sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{e(cap)}</figcaption></figure>'
-                    for src, cap in CONTROL_ROOMS)
+    tile = lambda src, cap: f'<figure class="crg__item" data-reveal>{img(src, cap, sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{e(cap)}</figcaption></figure>'
+    tiles = "".join(tile(s_, c_) for s_, c_ in CONTROL_ROOMS)
+    back = "".join(tile(s_, c_) for s_, c_ in BACKEND)
     return f'''<section class="section dark opswall-sec" aria-labelledby="ow-title">
   <div class="wrap">
     <div class="sec-head sec-head--split" data-reveal>
-      <div>{eyebrow("Command & control", True)}<h2 class="display-3" id="ow-title">Control rooms <em>we build.</em></h2></div>
-      <p class="opswall-sec__lead">Traffic, emergency response, utilities, security and airport operations: video walls, monitoring platforms and operator consoles designed as one environment.</p>
+      <div>{eyebrow("Command & control", True)}<h2 class="display-3" id="ow-title">Control rooms, <em>end to end.</em></h2></div>
+      <p class="opswall-sec__lead">Traffic, emergency response, utilities, security and airport operations, from the video wall and operator consoles to the backend systems that run them.</p>
     </div>
     <div class="crg">
       <figure class="crg__item crg__item--live" data-reveal>
@@ -706,6 +719,9 @@ def ops_wall():
         </div>
         <figcaption><i class="crg__live"></i>Live operations view · illustrative</figcaption>
       </figure>{tiles}
+    </div>
+    <div class="crg__sub" data-reveal><h3>Behind the wall</h3><p>The infrastructure that keeps every screen live: data centres, equipment rooms, network core, AI compute, cabling and critical power.</p></div>
+    <div class="crg">{back}
     </div>
   </div>
 </section>'''
@@ -1000,10 +1016,10 @@ def capabilities_overview():
       <a class="link" href="{{r}}capabilities/{c["slug"]}.html">Explore {e(c["short"])} {arrow()}</a>
     </div>
   </article>''' for c in CAPABILITIES)
-    body = page_hero("Our <em>Capabilities</em>", "Six integrated business verticals — engineered to work together, from the first concept to long-term operation.",
+    body = page_hero("Our <em>Expertise</em>", "Six integrated business verticals — engineered to work together, from the first concept to long-term operation.",
                      "hd/capabilities-hero.jpg", "", "What We Do") + f'''
 <section class="section capblocks"><div class="wrap">{blocks}</div></section>'''
-    return page("capabilities.html", "Our Capabilities", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction, architecture & engineering, real estate development, museums & immersive experiences, and exhibition & equipment rental.",
+    return page("capabilities.html", "Our Expertise", "Technology & intelligent infrastructure, audiovisual & integrated solutions, construction, architecture & engineering, real estate development, museums & immersive experiences, and exhibition & equipment rental.",
                 body, "capabilities.html", "has-hero")
 
 
@@ -1114,7 +1130,7 @@ def capability_page(c, idx):
     nxt = CAPABILITIES[(idx + 1) % len(CAPABILITIES)]
     steps = [("Consult", "Requirements, users, site and success criteria."), ("Design", "Engineering, technology selection and value engineering."),
              ("Deliver", "Supply, construction, installation and integration."), ("Support", "Commissioning, training, maintenance and upgrades.")]
-    body = page_hero(e(c["name"]), e(c["tagline"]), c["hero"], c["hero_caption"], f'Capability {c["n"]}', c["accent"], mosaic=c["slug"] == "rental") + f'''
+    body = page_hero(e(c["name"]), e(c["tagline"]), c["hero"], c["hero_caption"], f'Expertise {c["n"]}', c["accent"], mosaic=c["slug"] == "rental") + f'''
 <section class="section cap-over" style="--accent:{c["accent"]}">
   <div class="wrap">
     <div class="cap-over__intro" data-reveal><div class="cap-over__side">{eyebrow("Overview")}<p class="cap-over__count"><b>{n_svc:02d}</b><span>Core services</span></p></div><p class="cap-intro">{e(c["intro"])}</p></div>
@@ -1136,7 +1152,7 @@ def capability_page(c, idx):
 
 <section class="next-cap" style="--accent:{nxt["accent"]}">
   <a class="wrap next-cap__link" href="{{r}}capabilities/{nxt["slug"]}.html">
-    <span class="eyebrow">Next capability · {nxt["n"]}</span>
+    <span class="eyebrow">Next · {nxt["n"]}</span>
     <span class="display-2">{e(nxt["name"])} {arrow()}</span>
   </a>
 </section>'''
