@@ -822,6 +822,7 @@ AR = {
     'Expertise 06': 'التخصص 06',
     'Chat with us on WhatsApp': 'تواصل معنا عبر واتساب',
     'WhatsApp': 'واتساب',
+    'Chat on WhatsApp': 'تواصل عبر واتساب',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

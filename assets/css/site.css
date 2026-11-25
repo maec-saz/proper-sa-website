@@ -1465,3 +1465,10 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 @media print { .wa-fab { display: none; } }
 /* keep the home hero arrows and caption clear of the WhatsApp button on desktop */
 @media (min-width: 761px) { .pv__nav { bottom: 96px; } .hp__caps { bottom: 168px; } }
+
+/* WhatsApp: in the footer only (no floating button); hero arrows back in place */
+.wa-fab { display: none; }
+@media (min-width: 761px) { .pv__nav { bottom: clamp(36px, 6vh, 56px); } .hp__caps { bottom: clamp(112px, 15vh, 150px); } }
+.footer__wa { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; height: 40px; padding: 0 16px; border: 1px solid rgba(37, 211, 102, .45); border-radius: 20px; color: #fff; font-size: 14px; transition: background .3s, border-color .3s; }
+.footer__wa svg { width: 18px; height: 18px; fill: #25d366; }
+.footer__wa:hover { background: rgba(37, 211, 102, .12); border-color: #25d366; }
