@@ -1601,3 +1601,5 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .crg__fit .ow-cam figcaption span { display: inline; }
   .crg__fit .ow-kpi__v { font-size: 34px; }
 }
+/* Technology page: the live dashboard tile is shown on desktop and tablet only; phones show the photos */
+@media (max-width: 760px) { .crg__item--live { display: none; } }
