@@ -773,16 +773,19 @@ PROFILES = [
 
 def profiles_section():
     cards = "".join(f'''
-      <a class="doc" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener" data-gated data-doc="{e(org)} · {e(title)}" data-reveal>
-        <span class="doc__cover"><img src="{{r}}assets/img/profiles/{slug}.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
-        <span class="doc__meta"><span class="doc__org">{e(org)}</span><b>{e(title)}</b><span class="doc__info">PDF · {e(pages)}</span></span>
-        <span class="doc__cta">View {arrow()}</span>
-      </a>''' for slug, org, title, pages, fid in PROFILES)
+      <article class="doc" data-reveal>
+        <a class="doc__cover" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="{{r}}assets/img/profiles/{slug}.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></a>
+        <div class="doc__meta"><span class="doc__org">{e(org)}</span><b>{e(title)}</b><span class="doc__info">PDF · {e(pages)}</span></div>
+        <div class="doc__actions">
+          <a class="doc__btn" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener">View {arrow()}</a>
+          <a class="doc__btn doc__btn--dl" href="https://drive.google.com/uc?export=download&amp;id={fid}" target="_blank" rel="noopener" data-gated data-doc="{e(org)} · {e(title)}">Download <svg class="i-dl" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        </div>
+      </article>''' for slug, org, title, pages, fid in PROFILES)
     return f'''
 <section class="section docs" id="profiles">
   <div class="wrap">
     <div class="sec-head" data-reveal>{eyebrow("Company profiles")}<h2 class="display-3">Read more about <em>the group.</em></h2>
-      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Share a few details to view them.</p></div>
+      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. View them online, or share a few details to download.</p></div>
     <div class="docs__grid">{cards}
     </div>
   </div>
@@ -790,13 +793,13 @@ def profiles_section():
     <form class="gate__form" method="dialog" novalidate>
       <button type="button" class="gate__close" data-gate-close aria-label="Close">×</button>
       <p class="gate__kicker">Company profiles</p>
-      <h3 id="gateTitle">View <span data-gate-doc>the document</span></h3>
-      <p class="gate__lead">Please share your details to continue.</p>
+      <h3 id="gateTitle">Download <span data-gate-doc>the document</span></h3>
+      <p class="gate__lead">Please share your details to download.</p>
       <label><span>Full name</span><input name="name" required autocomplete="name"></label>
       <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
       <label><span>Company</span><input name="company" required autocomplete="organization"></label>
       <p class="gate__err" hidden>Please fill in your name, a valid email and your company.</p>
-      <button class="btn btn--metal" type="submit">View document {arrow()}</button>
+      <button class="btn btn--metal" type="submit">Download</button>
     </form>
   </dialog>
 </section>'''

@@ -781,6 +781,9 @@ AR = {
     'Headquarters Business Park, Al Corniche Road, Jeddah': 'المركز الرئيسي للأعمال، طريق الكورنيش، جدة',
     'Riyadh, Kingdom of Saudi Arabia': 'الرياض، المملكة العربية السعودية',
     'Hyderabad, India': 'حيدر آباد، الهند',
+    'Our company profile, technology catalogue and MIDRAR’s engineering firm profile. View them online, or share a few details to download.': 'الملف التعريفي لشركتنا، وكتالوج التقنيات، والملف التعريفي لممارسة مدرار الهندسية. اعرضها مباشرة، أو شاركنا بعض البيانات لتحميلها.',
+    'Download': 'تحميل',
+    'Please share your details to download.': 'يرجى مشاركة بياناتك للتحميل.',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

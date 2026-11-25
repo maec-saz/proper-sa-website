@@ -1398,3 +1398,16 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .cmarq__track li:hover img { opacity: 1; transform: scale(1.06); }
 .cmarq__track li:hover img[src*="aarcalev"] { transform: scale(1.42); }
 @media (max-width: 600px) { .cmarq__track li, .cmarq__track li:hover { width: 150px; } }
+
+/* Profiles: view freely, download after details */
+.doc { grid-template-rows: auto 1fr auto; }
+.doc:hover { transform: none; }
+.doc__cover:hover img { transform: scale(1.04); }
+.doc__actions { display: flex; gap: 10px; padding: 14px 24px 22px; }
+.doc__btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid var(--line-2); font-size: 14px; font-weight: 500; color: #fff; transition: background .3s, border-color .3s, color .3s; }
+.doc__btn:hover, .doc__btn:focus-visible { border-color: var(--metal); }
+.doc__btn--dl { background: var(--metal-grad); background-size: 200% 100%; border-color: transparent; color: #0d0e10; }
+.doc__btn--dl:hover { background-position: 100% 0; }
+.doc__btn .i-arrow, .i-dl { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .doc__btn .i-arrow { transform: scaleX(-1); }
+@media (max-width: 900px) { .doc__actions { justify-content: center; } }
