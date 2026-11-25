@@ -1377,3 +1377,10 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 /* Hide the tagline (band on desktop) while a discipline is open; it returns with the six strips */
 .hero--pano .hero__content { transition: opacity .45s ease, visibility 0s linear 0s, transform .45s var(--ease); }
 .hero--pano.is-open .hero__content { opacity: 0; visibility: hidden; transform: translateY(12px); pointer-events: none; transition: opacity .35s ease, visibility 0s linear .35s, transform .35s ease; }
+
+/* Home hero after trimming: headline and description only, left (desktop) or centred (phone) */
+@media (min-width: 901px) {
+  .hero--pano .hero__content { grid-template-columns: minmax(0, 1fr); }
+  .hero--pano .hero__title { display: block; }
+}
+@media (min-width: 901px) { .hero--pano .hero__title .line:last-child { text-align: start; } .hero--pano .hero__lead { grid-column: 1; } }

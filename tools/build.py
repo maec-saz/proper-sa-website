@@ -579,12 +579,8 @@ def home():
   <div class="hero__grade" aria-hidden="true"></div>
 
   <div class="wrap hero__content">
-    <h1 class="hero__title"><span class="line"><span>{COMPANY["statement"]}</span></span><span class="line"><em>{COMPANY["statement_em"]}</em></span></h1>
+    <h1 class="hero__title"><span class="line"><span>{COMPANY["statement"]}</span></span></h1>
     <p class="hero__lead">Technology, construction, real estate development and immersive experiences — delivered by one multidisciplinary team.</p>
-    <div class="hero__actions">
-      <a class="btn btn--metal" href="{{r}}capabilities.html">Explore Our Capabilities {arrow()}</a>
-      <a class="btn btn--line" href="{{r}}contact.html">Contact Us</a>
-    </div>
   </div>
 
   <div class="hp__caps">{hero_caps()}</div>
