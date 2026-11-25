@@ -189,6 +189,16 @@
     });
   }
 
+  /* ---------- Header language dropdown ---------- */
+  var ldd = $('.lang-dd');
+  if (ldd) {
+    var lbtn = $('.lang-dd__btn', ldd), lmenu = $('.lang-dd__menu', ldd);
+    var lset = function (open) { lbtn.setAttribute('aria-expanded', String(open)); lmenu.hidden = !open; if (open) { var f = $('a', lmenu); if (f) f.focus(); } };
+    lbtn.addEventListener('click', function (e) { e.stopPropagation(); lset(lmenu.hidden); });
+    document.addEventListener('click', function (e) { if (!ldd.contains(e.target)) lset(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lmenu.hidden) { lset(false); lbtn.focus(); } });
+  }
+
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
   var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {

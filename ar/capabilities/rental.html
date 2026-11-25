@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap">
 
-<link rel="stylesheet" href="../../assets/css/site.css?v=d493a937">
-<script src="../../assets/js/site.js?v=62a21e52" defer></script>
+<link rel="stylesheet" href="../../assets/css/site.css?v=3d260ed5">
+<script src="../../assets/js/site.js?v=7d684901" defer></script>
 
 </head>
 <body class="has-hero">
@@ -43,7 +43,13 @@
         </div><div class="nav__item"><a href="../../ar/partners.html">شركاء التقنية</a></div><div class="nav__item nav__item--contact"><a href="../../ar/contact.html">تواصل معنا</a></div>
       <div class="nav__item nav__item--lang"><a href="../../capabilities/rental.html" hreflang="en" lang="en">English</a></div>
     </nav>
-    <a class="lang-switch" href="../../capabilities/rental.html" hreflang="en" lang="en">English</a>
+    <div class="lang-dd">
+      <button class="lang-dd__btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="langMenu" aria-label="اللغة"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span>AR</span><svg class="lang-dd__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="lang-dd__menu" id="langMenu" hidden>
+        <a href="../../capabilities/rental.html" hreflang="en" lang="en">English</a>
+        <a href="" hreflang="ar" lang="ar" aria-current="true">العربية</a>
+      </div>
+    </div>
     <a class="btn btn--line btn--sm header-cta" href="../../ar/contact.html">تواصل معنا</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav"><span class="sr">القائمة</span><i></i><i></i></button>
   </div>

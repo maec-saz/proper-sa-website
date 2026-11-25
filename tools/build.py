@@ -267,7 +267,13 @@ def header(r, active):
       {''.join(links)}
       <div class="nav__item nav__item--lang"><a href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a></div>
     </nav>
-    <a class="lang-switch" href="{{alt}}" hreflang="{"en" if LANG == "ar" else "ar"}" lang="{"en" if LANG == "ar" else "ar"}">{"English" if LANG == "ar" else "العربية"}</a>
+    <div class="lang-dd">
+      <button class="lang-dd__btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="langMenu" aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span>{"AR" if LANG == "ar" else "EN"}</span><svg class="lang-dd__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="lang-dd__menu" id="langMenu" hidden>
+        <a href="{"{alt}" if LANG == "ar" else ""}" hreflang="en" lang="en"{' aria-current="true"' if LANG != "ar" else ""}>English</a>
+        <a href="{"" if LANG == "ar" else "{alt}"}" hreflang="ar" lang="ar"{' aria-current="true"' if LANG == "ar" else ""}>العربية</a>
+      </div>
+    </div>
     <a class="btn btn--line btn--sm header-cta" href="{r}contact.html"{' aria-current="page"' if active == "contact.html" else ""}>Contact Us</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav"><span class="sr">Menu</span><i></i><i></i></button>
   </div>

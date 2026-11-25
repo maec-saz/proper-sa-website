@@ -831,6 +831,8 @@ AR = {
     'Slide 4': 'الشريحة 4',
     'Slide 5': 'الشريحة 5',
     'Slide 6': 'الشريحة 6',
+    'Language': 'اللغة',
+    'AR': 'AR',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
