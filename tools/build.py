@@ -209,7 +209,7 @@ OFFICES = [
 ]
 
 
-PRESALES_MAP = "https://www.google.com/maps/search/?api=1&amp;query=Jeddah+Saudi+Arabia"   # replace with the office's map pin
+PRESALES_MAP = "https://www.google.com/maps/search/?api=1&amp;query=Gravita+Jameel+Square+Jeddah"
 
 
 def offices_section():
@@ -284,7 +284,7 @@ def footer(r):
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
       <div><h2 class="footer__h">Headquarters</h2>
         <address>{e(COMPANY["address_short"])}<br>Kingdom of Saudi Arabia</address>
-        <p class="footer__presales"><span class="footer__sub">Pre-sales office</span><br><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Jeddah, Kingdom of Saudi Arabia</a></p>
+        <p class="footer__presales"><span class="footer__sub">Pre-sales office</span><br><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></p>
         <p class="footer__also">Also in Riyadh and Hyderabad, India.</p>
         <p><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
       </div>

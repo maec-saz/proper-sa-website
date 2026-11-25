@@ -753,6 +753,7 @@ AR = {
     'Saudi': 'أرامكو',
     'Aramco.': 'السعودية.',
     'Curved LED wall showing a heritage scene, Saudi Aramco': 'جدار LED منحني يعرض مشهدًا تراثيًا، أرامكو السعودية',
+    'Gravita, Jameel Square, Jeddah': 'Gravita، جميل سكوير، جدة',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
