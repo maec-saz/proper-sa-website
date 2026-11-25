@@ -1534,14 +1534,8 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 @media (max-width: 980px) { .lang-dd { margin-inline-start: auto; margin-inline-end: 8px; } }
 @media (max-width: 760px) { .site-header .lang-dd { display: none; } }
 
-/* Phones: bottom-of-page content aligned to the left edge (desktop unchanged) */
-@media (max-width: 760px) {
-  .cta-band .wrap, .cta-band__inner { justify-items: start; text-align: start; align-items: flex-start; }
-  .cta-band__inner > * { text-align: start; }
-  .cta-band .link { margin-inline: 0; }
-  .footer__grid { text-align: start; justify-items: start; }
-  .footer__grid img { margin-inline: 0; }
-  .footer__bottom { justify-content: flex-start; text-align: start; flex-direction: column; gap: 6px; }
-  .offices-t caption { text-align: start; }
-  .offices-t td, .offices-t td + td { text-align: start; justify-items: start; }
-}
+
+/* WhatsApp as a plain contact line, matching phone and email */
+.footer__wa-line { margin-top: 10px; font-size: 14.5px; color: var(--mute); }
+.footer__wa-line a { color: #c9ccd1; }
+.footer__wa-line a:hover { color: #fff; }

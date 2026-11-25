@@ -833,6 +833,7 @@ AR = {
     'Slide 6': 'الشريحة 6',
     'Language': 'اللغة',
     'AR': 'AR',
+    'WhatsApp:': 'واتساب:',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
