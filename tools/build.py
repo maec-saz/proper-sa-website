@@ -209,6 +209,9 @@ OFFICES = [
 ]
 
 
+PRESALES_MAP = "https://www.google.com/maps/search/?api=1&amp;query=Jeddah+Saudi+Arabia"   # replace with the office's map pin
+
+
 def offices_section():
     cards = "".join(f'''
       <article class="office{" office--hq" if i == 0 else ""}" data-reveal>
@@ -281,7 +284,8 @@ def footer(r):
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
       <div><h2 class="footer__h">Headquarters</h2>
         <address>{e(COMPANY["address_short"])}<br>Kingdom of Saudi Arabia</address>
-        <p class="footer__offices"><a href="{r}contact.html#offices">Offices in Jeddah, Riyadh and Hyderabad</a></p>
+        <p class="footer__presales"><span class="footer__sub">Pre-sales office</span><br><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Jeddah, Kingdom of Saudi Arabia</a></p>
+        <p class="footer__also">Also in Riyadh and Hyderabad, India.</p>
         <p><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
       </div>
     </div>
@@ -599,8 +603,6 @@ def home():
 
 {reel()}
 
-{proof_band("aramco")}
-
 {image_band("hd/riyadh-kafd-night.jpg", "Built in the Kingdom", "Engineering the Kingdom’s <em>next chapter.</em>",
             "From Jeddah to Riyadh, we deliver the technology, infrastructure and experiences behind the places where people work, operate and gather — in step with Vision 2030.")}
 
@@ -858,16 +860,15 @@ def about():
   <div class="wrap feature__grid">
     <div class="feature__text" data-reveal>
       {eyebrow("Featured project")}
-      <h2 class="display-3">Saudi Aramco, <em>Dammam.</em></h2>
+      <h2 class="display-3">Saudi <em>Aramco.</em></h2>
       <p class="lead">An IT lab and experience space wrapped in curved LED walls, with digital signage, IPTV, AV systems and meeting rooms, designed, supplied, installed and integrated by PROPER Developments.</p>
       <dl class="feature__facts">
-        <div><dt>Location</dt><dd>Dammam, Saudi Arabia</dd></div>
         <div><dt>Solutions</dt><dd>IPTV · Digital signage · AV systems · Meeting rooms</dd></div>
         <div><dt>Scope</dt><dd>Design, supply, installation &amp; integration</dd></div>
       </dl>
     </div>
     <div class="feature__media" data-reveal>
-      <figure class="feature__big"><img src="{{r}}assets/img/projects/aramco-heritage-wall.jpg" srcset="{{r}}assets/img/projects/aramco-heritage-wall-640.jpg 640w, {{r}}assets/img/projects/aramco-heritage-wall.jpg 1200w" sizes="(max-width: 980px) 100vw, 55vw" alt="Curved LED wall showing a heritage scene, Saudi Aramco, Dammam" loading="lazy" decoding="async" width="1165" height="744"></figure>
+      <figure class="feature__big"><img src="{{r}}assets/img/projects/aramco-heritage-wall.jpg" srcset="{{r}}assets/img/projects/aramco-heritage-wall-640.jpg 640w, {{r}}assets/img/projects/aramco-heritage-wall.jpg 1200w" sizes="(max-width: 980px) 100vw, 55vw" alt="Curved LED wall showing a heritage scene, Saudi Aramco" loading="lazy" decoding="async" width="1165" height="744"></figure>
       <figure><img src="{{r}}assets/img/projects/aramco-curve-wall.jpg" srcset="{{r}}assets/img/projects/aramco-curve-wall-640.jpg 640w, {{r}}assets/img/projects/aramco-curve-wall.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="Curved LED journey wall" loading="lazy" decoding="async" width="1165" height="703"></figure>
       <figure><img src="{{r}}assets/img/projects/aramco-lab.jpg" srcset="{{r}}assets/img/projects/aramco-lab-640.jpg 640w, {{r}}assets/img/projects/aramco-lab.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="IT Lab of Excellence LED wall" loading="lazy" decoding="async" width="1197" height="744"></figure>
       <figure><img src="{{r}}assets/img/projects/aramco-immersive.jpg" srcset="{{r}}assets/img/projects/aramco-immersive-640.jpg 640w, {{r}}assets/img/projects/aramco-immersive.jpg 1200w" sizes="(max-width: 980px) 50vw, 15vw" alt="Interactive LED wall" loading="lazy" decoding="async" width="1197" height="748"></figure>
@@ -999,7 +1000,7 @@ def proof_band(kind):
     """A compact band of real-work evidence: the Saudi Aramco project, or MIDRAR's group track record."""
     if kind == "aramco":
         imgs = ["projects/aramco-heritage-wall", "projects/aramco-lab", "projects/aramco-curve-wall"]
-        eb, title, text = "Featured project", "Saudi Aramco, <em>Dammam.</em>", "Curved LED walls, digital signage, IPTV, AV systems and meeting rooms for an IT lab and experience space, designed, supplied, installed and integrated by PROPER Developments."
+        eb, title, text = "Featured project", "Saudi <em>Aramco.</em>", "Curved LED walls, digital signage, IPTV, AV systems and meeting rooms for an IT lab and experience space, designed, supplied, installed and integrated by PROPER Developments."
         link, label = "about.html#featured-project", "See the project"
     else:
         imgs = ["maec/headquarters-business-park", "maec/hajj-street-hotels", "maec/al-bukhariya-lane"]
@@ -1046,7 +1047,7 @@ def capability_page(c, idx):
 {ops_wall() if c["slug"] == "technology" else ""}
 <section class="section section--tight gallery-sec"><div class="wrap gallery gallery--{len(c["gallery"])}">{gallery}</div>{gallery2}</section>
 {rental_reel() if c["slug"] == "rental" else ""}
-{proof_band("aramco") if c["slug"] in ("technology", "audiovisual") else proof_band("group") if c["slug"] in ("construction", "real-estate") else ""}
+{proof_band("group") if c["slug"] in ("construction", "real-estate") else ""}
 
 <section class="section section--stone">
   <div class="wrap">
@@ -1125,7 +1126,6 @@ def contact():
     </form>
   </div>
 </section>
-{offices_section()}
 {image_band("hd/jeddah-corniche-hd.jpg", "Headquarters", "Visit us on <em>Jeddah’s Corniche.</em>",
             "The Headquarters Business Park, Al Corniche Road — open Monday to Saturday.")}
 <section class="map-sec">

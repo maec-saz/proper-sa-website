@@ -1290,3 +1290,8 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .hero--pano .hero__title { color: rgba(243, 242, 239, .72); }
 .hero--pano .hero__title em { opacity: .72; }
 .hero--pano .hero__lead { color: rgba(214, 216, 220, .72); }
+
+/* Footer: pre-sales office and other locations, kept quiet */
+.footer__presales { margin-top: 18px; line-height: 1.7; }
+.footer__sub { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute-2); }
+.footer__also { margin-top: 12px; font-size: 13px; color: var(--mute-2); }

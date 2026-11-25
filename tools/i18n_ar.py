@@ -748,6 +748,11 @@ AR = {
     'Offices in Jeddah, Riyadh and Hyderabad': 'مكاتب في جدة والرياض وحيدر آباد',
     'Headquartered in Jeddah, with offices in Riyadh and Hyderabad, India, and an ambition that reaches across the GCC.': 'مقرنا الرئيسي في جدة، ولدينا مكاتب في الرياض وحيدر آباد في الهند، وطموح يمتد عبر دول الخليج.',
     'Since 2007, we have grown from a technology and infrastructure integrator into a partner across six disciplines: technology and intelligent infrastructure, audiovisual systems, construction, architecture and engineering, real estate development, museums and immersive experiences, and exhibition and equipment rental.': 'منذ عام 2007، تطورنا من شركة لتكامل التقنية والبنية التحتية إلى شريك في ستة تخصصات: التقنية والبنية التحتية الذكية، والأنظمة السمعية والبصرية، والإنشاءات والعمارة والهندسة، والتطوير العقاري، والمتاحف والتجارب الغامرة، وتأجير المعارض والمعدات.',
+    'Jeddah, Kingdom of Saudi Arabia': 'جدة، المملكة العربية السعودية',
+    'Also in Riyadh and Hyderabad, India.': 'ولدينا مكاتب أيضًا في الرياض وحيدر آباد، الهند.',
+    'Saudi': 'أرامكو',
+    'Aramco.': 'السعودية.',
+    'Curved LED wall showing a heritage scene, Saudi Aramco': 'جدار LED منحني يعرض مشهدًا تراثيًا، أرامكو السعودية',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
