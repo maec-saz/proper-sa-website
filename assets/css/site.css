@@ -1356,14 +1356,16 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .gate .btn { justify-self: start; }
 @media (max-width: 560px) { .gate .btn { justify-self: center; } }
 
-/* Home hero tagline — desktop: a frosted band across the bottom (tagline · description · buttons) */
+/* Home hero tagline — desktop: split across the page. "Building Intelligent Environments." on the left,
+   "Enabling Tomorrow." on the right; the description sits under the left half, the buttons under the right. */
 @media (min-width: 901px) {
-  .hero--pano .hero__content { position: absolute; left: 0; right: 0; bottom: clamp(108px, 14vh, 130px); max-width: none; padding: 22px max(24px, calc((100vw - 1320px) / 2)); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; background: rgba(10, 11, 13, .42); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-block: 1px solid rgba(255, 255, 255, .12); }
-  .hero--pano .hero__title { font-size: clamp(20px, 1.9vw, 30px); max-width: none; white-space: nowrap; }
-  .hero--pano .hero__lead { margin: 0; max-width: none; font-size: 14px; }
-  .hero--pano .hero__actions { margin: 0; flex-wrap: nowrap; }
-  .hero--pano .hero__actions .btn { height: 44px; padding: 0 18px; font-size: 14px; }
-  .hp__caps { bottom: calc(clamp(108px, 14vh, 130px) + 120px); }
+  .hero--pano .hero__content { max-width: none; display: grid; grid-template-columns: 1fr 1fr; align-items: end; column-gap: 40px; padding-bottom: clamp(120px, 17vh, 170px); }
+  .hero--pano .hero__title { grid-column: 1 / -1; max-width: none; display: flex; justify-content: space-between; align-items: baseline; gap: 40px; font-size: clamp(28px, 3.4vw, 52px); }
+  .hero--pano .hero__title .line:last-child { text-align: end; }
+  .hero--pano .hero__lead { grid-column: 1; margin: 18px 0 0; max-width: 460px; }
+  .hero--pano .hero__actions { grid-column: 2; justify-content: flex-end; margin-top: 18px; }
+  /* a little more depth at the bottom so both ends of the line stay readable over bright images */
+  .hero--pano .hero__grade, [dir="rtl"] .hero--pano .hero__grade { background: linear-gradient(180deg, rgba(5, 5, 6, .45) 0%, transparent 18%, transparent 48%, rgba(5, 5, 6, .55) 72%, rgba(5, 5, 6, .9) 100%); }
 }
 /* Phone: the whole tagline centred across the screen, description and buttons centred beneath */
 @media (max-width: 900px) {
