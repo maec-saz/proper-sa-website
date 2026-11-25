@@ -145,6 +145,18 @@
     });
   }
 
+  /* ---------- Technology: scale the live dashboard to its gallery tile ---------- */
+  var owFit = $('[data-ow-fit]');
+  if (owFit) {
+    var owWall = $('.opswall', owFit);
+    var fitWall = function () {
+      var sx = owFit.clientWidth / 1280, sy = owFit.clientHeight / owWall.offsetHeight;
+      owFit.style.setProperty('--ow-s', Math.min(sx, sy).toFixed(4));
+    };
+    fitWall(); window.addEventListener('resize', fitWall);
+    if ('ResizeObserver' in window) new ResizeObserver(fitWall).observe(owFit);
+  }
+
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
   var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {

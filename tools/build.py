@@ -291,10 +291,9 @@ def footer(r):
     <table class="offices-t">
       <caption class="footer__h">Our offices</caption>
       <tbody><tr>
-        <td><span class="offices-t__role">Headquarters</span><a href="{HQ_MAP}" target="_blank" rel="noopener">Headquarters Business Park, Al Corniche Road, Jeddah</a></td>
-        <td><span class="offices-t__role">Pre-sales office</span><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></td>
-        <td><span class="offices-t__role">Riyadh branch</span><span>Riyadh, Kingdom of Saudi Arabia</span></td>
-        <td><span class="offices-t__role">Hyderabad branch</span><span>Hyderabad, India</span></td>
+        <td><span class="offices-t__role">Headquarters</span><a href="{HQ_MAP}" target="_blank" rel="noopener">Headquarters Business Park, Al Corniche Road, Jeddah, KSA</a></td>
+        <td><span class="offices-t__role">Pre-sales office</span><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah, KSA</a></td>
+        <td><span class="offices-t__role">Branch offices</span><span>Riyadh, KSA</span><span>Hyderabad, Telangana, India</span></td>
       </tr></tbody>
     </table>
     <div class="footer__bottom">
@@ -538,11 +537,19 @@ ORG_LD = {
 # ============================================================================================
 # Pages
 # ============================================================================================
+# Home hero order (positions into CAPABILITIES); hero-panorama.jpg zones follow the same order
+HOME_ORDER = [2, 1, 0, 3, 4, 5]
+
+
+def hero_list():
+    return [CAPABILITIES[k] for k in HOME_ORDER]
+
+
 def hero_panels():
     """Home hero strips: each shows its own part of one continuous six-discipline photograph
     (hd/hero-panorama.jpg); when a discipline opens full screen, its full-size photograph fades in."""
     out = ""
-    for i, c in enumerate(CAPABILITIES):
+    for i, c in enumerate(hero_list()):
         b = c["hero"][:-4]
         prio = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
         out += (f'<a class="pv__s" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1" style="--i:{i}">'
@@ -559,7 +566,7 @@ def hero_caps():
     return "".join(f'<a class="hp__cap" data-i="{i}" href="{{r}}capabilities/{c["slug"]}.html" tabindex=-1>'
                    f'<span class="hp__cn">{c["n"]} / {len(CAPABILITIES):02d}</span>'
                    f'<span class="hp__cname">{e(c["name"])}</span><span class="hp__ctag">{e(c["tagline"])}</span></a>'
-                   for i, c in enumerate(CAPABILITIES))
+                   for i, c in enumerate(hero_list()))
 
 
 def home():
@@ -636,6 +643,15 @@ OPS_CAMS = [("CAM 01 · Lobby", "hd/tech-robotics-640.jpg"), ("CAM 04 · Plaza",
             ("CAM 07 · Data hall", "hd/tech-gpu-640.jpg"), ("CAM 12 · Perimeter", "hd/construction-infrastructure-640.jpg")]
 
 
+CONTROL_ROOMS = [
+    ("hd/cr-traffic.jpg", "Traffic management centre"),
+    ("hd/cr-emergency.jpg", "Emergency response & dispatch"),
+    ("hd/cr-utility.jpg", "Energy & utilities control"),
+    ("hd/cr-soc.jpg", "Security operations centre"),
+    ("hd/cr-airport.jpg", "Airport operations centre"),
+]
+
+
 def ops_wall():
     def xy(lon, lat):  # simple equirectangular projection into a 400×300 viewBox
         return round((lon - 34) / (52 - 34) * 360 + 20, 1), round((30 - lat) / (30 - 16) * 260 + 20, 1)
@@ -656,13 +672,18 @@ def ops_wall():
     kpis = [("Platform availability", "99.98", "%", "2"), ("Connected sites", "48", "", "0"),
             ("Events processed today", "12840", "", "0"), ("Mean response", "42", "s", "0")]
     kp = "".join(f'<div class="ow-kpi"><span class="ow-kpi__v"><span data-count="{v}" data-dec="{d}" data-ow-kpi="{k}">{v}</span><small>{u}</small></span><span class="ow-kpi__l">{e(l)}</span></div>' for k, (l, v, u, d) in enumerate(kpis))
+    tiles = "".join(f'<figure class="crg__item" data-reveal>{img(src, cap, sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{e(cap)}</figcaption></figure>'
+                    for src, cap in CONTROL_ROOMS)
     return f'''<section class="section dark opswall-sec" aria-labelledby="ow-title">
   <div class="wrap">
     <div class="sec-head sec-head--split" data-reveal>
-      <div>{eyebrow("Command & control", True)}<h2 class="display-3" id="ow-title">Inside an operations centre <em>we build.</em></h2></div>
-      <p class="opswall-sec__lead">Video walls, monitoring platforms and the people who run them, designed as one environment. The wall below is a live illustration of the picture our command, network and security operations centres bring together.</p>
+      <div>{eyebrow("Command & control", True)}<h2 class="display-3" id="ow-title">Control rooms <em>we build.</em></h2></div>
+      <p class="opswall-sec__lead">Traffic, emergency response, utilities, security and airport operations: video walls, monitoring platforms and operator consoles designed as one environment.</p>
     </div>
-    <div class="opswall" data-opswall data-reveal role="img" aria-label="Illustrative operations-centre video wall with a site network map, live metrics, camera feeds, GPU utilisation and an event log. All data is simulated.">
+    <div class="crg">
+      <figure class="crg__item crg__item--live" data-reveal>
+        <div class="crg__fit" data-ow-fit>
+    <div class="opswall" data-opswall role="img" aria-label="Illustrative operations-centre video wall with a site network map, live metrics, camera feeds, GPU utilisation and an event log. All data is simulated.">
       <div class="ow-bar">
         <span class="ow-brand">PROPER <b>OPS</b> · Unified operations view</span>
         <span class="ow-status"><i></i>All systems nominal</span>
@@ -681,7 +702,10 @@ def ops_wall():
         <div class="ow-tile ow-log"><h3>Event log</h3><ol data-ow-log></ol></div>
       </div>
     </div>
-    <p class="opswall-sec__note">Illustrative interface. All figures are simulated.</p>
+        </div>
+        <figcaption><i class="crg__live"></i>Live operations view · illustrative</figcaption>
+      </figure>{tiles}
+    </div>
   </div>
 </section>'''
 

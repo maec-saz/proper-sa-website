@@ -784,6 +784,20 @@ AR = {
     'Our company profile, technology catalogue and MIDRAR’s engineering firm profile. View them online, or share a few details to download.': 'الملف التعريفي لشركتنا، وكتالوج التقنيات، والملف التعريفي لممارسة مدرار الهندسية. اعرضها مباشرة، أو شاركنا بعض البيانات لتحميلها.',
     'Download': 'تحميل',
     'Please share your details to download.': 'يرجى مشاركة بياناتك للتحميل.',
+    'Control rooms': 'غرف تحكم',
+    'we build.': 'نبنيها.',
+    'Traffic, emergency response, utilities, security and airport operations: video walls, monitoring platforms and operator consoles designed as one environment.': 'المرور والاستجابة للطوارئ والمرافق والأمن وعمليات المطارات: جدران فيديو ومنصات مراقبة ومنصات تشغيل مصممة كبيئة واحدة.',
+    'Live operations view · illustrative': 'عرض العمليات المباشر · توضيحي',
+    'Traffic management centre': 'مركز إدارة المرور',
+    'Emergency response & dispatch': 'الاستجابة للطوارئ والإرسال',
+    'Energy & utilities control': 'التحكم في الطاقة والمرافق',
+    'Security operations centre': 'مركز العمليات الأمنية',
+    'Airport operations centre': 'مركز عمليات المطار',
+    'Headquarters Business Park, Al Corniche Road, Jeddah, KSA': 'المركز الرئيسي للأعمال، طريق الكورنيش، جدة، المملكة العربية السعودية',
+    'Gravita, Jameel Square, Jeddah, KSA': 'Gravita، جميل سكوير، جدة، المملكة العربية السعودية',
+    'Branch offices': 'الفروع',
+    'Riyadh, KSA': 'الرياض، المملكة العربية السعودية',
+    'Hyderabad, Telangana, India': 'حيدر آباد، تيلانغانا، الهند',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
