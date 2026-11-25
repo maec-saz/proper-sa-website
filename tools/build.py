@@ -753,6 +753,32 @@ def clients_section():
 </section>'''
 
 
+# Company documents, viewed in Google Drive (the files are too large to host on the site itself)
+PROFILES = [
+    ("proper-profile", "PROPER Holding", "Company Profile", "30 pages", "1dnt3zEk-43OjzMg8I7WB3-UdpnDhWphO"),
+    ("technology-catalogue", "PROPER Holding", "Technology Catalogue", "65 pages", "1oSQ7XAWPBANX9IRq_nOtdzzvhB4MAn-p"),
+    ("midrar-profile", "MIDRAR · MAEC Architects & Engineers", "Firm Profile", "35 pages", "106i79Rzjj0sz9TDW6450bmauFs9O-12u"),
+]
+
+
+def profiles_section():
+    cards = "".join(f'''
+      <a class="doc" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener" data-reveal>
+        <span class="doc__cover"><img src="{{r}}assets/img/profiles/{slug}.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
+        <span class="doc__meta"><span class="doc__org">{e(org)}</span><b>{e(title)}</b><span class="doc__info">PDF · {e(pages)}</span></span>
+        <span class="doc__cta">View {arrow()}</span>
+      </a>''' for slug, org, title, pages, fid in PROFILES)
+    return f'''
+<section class="section docs" id="profiles">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("Company profiles")}<h2 class="display-3">Read more about <em>the group.</em></h2>
+      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Each opens in a viewer in a new tab.</p></div>
+    <div class="docs__grid">{cards}
+    </div>
+  </div>
+</section>'''
+
+
 def tech_solutions_section():
     items = "".join(f'<li><span>{i + 1:02d}</span>{e(t)}</li>' for i, t in enumerate(TECH_SOLUTIONS))
     return f'''
@@ -904,6 +930,7 @@ def about():
   </div>
 </section>
 {tech_solutions_section()}
+{profiles_section()}
 {maec_section()}
 '''
     return page("about.html", "About Us", "PROPER Developments is a multidisciplinary Saudi company operating under MIDRAR, bringing together technology, engineering, infrastructure and development expertise since 2007.",

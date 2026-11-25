@@ -754,6 +754,18 @@ AR = {
     'Aramco.': 'السعودية.',
     'Curved LED wall showing a heritage scene, Saudi Aramco': 'جدار LED منحني يعرض مشهدًا تراثيًا، أرامكو السعودية',
     'Gravita, Jameel Square, Jeddah': 'Gravita، جميل سكوير، جدة',
+    'Company profiles': 'الملفات التعريفية',
+    'Read more about': 'اعرف المزيد عن',
+    'the group.': 'المجموعة.',
+    'Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Each opens in a viewer in a new tab.': 'الملف التعريفي لشركتنا، وكتالوج التقنيات، والملف التعريفي لممارسة مدرار الهندسية. يُفتح كل ملف للعرض في علامة تبويب جديدة.',
+    'Company Profile': 'الملف التعريفي',
+    'Technology Catalogue': 'كتالوج التقنيات',
+    'MIDRAR · MAEC Architects & Engineers': 'مدرار · MAEC للعمارة والهندسة',
+    'Firm Profile': 'الملف التعريفي للشركة',
+    'PDF · 30 pages': 'PDF · 30 صفحة',
+    'PDF · 65 pages': 'PDF · 65 صفحة',
+    'PDF · 35 pages': 'PDF · 35 صفحة',
+    'View': 'عرض',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
