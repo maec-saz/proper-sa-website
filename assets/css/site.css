@@ -1258,3 +1258,8 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .wreveal .w { opacity: 1; transition: none; }
 }
 .grp__root::before { inset: -2px; padding: 2px; background: conic-gradient(from var(--beam), transparent 0 62%, rgba(242, 223, 176, .35) 72%, #f6e6bd 84%, rgba(242, 223, 176, .35) 90%, transparent 96%); filter: drop-shadow(0 0 6px rgba(242, 223, 176, .45)); }
+
+/* Partners page: moving logo rows (same format as the clients) */
+.partners__head { margin-bottom: clamp(28px, 4vw, 48px); }
+.section--stone .partners__sub { margin: clamp(56px, 7vw, 96px) 0 clamp(24px, 3vw, 40px); }
+.cmarq__track img[src*="aarcalev"] { max-height: 84px; transform: scale(1.35); }

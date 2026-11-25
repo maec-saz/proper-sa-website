@@ -725,6 +725,9 @@ AR = {
     'All disciplines': 'جميع التخصصات',
     'Numerous projects across': 'مشاريع عديدة في أنحاء',
     'Cities across the Kingdom': 'مدن في أنحاء المملكة',
+    'Technology partners & distribution': 'شركاء التقنية والتوزيع',
+    'Global brands,': 'علامات عالمية،',
+    'delivered locally.': 'بخدمة محلية.',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).

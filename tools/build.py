@@ -465,6 +465,12 @@ def reel():
 </section>'''
 
 
+def partner_mono(p):
+    """Path (under assets/img) of a partner's white logo."""
+    folder, file = p["logo"].rsplit("/", 1)
+    return f'{folder}/mono/{file.rsplit(".", 1)[0]}.png'
+
+
 def partner_tile(p, big=False):
     mono = p["logo"].rsplit("/", 1)[0] + "/mono/" + p["logo"].rsplit("/", 1)[1].rsplit(".", 1)[0] + ".png" if p["logo"] else ""
     inner = (f'<img src="{{r}}assets/img/{mono}" alt="{e(p["name"])}" loading="lazy">' if p["logo"]
@@ -674,6 +680,24 @@ TECH_SOLUTIONS = ['LED Display Solutions', 'Digital Signage Solutions', 'Intelli
 
 
 CLIENTS = [('alkhabeer-capital', 'Alkhabeer Capital'), ('bcg', 'BCG'), ('ministry-of-culture', 'Ministry of Culture'), ('ministry-of-commerce', 'Ministry of Commerce'), ('knowledge-economic-city', 'Knowledge Economic City'), ('aldar-alkhasa', 'Aldar Alkhasa'), ('aramco-digital', 'Aramco Digital'), ('dallah-albaraka', 'Dallah Albaraka'), ('dar', 'Dar'), ('ministry-of-health', 'Ministry of Health'), ('abdul-latif-jameel', 'Abdul Latif Jameel'), ('jeddah-central', 'Jeddah Central Development Company'), ('diriyah-gate', 'Diriyah Gate Development Authority'), ('thakher-makkah', 'Thakher Makkah'), ('kinan', 'Kinan'), ('development-authorities-support-office', 'Development Authorities Support Office'), ('al-balad-development', 'Al Balad Development Company'), ('sedco-holding', 'SEDCO Holding'), ('sumou', 'Sumou')]
+
+
+def logo_marquee(items, rows=2):
+    """Logos as endless rows drifting in alternate directions; each row repeats its set so it always fills the
+    screen, and a duplicate copy makes the loop seamless. items: (image path under assets/img, name)."""
+    per = (len(items) + rows - 1) // rows
+    out = []
+    for k in range(rows):
+        group = items[k * per:(k + 1) * per]
+        reps = max(1, -(-10 // len(group)))                  # at least ~10 logos per half, whatever the set size
+        def li(src, name, hidden):
+            return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/{src}" alt="{"" if hidden else e(name)}"'
+                    f' title="{e(name)}" loading="lazy" decoding="async"></li>')
+        half = "".join(li(src, n, r > 0) for r in range(reps) for src, n in group)
+        dup = "".join(li(src, n, True) for r in range(reps) for src, n in group)
+        dur = round(4.8 * len(group) * reps) + (6 * k)
+        out.append(f'<div class="cmarq__row{" cmarq__row--rev" if k % 2 else ""}"><ul class="cmarq__track" style="animation-duration:{dur}s">{half}{dup}</ul></div>')
+    return "".join(out)
 
 
 def clients_section():
@@ -1019,9 +1043,14 @@ def partners():
                      "hd/network-cables.jpg", "", "Partners") + f'''
 <section class="section section--stone">
   <div class="wrap">
-    <ul class="partners partners--big">{"".join(partner_tile(p, True) for p in PARTNERS)}</ul>
+    <div class="sec-head partners__head" data-reveal>{eyebrow("Technology partners & distribution")}<h2 class="display-3">Global brands, <em>delivered locally.</em></h2></div>
+  </div>
+  <div class="cmarq" data-reveal>{logo_marquee([(partner_mono(x), x["name"]) for x in PARTNERS], 2)}</div>
+  <div class="wrap">
     <div class="sec-head partners__sub" data-reveal>{eyebrow("Solution partners")}<h2 class="display-3">Specialists in AI, BIM, security and data.</h2></div>
-    <ul class="partners partners--big partners--four">{"".join(partner_tile(p, True) for p in SOLUTION_PARTNERS)}</ul>
+  </div>
+  <div class="cmarq" data-reveal>{logo_marquee([(partner_mono(x), x["name"]) for x in SOLUTION_PARTNERS], 1)}</div>
+  <div class="wrap">
   </div>
 </section>
 <section class="section">
