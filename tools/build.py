@@ -199,6 +199,33 @@ SOLUTION_PARTNERS = [
     {"name": "Smart Solutions", "logo": "partners/smart-solutions.png", "role": "Data visualisation and integration design"},
 ]
 
+# Offices (addresses only where confirmed; map links search the stated location)
+OFFICES = [
+    {"city": "Jeddah", "role": "Headquarters", "address": "The Headquarters Business Park, Al Corniche Road, Jeddah",
+     "country": "Kingdom of Saudi Arabia", "map": "The Headquarters Business Park Jeddah"},
+    {"city": "Jeddah", "role": "Pre-sales office", "address": "", "country": "Kingdom of Saudi Arabia", "map": "Jeddah Saudi Arabia"},
+    {"city": "Riyadh", "role": "Riyadh office", "address": "", "country": "Kingdom of Saudi Arabia", "map": "Riyadh Saudi Arabia"},
+    {"city": "Hyderabad", "role": "India office", "address": "Hyderabad, Telangana", "country": "India", "map": "Hyderabad Telangana India"},
+]
+
+
+def offices_section():
+    cards = "".join(f'''
+      <article class="office{" office--hq" if i == 0 else ""}" data-reveal>
+        <span class="office__role">{e(o["role"])}</span>
+        <h3>{e(o["city"])}</h3>
+        <p>{e(o["address"]) + "<br>" if o["address"] else ""}{e(o["country"])}</p>
+        <a class="office__map" href="https://www.google.com/maps/search/?api=1&amp;query={o["map"].replace(" ", "+")}" target="_blank" rel="noopener">View on map {arrow()}</a>
+      </article>''' for i, o in enumerate(OFFICES))
+    return f'''
+<section class="section offices" id="offices">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>{eyebrow("Our offices")}<h2 class="display-3">Jeddah, Riyadh <em>and Hyderabad.</em></h2></div>
+    <div class="offices__grid">{cards}
+    </div>
+  </div>
+</section>'''
+
 NAV = [("index.html", "Home"), ("about.html", "About Us"), ("capabilities.html", "Our Capabilities"),
        ("partners.html", "Technology Partners"), ("contact.html", "Contact Us")]
 
@@ -254,6 +281,7 @@ def footer(r):
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
       <div><h2 class="footer__h">Headquarters</h2>
         <address>{e(COMPANY["address_short"])}<br>Kingdom of Saudi Arabia</address>
+        <p class="footer__offices"><a href="{r}contact.html#offices">Offices in Jeddah, Riyadh and Hyderabad</a></p>
         <p><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
       </div>
     </div>
@@ -773,12 +801,11 @@ def about():
                      "hd/jeddah-corniche-hd.jpg", "Jeddah, Kingdom of Saudi Arabia", "About Us") + f'''
 <section class="section">
   <div class="wrap split">
-    <div data-reveal>{eyebrow("Who we are")}<h2 class="display-3">Integrated solutions, from concept to completion.</h2></div>
+    <div data-reveal>{eyebrow("Who we are")}<h2 class="display-3">One partner, from <em>concept to completion.</em></h2></div>
     <div class="prose" data-reveal>
-      <p class="lead">PROPER Developments is a Saudi company delivering innovative solutions across technology, intelligent infrastructure, construction, fit-out, digital environments and immersive experiences.</p>
-      <p>Founded in {COMPANY["founded"]}, the company began with a vision to deliver innovative solutions in technology and infrastructure. Over the years, our expertise has expanded across audiovisual, ICT, construction and project development — and today spans AI enablement, command and control environments, museums and exhibition services.</p>
-      <p>We help organisations turn spaces into intelligent, high-performance environments, from LED displays, digital signage and command centres to audiovisual systems, immersive experiences and architectural lighting.</p>
-      <p>Our multidisciplinary approach means one accountable team across every stage: consultancy and design, supply and construction, integration and commissioning, and long-term support.</p>
+      <p class="lead">PROPER Developments is a Saudi multidisciplinary company that designs, builds and integrates the environments where organisations operate, engage and grow.</p>
+      <p>Since {COMPANY["founded"]}, we have grown from a technology and infrastructure integrator into a partner across six disciplines: technology and intelligent infrastructure, audiovisual systems, construction, architecture and engineering, real estate development, museums and immersive experiences, and exhibition and equipment rental.</p>
+      <p>From command centres and LED environments to buildings, destinations and brand experiences, we bring engineering discipline and creative ambition to every project, and deliver it with one accountable team: consultancy and design, supply and construction, integration and commissioning, and long-term support.</p>
     </div>
   </div>
 </section>
@@ -852,7 +879,7 @@ def about():
 {clients_section()}
 
 {image_band("hd/riyadh-night.jpg", "Our reach", "Delivering across <em>the Kingdom.</em>",
-            "Headquartered in Jeddah and working across Saudi Arabia, with an ambition that reaches across the GCC.")}
+            "Headquartered in Jeddah, with offices in Riyadh and Hyderabad, India, and an ambition that reaches across the GCC.")}
 
 <section class="section">
   <div class="wrap">
@@ -1098,6 +1125,7 @@ def contact():
     </form>
   </div>
 </section>
+{offices_section()}
 {image_band("hd/jeddah-corniche-hd.jpg", "Headquarters", "Visit us on <em>Jeddah’s Corniche.</em>",
             "The Headquarters Business Park, Al Corniche Road — open Monday to Saturday.")}
 <section class="map-sec">
