@@ -575,7 +575,7 @@ def mobile_slides():
     """Phones only: the hero becomes six full-screen, swipeable discipline slides (desktop keeps the six strips)."""
     n = len(hero_list())
     slides = "".join(f'''<article class="mx__s">
-  <img src="{{r}}assets/img/{c["hero"][:-4]}-1280.jpg" srcset="{{r}}assets/img/{c["hero"][:-4]}-640.jpg 640w, {{r}}assets/img/{c["hero"][:-4]}-1280.jpg 1280w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <img src="{{r}}assets/img/m/{c["slug"]}-1080.jpg" srcset="{{r}}assets/img/m/{c["slug"]}-720.jpg 720w, {{r}}assets/img/m/{c["slug"]}-1080.jpg 1080w, {{r}}assets/img/m/{c["slug"]}-1440.jpg 1440w" sizes="100vw" width="1440" height="2560" alt="" loading="lazy" decoding="async">
   <div class="mx__cap"><span class="mx__n">{i + 1:02d} / {n:02d}</span><h2>{e(c["name"])}</h2><p>{e(c["tagline"])}</p>
   <a class="mx__go" href="{{r}}capabilities/{c["slug"]}.html">Explore {arrow()}</a></div>
 </article>''' for i, c in enumerate(hero_list()))
