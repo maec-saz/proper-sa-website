@@ -1539,3 +1539,25 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .footer__wa-line { margin-top: 10px; font-size: 14.5px; color: var(--mute); }
 .footer__wa-line a { color: #c9ccd1; }
 .footer__wa-line a:hover { color: #fff; }
+
+/* Phones: a more compact footer (desktop unchanged) */
+@media (max-width: 760px) {
+  .site-footer { padding: 44px 0 22px; }
+  .footer__grid { gap: 26px; padding: 0 0 26px; }
+  .footer__grid img { height: 32px; }
+  .footer__parent { margin-top: 10px; font-size: 12px; }
+  .footer__h { margin-bottom: 8px; }
+  .footer__grid li + li { margin-top: 0; }
+  .footer__grid a { padding-block: 7px; }
+  .footer__grid ul { display: grid; gap: 0; }
+  /* company links: two short centred lines instead of a long column */
+  .footer__grid > div:nth-child(3) ul { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 18px; }
+  .footer__grid p { margin-top: 0; line-height: 1.7; }
+  .footer__contact a { display: inline-block; padding-block: 4px; }
+  .footer__wa-line { margin-top: 4px; }
+  .offices-t { margin-bottom: 18px; }
+  .offices-t caption { margin-bottom: 8px; }
+  .offices-t td, .offices-t td + td { padding: 12px 0; gap: 3px; }
+  .footer__bottom { padding-top: 16px; gap: 4px; font-size: 12px; }
+}
+@media (max-width: 760px) { .footer__bottom { border-top: 0; padding-top: 4px; } }
