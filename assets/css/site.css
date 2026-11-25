@@ -1584,3 +1584,17 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .grp__specs b { font-size: 13px; line-height: 1.25; }
   .grp__n { font-size: 10px; }
 }
+
+/* Technology gallery: the live dashboard tile always uses the full desktop layout and fills its tile like a photo */
+.crg__fit .opswall, [dir="rtl"] .crg__fit .opswall { left: 0; right: auto; transform-origin: 0 0; direction: ltr; transform: translate(var(--ow-x, 0px), var(--ow-y, 0px)) scale(var(--ow-s, .3)); }
+.crg__fit .ow-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.crg__fit .ow-map { grid-column: span 5; grid-row: span 2; }
+.crg__fit .ow-kpis { grid-column: span 7; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.crg__fit .ow-chart { grid-column: span 7; }
+.crg__fit .ow-cams { grid-column: span 6; }
+.crg__fit .ow-gpu, .crg__fit .ow-log { grid-column: span 3; }
+.crg__fit .ow-bar { flex-wrap: nowrap; gap: 18px; }
+.crg__fit .ow-status { margin-inline-start: auto; }
+.crg__fit .ow-brand { width: auto; }
+.crg__fit .ow-cam figcaption span { display: inline; }
+.crg__fit .ow-kpi__v { font-size: 34px; }

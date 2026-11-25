@@ -150,8 +150,11 @@
   if (owFit) {
     var owWall = $('.opswall', owFit);
     var fitWall = function () {
-      var sx = owFit.clientWidth / 1280, sy = owFit.clientHeight / owWall.offsetHeight;
-      owFit.style.setProperty('--ow-s', Math.min(sx, sy).toFixed(4));
+      var cw = owFit.clientWidth, ch = owFit.clientHeight, wh = owWall.offsetHeight;
+      var s = Math.max(cw / 1280, ch / wh);                       // fill the tile (like a photo), centred
+      owFit.style.setProperty('--ow-s', s.toFixed(4));
+      owFit.style.setProperty('--ow-x', ((cw - 1280 * s) / 2).toFixed(1) + 'px');
+      owFit.style.setProperty('--ow-y', ((ch - wh * s) / 2).toFixed(1) + 'px');
     };
     fitWall(); window.addEventListener('resize', fitWall);
     if ('ResizeObserver' in window) new ResizeObserver(fitWall).observe(owFit);
