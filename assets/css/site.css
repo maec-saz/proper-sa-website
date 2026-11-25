@@ -1372,3 +1372,6 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .hero--pano .hero__lead { margin-inline: auto; }
   .hero--pano .hero__actions { justify-content: center; }
 }
+/* Hide the tagline (band on desktop) while a discipline is open; it returns with the six strips */
+.hero--pano .hero__content { transition: opacity .45s ease, visibility 0s linear 0s, transform .45s var(--ease); }
+.hero--pano.is-open .hero__content { opacity: 0; visibility: hidden; transform: translateY(12px); pointer-events: none; transition: opacity .35s ease, visibility 0s linear .35s, transform .35s ease; }
