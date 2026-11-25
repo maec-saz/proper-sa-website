@@ -1384,3 +1384,9 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
   .hero--pano .hero__title { display: block; }
 }
 @media (min-width: 901px) { .hero--pano .hero__title .line:last-child { text-align: start; } .hero--pano .hero__lead { grid-column: 1; } }
+
+/* Logos in their original colours, each on a light card so dark marks stay visible on the dark page */
+.cmarq__track li { background: #f4f3f0; border-color: rgba(255, 255, 255, .08); }
+.cmarq__track li:hover { background: #fff; border-color: rgba(255, 255, 255, .3); }
+.cmarq__track img, .cmarq__track li:hover img { filter: none; opacity: 1; mix-blend-mode: multiply; }
+.cmarq__track img[src*="aarcalev"] { transform: scale(1.35); }

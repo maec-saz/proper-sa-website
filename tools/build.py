@@ -737,7 +737,7 @@ def logo_marquee(items, rows=2):
 def clients_section():
     """Client logos as two endless rows drifting in opposite directions (paused on hover, still with reduced motion)."""
     def item(slug, name, hidden=False):
-        return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/clients/mono/{slug}.png" alt="{"" if hidden else e(name)}"'
+        return (f'<li{" aria-hidden=\"true\"" if hidden else ""}><img src="{{r}}assets/img/clients/{slug}.png" alt="{"" if hidden else e(name)}"'
                 f' title="{e(name)}" loading="lazy" decoding="async"></li>')
     half = (len(CLIENTS) + 1) // 2
     rows = []
@@ -1117,11 +1117,11 @@ def partners():
   <div class="wrap">
     <div class="sec-head partners__head" data-reveal>{eyebrow("Technology partners & distribution")}<h2 class="display-3">Global brands, <em>delivered locally.</em></h2></div>
   </div>
-  <div class="cmarq" data-reveal>{logo_marquee([(partner_mono(x), x["name"]) for x in PARTNERS], 2)}</div>
+  <div class="cmarq" data-reveal>{logo_marquee([(x["logo"], x["name"]) for x in PARTNERS], 2)}</div>
   <div class="wrap">
     <div class="sec-head partners__sub" data-reveal>{eyebrow("Solution partners")}<h2 class="display-3">Specialists in AI, BIM, security and data.</h2></div>
   </div>
-  <div class="cmarq" data-reveal>{logo_marquee([(partner_mono(x), x["name"]) for x in SOLUTION_PARTNERS], 1)}</div>
+  <div class="cmarq" data-reveal>{logo_marquee([(x["logo"], x["name"]) for x in SOLUTION_PARTNERS], 1)}</div>
   <div class="wrap">
   </div>
 </section>
