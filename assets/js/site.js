@@ -151,10 +151,12 @@
     var owWall = $('.opswall', owFit);
     var fitWall = function () {
       var cw = owFit.clientWidth, ch = owFit.clientHeight, wh = owWall.offsetHeight;
-      var s = Math.max(cw / 1280, ch / wh);                       // fill the tile (like a photo), centred
+      var small = window.matchMedia('(max-width: 1100px)').matches;
+      // desktop: fit inside the tile (as before); phones/tablets: fill the tile, centred
+      var s = small ? Math.max(cw / 1280, ch / wh) : Math.min(cw / 1280, ch / wh);
       owFit.style.setProperty('--ow-s', s.toFixed(4));
-      owFit.style.setProperty('--ow-x', ((cw - 1280 * s) / 2).toFixed(1) + 'px');
-      owFit.style.setProperty('--ow-y', ((ch - wh * s) / 2).toFixed(1) + 'px');
+      owFit.style.setProperty('--ow-x', small ? ((cw - 1280 * s) / 2).toFixed(1) + 'px' : '0px');
+      owFit.style.setProperty('--ow-y', small ? ((ch - wh * s) / 2).toFixed(1) + 'px' : '0px');
     };
     fitWall(); window.addEventListener('resize', fitWall);
     if ('ResizeObserver' in window) new ResizeObserver(fitWall).observe(owFit);
