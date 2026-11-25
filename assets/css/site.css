@@ -1390,3 +1390,11 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 .cmarq__track li:hover { background: #fff; border-color: rgba(255, 255, 255, .3); }
 .cmarq__track img, .cmarq__track li:hover img { filter: none; opacity: 1; mix-blend-mode: multiply; }
 .cmarq__track img[src*="aarcalev"] { transform: scale(1.35); }
+
+/* Logos: brand colours floating on the dark band, separated by hairline dividers (option A) */
+.cmarq__track li, .cmarq__track li:hover { background: none; border: 0; box-shadow: none; border-inline-end: 1px solid rgba(255, 255, 255, .1); margin-inline-end: 0; width: clamp(190px, 16vw, 250px); }
+.cmarq__track img, .cmarq__track li:hover img { mix-blend-mode: normal; filter: none; }
+.cmarq__track img { opacity: .82; transition: opacity .4s, transform .4s var(--ease); }
+.cmarq__track li:hover img { opacity: 1; transform: scale(1.06); }
+.cmarq__track li:hover img[src*="aarcalev"] { transform: scale(1.42); }
+@media (max-width: 600px) { .cmarq__track li, .cmarq__track li:hover { width: 150px; } }
