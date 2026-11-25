@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
 
-<link rel="stylesheet" href="assets/css/site.css?v=f0196838">
-<script src="assets/js/site.js?v=c22830bf" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=580707b3">
+<script src="assets/js/site.js?v=310e6e2d" defer></script>
 
 </head>
 <body class="has-hero">
@@ -182,25 +182,38 @@
 <section class="section docs" id="profiles">
   <div class="wrap">
     <div class="sec-head" data-reveal><p class="eyebrow">Company profiles</p><h2 class="display-3">Read more about <em>the group.</em></h2>
-      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Each opens in a viewer in a new tab.</p></div>
+      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Share a few details to view them.</p></div>
     <div class="docs__grid">
-      <a class="doc" href="https://drive.google.com/file/d/1dnt3zEk-43OjzMg8I7WB3-UdpnDhWphO/view" target="_blank" rel="noopener" data-reveal>
+      <a class="doc" href="https://drive.google.com/file/d/1dnt3zEk-43OjzMg8I7WB3-UdpnDhWphO/view" target="_blank" rel="noopener" data-gated data-doc="PROPER Holding · Company Profile" data-reveal>
         <span class="doc__cover"><img src="assets/img/profiles/proper-profile.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
         <span class="doc__meta"><span class="doc__org">PROPER Holding</span><b>Company Profile</b><span class="doc__info">PDF · 30 pages</span></span>
         <span class="doc__cta">View <svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="doc" href="https://drive.google.com/file/d/1oSQ7XAWPBANX9IRq_nOtdzzvhB4MAn-p/view" target="_blank" rel="noopener" data-reveal>
+      <a class="doc" href="https://drive.google.com/file/d/1oSQ7XAWPBANX9IRq_nOtdzzvhB4MAn-p/view" target="_blank" rel="noopener" data-gated data-doc="PROPER Holding · Technology Catalogue" data-reveal>
         <span class="doc__cover"><img src="assets/img/profiles/technology-catalogue.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
         <span class="doc__meta"><span class="doc__org">PROPER Holding</span><b>Technology Catalogue</b><span class="doc__info">PDF · 65 pages</span></span>
         <span class="doc__cta">View <svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
-      <a class="doc" href="https://drive.google.com/file/d/106i79Rzjj0sz9TDW6450bmauFs9O-12u/view" target="_blank" rel="noopener" data-reveal>
+      <a class="doc" href="https://drive.google.com/file/d/106i79Rzjj0sz9TDW6450bmauFs9O-12u/view" target="_blank" rel="noopener" data-gated data-doc="MIDRAR · MAEC Architects &amp; Engineers · Firm Profile" data-reveal>
         <span class="doc__cover"><img src="assets/img/profiles/midrar-profile.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
         <span class="doc__meta"><span class="doc__org">MIDRAR · MAEC Architects &amp; Engineers</span><b>Firm Profile</b><span class="doc__info">PDF · 35 pages</span></span>
         <span class="doc__cta">View <svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </div>
   </div>
+  <dialog class="gate" id="docGate" aria-labelledby="gateTitle">
+    <form class="gate__form" method="dialog" novalidate>
+      <button type="button" class="gate__close" data-gate-close aria-label="Close">×</button>
+      <p class="gate__kicker">Company profiles</p>
+      <h3 id="gateTitle">View <span data-gate-doc>the document</span></h3>
+      <p class="gate__lead">Please share your details to continue.</p>
+      <label><span>Full name</span><input name="name" required autocomplete="name"></label>
+      <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
+      <label><span>Company</span><input name="company" required autocomplete="organization"></label>
+      <p class="gate__err" hidden>Please fill in your name, a valid email and your company.</p>
+      <button class="btn btn--metal" type="submit">View document <svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+  </dialog>
 </section>
 
 <section class="section projects" id="group-projects">
@@ -297,13 +310,19 @@
       </div>
       <div><h2 class="footer__h">Capabilities</h2><ul><li><a href="capabilities/technology.html">Technology &amp; Intelligent Infrastructure</a></li><li><a href="capabilities/audiovisual.html">Audiovisual &amp; Integrated Solutions</a></li><li><a href="capabilities/construction.html">Construction, Architecture &amp; Engineering</a></li><li><a href="capabilities/real-estate.html">Real Estate Development</a></li><li><a href="capabilities/museums.html">Museums &amp; Immersive Experiences</a></li><li><a href="capabilities/rental.html">Exhibition &amp; Equipment Rental</a></li></ul></div>
       <div><h2 class="footer__h">Company</h2><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="capabilities.html">Our Capabilities</a></li><li><a href="partners.html">Technology Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
-      <div><h2 class="footer__h">Headquarters</h2>
-        <address>Headquarters Business Park, Al Corniche Road, Jeddah<br>Kingdom of Saudi Arabia</address>
-        <p class="footer__presales"><span class="footer__sub">Pre-sales office</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Gravita+Jameel+Square+Jeddah" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></p>
-        <p class="footer__also">Also in Riyadh and Hyderabad, India.</p>
-        <p><a href="tel:+966549966266">+966 5499 662 66</a><br><a href="mailto:sales@properholding.com">sales@properholding.com</a></p>
+      <div><h2 class="footer__h">Contact</h2>
+        <p class="footer__contact"><a href="tel:+966549966266">+966 5499 662 66</a><br><a href="mailto:sales@properholding.com">sales@properholding.com</a></p>
       </div>
     </div>
+    <table class="offices-t">
+      <caption class="footer__h">Our offices</caption>
+      <tbody><tr>
+        <td><span class="offices-t__role">Headquarters</span><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Headquarters+Business+Park+Jeddah" target="_blank" rel="noopener">Headquarters Business Park, Al Corniche Road, Jeddah</a></td>
+        <td><span class="offices-t__role">Pre-sales office</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Gravita+Jameel+Square+Jeddah" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></td>
+        <td><span class="offices-t__role">Riyadh branch</span><span>Riyadh, Kingdom of Saudi Arabia</span></td>
+        <td><span class="offices-t__role">Hyderabad branch</span><span>Hyderabad, India</span></td>
+      </tr></tbody>
+    </table>
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> PROPER Developments. All rights reserved.</span>
       <span>A member of MIDRAR</span>

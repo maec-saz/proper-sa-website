@@ -110,6 +110,41 @@
     paint();
   }
 
+  /* ---------- Company profiles: ask for name, email and company before opening ----------
+     Details are kept in this browser so a returning visitor isn't asked again. If GATE_ENDPOINT is set
+     (e.g. a Formspree form URL), each request is also sent there so the team receives the lead. */
+  var GATE_ENDPOINT = '';
+  var gate = $('#docGate');
+  if (gate && typeof gate.showModal === 'function') {
+    var gForm = $('.gate__form', gate), gErr = $('.gate__err', gate), gDoc = $('[data-gate-doc]', gate), pending = null;
+    var known = function () { try { return JSON.parse(localStorage.getItem('properDocGate') || 'null'); } catch (e) { return null; } };
+    var openDoc = function (a) { window.open(a.href, '_blank', 'noopener'); };
+    var send = function (who, doc) {
+      if (!GATE_ENDPOINT) return;
+      try { fetch(GATE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ name: who.name, email: who.email, company: who.company, document: doc, page: location.href }) }); } catch (e) {}
+    };
+    $$('a[data-gated]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var who = known();
+        if (who) { send(who, a.getAttribute('data-doc')); return; }     // already registered: open normally
+        e.preventDefault(); pending = a;
+        gDoc.textContent = a.getAttribute('data-doc'); gErr.hidden = true; gate.showModal();
+        var first = $('input', gate); if (first) first.focus();
+      });
+    });
+    $$('[data-gate-close]', gate).forEach(function (b) { b.addEventListener('click', function () { gate.close(); }); });
+    gate.addEventListener('click', function (e) { if (e.target === gate) gate.close(); });
+    gForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = gForm.elements, who = { name: f.namedItem('name').value.trim(), email: f.namedItem('email').value.trim(), company: f.namedItem('company').value.trim() };
+      if (!who.name || !who.company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(who.email)) { gErr.hidden = false; return; }
+      try { localStorage.setItem('properDocGate', JSON.stringify(who)); } catch (err) {}
+      send(who, pending && pending.getAttribute('data-doc'));
+      gate.close();
+      if (pending) openDoc(pending);
+    });
+  }
+
   /* ---------- Muted clips: play only while on screen (and never with reduced motion) ---------- */
   var clips = $$('video[data-autoplay]').filter(function (v) { return !v.closest('.pv'); });
   if (clips.length && !reduce && 'IntersectionObserver' in window) {

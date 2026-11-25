@@ -209,6 +209,7 @@ OFFICES = [
 ]
 
 
+HQ_MAP = "https://www.google.com/maps/search/?api=1&amp;query=The+Headquarters+Business+Park+Jeddah"
 PRESALES_MAP = "https://www.google.com/maps/search/?api=1&amp;query=Gravita+Jameel+Square+Jeddah"
 
 
@@ -282,13 +283,19 @@ def footer(r):
       </div>
       <div><h2 class="footer__h">Capabilities</h2><ul>{caps}</ul></div>
       <div><h2 class="footer__h">Company</h2><ul>{nav}</ul></div>
-      <div><h2 class="footer__h">Headquarters</h2>
-        <address>{e(COMPANY["address_short"])}<br>Kingdom of Saudi Arabia</address>
-        <p class="footer__presales"><span class="footer__sub">Pre-sales office</span><br><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></p>
-        <p class="footer__also">Also in Riyadh and Hyderabad, India.</p>
-        <p><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
+      <div><h2 class="footer__h">Contact</h2>
+        <p class="footer__contact"><a href="tel:{COMPANY["phone_href"]}">{COMPANY["phone"]}</a><br><a href="mailto:{COMPANY["email"]}">{COMPANY["email"]}</a></p>
       </div>
     </div>
+    <table class="offices-t">
+      <caption class="footer__h">Our offices</caption>
+      <tbody><tr>
+        <td><span class="offices-t__role">Headquarters</span><a href="{HQ_MAP}" target="_blank" rel="noopener">Headquarters Business Park, Al Corniche Road, Jeddah</a></td>
+        <td><span class="offices-t__role">Pre-sales office</span><a href="{PRESALES_MAP}" target="_blank" rel="noopener">Gravita, Jameel Square, Jeddah</a></td>
+        <td><span class="offices-t__role">Riyadh branch</span><span>Riyadh, Kingdom of Saudi Arabia</span></td>
+        <td><span class="offices-t__role">Hyderabad branch</span><span>Hyderabad, India</span></td>
+      </tr></tbody>
+    </table>
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> {COMPANY["name"]}. All rights reserved.</span>
       <span>A member of {COMPANY["parent"]}</span>
@@ -763,7 +770,7 @@ PROFILES = [
 
 def profiles_section():
     cards = "".join(f'''
-      <a class="doc" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener" data-reveal>
+      <a class="doc" href="https://drive.google.com/file/d/{fid}/view" target="_blank" rel="noopener" data-gated data-doc="{e(org)} · {e(title)}" data-reveal>
         <span class="doc__cover"><img src="{{r}}assets/img/profiles/{slug}.jpg" alt="" loading="lazy" decoding="async" width="800" height="450"></span>
         <span class="doc__meta"><span class="doc__org">{e(org)}</span><b>{e(title)}</b><span class="doc__info">PDF · {e(pages)}</span></span>
         <span class="doc__cta">View {arrow()}</span>
@@ -772,10 +779,23 @@ def profiles_section():
 <section class="section docs" id="profiles">
   <div class="wrap">
     <div class="sec-head" data-reveal>{eyebrow("Company profiles")}<h2 class="display-3">Read more about <em>the group.</em></h2>
-      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Each opens in a viewer in a new tab.</p></div>
+      <p class="sec-head__lead">Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Share a few details to view them.</p></div>
     <div class="docs__grid">{cards}
     </div>
   </div>
+  <dialog class="gate" id="docGate" aria-labelledby="gateTitle">
+    <form class="gate__form" method="dialog" novalidate>
+      <button type="button" class="gate__close" data-gate-close aria-label="Close">×</button>
+      <p class="gate__kicker">Company profiles</p>
+      <h3 id="gateTitle">View <span data-gate-doc>the document</span></h3>
+      <p class="gate__lead">Please share your details to continue.</p>
+      <label><span>Full name</span><input name="name" required autocomplete="name"></label>
+      <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
+      <label><span>Company</span><input name="company" required autocomplete="organization"></label>
+      <p class="gate__err" hidden>Please fill in your name, a valid email and your company.</p>
+      <button class="btn btn--metal" type="submit">View document {arrow()}</button>
+    </form>
+  </dialog>
 </section>'''
 
 

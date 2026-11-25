@@ -766,6 +766,21 @@ AR = {
     'PDF · 65 pages': 'PDF · 65 صفحة',
     'PDF · 35 pages': 'PDF · 35 صفحة',
     'View': 'عرض',
+    'Our company profile, technology catalogue and MIDRAR’s engineering firm profile. Share a few details to view them.': 'الملف التعريفي لشركتنا، وكتالوج التقنيات، والملف التعريفي لممارسة مدرار الهندسية. شاركنا بعض البيانات لعرضها.',
+    'the document': 'المستند',
+    'Please share your details to continue.': 'يرجى مشاركة بياناتك للمتابعة.',
+    'Full name': 'الاسم الكامل',
+    'Email': 'البريد الإلكتروني',
+    'Company': 'الشركة',
+    'Please fill in your name, a valid email and your company.': 'يرجى إدخال اسمك وبريد إلكتروني صحيح واسم شركتك.',
+    'View document': 'عرض المستند',
+    'Close': 'إغلاق',
+    'Contact': 'تواصل',
+    'Riyadh branch': 'فرع الرياض',
+    'Hyderabad branch': 'فرع حيدر آباد',
+    'Headquarters Business Park, Al Corniche Road, Jeddah': 'المركز الرئيسي للأعمال، طريق الكورنيش، جدة',
+    'Riyadh, Kingdom of Saudi Arabia': 'الرياض، المملكة العربية السعودية',
+    'Hyderabad, India': 'حيدر آباد، الهند',
 }
 
 # Regex rules for strings that contain numbers (pattern, replacement).
