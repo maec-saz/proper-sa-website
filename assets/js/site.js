@@ -165,6 +165,13 @@
   /* ---------- Home hero on phones: swipe slides with dots ---------- */
   var mxTrack = $('.mx__track');
   if (mxTrack) {
+    // slides 3-6 load once the visitor starts swiping (or shortly after the page settles)
+    var mxLoad = function () {
+      $$('.mx__s img[data-src]', mxTrack).forEach(function (im) { im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); });
+    };
+    mxTrack.addEventListener('scroll', mxLoad, { once: true, passive: true });
+    mxTrack.addEventListener('touchstart', mxLoad, { once: true, passive: true });
+    window.addEventListener('load', function () { setTimeout(mxLoad, 4000); });
     var mxDots = $$('.mx__dots button');
     var mxIndex = function () { return Math.round(Math.abs(mxTrack.scrollLeft) / mxTrack.clientWidth); };
     mxTrack.addEventListener('scroll', function () {
@@ -270,6 +277,7 @@
     var hydrate = function (im) { im.srcset = im.getAttribute('data-srcset'); im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); };
     var warm = function () {
       if (navigator.connection && navigator.connection.saveData) return;
+      if (window.matchMedia('(max-width: 760px)').matches) return;   // phones use the swipe slides, not the mosaics
       $$('.pv img[data-src]', pv).forEach(hydrate);
     };
     var warmLater = function () { setTimeout(function () { ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 2500 }) : warm(); }, 1500); };

@@ -562,7 +562,8 @@ def hero_panels():
         b = c["hero"][:-4]
         prio = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
         out += (f'<a class="pv__s" href="{{r}}capabilities/{c["slug"]}.html" data-i="{i}" tabindex="-1" style="--i:{i}">'
-                f'<img class="pv__z" src="{{r}}assets/img/hd/hero-panorama.jpg" alt="" {prio} decoding="async">'
+                f'<picture><source media="(max-width: 760px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">'
+                f'<img class="pv__z" src="{{r}}assets/img/hd/hero-panorama.jpg" alt="" {prio} decoding="async"></picture>'
                 + (clip_mosaic("pv__hd pv__mosaic") if c["slug"] == "rental" else
                    photo_mosaic("pv__hd pv__mosaic", HERO_MOSAIC[c["slug"]]) if c["slug"] in HERO_MOSAIC else
                    f'<img class="pv__hd" src="{{r}}assets/img/{c["hero"]}" srcset="{{r}}assets/img/{b}-640.jpg 640w, '
@@ -575,7 +576,7 @@ def mobile_slides():
     """Phones only: the hero becomes six full-screen, swipeable discipline slides (desktop keeps the six strips)."""
     n = len(hero_list())
     slides = "".join(f'''<article class="mx__s">
-  <img src="{{r}}assets/img/m/{c["slug"]}-1080.jpg" srcset="{{r}}assets/img/m/{c["slug"]}-720.jpg 720w, {{r}}assets/img/m/{c["slug"]}-1080.jpg 1080w, {{r}}assets/img/m/{c["slug"]}-1440.jpg 1440w" sizes="100vw" width="1440" height="2560" alt="" loading="lazy" decoding="async">
+  <img {"" if i < 2 else "data-"}src="{{r}}assets/img/m/{c["slug"]}-1080.jpg" {"" if i < 2 else "data-"}srcset="{{r}}assets/img/m/{c["slug"]}-720.jpg 720w, {{r}}assets/img/m/{c["slug"]}-1080.jpg 1080w, {{r}}assets/img/m/{c["slug"]}-1440.jpg 1440w" sizes="100vw" width="1440" height="2560" alt="" loading="lazy" decoding="async">
   <div class="mx__cap"><span class="mx__n">{i + 1:02d} / {n:02d}</span><h2>{e(c["name"])}</h2><p>{e(c["tagline"])}</p>
   <a class="mx__go" href="{{r}}capabilities/{c["slug"]}.html">Explore {arrow()}</a></div>
 </article>''' for i, c in enumerate(hero_list()))

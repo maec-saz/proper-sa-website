@@ -1603,3 +1603,55 @@ a, button, select, input, textarea, label { touch-action: manipulation; }
 }
 /* Technology page: the live dashboard tile is shown on desktop and tablet only; phones show the photos */
 @media (max-width: 760px) { .crg__item--live { display: none; } }
+
+/* =====================================================================
+   Phone optimisation (max-width 760px only; desktop unchanged)
+   ===================================================================== */
+@media (max-width: 760px) {
+  /* galleries as swipeable rows with a peek of the next card */
+  .crg, .vreel__grid, .projects__grid, .gallery-sec .gallery {
+    display: flex !important; grid-template-columns: none; gap: 12px;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+    width: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+  }
+  .gallery-sec .gallery { margin-inline: 0; padding-inline: var(--gutter); }
+  .gallery-sec .gallery + .gallery { margin-top: 12px; }
+  .crg::-webkit-scrollbar, .vreel__grid::-webkit-scrollbar, .projects__grid::-webkit-scrollbar, .gallery-sec .gallery::-webkit-scrollbar { display: none; }
+  .crg > *, .vreel__grid > *, .projects__grid > *, .gallery-sec .gallery > * { flex: 0 0 84%; scroll-snap-align: start; min-width: 0; }
+  /* items inside a sideways row are visible straight away (the scroll-in fade can't see them) */
+  .js .crg [data-reveal], .js .vreel__grid [data-reveal], .js .projects__grid [data-reveal], .js .gallery-sec .gallery [data-reveal] { opacity: 1; transform: none; clip-path: none; }
+  .crg + .crg__sub + .crg, .crg__sub + .crg { margin-top: 16px; }
+  .crg__sub { margin-top: 36px; }
+  .vreel__item h3, .proj h3 { font-size: 16px; }
+
+  /* readability: nothing under 12px; comfortable tap heights in the footer */
+  .grp__role, .grp__co-body p { font-size: 12px; }
+  .grp__n { font-size: 11px; }
+  .footer__grid a { padding-block: 9px; }
+
+  /* services on discipline pages: tighter cards */
+  .svccard { padding: 20px 18px; gap: 8px; }
+  .svccard p { font-size: 14px; }
+  .cap-over__intro { margin-bottom: 28px; }
+}
+@media (max-width: 760px) {
+  /* About: 21 solutions in two compact columns; profiles as a swipe row */
+  .solutions__list { grid-template-columns: 1fr 1fr; column-gap: 14px; }
+  .solutions__list li { grid-template-columns: 24px 1fr; gap: 6px; padding: 11px 0; font-size: 13.5px; line-height: 1.35; }
+  .docs__grid { display: flex !important; gap: 12px; max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .docs__grid::-webkit-scrollbar { display: none; }
+  .docs__grid > * { flex: 0 0 84%; scroll-snap-align: start; }
+  .js .docs__grid [data-reveal] { opacity: 1; transform: none; clip-path: none; }
+  /* Our Expertise: tighter discipline blocks */
+  .capblocks .wrap { gap: 44px; }
+  .capblock { gap: 16px; }
+  .capblock__media { aspect-ratio: 16 / 10; }
+  .capblock h2 { margin: 8px 0 6px; }
+  .capblock__tag { font-size: 15px; margin-bottom: 14px; }
+  .capblock .tags { gap: 6px; margin-bottom: 16px; }
+  .capblock .tags li { font-size: 12px; padding: 5px 9px; }
+  /* comfortable taps: office map links and slide dots */
+  .offices-t a { display: inline-block; padding-block: 8px; }
+  .mx__dots button { height: 32px; }
+}
